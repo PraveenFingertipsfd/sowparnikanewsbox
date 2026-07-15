@@ -1,0 +1,64 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false" extensions="demandController" action="{!getTotalCost}">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                margin-top: 200px;
+                }
+            </style>
+        </head>
+        
+        <body >
+            <div ><br/><br/><br/><br/>
+                <p>
+                      <strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong>
+                </p>
+                <p>
+                    To,<br/>
+                    Housing Development Finance Corporation Bank Ltd <br/>
+                    Bangalore, <br/>
+                    Karnataka , India.
+                </p>
+                <p>
+                    Dear Sir,
+                </p>
+                <p>
+                    Sub: NO OBJECTION CERTIFICATE / LETTER to avail loan w.r.t Plot No {!Booking__c.Unit_NumberFor__c} in {!Booking__c.Project__c}  booking by	 {!Booking__c.Applicant_Name__c}
+                </p>
+                <p>
+                     This is to confirm that we have sold Plot No {!Booking__c.Unit_NumberFor__c} in the project called {!Booking__c.Project__c}
+                    {!Booking__c.Project_Address__c}, to {!Booking__c.First_Applicant_Name__c} and <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        {!p.Name}                       
+                    </apex:repeat> for a total consideration of Rs.{!TotalcostStr} /-
+                    ({!AmountInWords}) under an agreement dated {!Booking__c.Sale_Agreement_Date__c} which includes GST and excluding Additional expenses.
+                </p>
+                <p style="text-align:justify;">
+                    We have no objection to your giving a loan of Rs. ____________( Rupees ______________________________________________________)
+                    to the said{!Booking__c.Applicant_Name__c} owners of  the said plot and his/their mortgaging the said flat with you by
+                    way of security for repayment, notwithstanding anything to the contrary contained I our agreement dated {!Booking__c.Sale_Agreement_Date__c}.
+                </p>
+                <p style="text-align:justify;">
+                   We also undertake to inform and give proper notice to the Co-operative Housing Society as and when formed, about the
+                    flat being mortgaged. We hereby undertake to forward the original title deed fort the undivided share in the land duly 
+                    registered directly to HDFC  without parting the same with the allottee of the flat during the pendency of the loan under
+                    intimation to the borrower.  
+                </p>
+                <p>
+                    Thanking you,
+                </p>
+                <p>
+                     {!Booking__c.Company_Name__c}.,
+                </p>
+                <p>
+                    {!Booking__c.Owner.Name}
+                </p>
+                <p>
+                    {!Booking__c.Owner_Designation__c}
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

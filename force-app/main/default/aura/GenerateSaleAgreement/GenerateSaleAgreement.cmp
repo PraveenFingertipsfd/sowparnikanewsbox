@@ -1,0 +1,60 @@
+<aura:component controller="BookingWelcomeMail" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="recordId" type="string"/>
+    <aura:attribute name="LeadRecord" type="Object"/>
+    <aura:attribute name="projectName" type="string"/>
+    <force:recordData aura:id="recordLoader"
+                  recordId="{!v.recordId}"
+                  fields="Name,OwnerId,Project__c"
+                  recordUpdated="{!c.doInit}"
+                  targetFields="{!v.LeadRecord}"
+                  targetError="{!v.recordLoadError}"
+                  />
+    <aura:html tag="style">
+        
+        .panel.slds-modal > .modal-container{
+        width: 75%;
+        max-width: 70rem;
+        }
+    </aura:html>
+    <section class="slds-modal slds-fade-in-open">
+        <header class="slds-modal__header">
+            <h2 class="slds-text-heading_medium slds-hyphenate">Generate Sale Agreement</h2>
+        </header>
+        <aura:if isTrue="{!v.projectName == 'The Landmark'}">
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <iframe src="{!'/apex/apex/SaleAgreement_LandMark?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/> 
+        </div>
+        </aura:if>
+        <aura:if isTrue="{!v.projectName == 'Pranathi'}">
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <iframe src="{!'/apex/apex/SaleAgreement_Sunray?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/> 
+        </div>
+            
+        </aura:if>
+        
+        <aura:if isTrue="{!v.projectName == 'Euphoria In The East'}">
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <iframe src="{!'/apex/apex/SALE_AGREEMENT?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/> 
+        </div>
+            
+        </aura:if>
+        
+        <aura:if isTrue="{!v.projectName == 'Rhythm of Rain'}">
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <iframe src="{!'/apex/apex/Sale_Agreement_ROR?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/> 
+        </div>
+            
+        </aura:if>
+        
+        <aura:if isTrue="{!v.projectName == 'Whispering Petals'}">
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <iframe src="{!'/apex/apex/AGREEMENT_SALE?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/> 
+        </div>
+            
+        </aura:if>
+        
+        <footer class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" onclick="{!c.close}">Cancel</button>            
+        </footer>
+    </section>
+</aura:component>

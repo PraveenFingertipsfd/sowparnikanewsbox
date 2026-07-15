@@ -1,0 +1,18 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+    
+    <aura:attribute name="LeadRecord" type="Object"/>
+    <aura:attribute name="callComp"  type="boolean" default="false"></aura:attribute>
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Name,OwnerId,SLead__c"
+                      recordUpdated="{!c.doInit}"
+                      targetFields="{!v.LeadRecord}"
+                      targetError="{!v.recordLoadError}"
+                      />
+     <header class="slds-modal__header">
+                  Call Customer
+                </header>
+    <aura:if isTrue="{!v.callComp}">
+        <c:MakeCall recordId="{!v.LeadRecord.SLead__c}" fromQucickAction = "true"/>
+    </aura:if>
+</aura:component>

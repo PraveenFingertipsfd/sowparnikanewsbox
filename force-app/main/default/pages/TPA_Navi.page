@@ -1,0 +1,413 @@
+<apex:page standardController="Booking__c"  extensions="convertValueToWords" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false">
+   <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                @bottom-right {
+
+                              content: "Page " counter(page);
+
+                            }
+                }
+                p{
+                text-align:justify;
+                }
+            </style>
+        </head>
+        <body>
+            
+            <div style="font-size: 17px;"><br/><br/><br/><br/>
+               
+                <h2 style="text-align:center;">TRIPARTITE AGREEMENT</h2><br/>
+                <p>
+                    This Tripartite Agreement ("Agreement") is executed at the Bangalore, on <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.TPA_Date__c}" /></apex:outputText>, between:
+                </p>
+               <p>
+                   <b>NAVI FINSERV LIMITED</b> (previously known as Navi Finserv Private Limited) (CIN U65923KA2012PLC062537), a non-banking financial company registered with the Reserve Bank of India, having its registered office at 02nd Floor Vaishnavi Tech Square, Iballur Village, Bagalur, Begur, Bengaluru, Karnataka 560102, and its branch office as mentioned in <b>Schedule I</b> hereunder (hereinafter referred to as the "<b>Lender</b>", which expression shall, unless it is contrary to the context or meaning thereof, mean and include its successors and assigns);
+                </p> 
+                <p>
+                    AND
+
+                </p>
+                <p>
+                    The persons identified as the borrower(s) / applicant(s) / co-applicant(s) in <b>Schedule I</b> hereunder (hereinafter referred 
+                    to as the "<b>Borrower</b>", which expression shall, unless it is contrary to the meaning or context thereof, mean and include
+                    the borrower and all the co-borrowers and his/her/their legal representatives, executors, administrators and permitted assigns).
+                </p>
+                <p>
+                    AND
+                </p>
+                <p>
+                    
+                    The builder(s), whose name, address and other details are mentioned in <b>Schedule I</b> hereunder (hereinafter referred to as th
+                    “<b>Builder(s)</b>”, which expression shall, unless it is contrary to the context or meaning thereof, mean and include its successors
+                    and permitted assigns)
+
+                </p>
+                <p>
+                    The Borrower, Lender and the Builder(s) shall collectively be referred to as “<b>Parties</b>” and individually as a “<b>Party</b>”.
+                </p>
+                <p>
+                    <b>WHEREAS:</b>
+                </p>
+                <p>
+                    a)	The Builder(s) is/are engaged in the business of development of real estate project(s) and is/are developing the
+                    Project {!Booking__c.Project__c} on the lands bearing {!projectSpecification}
+                </p>
+                <p>
+                    b)	The Borrower, on being independently satisfied with the Builder(s)' integrity, capability and ability for timely
+                    completion of the Project, entered into agreement(s) more particularly identified in Schedule I hereunder with the Builder(s) 
+                    (“Builder-Borrower Agreement(s)”) for sale/allotment/transfer (as the case may be) of the unit(s) (as described in Schedule I
+                    hereunder) in favour of the Borrower (“Unit(s)”) at a total (all-inclusive) sale consideration identified in Schedule I 
+                    hereunder (“Sale Consideration”).
+                </p>
+                <p>
+                   c)	The Borrower has approached the Lender for availing a housing loan upto the amount identified in Schedule I hereunder
+                    (“Loan”) for the purpose of purchasing the Unit(s) and the Lender has agreed to sanction the same in favour of the Borrower
+                    on the terms and conditions of the loan documents executed in relation to the Loan (“Loan Documents”). 
+                </p>
+                <p>
+                    d)	In view of the aforesaid, the Parties have entered into this binding Agreement.
+       IT IS AGREED as follows:
+
+                </p>
+                <p>
+                    1.	OBLIGATIONS OF THE BORROWER AND/OR THE BUILDER(S)
+                </p>
+                <p>
+                    a)	The Borrower undertakes to make payment of the Borrower's Contribution (as specified in Schedule I hereunder),
+                    which forms part of the Sale Consideration, directly to the Builder(s) out of the Borrower's own funds and prior to
+                    the disbursement of the Loan. After payment of the Borrower's Contribution, the Borrower shall promptly provide satisfactory
+                    documentary evidence to the Lender. If there is an enhancement of the Sale Consideration or if any other amount is payable
+                    by the Borrower to the Builder(s) as per the provisions of the Builder-Borrower Agreement(s), the same shall forthwith be
+                    paid by the Borrower to the Builder(s).
+                </p>
+                <p>
+                    b)	Without prior written approval of the Lender, the Borrower shall not take possession of the Unit(s) and the Builder(s)
+                    shall not offer possession of the Unit(s) to the Borrower or any agent of the Borrower before the execution and registration
+                    of the sale deed or conveyance deed or other similar/relevant deed(s) (as the case may be) in favor of the Borrower.
+                </p>
+                <p>
+                   c)	The Borrower has created/shall create mortgage(s)/charge(s)/encumbrance(s)/lien(s) over the Unit(s) (including all 
+                    receivables therefrom or relating thereto) exclusively in favour of the Lender. The Builder(s) has/have granted its/their 
+                    consent for, and hereby acknowledge(s), such mortgage(s)/charge(s)/encumbrance(s)/lien(s) by the Borrower exclusively in 
+                    favour of the Lender. 
+                </p>
+                <p>
+                    d)	Borrower and/or Builder(s) shall not cancel/alter the allotment/booking/allocation of the Unit(s) without obtaining a ‘No Objection
+                    Certificate’ from the Lender in that regard.
+                </p>
+                <p>
+                    e)	The Builder(s) hereby undertakes or confirms:
+                </p>
+                <p>
+                    i.	that all approvals, permissions and clearances pertaining to the Project and the Said Land have been duly obtained as per applicable 
+                    laws from the concerned authorities and the construction of the Project is in accordance with the plan approved by the concerned 
+                    authorities;
+                </p>
+                <p>
+                    ii.	to not delay the construction of the Project and/or to not breach any timeline expressed by the Builder(s) with respect to the construction 
+                    of the Project or the Unit(s);
+                </p>
+                <p>
+                    iii.	to not breach any obligation undertaken by the Builder(s) to the Borrower in connection with the Unit(s) and/or as provided under the
+                    Builder-Borrower Agreement(s);
+                </p>
+                <p>
+                    iv.	to provide the Lender, from time to time, relevant information about the Project including the progress in construction of the Project, forthwith 
+                    upon request from the Lender;
+                </p>
+                <p>
+                v.	that there is no litigation/threatened litigation with respect to the Unit(s), the Said Land and the Project. Further, there is no lien/encumbrance/negative 
+                    lien/charge/mortgage over the Unit(s) except in favour of the Lender and all approval(s)/no-objection certificate(s) have been obtained by the Builder(s) for
+                    \sale of the Unit(s) and for creation of encumbrance/mortgage/charge/lien over the Unit(s) (including all receivables therefrom or relating thereto) by the Borrower
+                    in favour of the Lender. The Builder(s) shall also forthwith procure any further approval(s)/ no-objection certificate(s) from any concerned person(s)/entities and 
+                    submit the same with the Lender, if so required by the Lender;    
+                </p>
+                <p>
+                    vi.	that without the prior written consent of the Lender, the Builder(s) shall not transfer or create/allow to be created in any manner, any charge(s), lien(s),
+                    hypothecation(s), negative lien(s), mortgage(s), pledge(s), interest(s) and/or any other encumbrance(s) whatsoever on the Unit(s) in favour of anyone other than the Lender.
+                </p>
+                <p>
+                   f)	All original documents relating to the Unit(s) (including allotment letter(s), the Builder-Borrower Agreement(s), 
+                    sale/conveyance deed or other similar/relevant deed(s), as the case may be, in favour of the Borrower) shall forthwith 
+                    (upon execution or registration, as may be applicable) be handed over to the Lender only. The Borrower hereby irrevocably
+                    authorizes and instructs the Builder(s), and the Builder(s) undertake(s) to the Lender, to promptly handover such documents
+                    to the Lender only. The Builder(s) shall also inform the Lender in writing at least a week in advance regarding the time,
+                    date and venue of registration of the sale/conveyance deed or other similar/relevant deed(s), as the case may be, in favour
+                    of the Borrower. The Borrower shall ensure that applicable stamp duty and registration/statutory charges (including penalty
+                    thereon) are paid on all such documents and the Borrower and the Builder(s) shall promptly register such documents
+                    (if so required under applicable laws) with the concerned authorities. The Borrower and/or the Builder(s) undertake to the
+                    Lender that it/he/she/they shall promptly execute such additional documents as may be required by the Lender (in a format 
+                    satisfactory to the Lender) relating to the matters of this Agreement.
+                </p>
+                <p>
+                   g)	In case of cancellation of the allotment/sale/transfer (as the case may be) of the Unit(s) in favour of the Borrower for 
+                    any reason whatsoever,
+
+              </p>
+                <p>
+                    i.	the Lender shall be entitled to, inter alia, instruct the Builder(s) to allot/sell/transfer (as the case may be) the Unit
+                    (s) (in lieu of the Borrower) in favour of any other person(s) of the Lender's choice (“New Buyer(s)”) and the Sale
+                    Consideration will remain the same (which shall be payable by the New Buyer(s) to the Builder(s));
+                </p>
+                <p>
+                    ii.	the Borrower hereby irrevocably authorize(s) and instruct(s) the Builder(s) to pay/refund directly to the Lender
+                    (on behalf of the Borrower) the entire amount(s) received by the Builder(s) in connection with the Unit(s) from or 
+                    on behalf of the Borrower (including the amount disbursed by the Lender to the Builder(s) on behalf of the Borrower
+                    under the Loan Documents), and the Borrower and/or the Builder(s) shall not raise any objection(s)/counter-claim(s) 
+                    in respect to any such payments/refund by the Builder(s) to the Lender; The Borrower and Builder(s) agree that any amount
+                    determined by the Lender, to be paid to the Lender pursuant to the provisions of this clause, shall be binding on the 
+                    Builder(s) and Borrower;
+                </p>
+                <p>
+                    iii.Notwithstanding anything to the contrary contemplated in any documents, the Builder(s) irrevocably undertake(s) to 
+                    forthwith pay/refund such amounts (without any deductions/forfeiture by the Builder(s)) to the Lender within 30 (thirty)
+                    days of cancellation of allotment/sale/transfer (as the case may be) of the Unit(s); but the Builder specifically agrees
+                    that in case of cancellation and/or termination of the Agreement between Builder and the Borrower/s and/or in the event
+                    of death of Borrower/s, the Builder undertakes to promptly and immediately refund the sale consideration amount received 
+                    by Builder (from both, Borrower and Lender) to the Lender, after deducting the amount as agreed in the Agreement to sell,
+                    notwithstanding whether the flat is resold or not. Provided the Builder will make all the necessary deductions under the 
+                    Agreement to sell from the Borrower’s 
+                </p>
+                <p>
+                    Contribution only. Borrower hereby irrevocably authorize the Builder to directly pay the said flat sale consideration 
+                    amount to the Lender, without requiring any further consent or authorization for the same; and
+                </p>
+                <p>
+                    iv.	The Lender shall be entitled to adjust/appropriate the amount paid/refunded by the Builder(s) (on behalf of the 
+                    Borrower) under this Agreement against all dues payable by the Borrower to the Lender
+                </p>
+                <p>
+                    h)	Any instruction(s) of the Lender under this Agreement shall be final and binding on the Builder(s) and the Borrower, 
+                    The Builder(s) and the Borrower shall promptly do the needful as per the instruction(s) of the Lender including execution 
+                    and registration of the requisite documents to the satisfaction of the Lender within the time as specified by the Lender.
+                </p>
+                <p>
+                    i)	Notwithstanding anything to the contrary mentioned in any documents, the Borrower undertakes to pay/repay the Loan and
+                    all amounts payable to the Lender as per the 
+                </p>
+                <p>
+                    provisions of the Loan Documents irrespective of, inter alia, (A) the stage of construction of the Project; (B) any delay 
+                    in handing over the possession of the Unit(s); (C) cancellation of allotment/sale/transfer (as the case may be) of the Unit(s)
+                    in favour of the Borrower for any reason whatsoever; and/or (D) any dispute/ difference between any of the Parties;
+                </p>
+                <p>
+                   j)	The Lender is not and shall not be construed as a promoter or co-developer of the Project and is not guaranteeing the construction
+                    or development of the Project/ Unit(s) in any manner 
+                </p>
+                <p>
+                   k)	The Builder(s) and the Borrower undertake to comply with all applicable laws with respect to the subject matter of this
+                    Agreement.
+                </p>
+                <p>
+                  l)	In case of any delay/default/breach by the Borrower under this Agreement, in addition to the other liabilities/obligations
+                    of the Borrower under this Agreement and/or the Loan Documents, the Borrower shall (a) forthwith indemnify the Lender; and 
+                    (b) also be liable for payment (to the Lender) of the default interest specified under the Loan Documents (plus any applicable
+                    taxes). Any decision of the Lender in this regard (including about any delay/default/breach by the Borrower) shall be final 
+                    and binding on the Borrower.
+                </p>
+                <p>
+                    2.	REPRESENTATIONS AND WARRANTIES
+                </p>
+                <p>
+                  The Builder(s) and the Borrower hereby make(s) the following representations and warranties to the Lender:  
+                </p>
+                <p>
+                    a)	that they have the power and authority to enter into this Agreement;
+                </p>
+                <p>
+                   b)	the performance of their respective obligations in this Agreement do not and will not conflict with any: (a) 
+                    applicable laws, rules or regulations; (b) its/their constitutional documents (if applicable); and/or (c) any agreement(s)
+                    or instrument(s) binding upon it/them; 
+                </p>
+                <p>
+                    c)	their respective obligations under this Agreement are/will be legal, valid, binding, irrevocable and enforceable.
+                </p>
+                <p>
+                    3.	NOTICE
+                </p>
+                <p>
+                    a)	Any communication to be made or delivered under or in connection with or pursuant to the Agreement and/or applicable laws
+                    shall be made or delivered, unless otherwise stated, by fax, email, and physical letter/document or in any other electronic/digital form.
+                </p>
+                <p>
+                   b)	The address, email address, phone and fax number (and the department or officer/person, if any, for whose attention the
+                    communication is to be made) of each Party for any communication to be made or delivered under or in connection with or pursuant 
+                    to the Agreement and/or applicable laws, shall be as mentioned in Schedule I of this Agreement: 
+                </p>
+                <p>
+                   c)	Receipt of Notice: A notice given under this Agreement will be effective on (i) the other Party’s receipt of it, or
+                    (ii) if mailed, the earlier of the other Party’s receipt of it or 7 (Seven) Business Days after mailing it. 
+                </p>
+                <p>
+                    GOVERNING LAW AND JURISDICTION
+                </p>
+                <p>
+                    a)	This Agreement shall be governed by and interpreted in accordance with the laws of India.
+                </p>
+                <p>
+                    b)	Subject to Clause 5, the Borrower and the Builder(s) hereto unconditionally submits to the exclusive jurisdiction
+                    of the courts and tribunals in Bengaluru, India alone for the determination of any matters arising out of or under this Agreement. 
+                </p>
+                <p>
+                    The Lender shall not be prevented from taking proceedings relating to a dispute arising out of this Agreement in any other courts 
+                    with jurisdiction. To the extent permitted by Applicable Law, the Lender may take concurrent proceedings in any number of jurisdictions.
+                </p>
+                <p>
+                    4.	DISPUTE RESOLUTION
+                </p>
+                <p>
+                    a)	All disputes or issues arising out of or in connection with this Agreement shall be resolved exclusively by binding arbitration conducted
+                    in accordance with the Arbitration Centre – Karnataka (Domestic and International) Rules, 2012.
+                </p>
+                <p>
+                    b)	The seat and venue of the arbitration shall be Bengaluru, Karnataka.
+                </p>
+                <p>
+                    c)	The arbitration shall be conducted in the English language.
+                </p>
+                <p>
+                    d)	The arbitration award shall be final and binding on the Parties.
+                </p>
+                <p>
+                    5.	MISCELLANEOUS
+                </p>
+                <p>
+                    a)	On any matter, acts or documents (relating to the subject matter of this Agreement) not specifically covered under this Agreement, the decision
+                    of the Lender shall be final and binding on the Parties.
+                </p>
+                <p>
+                    b)	Nothing in this Agreement shall adversely affect the provisions of the Loan Documents (including the rights, claims, remedies and/or interests of the Lender).
+                </p>
+                <p>
+                    c)	If any part of this Agreement is declared unenforceable or invalid, the remainder will continue to be valid and enforceable.
+                </p>
+                <p>
+                    SCHEDULE I
+                </p>
+                    <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                        <tr>
+                            <th>SL.No</th>
+                            <th>Description</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <th>1.</th>
+                            <th>Borrower/Co-Borrower/Co- Applicant</th>
+                            <th> Mr. {!Booking__c.First_Applicant_Name__c}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Age__c}" /></apex:outputText> years,<br/>
+                                PAN No: {!Booking__c.PAN_Number__c}, Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                                <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                                    Mr. {!p.Name}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!p.Age__c}" /></apex:outputText> years,<br/>
+                                    PAN No: {!p.PAN_Number__c}, Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                                </apex:repeat>
+                                Residing at {!Booking__c.Address__c}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>2.</th>
+                            <th>Builder(s)</th>
+                            <th>{!Booking__c.Company_Name__c}</th>
+                        </tr>
+                        <tr>
+                            <th>3.</th>
+                            <th>Builder-Borrower Agreement(s)</th>
+                            <th>Agreement(s) for Sale/allotment/transfer dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> executed between {!Booking__c.First_Applicant_Name__c} and {!Booking__c.Company_Name__c}.</th>
+                        </tr>
+                        <tr>
+                            <th>4.</th>
+                            <th>Sale Consideration</th>
+                            <th>Rs. {!Booking__c.Total_Cost_Ex_Leg_Main__c}</th>
+                        </tr>
+                        <tr>
+                            <th>5.</th>
+                            <th>Borrower's Contribution</th>
+                            <th>Booking Amount {!Booking__c.Booking_Amount__c}</th>
+                        </tr>
+                        <tr>
+                            <th>6.</th>
+                            <th>Loan</th>
+                            <th>Rs. </th>
+                        </tr>
+                </table>
+          
+                <p>
+                    SCHEDULE II
+                </p>
+                
+                <p>
+                    Description of the Unit(s)
+                </p>
+                <p>
+                    All that pieces or parcels of properties/unit(s)/apartment(s)/flat(s) as under (constructed/to be constructed) together with all the
+                    present and/or future structures, buildings, furniture, fixtures, fittings, standing and/or plant and machinery installed/ to be
+                    installed and/or constructed/to be constructed thereon:    
+                </p>
+                <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                        <tr>
+                            <th>SL.No</th>
+                            <th>Tower</th>
+                            <th>Unit/Flat No</th>
+                            <th>Floor</th>
+                            <th>Super Built Up Area(Sq.ft)</th>
+                            <th>Terrace Area(Sq.ft)</th>
+                        </tr>
+                     <tr>
+                            <th>1</th>
+                            <th>{!Booking__c.Block_Number__c}</th>
+                            <th>{!Booking__c.Unit_NumberFor__c}</th>
+                            <th>{!Booking__c.Floor__c}</th>
+                            <th>{!Booking__c.Built_up_area__c}</th>
+                            <th></th>
+                        </tr>
+                </table>
+                        
+                <p>
+                    together with 1 number of _______________(Number of Car or Scooter -parking spaces) (on the ground floor/basement) allocated/to be
+                    allocated for the aforesaid Unit(s)/Apartment(s)/Flat(s), in the project currently named as “Sowparnika {!Booking__c.Project__c}”
+                    (“Project”), constructed/to be constructed on the land bearing {!Booking__c.Project_Address__c}
+                </p>
+                <p>
+                    ___________________________________________________________________________
+                </p>
+                <p>
+                    SIGNATURE PAGE
+                </p>
+                <p>
+                    IN WITNESS WHEREOF the Parties have executed this Agreement on [                        ].
+                </p>
+                <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                        <tr>
+                            <th>Signed and delivered by the Borrower:</th>
+                            <th>Signed and delivered by the Builder(s)</th>
+                            <th>Signed and delivered by the Lender </th>
+                           
+                        </tr>
+                     <tr>
+                            <th>Signature</th>
+                            <th>Signature</th>
+                            <th>Signature</th>
+                        </tr>
+                    <tr>
+                            <th>Name</th>
+                            <th>Name</th>
+                            <th>Name</th>
+                        </tr>
+                    <tr>
+                            <th></th>
+                            <th>Designation</th>
+                            <th>Designation</th>
+                        </tr>
+                    <tr>
+                            <th></th>
+                            <th>Authorized Authority</th>
+                            <th>Authorized Authority</th>
+                        </tr>
+                </table>
+            </div>
+       </body>
+    </html>
+</apex:page>

@@ -1,0 +1,27 @@
+<aura:component controller="BulkRaiseDemandController"  implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="standCustType" type="String" />
+    <aura:attribute name="masterPaymentScheduleId" type="String" />
+    <aura:attribute name="bookingRecords" type="Booking__c[]" />
+    <aura:attribute name="showNextCmp" type="boolean" default="false" />
+    <aura:attribute name="showNextCmpCustom" type="boolean" default="false" />
+    <aura:registerEvent name="raiseDemandEvent" type="c:RaiseDemandEvent"/>
+    <aura:attribute name="paymentScheduleId" type="Id" />
+    <aura:attribute name="grandTotalAmountCustom" type="Decimal"/>
+    <aura:attribute name="Bookid" type="Id" />
+    <aura:attribute name="Leadid" type="id"/>
+    <aura:attribute name="isStandard" type="boolean" default = "false"/>
+    <aura:attribute name="isCustome" type="boolean" default = "false"/>
+    <aura:attribute name="isContinue" type="boolean" default = "false"/>
+    
+    
+  
+    <lightning:select name="selectStandCust" label="Select Type" value="{!v.standCustType}" required="true" messageWhenValueMissing="Select type" onchange = "{!c.selectStandCus}">
+        <option value="choose one">choose one...</option>
+        <option value="Standard">Standard</option>
+        <option value="Custom">Custom</option>
+    </lightning:select>
+    
+    
+    
+</aura:component>

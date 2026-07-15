@@ -1,0 +1,16 @@
+.THIS.styles {
+    width : 500px;
+    border : 1px solid black;
+    margin-left : 400px;
+    margin-top : 200px;
+    border-radius : 10px;
+    padding-left : 10px;
+    padding-right : 10px; 
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
+.THIS.outputFont {
+        font-size: 14px;
+        font-weight:bold;
+    }

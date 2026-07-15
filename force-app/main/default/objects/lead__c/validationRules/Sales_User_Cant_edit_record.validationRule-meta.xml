@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_User_Cant_edit_record</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+$Profile.Name = &apos;Sales&apos;,
+OR(
+ISCHANGED( Name),
+ISCHANGED( Leadsource__c),
+ISCHANGED( Sub_Source__c),
+ISCHANGED( Phone__c),
+ISCHANGED( Secondary_Country__c),
+ISCHANGED( Secondary_Country_Code__c),
+ISCHANGED( Secondary_Phone__c),
+ISCHANGED( Secondary_Email__c),
+ISCHANGED( Allocated_Project__c),
+ISCHANGED( Maximum_Investment_in_Lakhs__c),
+ISCHANGED( BHK__c),
+ISCHANGED( Minimum_Investment_in_Lakhs__c),
+ISCHANGED( Last_Sub_Source__c),
+ISCHANGED( First_Sub_Source__c)
+)
+)</errorConditionFormula>
+    <errorMessage>You can not edit this Record</errorMessage>
+</ValidationRule>

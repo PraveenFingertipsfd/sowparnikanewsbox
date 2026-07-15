@@ -1,0 +1,47 @@
+<apex:page standardController="Booking__c" showHeader="false" standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                border: 2px solid black;    
+                }
+            </style>
+        </head>
+        
+        <body >
+            <div style="font-size:22px;"><br/><br/><br/><br/>
+                <p style="text-align:right;">
+                    <b>Date: <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!today()}" /></apex:outputText><br/>Banglore</b>  
+                </p>
+                <p style="text-align:left;">To</p>
+                    <p style="text-align:left;"><b>Mr.</b>{!Booking__c.First_Applicant_Name__c}</p>
+                <p style="text-align:left;"><b>Residing </b>{!Booking__c.Address__c}</p><br/>
+                <p>
+                    <b>Dear Sir</b> 
+                </p>
+                <p>
+                    <b>Sub: NO DUE CERTIFICATE</b>
+                </p>
+                <p>
+                    With reference to the above this is to inform you that the Apartment No. {!Booking__c.Unit_Number__c} in our project named as “Sowparnika {!Booking__c.Project__c}” has been registered vide document No. {!Booking__c.Registered_Document_No__c} registered on {!Booking__c.Sale_Deed_Date__c} in the office of the sub registrar {!Booking__c.Sub_Registrar__c}.                </p>
+                    <p>
+                        We wish to inform you that we have received all the amounts in full as per our records there are no dues with respect to the above said flat.
+                </p>
+                <p>
+                    Thanking you
+                </p>
+                    <p>
+                        <b>Yours faithfully,</b>
+                </p>
+                <p>
+                    <b>For	 {!Booking__c.Company_Name__c}</b>
+                </p>
+                <p>
+                    {!Booking__c.Authorized_Signato__c}
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

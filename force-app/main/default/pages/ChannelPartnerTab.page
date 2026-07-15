@@ -1,0 +1,93 @@
+<apex:page standardController="Channel_Partner__c" extensions="BulkOwnerUpdaterController" recordSetVar="standardCPRecord">
+    <html>
+        <style>
+            .button-style {
+                display: inline-block;
+                padding: 4px 8px;
+                background-color: white;
+                color: black;
+                text-decoration: none;
+                border: 1px solid black;
+                border-radius: 4px;
+                font-size: 12px;
+                text-align: center;
+                cursor: pointer;
+                margin-right: 8px;
+            }
+
+            .button-style:hover {
+                background-color: #f0f0f0;
+            }
+
+            .horizontal-alignment {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 10px;
+            }
+
+            .full-width-table {
+                width: 100%;
+            }
+
+            .table-header {
+                font-weight: bold;
+                text-align: left;
+            }
+        </style>
+    </html>
+
+    <apex:sectionHeader title="Bulk Update Owner" subtitle="Update the owner for selected Channel Partners" />
+    <apex:pageMessages id="messages" />
+    <apex:form >
+        <apex:pageBlock title="Select Records for Owner Update">
+            <!-- Align elements in a single row -->
+            <apex:outputPanel styleClass="horizontal-alignment">
+                <apex:outputLabel value="Select New Owner" for="newOwner" style="font-weight: bold;" />
+                <apex:selectList value="{!newOwnerId}" size="1" id="newOwner" style="border: 1px solid black; border-radius: 10px; font-weight: bold;">
+                    <apex:selectOptions value="{!userOptions}" />
+                </apex:selectList>
+                <apex:commandButton value="Update Owner" action="{!updateOwner}" styleClass="button-style" rerender="mytable,messages" />
+                <apex:commandButton value="Cancel" action="{!cancel}" styleClass="button-style" />
+
+            </apex:outputPanel>
+
+            <!-- Table for records -->
+            <apex:outputPanel id="mytable">
+                <apex:pageblockTable value="{!records}" var="rec" styleClass="full-width-table">
+                    <apex:column headerValue="Select" styleClass="table-header">
+                        <apex:inputCheckbox value="{!rec.selected}" />
+                    </apex:column>
+
+                    <apex:column headerValue="Channel Partner" styleClass="table-header">
+                        <apex:outputField value="{!rec.record.Name}" />
+                    </apex:column>
+
+                    <apex:column headerValue="Name" styleClass="table-header">
+                        <apex:outputField value="{!rec.record.Name__c}" />
+                    </apex:column>
+
+                    <apex:column headerValue="Active" styleClass="table-header">
+                        <apex:outputField value="{!rec.record.Active__c}" />
+                    </apex:column>
+
+                    <apex:column headerValue="Created Date" styleClass="table-header">
+                        <apex:outputField value="{!rec.record.CreatedDate}" />
+                    </apex:column>
+
+                    <apex:column headerValue="Phone" styleClass="table-header">
+                        <apex:outputField value="{!rec.record.Phone__c}" />
+                    </apex:column>
+
+                    <apex:column headerValue="Type" styleClass="table-header">
+                        <apex:outputField value="{!rec.record.Type__c}" />
+                    </apex:column>
+
+                    <apex:column headerValue="Owner First Name" styleClass="table-header">
+                        <apex:outputField value="{!rec.record.Owner.FirstName}" />
+                    </apex:column>
+                </apex:pageblockTable>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

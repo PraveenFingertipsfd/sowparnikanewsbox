@@ -1,0 +1,33 @@
+<aura:component controller="mCubeController"
+                implements="force:hasRecordId,force:lightningQuickAction,flexipage:availableForRecordHome"
+                access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="phoneNumbers" type="String[]" default="[]"/>
+    <aura:attribute name="selectedPhone" type="String"/>
+    <aura:attribute name="isLoading" type="Boolean" default="false"/>
+
+    <div class="slds-p-around_medium">
+        <lightning:select name="phoneSelection" label="Select Number" value="{!v.selectedPhone}" required="true">
+            <aura:iteration items="{!v.phoneNumbers}" var="phone">
+                <option value="{!phone}">{!phone}</option>
+            </aura:iteration>
+        </lightning:select>
+
+        <div class="slds-m-top_medium slds-clearfix">
+            <div class="slds-float_left">
+                <lightning:button variant="neutral"
+                                  label="Cancel"
+                                  onclick="{!c.closeQuickAction}"
+                                  disabled="{!v.isLoading}"/>
+            </div>
+            <div class="slds-float_right">
+                <lightning:button variant="brand"
+                                  label="Call"
+                                  onclick="{!c.handleCall}"
+                                  disabled="{!v.isLoading}"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

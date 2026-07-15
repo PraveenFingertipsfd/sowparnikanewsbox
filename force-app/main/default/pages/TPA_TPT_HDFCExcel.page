@@ -1,0 +1,157 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false">
+   <html>
+        <head>
+            <style type="text/css" >
+                body{
+                font-family:font-family:Arial Unicode MS !important;
+                
+                }
+                
+                
+                @page {
+                size:A4 portrait;  
+                border:1px solid black;
+                counter-increment: pages;
+                margin-bottom: 200px;
+                @bottom-right {
+
+                              content: "Page " counter(page);
+
+                            }
+                @bottom-left {
+                content: element(footer);
+                padding-bottom: 20px;
+                
+                }  
+                }
+                div.footer {
+                display: block;
+                padding: 1px 0;
+                position: running(footer);
+                border-bottom:2px solid black;
+                border-left:2px solid black;
+                border-right:2px solid black;
+                
+                width: 100%;    
+                margin-top: -8px;
+                }
+                p{
+                font-family: Palatino Linotype;
+                font-size:12pt; 
+                text-align:justify;
+                }
+                .pagenumber:before {
+                content: counter(page);
+                }
+                .pagecount:before {
+                content: counter(pages);
+                }
+            </style>
+            
+        </head>
+        <body>
+            <div style="page-break-after:always;">
+            <table width="100%" style="font-size: 30px;text-align:center"  cellpadding="0" cellspacing="0" >
+                
+                <tr><td><b>SCHEDULE</b></td></tr>
+            </table>
+            
+             
+                
+                <table style="font-size: 16px;" cellpadding="0" cellspacing="0"  border="1" width="100%" height="100%" >
+
+                     <tr>
+                        <td>Sr. No. </td>
+                        <td>Description</td>
+                        <td>Particulars/ Details	</td>
+                    </tr>
+                   <tr>
+                        <td>1</td>
+                        <td>Place</td>
+                        <td>{!Booking__c.Place__c}</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Date (DD/MM/YYYY)</td>
+                        <td><apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.TPA_Date__c}" /></apex:outputText>
+
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td>3</td>
+                        <td>Name and address of the Borrower/s</td>
+                        <td>{!Booking__c.First_Applicant_Name__c}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Age__c}" /></apex:outputText> years,<br/>
+                            PAN No: {!Booking__c.PAN_Number__c}, Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                            <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                                {!p.Name}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!p.Age__c}" /></apex:outputText> years,<br/>
+                                PAN No: {!p.PAN_Number__c}, Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                            </apex:repeat>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Name and address of the Builder/ Land Owner</td>
+                        <td>{!Booking__c.Company_Name__c}	
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Project name and property address</td>
+                        <td>{!Booking__c.Project__c}, {!Booking__c.Project_Address__c}</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Bank/ FI to which project has been mortgages by the Builder/ Land Owner</td>
+                        <td>{!Booking__c.Project_mortgager__c}	</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Details of the Unit being purchased</td>
+                        <td>{!Booking__c.Unit_NumberFor__c}	</td>
+                    </tr>
+                     <tr>
+                        <td>8</td>
+                        <td>"Date of Sale Agreement/ Flat Buyers's Agreement(DD/MM/YYYY)"</td>
+                        <td><apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>	</td>
+                    </tr>
+                     <tr>
+                        <td>9</td>
+                        <td>Total sale consideration (in words and figures both)</td>
+                        <td>Rs. {!Booking__c.Total_Cost_Ex_Leg_Main__c}	</td>
+                    </tr>
+                     <tr>
+                        <td>10</td>
+                        <td>Borrower/s own contribution amount paid before first disbursement Borrower/s own contribution amount</td>
+                        <td>{!Booking__c.Amount_By_Customer__c}</td>
+                    </tr>
+                    <tr>
+                        <td>10A</td>
+                        <td>Borrower/s balance own contribution amount to be paid Borrower/s own contribution amount</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>10B</td>
+                        <td>Date of balance own contribution to be paid (DD/MM/YYYY)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>Loan Amount</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td>File No. </td>
+                        <td></td>
+                    </tr>
+                     <tr>
+                        <td>13</td>
+                        <td>Date of HDFC Offer Letter (DD/MM/YYYY)</td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+       </body>
+    </html>
+</apex:page>

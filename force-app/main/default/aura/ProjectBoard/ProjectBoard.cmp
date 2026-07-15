@@ -1,0 +1,478 @@
+<aura:component controller="ProjectBoardControllerClass"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <aura:attribute name="projects" type="object[]" default="[]"/>
+    <aura:attribute name="Plots" type="object[]" default="[]"/>
+    <aura:attribute name="Blocks" type="object[]" default="[]"/>
+    <aura:attribute name="showProjects" type="boolean" default="true"/>
+    <aura:attribute name="showPlots" type="boolean" default="false"/>
+    <aura:attribute name="showBlocks" type="boolean" default="false"/>
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="openBooking" type="boolean" default="false"/>
+    <aura:attribute name="openQuote" type="boolean" default="false"/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+     <aura:attribute name="ProjectId" type="String"/>
+    <aura:attribute name="plotId" type="String"/>
+    <aura:attribute name="LeadId" type="String"/>
+    <aura:attribute name="blockId" type="String"/>
+    <aura:attribute name="selectedProject" type="String"/>
+    <aura:attribute name="selectedProjectName" type="String"/>
+     <aura:attribute name="selectedBlockName" type="String"/>
+    <aura:attribute name="bookingData" type="object" default="{}" />
+    <aura:attribute name="sObjectName" type="String" />
+    
+    
+    
+    <div>
+        <aura:if isTrue="{!v.showProjects}">
+            <div class="slds-grid slds-wrap" >
+                <aura:iteration items="{!v.projects}" var="prj"> 
+                    <aura:if isTrue="{!($Browser.formFactor=='DESKTOP')}">
+                        <div class="slds-col slds-size_1-of-3 slds-p-around_small" onclick="{!c.loadPlots}" data-id="{!prj.Id}" data-name="{!prj.Name}">
+                            <lightning:card class="myColor" footer="{!prj.Project_Address__c}" title="{!prj.Name}" iconName="standard:address"> 
+                                <div class="inner">
+                                    <b>Total Unit:&nbsp;{!prj.Total_Units__c} </b><br/>
+                                    <b>Available Unit:&nbsp;{!prj.Available_Units__c} </b><br/>
+                                    <b>Booked Unit:&nbsp;{!prj.Booked_Units__c} </b><br/>
+                                    <!--   <b>Not Released Unit:&nbsp;{!prj.Not_Released_Units__c} </b><br/>  -->
+                                    <b>Blocked Unit:&nbsp;{!prj.Blocked_Units__c}</b>
+                                </div>
+                            </lightning:card>
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!($Browser.formFactor=='PHONE')}">
+                        <div class="slds-col slds-size_1-of-1 slds-p-around_small" onclick="{!c.loadPlots}" data-id="{!prj.Id}">
+                            <lightning:card class="myColor" footer="{!prj.Project_Address__c}" title="{!prj.Project__c}" iconName="standard:address"> 
+                                <div class="inner">
+                                    <b>Project Name:&nbsp;{!prj.Name} </b><br/>
+                                    <b>Total Unit:&nbsp;{!prj.Total_Units__c} </b><br/>
+                                    <b>Available Unit:&nbsp;{!prj.Available_Units__c} </b><br/>
+                                    <b>Booked Unit:&nbsp;{!prj.Booked_Units__c} </b><br/>
+                                    <b>Not Released Unit:&nbsp;{!prj.Not_Released_Units__c} </b><br/>
+                                    <b>Blocked Unit:&nbsp;{!prj.Blocked_Units__c}</b>
+                                </div>
+                            </lightning:card>
+                        </div>
+                    </aura:if>
+                </aura:iteration>
+            </div>  
+        </aura:if>
+    </div>
+   <div>
+       <aura:if isTrue="{!v.selectedProject =='Appartment'}">
+        <aura:if isTrue="{!v.showBlocks}">
+            <div class="slds-scrollable_y" style="height:34rem;width:auto" tabindex="0">
+                <div class="slds-grid slds-wrap" >
+                    
+                    <aura:iteration items="{!v.Blocks}" var="block">
+                        <aura:if isTrue="{!($Browser.formFactor=='DESKTOP')}">
+                            <div class="slds-col slds-size_1-of-3 slds-p-around_small " onclick="{!c.clicktogetblockplots}" data-id="{!block.Id}" data-name="{!block.Name}">
+
+                                    <div >
+                                        <lightning:card class="myColor" footer="" title="{!block.Name}" iconName="standard:address" > 
+                                            <div class="blockCard">
+                                                <b>Block Name:&nbsp;{!block.Name} </b><br/>
+                                                     <b>Project:&nbsp;{!block.Project__r.Project__c} </b><br/>
+                                            </div>
+                                            
+                                        </lightning:card>
+                                    </div>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!($Browser.formFactor=='PHONE')}">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_small " onclick="{!c.clicktogetblockplots}"  data-id="{!block.Id}">
+                                 <div >
+                                        <lightning:card footer="" title="{!block.Name}" iconName="standard:address" > 
+                                            <div >
+                                                <b>Project:&nbsp;{!block.Project__r.Project__c} </b><br/>
+                                            </div>
+                                            
+                                        </lightning:card>
+                                    </div>
+                            </div>
+                        </aura:if>
+                    </aura:iteration>
+                </div>
+                
+            </div>
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+                <button class="slds-button slds-button_brand" onclick="{!c.closeModel}">Previous</button>
+            </div>
+        </aura:if>
+        </aura:if>
+    </div>
+    
+    <div>
+        <aura:if isTrue="{!v.showPlots}">
+           <lightning:card class="legend">
+        <div style="background-color: #FFFFFF; width: 15px; height: 10px; display: inline-block;"></div>
+               <span style="margin-left: 5px;"><b>Available</b></span><br/>
+        <div style="background-color:#ccff99; width: 15px; height: 10px; display: inline-block;"></div>
+        <span style="margin-left: 5px;"><b>Booked</b></span><br/>
+       
+                <div style="background-color: #ff9248; width: 15px; height: 10px; display: inline-block;"></div>
+        <span style="margin-left: 5px;"><b>BLOCKED</b></span><br/>
+               <center><h1><b>{!v.selectedProjectName}
+                    <aura:if isTrue="{!v.selectedBlockName}">
+                   -{!v.selectedBlockName}
+                   </aura:if>
+                   </b></h1></center>
+        <!-- Add more statuses as needed -->
+            </lightning:card>
+            <div class="slds-scrollable_y" style="height:30rem;width:auto" tabindex="0">
+                <div class="slds-grid slds-wrap" >
+                    <aura:if ></aura:if>
+                    
+                    <aura:iteration items="{!v.Plots}" var="plot">
+                        <aura:if isTrue="{!($Browser.formFactor=='DESKTOP')}">
+                            <div class="slds-col slds-size_1-of-5 slds-p-around_small  " onclick="{!c.clicktogetplotrecord}" data-id="{!plot.Id}" >
+                                <aura:if isTrue="{!plot.Status__c =='Available'}">
+                                    <div >
+                                        <lightning:card footer="" title="{!plot.Name}" iconName="standard:address" > 
+                                            <div class="avaliableplot">
+                                                
+                                                <b>Facing:&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                                <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                                <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                            </div>
+                                            
+                                            
+                                           <!-- <aura:set attribute="actions">
+                                                <lightning:button variant="brand"   label="Quote"  onclick="{!c.navigateToQuote}" />
+                                                <lightning:button name="Button1" variant="brand" label="Booking"  onclick="{!c.navigateToBooking}" />
+                                                
+                                            </aura:set>-->
+                                            
+                                            
+                                        </lightning:card>
+                                    </div>
+                                </aura:if>
+                                <aura:if isTrue="{!plot.Status__c =='Booked'}">
+                                    <lightning:card footer="" title="{!plot.Name}" iconName="standard:address"> 
+                                        <div class="bookedplot">
+                                            <b>Facing :&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                            <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                            <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                        </div>
+                                    </lightning:card>
+                                </aura:if>
+                                <aura:if isTrue="{!plot.Status__c =='NOT RELEASE FOR SALE'}">
+                                    <lightning:card footer="" title="{!plot.Name}" iconName="standard:address"> 
+                                        <div class="notreleasedplot">
+                                            <b>Facing:&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                            <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                            <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                        </div>
+                                    </lightning:card>
+                                </aura:if>
+                                <aura:if isTrue="{!plot.Status__c =='BLOCKED'}">
+                                    <lightning:card footer="" title="{!plot.Name}" iconName="standard:address"> 
+                                        <div class="blockedplot">
+                                            <b>Facing:&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                            <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                            <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                        </div>
+                                    </lightning:card>
+                                </aura:if>
+                                
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!($Browser.formFactor=='PHONE')}">
+                            <div class="slds-col slds-size_1-of-2 slds-p-around_small " data-id="{!plot.Id}">
+                                <aura:if isTrue="{!plot.Status__c =='Available'}">
+                                    <lightning:card footer="" title="{!plot.Name}" iconName="standard:address"> 
+                                        
+                                        <div class="avaliableplot">
+                                            <b>Facing:&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                            <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                            <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                        </div>
+                                    </lightning:card>
+                                </aura:if>
+                                <aura:if isTrue="{!plot.Status__c =='Booked'}">
+                                    <lightning:card footer="" title="{!plot.Name}" iconName="standard:address"> 
+                                        <div class="bookedplot">
+                                            <b>Facing:&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                            <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                            <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                        </div>
+                                    </lightning:card>
+                                </aura:if>
+                                <aura:if isTrue="{!plot.Status__c =='NOT RELEASE FOR SALE'}">
+                                    <lightning:card footer="" title="{!plot.Name}" iconName="standard:address"> 
+                                        <div class="notreleasedplot">
+                                            <b>Facing:&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                            <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                            <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                        </div>
+                                    </lightning:card>
+                                </aura:if>
+                                <aura:if isTrue="{!plot.Status__c =='BLOCKED'}">
+                                    <lightning:card footer="" title="{!plot.Name}" iconName="standard:address"> 
+                                        <div class="blockedplot">
+                                            <b>Facing:&nbsp;{!plot.Unit_Facing_Direction__c} </b><br/>
+                                            <b>Status:&nbsp;{!plot.Status__c} </b><br/>
+                                            <b>Built Up Area:&nbsp;{!plot.Built_up_area__c}&nbsp;{!plot.Measurment_Type__c} </b><br/>
+                                        </div>
+                                    </lightning:card>
+                                </aura:if>
+                                
+                            </div>
+                        </aura:if>
+                    </aura:iteration>
+                </div>
+                
+            </div>
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+                <button class="slds-button slds-button_brand" onclick="{!c.closeModel}">Previous</button>
+            </div>
+            
+        </aura:if>
+        
+    </div>
+    
+    <div>
+        <aura:if isTrue="{!v.openBooking}">
+            <lightning:recordEditForm recordTypeId="" objectApiName="Booking__c" aura:id="myform" 
+                                      onsubmit="{!c.handleSubmit}"
+                                      >
+                
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <lightning:buttonIcon iconName="utility:close"
+                                                  onclick="{! c.closeBookingModel }"
+                                                  alternativeText="close"
+                                                  variant="bare-inverse"
+                                                  class="slds-modal__close"/>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Booking</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <p>
+                                <div class="slds-form">
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Project__c" value="{!v.bookingData.Project__c}"  />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="lead1__c" value="{!v.bookingData.lead1__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Plot__c" value="{!v.bookingData.Plot__c}"  />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Property_Type__c" value="{!v.bookingData.Property_Type__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                     <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Quote__c" value="{!v.bookingData.Quote__c}"  />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Status__c" value="{!v.bookingData.Status__cc}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Plot_Land_Area__c" value="{!v.bookingData.Plot_Land_Area__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Sale_Area__c" value="{!v.bookingData.Sale_Area__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Basic_Price__c" value="{!v.bookingData.Basic_Price__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Rate_per_sqft__c" value="{!v.bookingData.Rate_per_sqft__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Corpus_Fund__c" value="{!v.bookingData.Corpus_Fund__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Maintenance_Charge__c" value="{!v.bookingData.Maintenance_Charge__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Booking_Date__c" value="{!v.bookingData.Booking_Date__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="GST__c" value="{!v.bookingData.GST__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                     <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="First_Applicant_Name__c" value="{!v.bookingData.First_Applicant_Name__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Contact_Number__c" value="{!v.bookingData.Contact_Number__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                      <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Country__c" value="{!v.bookingData.Country__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Date_of_Birth__c" value="{!v.bookingData.Date_of_Birth__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                        <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Email__c" value="{!v.bookingData.Email__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="PAN_Number__c" value="{!v.bookingData.PAN_Number__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Second_Applicant_Name__c" value="{!v.bookingData.Second_Applicant_Name__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Contact_Number1__c" value="{!v.bookingData.Contact_Number1__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                      <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Country1__c" value="{!v.bookingData.Country1__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Date_of_Birth1__c" value="{!v.bookingData.Date_of_Birth1__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="slds-scope">
+                                        <div class="slds-grid slds-wrap slds-text-align_left">
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="Email1__c" value="{!v.bookingData.Email1__c}" />
+                                                </div>
+                                            </div>
+                                            <div class="slds-size_1-of-2 slds-max-small-size_1-of-1">
+                                                <div class="slds-form-element__control">
+                                                    <lightning:inputField fieldName="PAN_Number1__c" value="{!v.bookingData.PAN_Number1__c}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </p>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <aura:if isTrue="{!!v.spinner}">
+                                <lightning:button variant="neutral"
+                                                  label="Cancel"
+                                                  title="Cancel"
+                                                  onclick="{! c.closeBookingModel }"/>
+                                <lightning:button variant="brand"  label="Save"  onclick="{!c.createBooking}"/>
+                            </aura:if>
+                        </footer>
+                    </div>
+                </section>
+            </lightning:recordEditForm>
+        </aura:if>
+    </div>
+    <lightning:navigation aura:id="navService"/>
+    
+</aura:component>

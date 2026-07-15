@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Minimum_Investment_Amount__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(TEXT( Minimum_Investment1__c ), &quot;10 Lakhs&quot;, &quot;10,000,00&quot;,&quot;20 Lakhs&quot;, &quot;20,000,00&quot;,&quot;30 Lakhs&quot;, &quot;10,000,00&quot;,&quot;40 Lakhs&quot;, &quot;40,000,00&quot;,&quot;50 Lakhs&quot;, &quot;50,000,00&quot;,&quot;60 Lakhs&quot;, &quot;60,000,00&quot;,&quot;70 Lakhs&quot;, &quot;70,000,00&quot;,&quot;80 Lakhs&quot;, &quot;80,000,00&quot;,&quot;90 Lakhs&quot;, &quot;90,000,00&quot;,&quot;1 Crore&quot;, &quot;1,00,00,000&quot;,&quot;1 Crore 20 Lakhs&quot;, &quot;1,20,00,000&quot;,&quot;1 Crore 40 Lakhs&quot;, &quot;1,40,00,000&quot;,&quot;1 Crore 60 Lakhs&quot;, &quot;1,60,00,000&quot;,&quot;1 Crore 80 Lakhs&quot;, &quot;1,80,00,000&quot;,&quot;2 Crore&quot;, &quot;2,00,00,000&quot;,&quot;2 Crore 20 Lakhs&quot;,&quot;2,20,00,000&quot;,&quot;2 Crore 40 Lakhs&quot;, &quot;2,40,00,000&quot;,&quot;2 Crore 60 Lakhs&quot;, &quot;2,60,00,000&quot;,&quot;2 Crore 80 Lakhs&quot;, &quot;2,80,00,000&quot;,&quot;3 Crore&quot;, &quot;3,00,00,000&quot;,&quot;3 Crore 20 Lakhs&quot;,&quot;3,20,00,000&quot;,&quot;3 Crore 40 Lakhs&quot;, &quot;3,40,00,000&quot;,&quot;3 Crore 60 Lakhs&quot;, &quot;3,60,00,000&quot;,&quot;3 Crore 80 Lakhs&quot;, &quot;3,80,00,000&quot;,&quot;4 Crore&quot;, &quot;4,00,00,000&quot;,&quot;4 Crore 20 Lakhs&quot;,&quot;4,20,00,000&quot;,&quot;4 Crore 40 Lakhs&quot;, &quot;4,40,00,000&quot;,&quot;4 Crore 60 Lakhs&quot;, &quot;4,60,00,000&quot;,&quot;4 Crore 80 Lakhs&quot;, &quot;4,80,00,000&quot;,&quot;5 Crore&quot;, &quot;5,00,00,000&quot;,&quot;6 Crore&quot;, &quot;6,00,00,000&quot;,&quot;7 Crore&quot;, &quot;7,00,00,000&quot;,&quot;8 Crore&quot;, &quot;8,00,00,000&quot;,&quot;9 Crore&quot;, &quot;9,00,00,000&quot;,&quot;10 Crore&quot;, &quot;10,00,00,000&quot;, null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Minimum Investment Amount</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

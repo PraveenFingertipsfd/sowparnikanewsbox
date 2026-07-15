@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Status__c</fullName>
+    <label>Sub Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Lead_status__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Need Time</fullName>
+                <default>false</default>
+                <label>Need Time</label>
+            </value>
+            <value>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <label>Completed</label>
+            </value>
+            <value>
+                <fullName>On Scheduled</fullName>
+                <default>false</default>
+                <label>On Scheduled</label>
+            </value>
+            <value>
+                <fullName>Non-Responsive</fullName>
+                <default>false</default>
+                <label>Non-Responsive</label>
+            </value>
+            <value>
+                <fullName>Rescheduled</fullName>
+                <default>false</default>
+                <label>Rescheduled</label>
+            </value>
+            <value>
+                <fullName>Dropped</fullName>
+                <default>false</default>
+                <label>Dropped</label>
+            </value>
+            <value>
+                <fullName>Needs Time</fullName>
+                <default>false</default>
+                <label>Needs Time</label>
+            </value>
+            <value>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+                <label>Negotiation</label>
+            </value>
+            <value>
+                <fullName>Budget Unfit</fullName>
+                <default>false</default>
+                <label>Budget Unfit</label>
+            </value>
+            <value>
+                <fullName>Loan Eligibility Unfit</fullName>
+                <default>false</default>
+                <label>Loan Eligibility Unfit</label>
+            </value>
+            <value>
+                <fullName>Low Intent to buy</fullName>
+                <default>false</default>
+                <label>Low Intent to buy</label>
+            </value>
+            <value>
+                <fullName>Not Enquired</fullName>
+                <default>false</default>
+                <label>Not Enquired</label>
+            </value>
+            <value>
+                <fullName>Project Unfit</fullName>
+                <default>false</default>
+                <label>Project Unfit</label>
+            </value>
+            <value>
+                <fullName>RNR</fullName>
+                <default>false</default>
+                <label>RNR</label>
+            </value>
+            <value>
+                <fullName>Wrong Number</fullName>
+                <default>false</default>
+                <label>Wrong Number</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

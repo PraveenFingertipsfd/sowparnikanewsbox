@@ -1,0 +1,225 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                @bottom-right {
+
+                              content: "Page " counter(page);
+
+                            }
+                }
+                p{
+                text-align:justify;
+                }
+            </style>
+        </head>
+        <body>
+            
+            <div style="font-size: 17px;"><br/><br/><br/><br/>
+               
+                <h2 style="text-align:center;">TRIPARTITE AGREEMENT</h2><br/>
+                <p>
+                     This Agreement is made and executed at on this <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.TPA_Date__c}" /></apex:outputText> between </p>
+                <div>
+                    Mr. {!Booking__c.First_Applicant_Name__c}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Age__c}" /></apex:outputText> years,<br/>
+                    Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                    <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        Mr. {!p.Name}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!p.Age__c}" /></apex:outputText> years,<br/>
+                        Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                    </apex:repeat>
+                    Residing at {!Booking__c.Address__c}
+                </div>
+                <p>
+                    Hereinafter called the “Borrower” which term so far as the context admits shall mean and include his/her heirs, executors,
+                    successors, administrators and legal representatives of the First Part.
+                </p>
+                <p>
+                    AND
+                </p>
+                <p>
+                    {!Booking__c.Company_Name__c}, a Company registered under the Companies Act, 2013, having its registered office having
+                    its office at No.750, 1st main, ”C” Block, AECS Layout, Bangalore-560 037, and Represented by its authorized Signatory
+                    {!Booking__c.Authorized_Signato__c}, authorized vide board resolution dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Authorized_Signatory_Resolution_Date__c}" /></apex:outputText>, hereinafter referred to as the 
+                    “BUILDER” (which term so far as the context admits, shall insofar as the Company is concerned, mean and include its
+                    successors executors, administrators, legal representatives, and assigns) of the Second Part.
+                </p>
+                <p>
+                    AND
+                </p>
+                <p>
+                    IIFL Home Finance Limited*/ India Infoline Finance Limited, a company incorporated under the Companies Act, 1956 (as amended upto date),
+                    having its registered office at India Infoline Finance Limited, 12 A - 10, 13th Floor, Parinee Crescenzo, C-38 and C-39, G Block, Behind MCA,
+                    \Bandra Kurla Complex, Bandra East, Mumbai - 400051 (hereinafter referred as “IIFL HFL”/ “IIFL”) which expression shall unless repugnant to the 
+                    context shall include its successors or assigns] of the Third Part.  WHEREAS, as part of its business activity, Developer has developed the said
+                    Project the details of which are herein below mentioned:
+                </p>
+                <p>
+                    Project Name  : {!Booking__c.Project__c}
+                    Project Address : {!Booking__c.Project_Address__c}
+
+               
+                    Project herein after referred to as the “Said Project”
+                </p>
+                <p>
+                    AND WHEREAS the Developer has invited applications for allotment by sale of residential apartments in the said project for which various
+                    payment options have been offered to the customers;
+                </p>
+                <p>
+                    AND WHEREAS the Developer and the Borrower have entered into an agreement for sale (hereinafter referred to as the “Sale document”) for the purchase
+                    of the said Property details of which are herein below mentioned:;
+                </p>
+                <p>
+                    Allotment Letter/ Agreement to Sale Dated : <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>
+
+
+                </p>
+                <p>
+                   Plot/Flat/Apartment/Unit/House Number : {!Booking__c.Unit_NumberFor__c}
+                </p>
+                <p>
+                    Property herein after referred to as the “Said Property”
+                </p>
+                <p>
+                    AND WHEREAS the Borrower has approached “IIFL HFL”/ ”IIFL” for the loan amount of _________________/- (Rupees _____________________________________________________________________________________) 
+                    (hereinafter the “Said Loan”) towards payment of the sale / purchase consideration of the said property in the said Project as provided in the
+                    Sale document.
+                </p>
+                <p>
+                    AND WHEREAS the Borrower has represented that the Developer is of Borrower’s own choice and that he/she has satisfied himself with regard to integrity
+                    and capability for quality construction of the Developer and the Developer’s ability for timely completion and on time delivery of the Project;
+                </p>
+                <p>
+                    AND WHEREAS the Borrower has agreed to secure with “IIFL HFL”/ ”IIFL” the said property under finance as and by way of mortgage of all the rights, title,
+                    benefits that would accrue from the said property till the currency and term of the said loan advanced / to be advanced. The Developer also agrees and confirms that 
+                    they shall take note of the said mortgage charge created by the Borrower and undertake not to create any third party rights or security interest of any sort whatsoever
+                    in respect of the said property without the prior written consent of “IIFL HFL”/ “IIFL”.
+                </p>
+                <p>
+                  AND WHEREAS based on several representations made by the Borrower, IIFL HFL/ “IIFL” sanctioned and disbursed the said loan to the Borrower, in terms of the Loan Agreement
+                    dated duly executed by the Borrower;  
+                </p>
+                <p>
+                    AND WHEREAS “IIFL HFL”/ “IIFL” based on such requests and representation and at its sole discretion, shall make disbursements under the Loan Agreement, based on stage of
+                    construction and/or the payment plan agreed by the borrower with the Developer, which factor is hereby confirmed and acknowledged by the Borrower herein;
+                </p>
+                <p>
+                    AND WHEREAS “IIFL HFL”/ “IIFL” has considered the said request with a clear understanding and an irrevocable undertaking by the Borrower that subsequent to the disbursement, 
+                    if any, as requested by the Borrower, there would be no repayment default for any reason whatsoever including but not limited to any concern/issues by and between the Borrower 
+                    and the Developer;
+                </p>
+                <p>
+                    AND WHEREAS the Borrower has represented, and such representation being a continuing representation, that Borrower’s obligation to repay the Loan shall be a distinct and independent
+                    obligation more particularly independent of any issues/concern/dispute of whatsoever nature between the Borrower and Developer;
+                </p>
+                <p>
+                    AND WHEREAS one of the conditions for “IIFL HFL”/ “IIFL” sanctioning the said Loan to the Borrower was that the understanding, as stipulated in the recitals above shall be reduced and 
+                    recorded in writing with an intent of making the same irrevocable, binding and enforceable by and between the Borrower and the Developer till such time this formality is complied with 
+                    to the satisfaction of the Lenders and documents in evidence thereof are delivered to the Lenders, there will be no disbursement pursuant to the Loan Agreement;
+                </p>
+                <p>
+                    AND WHEREAS in consideration of “IIFL HFL”/ “IIFL” agreeing to give loan to the Borrower, all the Parties have agreed as under.
+                </p>
+                <p>
+                    NOW THEREFORE IT IS HEREBY AGREED BY AND BETWEEN THE PARTIES THAT:
+                </p>
+                <p>
+                    1.	The foregoing recitals as mentioned above are incorporated herein by this reference and constitutes an integral part of this Agreement.
+                </p>
+                <p>
+                    2.	The housing loan advanced to the borrower by “IIFL HFL”/ “IIFL” shall be subject to the Borrower's repayment capacity as assessed by “IIFL HFL”/ “IIFL” and shall be secured against
+                    the first and exclusive mortgage of the said Property to be acquired in the Project in favour of “IIFL HFL”/ “IIFL”.
+                </p>
+                <p>
+                    3.	The housing loan advanced to the Borrower by “IIFL HFL”/ “IIFL” shall be repayable by the borrower by way of Equated Monthly Installments (EMI). The date of commencement of EMI shall be
+                    the first day of the month following the month in which the disbursement of the loan have been completed and consequently the due date of payment of first EMI shall in such a case be the last day 
+                    of the said following month. Till the commencement of EMI the borrower shall pay Pre-Equated Monthly Installments (PEMI), which is the simple interest on the loan amount disbursed calculated at the
+                    rate of interest as mentioned in the respective loan agreement of the Borrower.
+                </p>
+                <p>
+                    4.	That “IIFL HFL”/ “IIFL” shall disburse the Loan as per the stage of construction of the Project and/or the payment plan agreed by the borrower in concerned with the builder, may warrant as confirmed
+                    through Architect certificate given by Developer and also assessed by “IIFL HFL”/ “IIFL”, and such decision being final and conclusive.
+                </p>
+                <p>
+                    5.	That irrespective of the stage of construction of the Project and/or the payment plan agreed by the borrower in concerned with the builder and irrespective of the date of handing over the possession
+                    of the said property to the Borrower by the Developer the Borrower shall be liable to pay to “IIFL HFL”/ “IIFL” regularly each month the EMI as laid down in the Loan Agreement to be signed by and between
+                    “IIFL HFL”/ “IIFL” and the Borrower. The Borrower shall execute such other documents as may be required by “IIFL HFL”/ “IIFL” in favour of “IIFL HFL”/ “IIFL” in this regard.
+                </p>
+                <P>
+                    6.	The Borrower shall ensure to pay to the Developer his own contribution in full i,e the cost of the Said Property minus the
+                    loan amount being disbursed by “IIFL HFL”/ “IIFL” before availing of the disbursement from “IIFL HFL”/ “IIFL”.
+               </P>
+                <p>
+                    7.	That “IIFL HFL”/ “IIFL” shall at the request of the Borrower disburse the balance sale consideration to the Borrower by way of cheque drawn 
+                    in favour of the Developer. Any balance payment or any payment escalation towards the cost of the said Property shall be made by the Borrower himself 
+                    to the Developer.
+
+              </p>
+                <p>
+                    8.	That the Developer shall not hand over the actual and physical possession of the said Property to the Borrower before execution and registration of the sale
+                    deed and the original registered sale deed shall be submitted to “IIFL HFL”/ “IIFL” directly by the Developer to be kept by “IIFL HFL”/ “IIFL” towards security 
+                    for the said loan without recourse to the borrower, to which the borrower hereby expressly consents and also authorizes the Developer to deposit the documents on his/her behalf.
+                </p>
+                <P>
+                    9.	That if the Borrower fails to pay the balance amount representing the difference between the loan sanctioned by “IIFL HFL”/
+                    “IIFL” and the actual purchase price of the said Property, or in the event of death of the Borrower ( but not substituted by 
+                    successors and/or legal heirs) or in the event of default of repayment of the loan and / or the Borrower committing any other
+                    default which make the Borrower liable for the repayment of the entire amount outstanding in the said loan as per the terms of
+                    the loan agreement executed between the Borrower and “IIFL HFL”/ “IIFL”, or if the Borrower withdraws from his agreement or
+                    Developer cancels the booking of the Borrower, or in the event of the failure of the Developer to complete the project, or in 
+                    any event where the title to the schedule flat/property not being passed on to the Borrower or breach of any of the terms and 
+                    condition contained in this agreement, the Developer undertake to refund the entire amount received from the borrower and IIFL
+                    HFL/ “IIFL” directly to IIFL HFL/ “IIFL” after deduction of earnest money (in terms of Allotment/ Agreement to Sale/ Builder Buy
+                    er Agreement). The Borrower hereby subrogates all his rights for obtaining refund with respect to the said property in favour of “IIFL HFL”/ “IIFL”.
+                </P>
+                <p>
+                    10.	Further if the Borrower commits a breach of any of the terms and conditions of this Tripartite Agreement it shall be treated as an event
+                    of default under the said Sale document or any such agreement or document signed by and between the Borrower and the Developer for the sale
+                    of the said residential apartment.
+                </p>
+                <p>
+                    11.	That in the event of occurrence of default under the Loan Agreement which would result in the cancellation of the Allotment as a consequence 
+                    thereof and/or for any reason whatsoever if the allotment is cancelled; any amount payable to the Borrower on account of such cancellation shall
+                    be directly paid to “IIFL HFL”/ “IIFL” as provided in clause no. 9 hereinabove. However it is further agreed between the Parties that such payment
+                    made by the Developer directly to “IIFL HFL”/ “IIFL” shall not absolve the Borrower from his liability to pay the residual amount, if any, from the
+                    outstanding amount under the Loan Agreement.
+                </p>
+                <p>
+                    12.	That the Borrower agrees that it unconditionally and irrevocably subrogates its right to receive any amount payable by
+                    the Developer to the Borrower in the event of cancellation in favour of “IIFL HFL”/ “IIFL” and that the act of payment by the
+                    Developer to “IIFL HFL”/ “IIFL” under this clause shall amount to a valid discharge of Developer’s obligation to pay the 
+                    Borrower such cancellation amount.
+                </p>
+                <p>
+                    13.	Further that the parties agree that the Builder shall in no circumstances forfeit any amount over and above the amount equivalent
+                    to the Borrowers contribution towards the purchase consideration paid to the Builder. Borrower’s contribution for the purpose of this
+                    clause shall mean and include the difference between the total cost of the said Property and the Loan amount as mentioned above.
+                </p>
+                <p>
+                    14.	Further, the Developer, in the event of default of repayment as mentioned in clauses hereinabove, shall on intimation by “IIFL HFL”/ “IIFL” 
+                    cancel the allotment of the said property and all monies advanced by “IIFL HFL”/ “IIFL” shall be refunded to “IIFL HFL”/ “IIFL” as provided in
+                    clause no. 9 hereinabove, directly under intimation to the borrower for appropriation and adjustment by “IIFL HFL”/ “IIFL” against all monies 
+                    due to it from the Borrower as mentioned above.
+                </p>
+                <p>
+                    15.	The Developer also confirms and undertakes that it shall submit to “IIFL HFL”/ “IIFL” all documents for the Project as requested by “IIFL HFL”/ “IIFL” 
+                    and shall keep “IIFL HFL”/ “IIFL” informed of the progress of the project through submitting Architect Certificate and shall obtain a clearance
+                    from “IIFL HFL”/ “IIFL” before handing over possession of the said property to the borrower.
+                </p>
+                <p>
+                    
+                    Signed and Delivered by the Borrowers -  __________________ 
+                </p>
+                <p>
+                    Signed and Delivered by the Developer -{!Booking__c.Company_Name__c}
+                </p>
+                <p>
+                    Signed and delivered by “IIFL HFL”/ “IIFL”      -      -      Sign And seal of AR of “IIFL HFL”/ “IIFL”
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,100 @@
+<aura:component controller="UpdateBookingFormController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="status" type="string" default=""/>
+    <!--<aura:attribute name="booking" type="Booking__c" />-->
+    <aura:attribute name="value" type="string" default=""/>
+    <aura:attribute name="Substatus" type="String"/>
+    <aura:attribute name="isPopup" type="boolean" default="true"/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="showEmailButton" type="boolean" default="false"/> 
+    <!--<aura:attribute name="leadEmail" type="String" default=""/>-->
+    <aura:attribute name="followupsubject" type="string" default=""/>
+    <!--<aura:attribute name="defaultValue" type="String"/>-->
+    <!--<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>-->
+    <aura:attribute name="bookingStatuses" type="Object" /> 
+    <aura:attribute type="Object" name="record"/>
+    <aura:html tag="style">
+        .slds-modal__container{ 
+        max-width: 75rem !important;
+        width:75% !important;
+        } 
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .closeIcon{
+        display:none;
+        }
+        .slds-col{
+        margin-left:5px;
+        }
+    </aura:html >
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Id, Status__c,Sub_Status__c"   
+                      targetRecord="{!v.record}"            
+                      targetFields="{!v.bookingStatuses}"
+                      recordUpdated="{!c.doInit}"/>
+    
+    
+    
+    <aura:if isTrue="{!v.isPopup}">
+        <div role="dialog" tabindex="-1" aria-labelledby="header43" aura:id="Modalbox" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                
+                <lightning:buttonIcon iconName="utility:close"
+                                      onclick="{! c.doCancel }"
+                                      alternativeText="close"
+                                      variant="bare-inverse"
+                                      class="slds-modal__close"
+                                      />
+                
+                <header class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Update Booking Status</h1>
+                </header>
+                
+                <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="Booking__c"  onsuccess="{!c.handleSuccess}" onsubmit="{!c.handleOnSubmit}"> 
+                    
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p>
+                            
+                            <lightning:inputField aura:id="status" fieldName="Status__c" onchange="{! c.statusChangeHandler}" required='true'/>
+                            <lightning:inputField aura:id="Substatus" fieldName="Sub_Status__c" onchange="{! c.subStatusChangeHandler}" required='true' />
+                            
+                            <lightning:inputField fieldName="Last_comment__c" value="" required='true'/>
+                            <aura:if isTrue="{!and(and(v.status!='Cancellation',v.status!='Closed won'))}">               
+                                <lightning:inputField aura:id="followupsubject" fieldName="Followup_Subject__c" value="{!v.followupsubject}" required='true'/> 
+                                <lightning:inputField fieldName="Followup_Date__c" value="" required='true'/>  
+                            </aura:if>
+                            
+                            
+                            <aura:if isTrue="{!v.showEmailButton}">
+                                <lightning:button label="Send Email to Lead" onclick="{!c.sendEmail}" />
+                            </aura:if>
+                        </p>
+                    </div>
+                    
+                    <footer class="slds-modal__footer">
+                        <lightning:button label="Cancel" title="Cancel" onclick="{!c.doCancel }" />
+                        
+                        <lightning:button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update" />
+                    </footer>
+                </lightning:recordEditForm>        
+                
+            </div>
+        </div> 
+    </aura:if>
+    <div>
+        <aura:if isTrue="{!v.spinner}">
+            <lightning:spinner class="spins" size="large" variant="brand" alternativeText="Loading" />
+        </aura:if>
+    </div>
+</aura:component>

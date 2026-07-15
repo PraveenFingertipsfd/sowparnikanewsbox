@@ -1,0 +1,115 @@
+<apex:page standardController="Booking__c" docType="html-5.0" showHeader="false" standardStylesheets="false"   applyBodyTag="false"   renderAs="pdf">
+    <head> 
+    <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+
+            .details-container {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .customer-details,
+            .booking-details {
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <p><span style= "float:right;display: inline-block;"><strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong></span></p>
+        <h1 style="text-align: center;">KYC Confirmation for Sale Agreement/Sale Deed</h1>
+        <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+            <tr>
+                <td width="30%">Project Name</td>
+                <td width="70%">{!Booking__c.Project__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">Flat No.</td>
+                <td width="70%">{!Booking__c.Unit_NumberFor__c}</td>
+            </tr>
+            <tr>
+                <td style="border: 0;" width="30%">&nbsp;</td>
+                <td style="border: 0;" width="70%">&nbsp;</td>
+            </tr>
+            <tr>
+                <td style="border: 0;" width="30%">&nbsp;</td>
+                <td style="border: 0;" width="70%">&nbsp;</td>
+            </tr>
+            <tr>
+                <th colspan="2" style="text-align:center;">Applicant:</th>
+            </tr>
+            <tr>
+                <td width="30%">Name</td>
+                <td width="70%">{!Booking__c.First_Applicant_Name__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">W/o/S/o/C/o</td>
+                <td width="70%">{!Booking__c.W_o_S_o_C_o__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">Address</td>
+                <td width="70%">{!Booking__c.Address__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">Age</td>
+                <td width="70%">{!Booking__c.Age__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">PAN No</td>
+                <td width="70%">{!Booking__c.PAN_Number__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">Aadhar No</td>
+                <td width="70%">{!Booking__c.Aadhar_Number__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">Contact Number</td>
+                <td width="70%">{!Booking__c.Contact_Number__c}</td>
+            </tr>
+            <tr>
+                <td width="30%">Email ID</td>
+                <td width="70%">{!Booking__c.Email__c}</td>
+            </tr>
+            <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="coappli">
+                <tr>
+                    <th colspan="2" style="text-align:center;">Co-Applicant:</th>
+                </tr>
+                <tr>
+                    <td width="30%">Name</td>
+                    <td width="70%">{!coappli.Name}</td>
+                </tr>
+                 <tr>
+                    <td width="30%">W/o/S/o/C/o</td>
+                    <td width="70%">{!coappli.W_o_S_o_C_o__c}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Address</td>
+                    <td width="70%">{!coappli.Address__c}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Age</td>
+                    <td width="70%">{!coappli.Age__c}</td>
+                </tr>
+                <tr>
+                    <td width="30%">PAN No</td>
+                    <td width="70%">{!coappli.PAN_Number__c}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Aadhar No</td>
+                    <td width="70%">{!coappli.Aadhar_Number__c}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Contact Number</td>
+                    <td width="70%">{!coappli.Contact_Number__c}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Email ID</td>
+                    <td width="70%">{!coappli.Email__c}</td>
+                </tr>
+            </apex:repeat>
+        </table>
+    </body>
+</apex:page>

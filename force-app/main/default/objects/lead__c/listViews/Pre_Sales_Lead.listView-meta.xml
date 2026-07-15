@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pre_Sales_Lead</fullName>
+    <columns>Created_Date__c</columns>
+    <columns>NAME</columns>
+    <columns>Lead_Type__c</columns>
+    <columns>Lead_status__c</columns>
+    <columns>Phone__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>Leadsource__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>lead__c.Pre_Sales</value>
+    </filters>
+    <label>Pre Sales Lead</label>
+</ListView>

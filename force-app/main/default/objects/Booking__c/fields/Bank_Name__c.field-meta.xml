@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bank_Name__c</fullName>
+    <label>Bank Name</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SBI</fullName>
+                <default>false</default>
+                <label>SBI</label>
+            </value>
+            <value>
+                <fullName>Navi</fullName>
+                <default>false</default>
+                <label>Navi</label>
+            </value>
+            <value>
+                <fullName>HDFC</fullName>
+                <default>false</default>
+                <label>HDFC</label>
+            </value>
+            <value>
+                <fullName>Tata Capital</fullName>
+                <default>false</default>
+                <label>Tata Capital</label>
+            </value>
+            <value>
+                <fullName>IIFL</fullName>
+                <default>false</default>
+                <label>IIFL</label>
+            </value>
+            <value>
+                <fullName>LT</fullName>
+                <default>false</default>
+                <label>L&amp;T</label>
+            </value>
+            <value>
+                <fullName>Union Bank</fullName>
+                <default>false</default>
+                <label>Union Bank</label>
+            </value>
+            <value>
+                <fullName>Canara</fullName>
+                <default>false</default>
+                <label>Canara</label>
+            </value>
+            <value>
+                <fullName>Shriram</fullName>
+                <default>false</default>
+                <label>Shriram</label>
+            </value>
+            <value>
+                <fullName>PNB</fullName>
+                <default>false</default>
+                <label>PNB</label>
+            </value>
+            <value>
+                <fullName>Bajaj</fullName>
+                <default>false</default>
+                <label>Bajaj</label>
+            </value>
+            <value>
+                <fullName>ICICI</fullName>
+                <default>false</default>
+                <label>ICICI</label>
+            </value>
+            <value>
+                <fullName>Federal</fullName>
+                <default>false</default>
+                <label>Federal</label>
+            </value>
+            <value>
+                <fullName>Piramal</fullName>
+                <default>false</default>
+                <label>Piramal</label>
+            </value>
+            <value>
+                <fullName>Allahabad Bank</fullName>
+                <default>false</default>
+                <label>Allahabad Bank</label>
+            </value>
+            <value>
+                <fullName>Indian</fullName>
+                <default>false</default>
+                <label>Indian</label>
+            </value>
+            <value>
+                <fullName>Anand Rathi</fullName>
+                <default>false</default>
+                <label>Anand Rathi</label>
+            </value>
+            <value>
+                <fullName>Axis</fullName>
+                <default>false</default>
+                <label>Axis</label>
+            </value>
+            <value>
+                <fullName>Godrej</fullName>
+                <default>false</default>
+                <label>Godrej</label>
+            </value>
+            <value>
+                <fullName>BOI</fullName>
+                <default>false</default>
+                <label>BOI</label>
+            </value>
+            <value>
+                <fullName>Karnataka Bank</fullName>
+                <default>false</default>
+                <label>Karnataka Bank</label>
+            </value>
+            <value>
+                <fullName>Central bank</fullName>
+                <default>false</default>
+                <label>Central bank</label>
+            </value>
+            <value>
+                <fullName>Yes Bank</fullName>
+                <default>false</default>
+                <label>Yes Bank</label>
+            </value>
+            <value>
+                <fullName>Bank Of Maharashtra</fullName>
+                <default>false</default>
+                <label>Bank Of Maharashtra</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

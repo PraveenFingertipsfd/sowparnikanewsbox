@@ -1,0 +1,203 @@
+<aura:component controller="getRelatedList"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+<aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <aura:attribute name="showEdit" type="boolean" default="false"/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+     <aura:attribute name="showNew" type="boolean" default="false"/>
+    <aura:attribute name="fields" type="String[]" default="['Name','Platform__c','RFQ_Date__c','RFQ_Value__c','RFQ_Rating__c','Status__c','Order_value__c','Warranty_expiry_date__c']"/>
+     <lightning:notificationsLibrary aura:id="notifLib"/>
+    <aura:attribute name="enqId" type="string"/>
+    <aura:attribute name="recId" type="Object"/>
+      <aura:attribute name="mydata3" type="Object"/>
+     <aura:attribute name="recordCount" type="integer" default="0"/>
+    <aura:attribute name="mydata4" type="Object"/>
+     <aura:attribute name="recordCount1" type="integer" default="0"/>
+    <aura:attribute name="mydata5" type="Object"/>
+     <aura:attribute name="recordCount2" type="integer" default="0"/>
+    <aura:attribute name="columnsCount" type="integer" default="2"/>
+    <aura:attribute name="mycolumns3" type="List"/>
+    <aura:html tag="style">
+    .slds-modal__container{ 
+        max-width: 75rem !important;
+        width:85% !important;
+        } 
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .closeIcon{
+        display:none;
+        }
+        .slds-col{
+        margin-left:5px;
+        }
+</aura:html>
+    <div style="background-color:white;" class="slds-p-around_small">
+    <lightning:tabset class="slds-tabs_default slds-tabs_medium" selectedTabId="one">
+        <lightning:tab label="Details" id="one">
+         <lightning:recordForm
+        recordId="{!v.recordId}"
+        objectApiName="lead__c"
+        layoutType="Full"
+        columns="2"                         
+        mode="view" />
+        </lightning:tab>
+        <lightning:tab label="Related Source" id="two">
+            <div >
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title slds-align-middle">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <lightning:icon size="small" iconName="custom:custom15"/>
+                        </div>
+                        <div class="slds-media__body"><span style="font-size:14px;font-weight: bold;">Related Source ({!v.recordCount})</span>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+            <aura:if isTrue="{!and(v.mydata3 != '',v.mydata3 != null)}">
+             
+                <aura:if isTrue="{!$Browser.formFactor=='PHONE'}">
+                 <div class="slds-grid slds-wrap" >
+                <aura:iteration items="{!v.mydata3}" var="prj">
+                    <div class="slds-col slds-size_1-of-1 slds-p-around_small" data-id="{!prj.Id}">
+                        <lightning:card class="slds-card_boundary slds-page-header_record-home" title="{!prj.Name}" iconName="custom:custom15"> 
+                                <b>&nbsp;&nbsp;Name:&nbsp;</b>{!prj.Name} <br/>
+                                <b>&nbsp;&nbsp;Source:&nbsp;</b>{!prj.Source__c} <br/>
+                                <b>&nbsp;&nbsp;Sub Source:&nbsp;</b>{!prj.Sub_Source__c}<br/>
+                                 <b>&nbsp;&nbsp;Created Date:&nbsp;</b>{!prj.Created_Date__c}<br/>
+							<aura:set attribute="actions" >
+                                <a onclick="{!c.goDetail}" data-id="{!prj.Id}">
+										<lightning:button name="Edit" label="Edit"/>
+                                </a>
+                                </aura:set>
+                        </lightning:card>
+                    </div>
+                    
+                </aura:iteration>
+            </div> 
+         </aura:if>
+            </aura:if>
+        
+        <br/>
+                
+        <aura:if isTrue="{!v.spinner}">
+            <lightning:spinner class="spins" size="large" variant="brand" alternativeText="Loading" />
+        </aura:if>
+                
+    </div>
+        </lightning:tab>
+        <lightning:tab label="Site Visit" id="three">
+            <div >
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title slds-align-middle">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <lightning:icon size="small" iconName="custom:custom15"/>
+                        </div>
+                        <div class="slds-media__body"><span style="font-size:14px;font-weight: bold;">Site Visit ({!v.recordCount1})</span>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+            <aura:if isTrue="{!and(v.mydata4 != '',v.mydata4 != null)}">
+             
+                <aura:if isTrue="{!$Browser.formFactor=='PHONE'}">
+                 <div class="slds-grid slds-wrap" >
+                     <aura:iteration items="{!v.mydata4}" var="prj1">
+                    <div class="slds-col slds-size_1-of-1 slds-p-around_small" data-id="{!prj1.Id}">
+                        <lightning:card class="slds-card_boundary slds-page-header_record-home" title="{!prj1.Name}" iconName="custom:custom15"> 
+                            <b>&nbsp;&nbsp;Name:&nbsp;</b>{!prj1.Name} <br/>
+                            <b>&nbsp;&nbsp;Project:&nbsp;</b>{!prj1.Project__c} <br/>
+                            <b>&nbsp;&nbsp;Status:&nbsp;</b>{!prj1.Status__c}<br/>
+                            <b>&nbsp;&nbsp;Scheduled Date:&nbsp;</b><ui:outputDateTime aura:id="oDateTime" value="{!prj1.Date__c}"  /><br/>
+                            <b>&nbsp;&nbsp;Feedback:&nbsp;</b>{!prj1.Feedback__c}<br/>
+                            <b>&nbsp;&nbsp;Visit Type:&nbsp;</b>{!prj1.Visit_Type__c}<br/>
+                            <b>&nbsp;&nbsp;Visit Note:&nbsp;</b><ui:outputRichText  value="{!prj1.Visit_Notes__c}"/><br/>
+							<aura:set attribute="actions" >
+                                <a onclick="{!c.goDetail}" data-id="{!prj1.Id}">
+										<lightning:button name="Edit" label="Edit"/>
+                                </a>
+                                </aura:set>
+                        </lightning:card>
+                    </div>
+                    
+                </aura:iteration>
+            </div> 
+                </aura:if>
+          </aura:if>
+        
+        <br/>
+                
+        
+                
+    </div>
+        </lightning:tab>
+        <lightning:tab label="Follow-Ups" id="four">
+            <div >
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title slds-align-middle">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <lightning:icon size="small" iconName="custom:custom15"/>
+                        </div>
+                        <div class="slds-media__body"><span style="font-size:14px;font-weight: bold;">Follow-Ups ({!v.recordCount2})</span>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+            <aura:if isTrue="{!and(v.mydata5 != '',v.mydata5 != null)}">
+             
+                <aura:if isTrue="{!$Browser.formFactor=='PHONE'}">
+                 <div class="slds-grid slds-wrap" >
+                     <aura:iteration items="{!v.mydata5}" var="prj2"> 
+                    <div class="slds-col slds-size_1-of-1 slds-p-around_small" data-id="{!prj2.Id}">
+                        <lightning:card class="slds-card_boundary slds-page-header_record-home" title="{!prj2.Name}" iconName="custom:custom15"> 
+                            <b>&nbsp;&nbsp;Name:&nbsp;</b>{!prj2.Name} <br/>
+                            <b>&nbsp;&nbsp;Scheduled Date:&nbsp;</b><ui:outputDateTime aura:id="oDateTime" value="{!prj2.Scheduled_Date__c}"  /> <br/>
+                            <b>&nbsp;&nbsp;Status:&nbsp;</b>{!prj2.Status__c}<br/>
+                            <b>&nbsp;&nbsp;Subject:&nbsp;</b>{!prj2.Subject__c}<br/>
+                            <b>&nbsp;&nbsp;Description:&nbsp;</b>{!prj2.Description__c}<br/>
+							<aura:set attribute="actions" >
+                                <a onclick="{!c.goDetail}" data-id="{!prj2.Id}">
+										<lightning:button name="Edit" label="Edit"/>
+                                </a>
+                                </aura:set>
+                        </lightning:card>
+                    </div>
+                    
+                </aura:iteration>
+            </div> 
+                </aura:if>
+           </aura:if>
+        
+        <br/>
+                
+        
+                
+    </div>
+        </lightning:tab>
+    </lightning:tabset>	
+      
+        
+    </div>
+</aura:component>

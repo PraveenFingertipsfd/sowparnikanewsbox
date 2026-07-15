@@ -1,0 +1,129 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false" extensions="demandController" action="{!getTotalCost}">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                margin-top: 200px;
+                }
+            </style>
+        </head>
+        
+        <body >
+             <div style="font-size: 17px;"><br/><br/><br/><br/>
+               
+                <p>
+                    To<br/>
+                    The Branch Manager<br/>
+                    State Bank of India<br/>
+                    Bangalore.
+                </p>
+                <p>
+                  Dear Sir / Madam,  
+                </p>
+                <p>
+                     I/We, M/s <b>Project Name:{!Booking__c.Project__c}</b>, here by certify that:                </p>
+                <p>
+                    
+                    1. I / We have transferable rights to the property described below, which has been allotted to {!Booking__c.First_Applicant_Name__c	},<apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        {!p.Name} ,                       
+                    </apex:repeat>  herein after referred to as “the purchasers”, subject to the due and proper performance
+                    and compliances of all the terms and conditions of the Allotment Letter / Sale Agreement dated - <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> (herein after referred to as the “sale document”).
+                </p>
+                <p>
+                    Description of the property:
+                </p>
+                 <table width="100%" border="1" cellpadding="5">
+                     <tr>
+                         <th style="font-weight: bold;">{Plot No / House No}</th>
+                         <th style="font-weight: bold;">{!Booking__c.Unit_NumberFor__c}</th>
+                     </tr>
+                     <tr>
+                         <th style="font-weight: bold;">Building No / Name</th>
+                         <th style="font-weight: bold;">{!Booking__c.Project__c}</th>
+                     </tr>
+                     <tr>
+                         <th style="font-weight: bold;">Project Address</th>
+                         <th style="font-weight: bold;">{!Booking__c.Project_Address__c}</th>
+                     </tr>
+                 </table>
+                <p style="text-align:justify;">
+                    2. That the total consideration for this transaction is Rs.{!TotalcostStr} (Rupees {!AmountInWords} towards sale document. 
+                </p>
+                <p style="text-align:justify;">
+                  3. The title of the property described above is clear, marketable and free from all encumbrances and doubts. 
+                </p>
+                <P style="text-align:justify;">
+                    4. I / We confirm that I / We have no objection whatsoever to the said purchasers, at their own costs, charges,
+                    risks and consequences mortgaging the said property to STATE BANK OF INDIA (herein after referred to as “the Bank”)
+                    as security for the amount advanced by the Bank to them subject to the due and proper performance and compliances of
+                    all the terms and conditions of the sale document by the said purchasers.
+
+
+                </P>
+                <P style="text-align:justify;">
+                  5. We have not borrowed funds from any financial institutions and have no loan on construction. 
+                </P>
+                <P style="text-align:justify;">
+                   6. After creation of proper charge / mortgage and after receipt of the copies there of and after receipt of proper nomination 
+                    in favour of the Bank, from the said purchasers, we are agreeable to accept State Bank of India as a nominee of the above named 
+                    purchaser for the property described above and once the nomination favoring the Bank has been registered and advice sent to the Bank 
+                    of having done so, I / We note not to change the same without the written NOC of the Bank. 
+                </P>
+                <P style="text-align:justify;">
+                   7. After creation of charge / mortgage and after receipt of the copies thereof and after receipt of the proper nomination in favour of
+                    the Bank, from the above named purchaser, I / We undertake to inform the society about the Bank’s charge on the said flats and when the
+                    society is formed. 
+                </P>
+                <P style="text-align:justify;">
+                   8. Please note that the payment for this transaction should be made by crossed cheque / Transfer of funds favoring SOWPARNIKA PROJECTS-  
+                </P>
+                <P style="text-align:justify;">
+                    Name: {!Booking__c.Account_Type__c} , {!Booking__c.Builder_Account_Number__c} , {!Booking__c.Project_Bank_Name__c}, IFSC Code: {!Booking__c.IFSC_Code__c}, Branch: {!Booking__c.Project_Bank_Branch__c}.
+                </P>
+                <P style="text-align:justify;">
+                    9. In case of cancellation of the sale agreement for any reason, I/ We shall refund the amount by crossed cheque favouring the Bank A/c and forward
+                    the same to you directly.
+                </P>
+                <P>
+                   10. The signatory to this letter draws authority to sign this undertaking on behalf of the company  
+                </P>
+               
+                <P>
+                    Yours faithfully,
+                </P>
+                <P>
+                    For {!Booking__c.Company_Name__c}
+                </P>
+                <P>
+                   {!Booking__c.Owner.Name}
+                </P>
+                <P>
+                    {!Booking__c.Owner_Designation__c}
+                </P>
+                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <P style="text-align:justify;">
+                    The said Bank to release the particular plot to {!Booking__c.First_Applicant_Name__c},<apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        {!p.Name} ,                       
+                    </apex:repeat>  and accordingly, the amount
+                    may be released in our favour with Escrow account no. {!Booking__c.Builder_Account_Number__c}.  We also confirm that the Plot No.{!Booking__c.Unit_NumberFor__c}, {!Booking__c.Project__c}, Which is being sold to {!Booking__c.First_Applicant_Name__c}, falls within sanctioned plan.
+                </P>
+                <P>
+                    Yours faithfully,
+                </P>
+                <P>
+                    For {!Booking__c.Company_Name__c}
+                </P>
+                <P>
+                    {!Booking__c.Owner.Name}
+                </P>
+                <P>
+                    {!Booking__c.Owner_Designation__c})
+                </P>
+            
+            </div>
+        </body>
+    </html>
+</apex:page>

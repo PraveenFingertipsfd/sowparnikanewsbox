@@ -1,0 +1,238 @@
+<aura:component controller="BookingController"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:attribute name="book" type="Booking__c" default="{}"/>
+    <aura:attribute name="quoteName" type="String" />
+    <aura:attribute name="bookingId" type="String" />
+    <aura:attribute name="unitName" type="String" />
+    <aura:attribute name="leadName" type="String" />
+    <aura:attribute name="bookingAmount" type="Decimal" />
+    <aura:attribute name="bookingRecordId" type="String" />
+    <aura:attribute name="showNext" type="boolean" default="false"/>
+    <aura:attribute name="goToreceipt" type="boolean" default="false"/>
+    <aura:attribute name="disableBtn" type="boolean" default="false"/>
+    <aura:attribute name="applicantList" type="List[]"/>
+    <aura:attribute name="paymentMode" type="List"  default="[
+                                                             { label: 'cheque', value: 'cheque' },
+                                                             { label: 'UPI', value: 'UPI' },
+                                                             { label: 'RTGS/IMPS/NEFT', value: 'RTGS/IMPS/NEFT' },
+                                                             { label: 'Card', value: 'Card' }]"/>
+    <aura:attribute name="parking" type="List"  default="[
+                                                             { label: '1 Scooter', value: '1 Scooter' },
+                                                         { label: '1 Covered Car', value: '1 Covered Car'},
+                                                         { label: '1 Open Car', value: '1 Open Car'},
+                                                         { label: '0 Car Park', value: '0 Car Park'}]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    
+    <aura:html tag="style">
+        .slds-modal__container{ 
+        max-width: 80rem !important;
+        width:80% !important;
+        } 
+        
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        
+        height:unset !important;
+        max-height:unset !important;
+        }
+        
+        .closeIcon{
+        display:none;
+        }
+        .slds-col{
+        margin-left:5px;
+        }
+    </aura:html >
+    
+    
+    <header class="slds-modal__header">
+        <lightning:buttonIcon iconName="utility:close"
+                              onclick="{! c.closeModel }"
+                              alternativeText="close"
+                              variant="bare-inverse"
+                              class="slds-modal__close"/>
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Booking</h2>
+    </header>
+    <aura:if isTrue="{!AND(v.showNext == false,v.goToreceipt == false)}">  
+        <div class="slds-grid slds-wrap slds-grid_pull-padded-x-medium">
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:input name="Quote__c" type="Text" formatter="Text"  disabled="true" label="Quote" aura:id="pro" value="{!v.quoteName}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input name="lead1__c" type="Text" formatter="Text"  disabled="true" label="Lead" aura:id="pro" value="{!v.leadName}" />
+            </div> 
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:input name="Plot__c" type="number" disabled="true"  label="Unit"  value="{!v.unitName}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input aura:id="field" name="Quote_date__c" type="Date" formatter="Date" step="0.01" disabled="false" required="true" label="Date of Booking (as per Booking Form)" value="{!v.book.Date_of_Booking__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input name="Project__c" type="Text" formatter="Text"  disabled="true" label="Project"  value="{!v.book.Project__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input name="Payment_Type__c" type="Text" formatter="Text"  disabled="true" label="Payment Type"  value="{!v.book.Payment_Type__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input name="Property_Type__c" type="Text" formatter="Text"  disabled="true" label="Property Type"  value="{!v.book.Property_Type__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input name="Unit_Facing_Direction__c" type="Text" formatter="Text" disabled="true" label="Unit Facing Direction"  value="{!v.book.Unit_Facing_Direction__c}" />
+            </div>
+            
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input name="Rate_per_sqft__c" type="number" formatter="currency"  disabled="true" label="Rate per sqft"  value="{!v.book.Rate_per_sqft__c}"/>
+            </div>
+            
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:input name="Plot_Land_Area__c" type="number" disabled="true"  formatter="number" label="Plot Land Area"  value="{!v.book.Plot_Land_Area__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input name="Club_House__c" type="number" formatter="currency"  disabled="true" label="Build Up Area"  value="{!v.book.Built_up_area__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:input name="Booking_Amount__c" type="number" disabled="true"  formatter="currency" label="Booking Amount"  value="{!v.book.Booking_Amount__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:dualListbox aura:id="field"
+                                       name="PaymentMode"
+                                       label="Select Parking"
+                                       messageWhenValueMissing="Select fill this field"
+                                       required = "true"
+                                       sourceLabel="Available Parking"
+                                       selectedLabel="Selected Parking"
+                                       options="{!v.parking}"
+                                       value="{!v.book.Parking__c}"
+                                       />
+            </div>
+            <br>
+            </br>
+            <br>
+            </br>
+            <br>
+            </br> 
+        </div>
+        <br/>
+        <h3 class="slds-section__title slds-theme_shade">
+            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Primary Applicant</span>
+        </h3>
+        <br/>
+        <div class="slds-grid slds-wrap slds-grid_pull-padded-x-medium">
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="First_Applicant_Name__c" type="Text" formatter="Text"  disabled="false" required="true" label="Name"  value="{!v.book.First_Applicant_Name__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="W_o_S_o_C_o__c" type="text" disabled="false"  formatter="currency" required="true" label="W/o/S/o/C/o"  value="{!v.book.W_o_S_o_C_o__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="Contact_Number__c" type="phone" formatter="Text"  disabled="false" required="true" label="Phone"  value="{!v.book.Contact_Number__c}" />
+            </div> 
+            <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="Country__c" type="text" disabled="false"  formatter="currency" required="true" label="Country"  value="{!v.book.Country__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input  name="Date_of_Birth__c" type="Date" formatter="Date" step="0.01" messageWhenValueMissing="Select fill this field" disabled="false" required="true" label="Date of birth" value="{!v.book.Date_of_Birth__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="Email__c" type="email" formatter="Text"  disabled="false" required="true" label="Email"  value="{!v.book.Email__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="PAN_Number__c" type="Text" formatter="Text"  disabled="false" required="true" label="PAN Number"  value="{!v.book.PAN_Number__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="Aadhar_Number__c" type="Text" formatter="Text"  disabled="false" required="true" label="Aadhar Number"  value="{!v.book.Aadhar_Number__c}" />
+            </div>
+            <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                <lightning:input aura:id="field" messageWhenValueMissing="Select fill this field" name="Address__c" type="Text" formatter="Text"  disabled="false" required="true" label="Address"  value="{!v.book.Address__c}" />
+            </div>
+            <br>
+            </br>
+            <br>
+            </br>
+            <br>
+            </br> 
+        </div>
+        <br/>
+        <h3 class="slds-section__title slds-theme_shade">
+            <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Other Applicants</span>
+        </h3>
+        <table>
+            <tbody>
+                <div style="text-align: right;">
+                    <a onclick="{!c.removeRow}" data-record="{!index}">
+                        <lightning:buttonIcon iconName="utility:delete" iconClass="red"  size="x-large" variant="destructive" alternativeText="Delete" />
+                    </a>
+                    <lightning:buttonIcon iconName="utility:add" iconClass="green"  size="x-large" variant="success" alternativeText="Add" onclick="{!c.addRow}"/>
+                    
+                </div>
+                <aura:iteration items="{!v.applicantList}" var="prd" indexVar="index">
+                    <h3 class="slds-section__title slds-theme_shade">
+                        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">{!index+1})</span>
+                    </h3>
+                    <tr>
+                        <td>
+                            <div class="slds-grid slds-wrap slds-grid_pull-padded-x-medium">
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                                    <lightning:input name="Name__c" type="Text" formatter="Text"  disabled="false" label="Name" aura:id="pro" value="{!prd.Name}" />
+                                </div>
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                                    <lightning:input name="Name__c" type="Text" formatter="Text"  disabled="false" label="W/o/S/o/C/o" aura:id="pro" value="{!prd.W_o_S_o_C_o__c}" />
+                                </div>
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                                    <lightning:input name="Number1__c" type="phone" formatter="Text"  disabled="false" label="Phone" aura:id="pro" value="{!prd.Contact_Number__c}" />
+                                </div> 
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small">
+                                    <lightning:input name="Country1__c" type="text" disabled="false"  formatter="currency" label="Country"  value="{!prd.Country__c}" />
+                                </div>
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                                    <lightning:input name="Date_of_Birth1__c" type="Date" formatter="Date" step="0.01" disabled="false" label="Date of birth" value="{!prd.Date_of_Birth__c}" />
+                                </div>
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                                    <lightning:input name="Email1__c" type="email" formatter="Text"  disabled="false" label="Email"  value="{!prd.Email__c}" />
+                                </div>
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                                    <lightning:input name="PAN_Number1__c" type="Text" formatter="Text"  disabled="false" label="PAN Number"  value="{!prd.PAN_Number__c}" />
+                                </div>
+                                <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+                                    <lightning:input name="Aadhar_Number__c" type="Text" formatter="Text"  disabled="false" label="Aadhar Number"  value="{!prd.Aadhar_Number__c}" />
+                                </div>
+                            </div>
+                            <aura:set attribute="actions" >
+                                <a onclick="{!c.removeRow}" data-record="{!index}">
+                                    <lightning:buttonIcon iconName="utility:delete" iconClass="red"  size="x-large" variant="destructive" alternativeText="Delete" />
+                                </a>
+                                <lightning:buttonIcon iconName="utility:add" iconClass="green"  size="x-large" variant="success" alternativeText="Add" onclick="{!c.addRow}"/>
+                                
+                            </aura:set>
+                        </td>
+                    </tr>
+                    
+                </aura:iteration>
+            </tbody>
+        </table>
+    </aura:if>
+    <aura:if isTrue="{!v.showNext == true}">
+        <c:photoUploadComponent recordId="{!v.bookingRecordId}" />
+    </aura:if>
+    <aura:if isTrue="{!v.goToreceipt == true}">
+       <!-- <c:Reciept1Comp1 recordId ="{!v.bookingRecordId}" receiptName="Booking Amount Receipt" BookingAmount="{!v.bookingAmount}" totalPending="{!v.bookingAmount}"/>-->
+    </aura:if>
+    
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <aura:if isTrue="{!v.goToreceipt == false}">
+            <aura:if isTrue="{!v.showNext == false}">  
+                <button class="slds-button slds-button_brand" onclick="{!c.closeModel}">Cancel</button>
+                <lightning:button class="slds-m-top_small" variant="brand"  label="Next" disabled="{!v.disableBtn}" onclick="{!c.saveBooking}"/>  
+            </aura:if> 
+            <aura:if isTrue="{!v.showNext == true}">  
+                <lightning:button class="slds-m-top_small" variant="brand"  label="Save"  onclick="{!c.gotoReceipt}"/>
+            </aura:if> 
+        </aura:if>
+    </div>
+    
+</aura:component>

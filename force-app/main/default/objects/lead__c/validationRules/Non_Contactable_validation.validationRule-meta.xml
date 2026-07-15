@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Non_Contactable_validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( ISPICKVAL( Lead_status__c ,&apos;Non Contactable&apos;), ISBLANK(  Remark_for_Non_Contactable__c  ))</errorConditionFormula>
+    <errorMessage>Please Enter Remark for Non Conatactable</errorMessage>
+</ValidationRule>

@@ -1,0 +1,20 @@
+<aura:component controller="BookingHandler" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="recordLoadError" type="String"/>
+    <aura:attribute name="BookingRecord" type="Object"/>
+    <aura:html tag="style">
+        
+        .panel.slds-modal > .modal-container{
+        width: 75%;
+        max-width: 70rem;
+        }
+    </aura:html>
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Id,Sale_Agreement_Completed__c"
+                      targetFields="{!v.BookingRecord}"
+                      recordUpdated="{!c.doInit}" 
+                      targetError="{!v.recordLoadError}"
+                      />
+    
+</aura:component>

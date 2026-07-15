@@ -1,0 +1,186 @@
+<aura:component controller="RecieptController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:html tag="style">
+        .slds-p-around–medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        
+    </aura:html>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> 
+    <aura:attribute name="savebuttonhide" type="boolean" default="false"/>
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    <aura:attribute name="rcpt" type="Receipt__c" default="{'sObjectType':'Receipt__c'}"/>
+    <aura:attribute name="rcptln" type="Receipt_Line_Item__c" default="{'sObjectType':'Receipt_Line_Item__c'}"/>
+    <aura:attribute name="paymentSchedules" type="object[]"/>
+    <aura:attribute name="recptItemList" type="object[]"/>
+    <aura:attribute name="BookingDetails" type="object[]"/>
+    <aura:attribute name="projectName" type="String" />
+    <aura:attribute name="flatNumber" type="String" />
+     <aura:attribute name="bookingPendingAmount" type="Decimal"/>
+    <aura:attribute name="newPendingAmount" type="Decimal"/>
+    <aura:attribute name="receivedAmount" type="Decimal"/>
+    <aura:attribute name="currentPaymentAmount" type="Decimal"/>
+    <aura:attribute name="FlatCost" type="Decimal" default="0.00"/>
+    <aura:handler name="change" value="{!v.searchText}" action="{!c.searchText}"></aura:handler> 
+    <aura:attribute name="searchText" type="string" default=""/>
+    <aura:attribute name="paymentschdl" type="Payment_schedule__c[]" default="[]" />
+    <aura:attribute name="matchpaymentschdl" type="Payment_schedule__c[]" default="[]"/>
+    <aura:attribute name="paymentTypePicklist" type="String[]" />
+    <aura:handler name="change" value="{!v.searchText}" action="{!c.searchText}"></aura:handler>
+    <aura:attribute name="totalrcvdAmount" type="Decimal" default="0.00"/>
+    <aura:attribute name="totalPending" type="Decimal" default="0.00"/>
+    <aura:attribute name="receiptName" type="String" />
+    <aura:attribute name="isDisabled" type="Boolean" default="false"/>
+    
+    <aura:if isTrue="{!$Browser.formFactor == 'DESKTOP'}">
+        <lightning:card >
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                    <lightning:icon iconName="standard:contract_payment" variant="error"/> 
+                                    <span class="slds-assistive-text">Receipt</span>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Receipt</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                                <p class="slds-page-header__name-meta">• Enter all mandatory details</p>
+                                <div style="float:centre;">
+                                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flat Details</h2><br/>
+                                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Name:</b>&nbsp;&nbsp; {!v.projectName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Flat Number:</b>&nbsp;&nbsp; {!v.flatNumber} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>FlatCost:</b>&nbsp;&nbsp; {!v.FlatCost}
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-has-flexi-truncate">
+                    <div class="slds-grid  slds-wrap slds-grid_pull-padded-xx-small slds-m-bottom--medium">
+                        <div class="slds-size_1-of-2 slds-p-horizontal_x-small">
+                            <ui:inputDate aura:id="expdate" label="Receipt Date" class="field" value="{!v.rcpt.Receipt_date__c}" displayDatePicker="true" /> 
+                        </div> 
+                        <div class="slds-size_1-of-2 slds-p-horizontal_x-small">
+                            <lightning:input  label="Remarks" value="{!v.rcpt.Remarks__c}" required="True" />
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-header slds-modal__header slds-size_1-of-1">
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"> Add Receipt Line Items</h2>
+            </div>
+            <div class="slds-modal__content">
+                <table width="100%">
+                    <tbody>
+                        <aura:iteration items="{!v.recptItemList}" var="qt" indexVar="index">
+                            <tr >
+                                
+                                <lightning:card title="{!index+1+(')')}" class="slds-p-left_xx-small groove">
+                                    <div class="slds-grid slds-wrap slds-grid_pull-padded-x-small">
+                                        <td width="20%" style="padding-right: 10px;padding-left: 20px;"> 
+                                            <div  data-record="{!index}" onkeyup="{!c.getGrandTotal}">
+                                                <lightning:select name="select1" label="Payment Type" required="true" value="{!qt.Payment_Type__c}">
+                                                    <option value="">choose one...</option>
+                                                    <option value="Payment Schedules">Payment Schedules</option>
+                                                    <option value="TDS">TDS</option>
+                                                </lightning:select>                                        
+                                            </div>
+                                            
+                                        </td>
+                                           <aura:if isTrue="{!qt.Payment_Type__c != ''}"> 
+                                               <td width="20%" style="padding-right: 10px;">
+                                                   
+                                                   <div  data-record="{!index}" onkeyup="{!c.getGrandTotal}">
+                                                       <lightning:input aura:id="field" name="Amount" type="decimal"  label="Pending Amount" value="{!v.bookingPendingAmount}" disabled="true"  />
+                                                   </div>                                                   
+                                               </td>
+                                       
+                                        <td width="10%" style="padding-right: 10px;">
+                                            <div  data-record="{!index}" onkeyup="{!c.getGrandTotal}">
+                                                <lightning:select aura:id="field" name="select1" label="Payment From" required="true" value="{!qt.Payment_From__c}">
+                                                    <option value="">choose one...</option>
+                                                    <option value="Bank">Bank</option>
+                                                    <option value="Customer">Customer</option>
+                                                </lightning:select>                                        
+                                            </div>
+                                        </td>
+                                        <td width="10%" style="padding-right: 10px;">
+                                            <div  >
+                                                <lightning:select aura:id="field" class="select slds-size_1-of-1" required="true" label="Mode of Payment"   value="{!qt.Mode_of_Payment__c}"   disabled="false"  >
+                                                    <option value="" >None</option>
+                                                    <aura:iteration items="{!v.paymentTypePicklist}"  var="option">
+                                                        
+                                                        <option text="{!option}" ></option>
+                                                    </aura:iteration>
+                                                </lightning:select>
+                                            </div>
+                                        </td>
+                                       <td width="10%" style="padding-right: 10px;">
+                                            <div data-record="{!index}">
+                                                <lightning:input  type="text" aura:id="field" label="Bank Name"  value="{!qt.Bank_Name__c}" /> 
+                                            </div>
+                                        </td>
+                                        <td width="10%" style="padding-right: 10px;">
+                                            <div data-record="{!index}">
+                                                <lightning:input aura:id="field" type="text" required="true" label="Transaction Number" value="{!qt.Cheque_no_Transaction_Number__c}" /> 
+                                            </div>
+                                        </td>
+                                        <td width="10%" style="padding-right: 10px;">
+                                            <div  onkeyup="{!c.getGrandTotal}" data-record="{!index}">
+                                                <lightning:input aura:id="field" type="decimal" required="true" label="Amount Received" value="{!v.receivedAmount}" /> 
+                                            </div>
+                                        </td>
+                                        <td width="10%" style="padding-right: 10px;">
+                                            <div  onkeyup="{!c.getGrandTotal}" data-record="{!index}">
+                                                <lightning:input  type="number"  label="New Pending Amount" value="{!v.newPendingAmount}" disabled="true"/> 
+                                            </div>
+                                        </td>
+                                        </aura:if>
+                                    </div>
+                                    <!--<aura:set attribute="actions" >
+                                        <a onclick="{!c.removeRow}" data-record="{!index}">
+                                            <lightning:buttonIcon iconName="utility:delete" iconClass="red"  size="x-large" variant="destructive" alternativeText="Delete" />
+                                        </a>
+                                        <lightning:buttonIcon iconName="utility:add" iconClass="green"  size="x-large" variant="success" alternativeText="Add" onclick="{!c.addRow}"/>
+                                    </aura:set>-->
+                                </lightning:card>
+                                
+                            </tr>
+                        </aura:iteration>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+                <b>Total Amount Received (INR) :</b>&nbsp;₹ {!v.totalrcvdAmount}
+                <div>
+                    <b>Total Pending Amount:</b>&nbsp;₹ {!v.totalPending}   
+                </div>
+            </div>
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+                <div class="slds-align_absolute-center slds-p-top_small ">
+                    <lightning:button variant="brand" label="Cancel" title="Brand action" onclick="{!c.quoteCancel}" />
+                    <aura:if isTrue="{!v.savebuttonhide}" >
+                        <lightning:button  variant="brand" label="Save" title="Brand action" onclick="{!c.quoteSave}" />
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:card>
+    </aura:if>
+</aura:component>

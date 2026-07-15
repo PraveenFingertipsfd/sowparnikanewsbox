@@ -1,0 +1,86 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:attribute name="recordId" type="String"  />
+    <aura:attribute name="showApprovalDetails" type="Boolean" default="false" />
+    <aura:attribute name="showFirstDetails" type="Boolean" default="false" />
+    
+    <div class="slds-theme_default">
+        <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="Booking__c">
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Swap_Unit__c" />
+                </div>
+                &nbsp;
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Swap_Unit_Status__c" />
+                </div>
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Date_of_Bookingswap__c" />
+                </div>
+                &nbsp;
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Projectswap__c" />
+                </div>
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Club_Houseswap__c" />
+                </div>
+                &nbsp;
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Corpus_Fundswap__c" />
+                </div>
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Legal_Documentation_Chargesswap__c" />
+                </div>
+                &nbsp;
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Rate_per_sqftswap__c" />
+                </div>
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Basic_Priceswap__c" />
+                </div>
+                &nbsp;
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Unit_Facing_Directionswap__c" />
+                </div>
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Plot_Land_Areaswap__c" />
+                </div>
+                &nbsp;
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="GSTswap__c" />
+                </div>
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Maintenance_Chargeswap__c" />
+                </div>
+                &nbsp;
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Infrastructure_Charges_per_sqftwsap__c" />
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="Total_With_Taxswap__c" />
+                </div>
+               
+            </div>
+        </lightning:recordViewForm>
+    </div>
+</aura:component>

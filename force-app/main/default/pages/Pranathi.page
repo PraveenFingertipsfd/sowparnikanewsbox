@@ -1,0 +1,228 @@
+<apex:page standardController="Booking__c"  extensions="convertValueToWords" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/CSS">
+                @page {
+                size:portrait;
+                
+                margin-bottom: 200px;
+                @bottom-right {
+
+                              content: "Page " counter(page);
+
+                            }
+                }
+                .content-wrapper {
+                page-break-inside: avoid;
+                }
+            </style>
+        </head>
+        
+        <body >
+            <div style="font-size: 17px;">
+               
+                <h2 style="text-align:center;">AGREEMENT OF ASSIGNMENT</h2><br/>
+                <p style="text-align:justify;">
+                     THIS AGREEMENT OF ASSIGNMENT is made and executed on this date <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!today()}" /></apex:outputText> at Bangalore.</p>
+                <p>
+                    BETWEEN;
+                </p>
+                <p style="font-size:17px;">
+                     {!Booking__c.First_Applicant_Name__c}, W/o/S/o/C/o. {!Booking__c.W_o_S_o_C_o__c}, Aged about {!Booking__c.Age__c} years,<br/>
+                    PAN No: {!Booking__c.PAN_Number__c}, Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                    <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                         {!p.Name}, W/o/S/o/C/o. {!p.W_o_S_o_C_o__c}, Aged about {!p.Age__c} years,<br/>
+                        PAN No: {!p.PAN_Number__c}, Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                    </apex:repeat>
+                    Both are residing at {!Booking__c.Address__c}
+                </p>
+                <p style="text-align:justify;">
+                    Hereinafter referred to as the <b>ASSIGNOR/S</b> (which expression shall mean and include their respective heirs, legal representatives, executors, 
+                    administrators and assigns etc) OF THE <b>FIRST PART:</b>
+                </p>
+                <p>
+                    <b>In Favour of</b> 
+                </p>
+                <p style="font-size:17px;">
+                     {!Booking__c.First_Applicant_Name__c}, W/o/S/o/C/o. {!Booking__c.W_o_S_o_C_o__c}, Aged about {!Booking__c.Age__c} years,<br/>
+                    PAN No: {!Booking__c.PAN_Number__c}, Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                    <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                         {!p.Name}, W/o/S/o/C/o. {!p.W_o_S_o_C_o__c}, Aged about {!p.Age__c} years,<br/>
+                        PAN No: {!p.PAN_Number__c}, Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                    </apex:repeat>
+                    Both are residing at {!Booking__c.Address__c}
+                </p>
+                <p style="text-align:justify;">
+                    Hereinafter referred to as the <b>ASSIGNEE/S </b>(which expression shall mean and include their heirs, legal representatives, executors,
+                    administrators and assigns etc) OF THE<b>SECOND PART:</b> 
+                </p>
+                <p>
+                    And:
+                </p>
+                <p style="text-align:justify;">
+                    <b>M/s. SOWPARNIKA PROJECTS AND INFRASTRUCTURE PRIVATE LIMITED,</b> CIN No. U45201KA2007PTC043166 a company incorporated 
+                    under the provisions of the Companies Act, 1956, having its registered office at No.750, ‘C’ Block, 1st Main Road,
+                    AECS Layout, Kundalahalli, Bangalore-560037 (PAN– AAKCS9641L). represented by its authorized signatory<b> MR. Purushotham C.
+                    Reddy, GM Finance,</b> Authorized vide board resolution dated 30.09.2019
+                </p>
+                <p style="text-align:justify;">
+                    Hereinafter referred to as the <b>CONSENTING WITNESS/BUILDER</b> (which expression shall mean and include its, representatives, 
+                    executors, administrators, Successors in interest and assigns etc) OF <b>THE THIRD PART:</b>
+                </p>
+                <div style="page-break-after:always;"></div>
+                <p>
+                    <b>WITNESSETH:</b>
+                </p>
+                <p style="text-align:justify;">
+                    WHEREAS the Assignor/s above named being desirous of owning an Apartment in the project known as<b> “SOWPARNIKA PRANATHI” </b>
+                    promoted by M/s Sowparnika Projects and Infrastructure Pvt. Ltd., a Private Limited Company (hereinafter referred to as the
+                    BUILDER) joined the scheme of ownership of residential apartments in the said project propounded by the said Builder on the
+                    residentially, converted land bearing Re-Survey No.28/17A (Old Survey No.28/17), measuring 1 Acre 34 Guntas
+                    (including 01 gunta of Kharab Land), situated at Kumbalagodu Village, Kengeri Hobli, Bangalore South Taluk, which is
+                    more-fully and particularly described in the schedule hereunder written and hereinafter referred to as<b> (“Said Land”)</b> having,
+                    purchased the same by a  sale Agreement dated 19.03.2018 registered as documents No 265/2018-19 in  the office of the Senior 
+                    Sub-Registrar Kengeri Bangalore South Taluk.  which is more fully described in the Schedule A hereunder and hereinafter
+                    referred to as the Schedule A Property.
+                </p>
+                <p style="text-align:justify;">
+                    The proportionate undivided interest in the Schedule A Property agreed to be purchased by the Assignor/s in terms of the
+                    Agreement to sell dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> more fully described in the Schedule B hereunder and hereinafter referred to as the 
+                    Schedule A Property.
+                </p>
+                <p style="text-align:justify;">
+                    WHEREAS in terms of the scheme propounded by the Builder, the Assignor/s by virtue of agreeing to purchase the Schedule ‘A’
+                    Property in terms of the said<b> Agreement to Sell dated<apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> and agreed to get constructed an Apartment bearing No. {!Booking__c.Unit_NumberFor__c} in the {!Booking__c.Floor__c} Floor, in the project known as “SOWPARNIKA PRANATHI”,</b> more fully described in the Schedule
+                    ‘A’ hereunder, through the Builder above named.
+                </p>
+                <p style="text-align:justify;">
+                   <b> WHEREAS in terms of the Sale Agreement dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>, the Builder had agreed to construct the Schedule ‘A’ Apartment for
+                       total cost of Rs.{!totalCostInString}/- excluding Tax.</b>
+                </p>
+                <p style="text-align:justify;">
+                    WHEREAS the Assignor/s has obtained a housing <b>loan from {!Booking__c.Bank_Name__c} and the bank has disbursed the amount of Rs. <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Sanctioned_Amount__c}" /></apex:outputText>/- </b>to the builder.  Now Assignors have no longer interested in owning the Schedule ‘A’ Apartment and hence
+                    are desirous of disposing off their right, title and interest in the Schedule ‘A’  Properties acquired in terms of the Sale Agreement 
+                    <b>dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>.</b>
+                </p>
+                <p style="text-align:justify;">
+                    WHEREAS the Assignee/s above named being desirous of owning an apartment has agreed to purchase the Schedule ‘A’ Property for
+                    total consideration of Rs.{!totalCostInString}/- excluding tax from the builder.  Hence the
+                    Assignor/s and the Assignee/s have entered into this Assignment Agreement in terms of which the Assignor/s above named have
+                    assigned all their right, title and interest acquired by them under the Sale Agreement dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> in favour
+                    of the Assignee/s. 
+                </p>
+                <div style="page-break-after:always;"></div>
+                                    <h2 style="text-align:center;">NOW THIS AGREEMENT OF ASSIGNMENT WITNESSETH AS FOLLOWS:</h2><br/>
+                 <p style="text-align:justify;">
+                     In Pursuance of the above and in consideration the Assignee has agreed to pay    Rs.-------------------/- (Rupees ------------------------ Only) 
+                     to Assignor and to the builder/ consenting witnesses herein in the following  manner: -
+                </p>
+                <p style="text-align:justify;">
+                    a)	Rs. __________/- (Rupees ___________ Only) shall pay to __________________Bank to close the Assignor housing loan.  
+                </p>
+                <p style="text-align:justify;">
+                    b)	Rs. ________/- (Rupees _________ Only) shall pay to Assignor
+                </p >
+                <p style="text-align:justify;">
+                    c)	The balance consideration of Rs._______/- (Rupees ________ Only) shall pay to builder/ consenting witness.
+                </p>
+                <p style="text-align:justify;">
+                    d)	Assignee has paid Rs. ________/-(Rupees _______ Only) to the builder as advance consideration, 
+                    Balance of Rs.___________/- (Rupees _________ Only) shall be paid to the builder.
+                </p>
+                <p style="text-align:justify;">
+                    The Assignor/s hereby assign, transfer and make over unto the Assignee/s all his/her/their right, title and interest in the
+                    Sale Agreement dated ___________ in favour of the Assignee/s and the Assignee/s hereby accepts the assignment. 
+                </p>
+                <p style="text-align:justify;">
+                    1.	The Assignor/s has agreed to pay to the builder the Assignment fee of Rs. <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Assignment_Fee__c}" /></apex:outputText>/- per Sq.ft of Rs. <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Assignment_Amount__c}" /></apex:outputText>/-.
+                </p>
+                <p style="text-align:justify;">
+                    2.	The Assignor/s hereby confirm and declare that they have not violated any terms and conditions of the Sale Agreement
+                    dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> and the said Sale Agreement is valid, subsisting and binding that they have not created any right 
+                    or charge in favour of any third parties nor have encumbered their right in favour of any third parties except for housing
+                    loan from {!Booking__c.Bank_Name__c} for purchase of the Schedule ‘B’ Properties which the Assignor undertake to clear before execution 
+                    of sale deed in favor of Assignee. 
+                </p>
+                <p style="text-align:justify;">
+                    3.	In case of any such charge or encumbrance, the Assignee shall be entitled to call upon the Assignor to discharge such charge,
+                    encumbrance or right at the cost of the Assignor/s.
+                </p>
+                <p style="text-align:justify;">
+                    4.	The Assignee/s hereby assures and covenants that they shall observe and confirm to all terms, conditions, covenants, and obligations etc,
+                    detailed in the Sale Agreement dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> and that they are bound by all such terms, conditions, covenants as if the Sale Agreement
+                    dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> is entered into and executed by Assignor/s.  
+                </p>
+                <br/><br/> <br/><br/><br/> <br/>
+                <p style="text-align:justify;">
+                    5.	The Assignor/s hereby declares and confirms that by virtue of this assignment they have extinguished all their right, title and interest in the
+                    Schedule ‘B’ Properties and the Assignee/s is entitled to get the conveyance deed registered in Their name and take possession from the Builder of the
+                    Schedule ‘B’ apartment after payment of the Assignment fee as stated above.
+                </p>
+                <p style="text-align:justify;">
+                    6.	The Builder has consented to this assignment by the Assignor/s in favour of the Assignee/s and has agreed to hand over the possession of the Schedule ‘B’ 
+                    apartment to the Assignee/s and in token thereof the Builder has executed this Agreement as a Consenting Witness.  
+                </p>
+                <p style="text-align:justify;">
+                    7.	The Assignor/s shall hand over original Sale Agreement dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> to the Assignee/s or to the Assignee Banker within 15 days from the date of closing
+                    existing housing loan.   
+                </p>
+                <p style="text-align:justify;">
+                    8.	The Assignee/s hereby assures and declares the Builder that he will get the Schedule B Property registered in their name or in the name of their heirs, legal representatives,
+                    assigns etc. 
+                </p>
+                <p style="text-align:justify;">
+                    9.	The original of this Assignment agreement shall be retained by the Assignee/s and the photo copy shall be retained by the Assignor/s and Builder.   
+                </p>
+                <h2 style="text-align:center;">SCHEDULE PROPERTY</h2>
+                <p style="text-align:justify;">
+                    All that piece and parcel of residential converted land bearing No.28/17, Re-Survey No.28/17-A, (Converted vide Official
+                    Memorandum No- B.Dis.ALN (S) SR(KT) 136/2004-05 dated 09-05-2005 issued by Special Deputy Commissioner, Bangalore District)
+                    having  E-Katha Property No.150200300200220412, situated at Kumbalagodu Village, Kengeri  Hobli, Bangalore South Taluk, measuring
+                    an extent of 1 Acres 34 Guntas (1-34) together with all rights, appurtenances whatsoever whether underneath or above the surface
+                    and bounded on:
+                </p>
+                <p>
+                    East by	: Eeranarasappa, Channamma Garden (Sy No.29) 
+                </p>
+                <p>
+                    West by	: Road,
+                </p>
+                <p>
+                    North by	: Narasimhaiah and Dasappa’s Land (Sy No.28)
+                </p>
+                <p>
+                    South by	: Private Property (Sy No.32)
+                </p>
+                 <h2 style="text-align:center;">SCHEDULE ‘A’</h2><br/>
+                <p style="font-size:17px;">
+                    <div style="text-align:justify;">
+                    Apartment No. {!Booking__c.Unit_NumberFor__c} having Super Built up area {!Booking__c.Built_up_area__c}Sq.ft., and carpet area of {!Booking__c.Carpet_Area__c} Sq. m
+                    (___ square feet), Balcony area {!Booking__c.Balcony_Area__c}Sq. m on {!Booking__c.Floor__c} floor {!Booking__c.Parking__c} space  along with {Booking__c.Undivided_Share_Of_Land__c} undivided share in the Schedule Property, in the Apartment 
+                        building known as SOWPARNIKA PRANATHI.</div><br/><br/>
+                    East by  : {!Booking__c.East_By__c}<br/>
+                    West by  : {!Booking__c.West_By__c}<br/>
+                    North by : {!Booking__c.North_By__c}<br/>
+                    South by : {!Booking__c.South_By__c}<br/><br/><br/>
+                </p>
+                <p>
+                  IN WITNESS WHEREOF the parties have signed this Agreement on the day month and year first above mentioned in the 
+                    presence of the following witnesses.  
+                </p>
+                <p>
+                    CONSENTING WITNESS:                                                       
+Sowparnika Projects and Infrastructure Pvt. Ltd.,      
+
+                </p>
+                <p>
+                   WITNESSES: 
+                </p>
+                <p>
+                    1. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ASSIGNOR/S<br/><br/><br/><br/><br/><br/>
+                    2. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ASSIGNEE/S
+                    
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

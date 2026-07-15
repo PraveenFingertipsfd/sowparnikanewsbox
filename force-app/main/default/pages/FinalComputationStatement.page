@@ -1,0 +1,167 @@
+<apex:page standardController="Booking__c"  renderAs="pdf"  applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <style>
+           @page {
+                    size: A4;
+                    margin: 0;
+                }
+            .details-container {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .customer-details,
+            .booking-details {
+                flex: 1;
+            }
+            
+            .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            }
+            .footer img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    
+                }
+        </style>
+    </head>
+    <body>
+         <h2 style="font-weight: bold; text-align: center; margin-bottom: 20px;">FINAL COMPUTATIONS STATEMENT</h2>
+        <br/>
+        <div style="margin:40px;">
+            <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <td width = "60%"><b>Customer Name:</b> {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat> </td>
+                    <td width = "40%"><b>Flat No.</b> {!Booking__c.Unit_NumberFor__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%"><b>Registration Date</b></td>
+                    <td width = "40%"><apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Deed_Date__c}" /></apex:outputText></td>
+                </tr>
+                <tr>
+                    <td width = "60%"><b>Bank</b></td>
+                    <td width = "40%"><b>SBI</b></td>
+                </tr>
+                <tr>
+                    <td width = "60%">Super Built up Area (Sft)</td>
+                    <td width = "40%">{!Booking__c.Built_up_area__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Rate/Sqft</td>
+                    <td width = "40%">{!Booking__c.Rate_per_sqft__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Basic cost</td>
+                    <td width = "40%">{!Booking__c.Basic_Price__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Scooter Park/ Car Park</td>
+                    <td width = "40%">{!Booking__c.Car_Scooter_Parking__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Club &amp; Amenities charges</td>
+                    <td width = "40%">{!Booking__c.Club_Amenities_Charges__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Water &amp; Electricity charges</td>
+                    <td width = "40%">{!Booking__c.Water_Electricity_Charges__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Generator/Solar/STP</td>
+                    <td width = "40%">{!Booking__c.Generator_STP__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">GST</td>
+                    <td width = "40%">{!Booking__c.GST__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Cost of the Apartment</td>
+                    <td width = "40%">{!Booking__c.Total_Cost_Ex_Leg_Main__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Maintenance Charges</td>
+                    <td width = "40%">{!Booking__c.Maintenance_Charge__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">GST on Maintenance</td>
+                    <td width = "40%"></td>
+                </tr>
+                <tr>
+                    <td width = "60%">Total cost of the flat(Incl Maintenance)</td>
+                    <td width = "40%">{!(Booking__c.Total_Cost_Ex_Leg_Main__c + Booking__c.Maintenance_Charge__c)}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Miscull</td>
+                    <td width = "40%"></td>
+                </tr>
+                <tr>
+                    <td width = "60%">Modification</td>
+                    <td width = "40%"></td>
+                </tr>
+                <tr>
+                    <td width = "60%">Total Payable</td>
+                    <td width = "40%">{!(Booking__c.Total_Cost_Ex_Leg_Main__c + Booking__c.Maintenance_Charge__c)}</td>
+                </tr>
+                <tr>
+                    <td width = "60%">Total Received </td>
+                    <td width = "40%">{!Booking__c.Total_received_Amount__c}</td>
+                </tr>
+                <tr>
+                    <td width = "60%"><b>Final Balance payable towards the flat</b></td>
+                    <td width = "40%">{!Booking__c.Pending_Amount__c}</td>
+                </tr>
+                
+            </table>
+            <br/><br/>
+            <div>
+                All dues has to be cleard prior to the registration excluding bank payment.
+            </div>
+            <div>
+                Please find the registrations Charges as below
+            </div>
+            <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <td width="60%"><b>Property Value</b></td>
+                    <td width="40%"></td>
+                </tr>
+                <tr>
+                    <td width="60%">1) Stamp Duty</td>
+                    <td width="40%">3.10%</td>
+                </tr>
+                <tr>
+                    <td width="60%">2) Cess on stamp Duty</td>
+                    <td width="40%">0.30%</td>
+                </tr>
+                <tr>
+                    <td width="60%">3) Registration Fees</td>
+                    <td width="40%">1.00%</td>
+                </tr>
+                <tr>
+                    <td width="60%">Total</td>
+                    <td width="40%"></td>
+                </tr>
+                <tr>
+                    <td width="60%">Scanning Amount</td>
+                    <td width="40%">1.30%</td>
+                </tr>
+                <tr>
+                    <td width="60%">Above Registration Charges has to paid through online </td>
+                    <td width="40%">1.30%</td>
+                </tr>
+            </table>
+            <br/>
+            <br/>
+            <div>
+                <b>Prepared By</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Checked By</b>
+            </div>
+        </div>
+    </body>
+</apex:page>

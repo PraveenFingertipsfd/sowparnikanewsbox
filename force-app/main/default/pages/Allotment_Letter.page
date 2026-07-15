@@ -1,0 +1,121 @@
+<apex:page standardController="Booking__c" showHeader="false" standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style>
+                @page {
+                size: A4;
+                margin: 0;
+                }
+                .details-container {
+                display: flex;
+                justify-content: space-between;
+                }
+                body {
+                font-family: Times New Roman;
+                font-size: 15px;
+                text-align: justify;
+     
+                }
+                p, div, td, span {
+                font-size: 15px;
+                line-height: 1.20;
+                
+                }
+                .customer-details,
+                .booking-details {
+                flex: 1;
+                }
+                
+                .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                font-size: 12px;
+                line-height: 1.1;
+                padding: 0;
+                }
+                .footer img {
+                width: 100%;
+                height: auto;
+                display: block;
+                
+                }
+            </style>
+        </head>
+        <body>
+            <div style="float:right;">
+                <img src="{!$Resource.Sowparnika}" height="70px;"/>
+            </div><br/><br/><br/>
+            <p><span style= "float:right;display: inline-block;"><strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong></span></p>
+            
+            <div style="margin:40px;font-size:14px;">
+                <table>
+                    <h2 style="text-align:center;">ALLOTMENT LETTER</h2>
+                    <div style="text-align:left;"><b>To,</b></div>
+                    <div style="text-align:left;"><b></b>{!Booking__c.First_Applicant_Name__c}
+                        <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                            <div style="text-align:left;"> and {!p.Name}</div>
+                        </apex:repeat>
+                    </div>
+                    <div style="text-align:left;"><b>Address:</b>{!Booking__c.Address__c}</div>
+                    <div style="text-align:left;"><b>Contact No:</b>{!Booking__c.Contact_Number__c}</div><br/>
+                    <div style="text-align:left;">Dear Sir/Madam,</div><br/>
+                    <div style="text-align:center;font-size:14px;"><b>PROJECT: {!Booking__c.Project__c} - {!Booking__c.Project_Address__c}</b></div><br/>
+                    <div style="text-align:left;font-size:14px;">We are delighted to inform you that your application has been processed, and we are pleased to allot you Apartment No. {!Booking__c.Unit_NumberFor__c} on  Floor {!Booking__c.Floor__c}<apex:outputText rendered="{!Booking__c.Project__c == 'Rhythm of Rain'}">, Tower {!Booking__c.Block_Number__c}, Building {!Booking__c.Building_No__c}</apex:outputText> <apex:outputText rendered="{!Booking__c.Project__c == 'Whispering Petals'}">, {!Booking__c.Plot__r.Building__c}, {!Booking__c.Block_Name__c} </apex:outputText> <apex:outputText rendered="{!NOT(ISBLANK(Booking__c.Plot__r.Terrace_Area__c))}">, Terrace area {!Booking__c.Plot__r.Terrace_Area__c}</apex:outputText> in the "{!Booking__c.Project__c}" at {!Booking__c.Project_Address__c}.</div><br/>
+                    <div style="text-align:left;font-size:14px;">"Please refer to the attached sheet for detailed information regarding the unit, indicative charges, and the payment schedule.</div><br/>
+                    <div style="text-align:left;font-size:14px;"><b>TERMS &amp; CONDITIONS:</b></div><br/>
+                    <div style="text-align:left;font-size:14px;">1. As agreed upon at the time of booking, additional expenses such as stamp duty, registration, and legal fees will be payable on demand at actuals.</div>
+                    <div style="text-align:left;font-size:14px;">2. The applicable GST shall be payable along with payment falling due at the prevailing rates in force, which, are subject to change from time to time.</div>
+                    <div style="text-align:left;font-size:14px;">3. Sowparnika, at its option can cancel the booking if the payment is not made as per this Allotment Letter and if the agreements are not signed within 15 days from the date of booking.</div>
+                    <div style="text-align:left;font-size:14px;">4. Allotment is valid subject to realization of the booking amount and the terms and conditions of application for allotment is duly signed by the purchaser or the power of Attorney holder.</div>
+                    <div style="text-align:left;font-size:14px;">5. In case of cancellation, Sowparnika is entitled to forfeit Rs.50,000/- from the booking amount paid by the customer towards administrative charges. We shall pay the balance amount if any, within 90 days from the date of said cancellation.</div>
+                    <div style="text-align:justify;font-size:14px;">6. The Applicant is aware that as per Finance Bill of 2013, TDS is applicable on sale of immoveable property wherein the sale consideration of the property exceeds or is equal to Rs 50,00,000 (Rupees Fifty Lakhs). The Applicant while making payments shall deduct Tax at the rate of 1% of the property cost and the tax so deducted shall be deposited into the Income Tax account through any of the authorized bank branches using the e-Tax payment option available at NSDL. Copies of the Form 26QB,TDS Challan and Form 16B shall be handed over to Sowparnika.</div>
+                    <div style="text-align:left;font-size:14px;">7. Errors &amp; omissions exempted (E&amp;OE).</div><br/>
+                    <div style="text-align:left;font-size:14px;">Please ensure to comply with the terms of the allotment.</div><br/>
+                    <div style="text-align:left;font-size:14px;">Thank you for choosing Sowparnika "{!Booking__c.Project__c}"</div><br/>
+                    <div style="text-align:left;font-size:14px;">We assure you of our best services always.</div><br/>
+                    <div style="text-align:left;font-size:14px;">Yours Sincerely,</div><br/>
+                    <div style="text-align:left;font-size:14px;">From {!Booking__c.Company_Name__c}</div>
+                </table>
+                
+                
+                <table width="100%">
+                    <tr>
+                        <td width="50%">{!Booking__c.Owner.Name}</td>
+                        <td width="50%" style="text-align:right;">Agreed &amp; Accepted By</td>
+                    </tr>
+                    <tr>
+                        <td width="50%">{!Booking__c.Owner_Designation__c}</td>
+                        <td width="50%" style="text-align:right;">Customer Signature</td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:left;">Signature</td>
+                        <td width="50%" ></td>
+                    </tr>
+                </table>
+                
+            </div>
+            <div class="footer">
+            <table style="margin-left: 30px;margin-right: 30px;table-layout: fixed;">
+                <tr>
+                    <td width="60%" style="text-align:left;border: 1px solid black;border-left: none; border-top: none; border-bottom: none;">
+                        <b>Registered &amp; Corporate Office:</b><br/>
+                        {!Booking__c.Company_Name__c}<br/>
+                        No.750, 1st Main Road, C-Block, AECS Layout, Kundalahalli, Banglore - 560 037, INDIA.
+                    </td>
+                    <td width="30%" style="text-align:right;">
+                        CIN: {!Booking__c.CIN_Number__c}<br/>
+                        www.sowparnika.com<br/>
+                        Phone No. 080 4243 3000<br/>
+                        cs@sowparnika.com
+                    </td>
+                </tr>
+            </table>
+            <img src="{!$Resource.footnewswp}" alt="Footer Image" width="795px;"/>
+        </div>
+        </body>
+    </html>
+</apex:page>

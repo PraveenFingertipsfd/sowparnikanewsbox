@@ -1,0 +1,57 @@
+<aura:component controller='BookingSecondaryWelcomeMail' 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" 
+                access="global">
+    <aura:attribute name="emailContent" type="String" />
+    <aura:attribute name="recepients" type="String" />
+    <aura:attribute name="record" type="Object" />
+    <aura:attribute name="LeadRecord" type="Object"/>
+    <aura:attribute name="files" type="List" />
+    <aura:attribute name="filesIDS" type="List" />
+     <force:recordData aura:id="recordLoader"
+                  recordId="{!v.recordId}"
+                  fields="Name,OwnerId,Bank_Name__c,Project__c,Booking_Amount__c,Unit_NumberFor__c,Owner_NameFor__c,Owner_Phone__c,Owner_Designation__c,First_Applicant_Name__c,Owner_Designation__c"
+                  recordUpdated="{!c.doInit}"
+                  targetFields="{!v.LeadRecord}"
+                  targetError="{!v.recordLoadError}"
+                  />
+    <aura:html tag="style">
+        .slds-modal__container{ 
+        max-width: 50rem !important;
+        width:75% !important;
+        } 
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .closeIcon{
+        display:none;
+        }
+        .slds-col{
+        margin-left:15px;
+        }
+        .custom-textarea {
+        --sds-c-textarea-sizing-min-height:300px;
+        }
+    </aura:html>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <h1 style="font-size: 20px;color: lightblue;"><b>Secondary Welcome Mail</b></h1>
+    </div>
+     
+    <div style="width: 100%; max-width: 700px; margin: 0 auto;"> <!-- Adjust max-width as needed -->
+        <lightning:textarea class="custom-textarea" aura:id="emailContent"
+                  placeholder="Review and edit email content"
+                  value="{!v.emailContent}" rows="10" cols="50"  style="width: 100%;height: 350px;"/>
+        <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+            <ui:button class="custom-round-button slds-button slds-button--brand" label="Send Email" press="{!c.sendEmail}" />
+            <ui:button class="custom-round-button slds-button slds-button--brand" label="Cancel" press="{!c.Cancel}" />
+        </div>
+    </div>
+</aura:component>

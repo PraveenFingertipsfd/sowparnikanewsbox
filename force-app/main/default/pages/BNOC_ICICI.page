@@ -1,0 +1,70 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false" extensions="convertValueToWords">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                margin-top: 200px;
+                }
+            </style>
+        </head>
+        
+        <body >
+            <div style="font-size: 17px;text-align:justify;"><br/><br/><br/><br/>
+               <p>
+                   Date: <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!today()}" /></apex:outputText>
+                   Place: Bengaluru
+                </p>
+                <p>
+                    To,
+                </p>
+                <p>
+                   ICICI Bank Limited
+                </p>
+                <p>
+                   Dear Sir,
+                </p>
+                <p>
+                    Re:	Permission to mortgage flat no. {!Booking__c.Unit_NumberFor__c} on the floor {!Booking__c.Floor__c} of the building proposed to be named as / named as “Sowparnika {!Booking__c.Project__c}” Situated at {!Booking__c.Project_Address__c}.
+                </p>
+                <p>
+                    1. This is to confirm that we have allotted/sold flat no. {!Booking__c.Unit_NumberFor__c} admeasuring {!Booking__c.Built_up_area__c}sq. ft. (carpet/built-up area) on floor {!Booking__c.Floor__c} of the building proposed to be named as / known as Sowparnika {!Booking__c.Project__c}” Situated Sowparnika {!Booking__c.Project__c}” Situated at {!Booking__c.Project_Address__c}, which is under construction / constructed by us to {!Booking__c.First_Applicant_Name__c} for a total consideration of Rs.{!totalCostInString} (Rupees {!TotalCostAmountInWords} only) under an Agreement for Sale/Sale Deed dated<apex:outputText value="{0, date, dd MMMM yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>.
+                </p>
+                <p>
+                    2. We confirm that we have obtained necessary permissions/approvals/sanctions for construction of the said building from all the concerned competent authorities and the construction of the building as well as of the flat are in accordance with the approved plans. We have a clear, legal and marketable title to the said property and every part thereof
+                </p>
+                <p>
+                    (a)  We have a clear, legal and marketable title to the said property and every part thereof
+                </p>
+                <p>
+                    A. We assure that the said flat as well as the said building and the land appurtenant thereto are not subject to any encumbrance, charge or liability of any kind whatsoever and that the entire property is free and marketable. 
+                </p>
+                <p>
+                    B. We have availed construction finance facility from {!Booking__c.Project_Financier__c} and release of charge letter shall be provided subject to the sale proceedings being deposited in the mandated ESCROW Account,..
+                </p>
+                <p>
+                   3. {!Booking__c.First_Applicant_Name__c} has paid an amount of Rs. {!totlreceivedinIndian}/-(Rupees {!tillDateReceived} only) and a sum of Rs. {!totalPendingInIndia} (Rupees {!totalPendingWords} only) remains to be paid towards the cost of the said flat. 
+                </p>
+                <p>
+                    4. We are aware that the said {!Booking__c.First_Applicant_Name__c} has approached ICICI Bank Ltd for a loan for purchasing/acquiring the said flat and that ICICI Bank Ltd has agreed to sanction/grant the loan to {!Booking__c.First_Applicant_Name__c} to purchase / acquire the above flat and {!Booking__c.First_Applicant_Name__c} has agreed to mortgage the said flat in your favour / in favour of your security trustee as security for the said loan. We hereby confirm that we have no objection {!Booking__c.First_Applicant_Name__c} mortgaging the said flat to your Company / in favour of your security trustee by way of security for repayment of the said loan.Notwithstanding anything to the contrary contained in the said Agreement for Sale, we hereby agree to note the aforesaid charge in our books in respect of the said Flat and {!Booking__c.First_Applicant_Name__c} will not be permitted to transfer, assign, sell off / cancel or in any other way / manner deal with the said Flat prejudicial to the interest of the aforesaid mortgagee without the prior written consent of the aforesaid mortgagee.
+                </p>
+                <p>
+                    5. We further agree that in case the Flat purchase transaction or the allotment/Agreement for sale of the Flat is terminated for any reason whatsoever, then ICICI Bank shall have a first charge and priority over the money advanced to M/s. Sowparnika Homes Pvt. Ltd and received by us, and we hereby undertake to forthwith refund such money received by us. 
+                </p>
+                <p>
+                    Yours faithfully,
+                </p>
+                 <p>
+                     For _________________________________________________(Builders)
+                </p>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+               
+            </div>
+        </body>
+    </html>
+</apex:page>

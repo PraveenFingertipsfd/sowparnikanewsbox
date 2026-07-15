@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Today</fullName>
+    <columns>NAME</columns>
+    <columns>Project__c</columns>
+    <columns>Plot__c</columns>
+    <columns>Stage__c</columns>
+    <columns>First_Applicant_Name__c</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Direct_CP__c</columns>
+    <columns>First_Disbursement_Date__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Project__c</field>
+        <operation>equals</operation>
+        <value>Rhythm of Rain,Euphoria In The East</value>
+    </filters>
+    <label>Today</label>
+</ListView>

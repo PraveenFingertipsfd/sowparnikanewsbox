@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rate_per_sqft_Temp__c</fullName>
+    <label>Rate per sqft</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>7200</fullName>
+                <default>false</default>
+                <label>7200</label>
+            </value>
+            <value>
+                <fullName>7499</fullName>
+                <default>false</default>
+                <label>7499</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

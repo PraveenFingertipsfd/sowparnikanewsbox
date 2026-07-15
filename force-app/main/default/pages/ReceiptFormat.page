@@ -1,0 +1,195 @@
+<apex:page standardController="Receipt__c" extensions="getReceiptDetails" renderAs="pdf" applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <style>
+            @page {
+            size: 210mm 297mm;
+            background: white;
+            margin-bottom: 4cm;
+            @bottom-left {
+            vertical-align: top;
+            content: element(footer);
+            padding-top: 1px;
+            background-color:#fff;
+            }
+            @bottom-center {
+            border-top:1px solid #777;
+            }
+            @bottom-right {
+            border-top:1px solid #777;
+            }
+            
+            }
+            footer {
+            bottom:0;
+            display: block;
+            position: running(footer);
+            font-size: 8pt;
+            line-height:1.0;
+            }
+            body {
+            position: relative;
+            box-sizing: border-box;
+            }
+            
+            .details-container {
+            display: flex;
+            justify-content: space-between;
+            }
+            
+            .customer-details,
+            .booking-details {
+            flex: 1;
+            }
+            
+            
+            footer img {
+            width: 100%;
+            }
+            
+            footer table {
+            width: 100%;
+            font-size:14px;
+            }
+            tr {
+            page-break-inside: avoid;
+            }
+        </style>
+    </head>
+    <body >
+        <footer class="footer">
+            <table>
+                <tr>
+                    <td width="60%" style="text-align:left;border-left: none; border-top: none; border-bottom: none;">
+                        <b>Registered &amp; Corporate Office:</b><br/>
+                        {!Receipt__c.Company_Name__c}<br/>
+                        No.750, 1st Main Road, C-Block, AECS Layout, Kundalahalli, Banglore - 560 037, INDIA.
+                    </td>
+                    <td width="30%" style="text-align:right;">
+                        CIN: {!Receipt__c.CIN_Number__c}<br/>
+                        www.sowparnika.com<br/>
+                        Phone No. 080 4243 3000<br/>
+                        cs@sowparnika.com
+                    </td>
+                </tr>
+            </table>
+            <img src="{!$Resource.footnewswp}" alt="Footer Image"/>
+        </footer> 
+        <div >
+            <div style="float:right;">
+                <img src="{!$Resource.Sowparnika}" height="70px;"/>
+            </div><br/><br/><br/>
+            <div style="margin:40px;">
+                
+                
+                <h1 style="text-align: center;">Payment E-Receipt</h1>
+                <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 0px solid black;" border="0">
+                    <tr>
+                        <td width="40%"><span style= "float:left;display: inline-block;"><strong>Date: <apex:outputText value="{0,date,dd'-'MM'-'yyyy}"> <apex:param value="{!Receipt__c.Receipt_date__c}" /> </apex:outputText> </strong></span></td>
+                        <td width="10%"></td>
+                        <td width="25%"></td>
+                        <td width="25%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">&nbsp;</td>
+                        <td width="10%"></td>
+                        <td width="25%"></td>
+                        <td width="25%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">&nbsp;</td>
+                        <td width="10%"></td>
+                        <td width="25%"></td>
+                        <td width="25%"></td>
+                    </tr>
+                    <tr>
+                        <td width="40%"><b>Customer Details:</b></td>
+                        <td width="10%"></td>
+                        <td colspan="2" style="text-align: center;border: 1px solid;" width="50%"><b>E-Receipt Details</b></td>
+                    </tr>
+                    <tr>
+                        <td width="40%">{!Receipt__c.Booking_Customer_Name__c},<br/>
+                            <apex:repeat value="{!cap}" var="ac">
+                                {!ac.Name},<br/>
+                            </apex:repeat>
+                        </td>
+                        <td width="10%"></td>
+                        <td width="25%" style="border: 1px solid;">E-Receipt No</td>
+                        <apex:outputText rendered="{!Receipt__c.Receipt_Number__c != null}">
+                            <td width="25%" style="border: 1px solid;">{!Receipt__c.Name}/{!Receipt__c.Receipt_Number__c}</td>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!Receipt__c.Receipt_Number__c == null}">
+                            <td width="25%" style="border: 1px solid;">{!Receipt__c.Name}</td>
+                        </apex:outputText>
+                    </tr>
+                    <tr>
+                        <td width="40%">{!Receipt__c.Booking_Customer_Address__c}</td>
+                        <td width="10%"></td>
+                        <td width="25%" style="border: 1px solid;">Project</td>
+                        <td width="25%" style="border: 1px solid;">{!Receipt__c.Project_Name__c}</td>
+                    </tr>
+                    <tr>
+                        <td width="40%"></td>
+                        <td width="10%"></td>
+                        <td width="25%" style="border: 1px solid;">Block/Wing</td>
+                        <td width="25%" style="border: 1px solid;">{!Receipt__c.Block_Name__c}</td>
+                    </tr>
+                    <tr>
+                        <td width="40%"></td>
+                        <td width="10%"></td>
+                        <td width="25%" style="border: 1px solid;">Flat No</td>
+                        <td width="25%" style="border: 1px solid;">{!Receipt__c.Unit_Number__c}</td>
+                    </tr>
+                    <tr>
+                        <td width="40%"></td>
+                        <td width="10%"></td>
+                        <td width="25%" style="border: 1px solid;">Floor No</td>
+                        <td width="25%" style="border: 1px solid;">{!Receipt__c.Floor__c}</td>
+                    </tr>
+                </table>
+                <br/>        
+                <p>We have received the below mentioned payments via following modes:</p>
+                <table width="100%" style="font-size:12px;table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                    <tr>
+                        <th width="15%" style="text-align: center;">Instrument Date</th>
+                        <th width="20%" style="text-align: center;">Payment Schedule Name</th>
+                        <th width="15%" style="text-align: left;">Amount</th>
+                        <th width="25%" style="text-align: center;">Mode of Payment</th>
+                        <th width="15%" style="text-align: center;">Bank</th>
+                        <th width="25%" style="text-align: left;">Instrument No</th>
+                    </tr>
+                    <apex:repeat value="{!repList}" var="p">
+                        <tr>
+                            <td><apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!p.receiptDate}" /></apex:outputText></td>
+                            <td>
+                                <apex:outputText rendered="{!p.payType != 'TDS'}">
+                                    {!p.payNameName}
+                                </apex:outputText>
+                                <apex:outputText rendered="{!p.payType = 'TDS'}">
+                                    {!p.payType}
+                                </apex:outputText>
+                            </td>
+                            <td>{!p.receiptAmount}</td>
+                            <td>{!p.modeOfPayment}</td>
+                            <td>{!p.bankName}</td>
+                            <td>{!p.instruMentNo}</td>
+                        </tr>
+                    </apex:repeat>
+                    <tr>
+                        <td>Total paid :</td>
+                        <td></td>
+                        <td><b>Rs.{!totalAmount}/-</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <p>{!Receipt__c.Company_Name__c}</p>
+                <p>Note : </p>
+                <p style="margin: 12px;">* The Payment by Cheque/DD is subject to realization.</p>
+                <p style="margin: 12px;">* This is a system generated receipt and doesn’t require signature.</p>
+                <p style="margin: 12px;">* For any further details/Queries, contact your relationship manager.</p>
+            </div>
+        </div>
+    </body>
+    
+</apex:page>

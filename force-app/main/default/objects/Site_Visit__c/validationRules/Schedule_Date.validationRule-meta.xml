@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Schedule_Date</fullName>
+    <active>false</active>
+    <errorConditionFormula>IF(
+    ISNEW(), 
+    IF(Date__c &lt; NOW(), true, false), 
+    IF(
+        Reschedule_Date__c != null, 
+        IF(Reschedule_Date__c &lt; NOW(), true, false), 
+        false
+    )
+)</errorConditionFormula>
+    <errorMessage>Please Don&apos;t Enter Past Date and Time</errorMessage>
+</ValidationRule>

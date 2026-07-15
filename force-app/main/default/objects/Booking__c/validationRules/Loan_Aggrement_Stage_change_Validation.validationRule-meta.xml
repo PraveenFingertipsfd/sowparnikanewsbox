@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loan_Aggrement_Stage_change_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+  ISPICKVAL(Stage__c, &apos;Loan Approval&apos;),
+    Not(Booking_Accepted_by_Customer__c),
+      ISPICKVAL(CRM_Manager_Approval__c, &apos;Approved&apos;),
+      ISPICKVAL(Finance_Approval__c, &apos;Accepted&apos;)
+)</errorConditionFormula>
+    <errorDisplayField>Booking_Accepted_by_Customer__c</errorDisplayField>
+    <errorMessage>Please get approval and and fill the required fields</errorMessage>
+</ValidationRule>

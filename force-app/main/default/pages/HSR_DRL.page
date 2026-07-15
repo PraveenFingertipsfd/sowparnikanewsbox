@@ -1,0 +1,168 @@
+<!-- 09-01-26 Today Updated Documnet No Need to Change Anything -->
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="RaiseDemandController">
+    <body style="font-family:'Times New Roman', Times, serif; font-size:14px;">
+
+        <h3 style="text-align:center; font-size:16px; margin:0;">
+            <u style="font-size:19px; text-decoration-thickness:3px;">DISBURSEMENT REQUEST FORM</u><br/>
+            (PL DO NOT LEAVE ANY FIELDS BLANK)
+        </h3>
+
+        <p style="text-align:center; font-size:15px; margin:0;">
+            FOR MAIL ATTACHMENT PLEASE USE JPEG FORMAT &amp; AVOID PDF FORMAT<br/>
+            FILE SIZE SHOULD NOT EXCEED 2 MB
+        </p>
+        <br/>
+        <table width="100%" border="0"
+               style="font-size:14px; table-layout:fixed; border-collapse:separate; border-spacing:0; margin-top:0; border:0;">
+            <tr>
+                <td>From :</td>
+                <td>File No.</td>
+            </tr>
+            <tr>
+                <td>
+                    {!Booking__c.First_Applicant_Name__c}
+                    <apex:outputPanel rendered="{!Booking__c.Co_Applicants__r != null}">
+                     
+                        <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                           and {!p.Name},
+                        </apex:repeat>
+                    </apex:outputPanel>
+                </td>
+
+
+                <td>Loan A/C ______________________________</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Loan Limit {!SanctionedAmountstring}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>a)Sanction Amount for The property __________</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>b)Interior Amount _____________________</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>c)Project cost ______________________________</td>
+            </tr>
+            <tr>
+                <td>To</td>
+                <td>SBI A/c ______________________________</td>
+            </tr>
+            <tr>
+                <td>
+                    SBI The Assistant General Manager<br/>
+                    State Bank of India
+                </td>
+                <td>Mobile : {!Booking__c.Contact_Number__c}</td>
+            </tr>
+            <tr>
+                <td>
+                    R.A.C.P.C., HSR Layout,<br/>
+                    Bangalore - 560102.
+                </td>
+                <td>E-mail : {!Booking__c.Email__c}</td>
+            </tr>
+        </table>
+
+        <br/><br/>
+        Dear Sir,<br/>
+
+        <h4 style="text-align:center; text-decoration:underline; font-size:15px; margin:8px 0;">
+            HOUSING LOAN: CONSTRUCTION/ FLAT
+        </h4>
+
+        <div style="font-size:14px;">
+            <b>We advise here below the present position of my house / flat and request you to release the amount as requested</b>
+        </div>
+
+        <br/>
+
+        <table width="100%" border="0"
+               style="font-size:14px; table-layout:fixed; border-collapse:collapse; border-spacing:0; border:none;">
+            <tr>
+                <td style="width:5%; padding:6px 8px; vertical-align:top;">A.</td>
+                <td style="width:60%; padding:6px 8px; vertical-align:top;">Present stage of construction</td>
+                <td style="width:35%; padding:6px 8px; vertical-align:top;">{!stageName}</td>
+            </tr>
+            <tr>
+                <td style="width:5%; padding:6px 8px; vertical-align:top;">B.</td>
+                <td style="width:60%; padding:6px 8px; vertical-align:top;">Flat No.&amp; Project Name</td>
+                <td style="width:35%; padding:6px 8px; vertical-align:top;">{!Booking__c.Unit_NumberFor__c}, {!Booking__c.Project__c}</td>
+            </tr>
+            <tr>
+                <td style="width:5%; padding:6px 8px; vertical-align:top;">C.</td>
+                <td style="width:60%; padding:6px 8px; vertical-align:top;">Amount already released by the Bank</td>
+                <td style="width:35%; padding:6px 8px; vertical-align:top;">Rs. {!bankAmountString}</td>
+            </tr>
+            <tr>
+                <td style="width:5%; padding:6px 8px; vertical-align:top;">D.</td>
+                <td style="width:60%; padding:6px 8px; vertical-align:top;">Margin Paid from your side to Builder</td>
+                <td style="width:35%; padding:6px 8px; vertical-align:top;">Rs.</td>
+            </tr>
+            <tr>
+                <td style="width:5%; padding:6px 8px; vertical-align:top;">E.</td>
+                <td style="width:60%; padding:6px 8px; vertical-align:top;">Amount of release requested now</td>
+                <td style="width:35%; padding:6px 8px; vertical-align:top;">RS. {!totalPendingAmountStr}</td>
+            </tr>
+            <tr>
+                <td style="width:5%; padding:6px 8px; vertical-align:top;"></td>
+                <td style="width:60%; padding:6px 8px; vertical-align:top;"></td>
+                <td style="width:35%; padding:6px 8px; vertical-align:top;"></td>
+            </tr>
+        </table>
+
+        <br/>
+        If any margin deficit, I agree to debit my Savings A/c. No._______________________
+
+        <p style="font-size:14px; text-align:justify;">
+            ADDRESS OF THE PROPERTY BEING CONSTRUCTED/ BUILDERS DETAILS_______________________________
+            ________________________________________________________________________________________________________________
+            ________________________________________________________________________________________________________________
+            ________________________________________________________________________________________________________________
+        </p>
+
+        <p style="font-size:14px; text-align:justify;">
+            Details of payment to be made in favour of (Builder/Seller) {!Booking__c.Company_Name__c}.
+        </p>
+
+        <p style="font-size:14px;">
+            Builder/Seller's A/c No. {!Booking__c.Builder_Account_Number__c}
+            <apex:outputPanel rendered="{!NOT(ISBLANK(Booking__c.Builder_Account_Number__c))}">
+                Bank {!Booking__c.Project_Bank_Name__c},
+                Branch {!Booking__c.Project_Bank_Branch__c}. 
+            </apex:outputPanel>
+        </p>
+
+
+        <p style="font-size:14px;">
+            IFSC Code of Builder/Seller’s Bank {!Booking__c.IFSC_Code__c}.
+        </p>
+
+        <p style="font-size:14px; text-align:justify;">
+            This request should be supported by receipts of previous payments. Request without the receipts are not
+            entertained. Disbursement can be sent by soft copy of Request form, Bullder demand and last payment receipt released by the Bank to mail ID : disbracpc2.ban@sbi.co.in
+        </p>
+
+        <br/><br/><br/>
+
+
+        <div style="width:90%; font-size:14px; overflow:hidden;">
+
+  <div style="float:left; width:25%; text-align:left;">
+    Bangalore<br/><br/>
+    Date:_________
+  </div>
+
+  <div style="float:right; width:50%; text-align:center;">
+    Signature of the Borrower/s.<br/>
+    (In case of joint accounts this release request should be signed by all the borrowers.)
+  </div>
+
+</div>
+
+    </body>
+</apex:page>

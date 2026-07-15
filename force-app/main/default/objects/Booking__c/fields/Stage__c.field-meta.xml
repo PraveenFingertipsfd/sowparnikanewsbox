@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stage__c</fullName>
+    <label>Stage</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New</fullName>
+                <default>true</default>
+                <label>New</label>
+            </value>
+            <value>
+                <fullName>Booking Approved</fullName>
+                <default>false</default>
+                <label>Booked</label>
+            </value>
+            <value>
+                <fullName>Agreement Under Process</fullName>
+                <default>false</default>
+                <label>Agreement Under Process</label>
+            </value>
+            <value>
+                <fullName>First Disbursement Under Process</fullName>
+                <default>false</default>
+                <label>First Disbursement Under Process</label>
+            </value>
+            <value>
+                <fullName>Progressive Collections</fullName>
+                <default>false</default>
+                <label>Progressive Milestones</label>
+            </value>
+            <value>
+                <fullName>Registration</fullName>
+                <default>false</default>
+                <label>Registration</label>
+            </value>
+            <value>
+                <fullName>Handover</fullName>
+                <default>false</default>
+                <label>Handover</label>
+            </value>
+            <value>
+                <fullName>Handed Over</fullName>
+                <default>false</default>
+                <label>Handed Over</label>
+            </value>
+            <value>
+                <fullName>Swapping In Progress</fullName>
+                <default>false</default>
+                <label>Swapping In Progress</label>
+            </value>
+            <value>
+                <fullName>Swapping Completed</fullName>
+                <default>false</default>
+                <label>Swapping Completed</label>
+            </value>
+            <value>
+                <fullName>Cancellation</fullName>
+                <default>false</default>
+                <label>Cancellation</label>
+            </value>
+            <value>
+                <fullName>Assignment Progress</fullName>
+                <default>false</default>
+                <label>Assignment Progress</label>
+            </value>
+            <value>
+                <fullName>Assignment Completed</fullName>
+                <default>false</default>
+                <label>Assignment Completed</label>
+            </value>
+            <value>
+                <fullName>Agreement</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Agreement</label>
+            </value>
+            <value>
+                <fullName>Booking</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Booking</label>
+            </value>
+            <value>
+                <fullName>D&amp;P</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>D&amp;P</label>
+            </value>
+            <value>
+                <fullName>Legal Finalization</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Legal Finalization</label>
+            </value>
+            <value>
+                <fullName>Loan Approval</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Loan Approval</label>
+            </value>
+            <value>
+                <fullName>Maintanance</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Maintanance</label>
+            </value>
+            <value>
+                <fullName>Possession</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Possession</label>
+            </value>
+            <value>
+                <fullName>Swapping</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Swapping</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

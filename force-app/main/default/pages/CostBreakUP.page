@@ -1,0 +1,60 @@
+<apex:page standardController="Booking__c" renderAs="pdf">
+    <head>
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+
+            .details-container {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .customer-details,
+            .booking-details {
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <p>To,</p>
+            <p>The Manager</p>
+            <p>{!Booking__c.Bank_Name__c}</p><br/>
+            <p style="text-align:center;"><b>Sub: COST BREAK UP LETTER</b></p>
+            <p>This is to inform that we have sold Flat No. {!Booking__c.Unit_NumberFor__c} to {!Booking__c.First_Applicant_Name__c}, {!Booking__c.Unit_Specification__c} in the building situated at “SOWPARNIKA {!Booking__c.Project__c}” Situated at {!Booking__c.Project_Address__c}. For Rs. <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Total_Cost_Ex_Leg_Main__c}" /></apex:outputText>/- of which the break-up of the costing is given below:-</p>
+            <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <td>Basic Cost of the Flat </td>
+                    <td><apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Basic_Price__c}" /></apex:outputText></td>
+                </tr>
+                <tr>
+                    <td>Car/Scooter Parking</td>
+                    <td><apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Car_Scooter_Parking__c}" /></apex:outputText></td>
+                </tr>
+                <tr>
+                    <td>Water, Electricity charges &amp; Other Charges</td>
+                    <td><apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Water_Electricity_Charges__c}" /></apex:outputText></td>
+                </tr>
+                <tr>
+                    <td>GST on total consideration</td>
+                    <td><apex:outputText value="{0,number}"><apex:param value="{!Booking__c.GST_Amount__c}" /></apex:outputText></td>
+                </tr>
+                <tr>
+                    <td>labour cess @0.7%</td>
+                    <td><apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Labour_Cess__c}" /></apex:outputText></td>
+                </tr>
+                <tr>
+                    <td><b>Grand Total</b></td>
+                    <td><apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Total_Cost_Ex_Leg_Main__c}" /></apex:outputText></td>
+                </tr>
+            </table>
+            <p>Thanking you,</p>
+            <p>For {!Booking__c.Company_Name__c},</p>
+            <p>{!Booking__c.Owner.Name}</p>
+            <p>{!Booking__c.Designation__c}</p>
+        </div>
+    </body>
+</apex:page>

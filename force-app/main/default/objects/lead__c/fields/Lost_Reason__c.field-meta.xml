@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lost_Reason__c</fullName>
+    <label>Lost Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not looking for Property</fullName>
+                <default>false</default>
+                <label>Not looking for Property</label>
+            </value>
+            <value>
+                <fullName>Junk enquiry</fullName>
+                <default>false</default>
+                <label>Junk enquiry</label>
+            </value>
+            <value>
+                <fullName>Budget Constraints</fullName>
+                <default>false</default>
+                <label>Budget Constraints</label>
+            </value>
+            <value>
+                <fullName>Location constrain</fullName>
+                <default>false</default>
+                <label>Location constrain</label>
+            </value>
+            <value>
+                <fullName>Data of Position</fullName>
+                <default>false</default>
+                <label>Data of Position</label>
+            </value>
+            <value>
+                <fullName>Ready to move in</fullName>
+                <default>false</default>
+                <label>Ready to move in</label>
+            </value>
+            <value>
+                <fullName>Feature project</fullName>
+                <default>false</default>
+                <label>Feature project</label>
+            </value>
+            <value>
+                <fullName>Invalid contact number</fullName>
+                <default>false</default>
+                <label>Invalid contact number</label>
+            </value>
+            <value>
+                <fullName>Project Unfit</fullName>
+                <default>false</default>
+                <label>Project Unfit</label>
+            </value>
+            <value>
+                <fullName>Already visited with someone</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Already visited with someone</label>
+            </value>
+            <value>
+                <fullName>Booked with us</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Booked with us</label>
+            </value>
+            <value>
+                <fullName>Budget Unfit</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Budget Unfit</label>
+            </value>
+            <value>
+                <fullName>Budget issue</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Budget issue</label>
+            </value>
+            <value>
+                <fullName>Future</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Future</label>
+            </value>
+            <value>
+                <fullName>Invalid</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Invalid</label>
+            </value>
+            <value>
+                <fullName>Loan Eligibility Unfit</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Loan Eligibility Unfit</label>
+            </value>
+            <value>
+                <fullName>Low Intent to buy</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Low Intent to buy</label>
+            </value>
+            <value>
+                <fullName>Not Enquired</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Not Enquired</label>
+            </value>
+            <value>
+                <fullName>RNR</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>RNR</label>
+            </value>
+            <value>
+                <fullName>Visited with us</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Visited with us</label>
+            </value>
+            <value>
+                <fullName>Wrong Number</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Wrong Number</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

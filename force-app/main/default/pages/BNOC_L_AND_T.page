@@ -1,0 +1,104 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false" extensions="demandController" action="{!getTotalCost}">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                margin-top: 200px;
+                }
+            </style>
+        </head>
+        
+        <body >
+           <div style="font-size: 17px;"><br/><br/><br/><br/>
+                <p>
+                    To,	
+                </p>
+                <p>
+                    <strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong>
+                </p>
+                <p>
+                    <b>L AND T Finance Limited </b><br/>
+                
+                   _____________Branch 
+                </p>
+                <p>
+                    Dear Sir:
+                </p>
+                <P>
+                  Re: Permission to mortgage flat No {!Booking__c.Unit_NumberFor__c} on {!Booking__c.Floor__c} floor of the building proposed to be named as / named as
+                    {!Booking__c.Project__c} situated at {!Booking__c.Project_Address__c} and {!Booking__c.Project_Address__c}.
+                </P>
+                <P style="text-align:justify;">
+                  1. This is to confirm that we have allotted / sold flat   No {!Booking__c.Unit_NumberFor__c} admeasuring {!Booking__c.Built_up_area__c}sq. ft ( built up area) on the {!Booking__c.Floor__c} floor
+                    of the building proposed to be named as / known as Sowparnika {!Booking__c.Project__c} situated {!Booking__c.Project_Address__c}
+                    under construction / constructed by us  {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat> or a total consideration of Rs.{!TotalcostStr} /-
+                    ({!AmountInWords}) under an agreement for Sale /Sale Deed dated <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /> </apex:outputText>.
+                </P>
+                <P style="text-align:justify;">
+                 2. We confirm that we have obtained necessary permissions / approvals / sanctions for constructions of the said building from all the 
+                    concerned competent authorities and the construction of the building is in accordance with the approved plans.    
+                </P>
+                <P style="text-align:justify;">
+                 3. We assure that we shall obtain the NOC for the sale of the said flat from the financial institution/Bank in which we have created a
+                    charge over the said Project. We have a clear, legal and marketable title to the said property and every part thereof.  
+                </P>
+                <P style="text-align:justify;">
+                 4. We are aware that said  {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat> has approached L AND T Housing Finance Limited for a loan for
+                    purchasing  / acquiring the said flat and that L AND T Housing Finance Limited has agreed to sanction / grant the loan to 
+                     {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat> to purchase / acquire the above  {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat>
+                    has agreed to mortgage the said flat in your favour / in favour your favor or security trustee appointed as security for the said loan  .   
+                </P>
+                <P style="text-align:justify;">
+                 5.We hereby confirm that we have no objection  {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat> mortgaging the said  flat to your Company / in 
+                    favour of your favor or security trustee appointed by you  by way of security for repayment of the said loan.   
+                </P>
+                <P style="text-align:justify;">
+                AND notwithstanding anything to the contrary contained in the said Agreement for Sale, we hereby agree  to note the aforesaid charge in our books
+                    in respect of the said flat and  {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat> will not be permitted to transfer, assign, sell off / cancel or
+                    in any other way / manner deal with the said flat prejudicial to the interest of the aforesaid mortgagee  without the prior written consent of the
+                    aforesaid  mortgagee.    
+                </P>
+                <P style="text-align:justify;">
+                6. We undertake to form a Co-Operative Society / Condominium under the Apartment Ownership Act of the premises / flat holders in the aforesaid building 
+                    within the statutory period. And we agree to inform and give proper notice to the Co-Operative Society / Condominium as and when formed, about and
+                    said unit / flat being so mortgaged to your Company / the security trustee nominated by your Company.    
+                </P>
+                <P style="text-align:justify;">
+              7. We further agree that in case the Agreement for sale of the flat/premises executed between ourselves  {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat>. 
+                    is terminated or otherwise the flat / premises purchase transaction is cancelled on account of non payment of own contribution
+                    or for any reason whatsoever, then your bank shall have priority over the sum or sums of money advanced to  {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat>
+                    and paid to us, and we hereby undertake to forthwith refund to you without demur, such sum/sums of money paid to us.      
+                </P>
+                <P>
+                 Thanking you   
+                </P>
+                <P>
+                 {!Booking__c.Company_Name__c}., 
+                </P>
+               <P>
+                   <b> {!Booking__c.Owner.Name} <br/> 
+                       {!Booking__c.Owner_Designation__c}  </b>
+               </P>
+            </div>
+        </body>
+    </html>
+</apex:page>

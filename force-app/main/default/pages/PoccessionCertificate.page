@@ -1,0 +1,55 @@
+<apex:page standardController="Booking__c" showHeader="false" standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                }
+                p{
+                text-align:justify;
+                }
+            </style>
+        </head>
+        <body>
+            <div style="font-size:18px;"><br/><br/>
+                <table>
+                    <p style="text-align:right;">
+                        <b>Date: <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!today()}" /></apex:outputText><br/>Banglore</b>
+                        
+                    </p>
+                    <h2 style="text-align:center;">POSSESSION LETTER</h2>
+                    <p style="text-align:left;">To</p>
+                    <p style="text-align:left;"><b>Mr.</b>{!Booking__c.First_Applicant_Name__c}<br/>
+                    <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">{!p.Name}<br/></apex:repeat></p>
+                    <p style="text-align:left;"><b>Residing </b>{!Booking__c.Address__c}</p>
+                  
+                    <p style="text-align:left;">Dear Sir/Madam,</p>
+                    <p style="text-align:left;">
+                        <b>Sub:</b> Handing Over Possession of &nbsp; Flat No.{!Booking__c.Unit_Number__c}, in <b>"Sowparnika {!Booking__c.Project__c}"</b>.
+                        
+                    </p>
+                    <p style="text-align:left;">
+                        We have great pleasure to inform you that we have completed construction of Apartment No, {!Booking__c.Unit_Number__c}, in “Sowparnika {!Booking__c.Project__c}” situated at {!Booking__c.Project_Address__c}.
+                    </p>
+                    <p style="text-align:justify;">
+                        The Construction of the apartment has been completed in all respects in terms of Agreement of sale dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> and further documents/correspondences entered into between us (if any). All contractual obligations have been completed as per the above said agreement and there are no pending obligations on our part. Therefore, kindly acknowledge taking over of possession of the apartment.
+                    </p >
+                    <p style="text-align:left;">
+                        The original Sale Deed dated <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Booking__c.Sale_Deed_Date__c}" /> </apex:outputText>, vide document bearing No. BKI- {!Booking__c.Registered_Document_No__c}, registered in the office of the {!Booking__c.Sub_Registrar__c}                 
+                    </p>
+                   
+                    <p style="text-align:left;">
+                        Thanking you.
+                    </p>
+                    <p style="text-align:left;">
+                        With Best Wishes
+                    </p>
+                    <p style="text-align:left;">
+                        For	 {!Booking__c.Company_Name__c}.
+                    </p>
+                </table>
+            </div>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,73 @@
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="RaiseDemandController">
+    <body>
+        <div style="font-size:16px;">
+        <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 0px solid black;" border="0">
+            <tr>
+                <td>From {!Booking__c.First_Applicant_Name__c}<br/><apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">{!p.Name}<br/></apex:repeat></td>
+                <td>File No.</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Loan A/C : {!Booking__c.Loan_Account_Number__c}</td>
+            </tr>
+            <tr>
+                <td>Flat No {!Booking__c.Address__c}</td>
+                <td>S B A/C</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Mobile {!Booking__c.Contact_Number__c}</td>
+            </tr>
+            <tr>
+                <td>The Assistant General Manager,</td>
+                <td>Loan limit(	%) Rs. {!SanctionedAmountstring}/-</td>
+            </tr>
+            <tr>
+                <td>State Bank Of India,</td>
+                <td>Margin@ (	%) Rs.</td>
+            </tr>
+            <tr>
+                <td>RACPC- 3, BANASAWADI,</td>
+                <td>PROJECT COS(100%)Rs.</td>
+            </tr>
+            <tr>
+                <td>Bangalore- 560 043</td>
+                <td></td>
+            </tr>
+            email:	disb.15628@sbi.co.in / phone: 080-25943794/91/95. FAX.080-25943793<br/>
+        </table>
+        (@ Your contribution towards the project cost. Please ensure your margin at every stage of disbursement. Please refer your arrangement letter)<br/><br/>
+        Dear Sir,<br/><br/>
+        <h3 style="text-align: center;">RELEASE OF HOUSING LOAN INSTALLMENT</h3>
+            I/We have been sanctioned a housing loan of Rs.	{!SanctionedAmountstring}/-(and additional housing loan of Rs. __________________ /-). I/We advise here below the present position of my house/flat and request you to release the amount as per my eligibility).<br/><br/>
+        <div style="text-decoration: underline;"><b>This request should be supported by receipts of previous payments. Request without the receipts are not entertained. In case of own construction please enclose Invoice/receipts.</b></div><br/>
+        
+        A.Present stage of construction  {!stageName}<br/> 
+        B.Plan sanctioned for/Apartment no. &amp; Project Name {!Booking__c.Unit_NumberFor__c}, {!Booking__c.Project__c}
+        (Please mention the floor for which loan is sanctioned)<br/> 
+        
+            C.Amount already released by the Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs.{!bankAmountString}	<br/> 
+        D.Margin Paid by me&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs. <br/> 
+        E.Amount as per the builder’s demand note/ <br/> 
+            Expenditure incurred after last disbursement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs.{!totalPendingAmountStr} /-<br/>
+   
+        F.Margin for the current demand/Expenditure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs.	NIL	<br/> 
+            G.Amount of release requested now from loan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rs.{!totalPendingAmountStr} /-<br/> 
+            H.TOTAL ( F+G) = E&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.{!totalPendingAmountStr} /- <br/> 
+        
+        Address of the property being constructed/builder’s details:	 <br/> 
+        (Please find location sketch of the construction place on the reverse of this page)<br/> <br/> 
+        Details of payment to be made in favour of (Builder/Seller)	{!Booking__c.Company_Name__c} Builder/Seller’s A/c No.{!Booking__c.Builder_Account_Number__c} Bank {!Booking__c.Project_Bank_Name__c} Branch {!Booking__c.Project_Bank_Branch__c} IFSC Code of Builder/Seller’s Bank {!Booking__c.IFSC_Code__c}<br/> <br/>  <br/>  <br/> 
+        <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 0px solid black;" border="0">
+            <tr>
+                <td>Date:	</td>
+                <td>Signature of the Borrower/s.</td>
+            </tr>
+            <tr>
+                <td>Banglore</td>
+                <td>(Incase of joint accounts this release request should be signed by all the borrowers.)</td>
+            </tr>
+        </table>
+        </div>
+    </body>
+</apex:page>

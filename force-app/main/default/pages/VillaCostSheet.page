@@ -1,0 +1,391 @@
+<apex:page standardController="Quote__c" extensions="getTermsAndCondition" docType="html-5.0" showHeader="false" standardStylesheets="false"   applyBodyTag="false"   renderAs="pdf">
+    <html>
+        <head>
+            <style type="text/css" >
+                @page {
+                size:A4 portrait;  
+                border:2px solid black;
+                border-bottom: none;
+                counter-increment: pages;
+                @bottom-left {
+                content: element(footer);
+                }  
+                }
+                div.footer {
+                display: block;
+                padding: 1px 0;
+                position: running(footer);
+                border-bottom:2px solid black;
+                border-left:2px solid black;
+                border-right:2px solid black;
+                
+                width: 100%;	
+                margin-top: -8px;
+                }
+                .pagenumber:before {
+                content: counter(page);
+                }
+                .pagecount:before {
+                content: counter(pages);
+                }
+                
+            </style>
+        </head>
+        <body>
+            <div style="page-break-after:auto;text-font:12px;">
+                <table width="100%" style="text-align:center">
+                    <tr>
+                        <td>
+                            <img src="{!$Resource.Sowparnika}" width="160px" height="70" />
+                        </td></tr>
+                </table>
+                <table style="font-size: 12px;" cellpadding="0" cellspacing="0"  border="1" width="100%" >
+                    <tr>
+                        <td width="50%">
+                        </td>
+                        <td width="30%" style="text-align:center">
+                            Villa Number
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!Quote__c.Unit__r.Name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                        </td>
+                        <td width="30%" style="text-align:center;background-color: grey;">
+                            &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                        </td>
+                        <td width="30%" style="text-align:center;background-color:powderblue;">
+                            Per sq ft
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!Quote__c.Final_Rate_Per_Sqft__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                        </td>
+                        <td width="30%" style="text-align:center">
+                            &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            
+                        </td>
+                    </tr>
+                   
+                    
+                    <tr>
+                        <td width="50%" style="text-align:left">
+                            Plot Area
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!Quote__c.Plot_Land_Area__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="text-align:left">
+                            SBA
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!Quote__c.Built_up_area__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                        </td>
+                        <td width="30%" style="text-align:center">
+                            &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            <b>Sale Agreeemnt</b>
+                        </td>
+                        <td width="30%" style="text-align:center">
+                            &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            Price
+                        </td>
+                        <td width="30%" style="text-align:center">
+                            
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!Quote__c.Unit__r.Land_Rate_per_sqft__c}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            Cost of Plot
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!landCost}
+                        </td>
+                    </tr>
+                     <tr>
+                        <td width="50%">
+                            <b>Total Sale Agreeement Value</b>
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            <b>{!landCost}</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                           
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          
+                        </td>
+                    </tr>
+                     <tr>
+                        <td width="50%">
+                           <b>Construction Agreement</b>
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                          Total Construction Agreement Cost by reducing Land Cost and other Charges
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          <apex:outputText value="{0, Number}"> <apex:param value="{!Quote__c.Construction_Cost__c - (Quote__c.Built_up_area__c * 250)}" /></apex:outputText>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td width="50%">
+                            Water &amp; Electricity charges
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          {!waterCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            Amenities charges
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          {!ammentiiesCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            Generator/STP
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          {!generatorCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            Total Construction Agreement Value
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          {!constructionCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            Add: GST @5%
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          {!gstCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            <b>Total Construction Agreement Value ( With GST )</b>
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                          {!totalConstuctionWithCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                        </td>
+                    </tr>
+                     <tr>
+                        <td width="50%">
+                            Total Villa Cost
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!basicCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            GST @ 5%
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!gstCost}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            Total Villa Cost with GST
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                            {!totalVilla}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            *PLC : East &amp; North facing villas @ additional Rs.300/sft, Corner Villas @ Rs.500/sft
+                        </td>
+                        <td width="20%" style="text-align:center">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%">
+                            <b>PAYMENT SCHEDULE</b>
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                        </td>
+                    </tr>
+                    <apex:repeat value="{!payList}" var="p">
+                        <apex:outputText rendered="{!p.S_No == 1}">
+                            <tr >
+                                <td width="50%" align="left">{!p.Name} </td>
+                                <td  width="30%" align="center"> <apex:outputText value="{0, Number}"> <apex:param value="{!p.Payment_percent}" /></apex:outputText>%  </td>
+                                <td width="20%"   align="right"> {!p.amount}  </td>	
+                            </tr>
+                        </apex:outputText>
+                    </apex:repeat>
+                    <tr>
+                        <td width="50%">
+                            <i>Sale Agreement</i>
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                        </td>
+                    </tr>
+                    <apex:repeat value="{!payList}" var="p">
+                        <apex:outputText rendered="{!p.isSale}">
+                            <tr >
+                                <td width="50%" align="left">{!p.Name} </td>
+                                <td  width="30%" align="center"> <apex:outputText value="{0, Number}"> <apex:param value="{!p.Payment_percent}" /></apex:outputText>%  </td>
+                                <td width="20%"   align="right"> {!p.amount}  </td>	
+                            </tr>
+                        </apex:outputText>
+                    </apex:repeat>
+                     <tr>
+                        <td width="50%">
+                            <i>Construction Agreement</i>
+                        </td>
+                        <td width="30%" style="text-align:center">
+                           &nbsp;
+                        </td>
+                        <td width="20%" style="text-align:center">
+                        </td>
+                    </tr>
+                    <apex:repeat value="{!payList}" var="p">
+                        <apex:outputText rendered="{!p.isConstruction}">
+                            <tr >
+                                <td width="50%" align="left">{!p.Name} </td>
+                                <td  width="30%" align="center"> <apex:outputText value="{0, Number}"> <apex:param value="{!p.Payment_percent}" /></apex:outputText>%  </td>
+                                <td width="20%"   align="right"> {!p.amount} </td>	
+                            </tr>
+                        </apex:outputText>
+                    </apex:repeat>
+                    <tr >
+                        <td><b>Total cost including GST(Excluding Maintenance,Registration/legal charges,Katha Transfer charges)</b></td>
+                        <td  align="center"> 100% </td>
+                        <td  align="right">{!totalVilla}   </td>
+                    </tr>
+                    <tr><td width="100%" colspan="3"><b>Note</b></td></tr>
+                    <tr><td width="100%"  colspan="3"><ul>
+                        <apex:repeat value="{!termsAndConditions}" var="p">
+                            <li>{!p.Terms__c}</li>                  
+                        </apex:repeat>
+                        </ul></td>
+                    </tr>
+                </table>
+            </div>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,4 @@
+({
+    updateBookingFields: function(component) {
+           }
+})

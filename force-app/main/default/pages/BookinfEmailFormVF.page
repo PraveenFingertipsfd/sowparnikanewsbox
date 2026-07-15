@@ -1,0 +1,63 @@
+<apex:page controller="BookingHandler" showHeader="false" standardStylesheets="false" rendered="true">
+    <apex:slds />
+    <apex:pageMessages /> 
+    
+    <apex:form >
+        <apex:pageBlock rendered="{!checks==false}">
+            <div class="slds-m-around_medium">
+                <p style= "font-size : 15px;"><b>Stage:</b> {!status}</p><br/>
+                <p><b>Downloading PDFs:</b></p><br/>
+                <table   class="slds-table slds-table_cell-buffer slds-table_bordered slds-theme_shade" aria-label="">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col" class="slds-text-align_center"><div class="slds-truncate" title="Document Name">Document Name</div></th>
+                            <th scope="col" class="slds-text-align_center"><div class="slds-truncate" title="Download Link">Download Link</div></th>
+                            <th scope="col" class="slds-text-align_center"><div class="slds-truncate" title="Upload">Upload Link</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <apex:repeat value="{!Docs}" var="pdf">
+                            <tr class="slds-hint-parent">
+                                <td class="slds-text-align_center"><div class="slds-truncate" title="{!pdf.Name}">{!pdf.Name}</div></td>
+                                <td class="slds-text-align_center"><div class="slds-truncate">
+                                    <a href="{!pdf.URL}" download="{!pdf.Name}">
+                                        <span class="slds-icon_container slds-icon-utility-download red-utility-icon" >
+                                            <svg aria-hidden="true" class="slds-icon slds-icon-text-default">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                                     xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#download">
+                                                </use>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    </div></td>         
+                                <td class="slds-text-align_center"><div class="slds-truncate" >
+                                    <apex:inputFile value="{!pdf.fileBody}" filename="{!pdf.fileName}"/>                                  
+                                    </div>
+                                </td>  
+                            </tr>
+                        </apex:repeat> 
+                    </tbody>
+                </table>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;<apex:commandButton styleClass="slds-button slds-button_success slds-float_right" value="Submit" action="{!Save}"/>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!checks==true}">
+            <div class= "slds-align_absolute-center"  style="padding-top:6rem;">        
+                
+                <div class="slds-panel slds-box">
+                    <div class="slds-panel__header" style="background:#c9e6ff;">
+                        <div class="slds-align_absolute-center" style="font-size:20px;font-style:italic;">    
+                            Thank You!
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="slds-panel__body">
+                        <div class="slds-align_absolute-center slds-text-heading_small slds-text-font_monospace">
+                            Thank you for your response ,Your response successfully recorded in our system
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

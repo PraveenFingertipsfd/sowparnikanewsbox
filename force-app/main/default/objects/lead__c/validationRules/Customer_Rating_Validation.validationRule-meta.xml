@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Rating_Validation</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISPickval(  Lead_status__c ,&apos;In Process&apos;),OR(Ispickval( Customer_Rating__c ,&apos;&apos;),ISBLANK( Remark_for_In_Process__c )))</errorConditionFormula>
+    <errorMessage>Please Select Customer Rating and Remark for in Process</errorMessage>
+</ValidationRule>

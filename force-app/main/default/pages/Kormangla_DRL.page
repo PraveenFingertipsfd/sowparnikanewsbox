@@ -1,0 +1,67 @@
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="RaiseDemandController">
+    <body>
+        <div style="font-size:15px;">
+            <h3 style="text-align: center;"> 
+                DISBURSEMENT REQUEST FORM<br/>
+                (PL DO NOT LEAVE ANY FIELDS BLANK)
+            </h3>
+            <div style="text-align: center;">
+                FOR MAIL ATTACHMENT PLEASE use JPEG FORMAT &amp; AVOID PDF FORMAT
+                FILE SIZE SHOULD NOT EXCEED 2 MB
+            </div>
+        <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 0px solid black;" border="0">
+            <tr>
+                <td>From</td>
+                <td>File No.</td>
+            </tr>
+            <tr>
+                <td>Name {!Booking__c.First_Applicant_Name__c}<br/><apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">{!p.Name}<br/></apex:repeat></td>
+                <td>Loan A/C : {!Booking__c.Loan_Account_Number__c}</td>
+            </tr>
+            <tr>
+                <td>{!Booking__c.Address__c}</td>
+                <td>Loan Limit</td>
+            </tr>
+            <tr>
+                <td>To</td>
+                <td>SBI A/c</td>
+            </tr>
+            <tr>
+                <td>CSBI The Assistant General Manager<br/>
+                State Bank of India</td>
+                <td>Mobile {!Booking__c.Contact_Number__c}</td>
+            </tr>
+            <tr>
+                <td>RACPC - 11,<br/>
+                Koramangala,BANGLORE - 560034.</td>
+                <td>E-mail {!Booking__c.Email__c}</td>
+            </tr>
+            </table><br/><br/>
+        Dear Sir,<br/><br/>
+        <h3 style="text-align: center;text-decoration: underline;">HOUSING LOAN: CONSTRUCTION/ FLAT</h3>
+        <div><b>We advise here below the present position of my house / flat and request you to release the amount as requested</b></div><br/>
+        
+        A.Present stage of construction {!stageName}<br/> <br/> 
+        B.Flat No.&amp; Project Name {!Booking__c.Unit_NumberFor__c},{!Booking__c.Project__c}<br/> <br/> 
+        
+            C.Amount already released by the Bank &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.{!bankAmountString} 	<br/> <br/> 
+        D.Margin Paid from your side to Builder &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.	<br/> <br/> 
+            E.Amount of release requested now &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rs.{!totalPendingAmountStr} /-<br/> <br/> 
+            If any margin deficit, I agree to debit my Savings Ale. No.<br/><br/> 
+            ADDRESS OF THE PROPERTY BEING CONSTRUCTED/ BUILDERS DETAILS <br/> <br/><br/>
+        Details of payment to be made in favour of (Builder/Seller)	{!Booking__c.Company_Name__c} Builder/Seller’s A/c No. {!Booking__c.Builder_Account_Number__c}	Bank {!Booking__c.Project_Bank_Name__c} Branch {!Booking__c.Project_Bank_Branch__c} IFSC Code of Builder/Seller’s Bank {!Booking__c.IFSC_Code__c}<br/> <br/>  <br/>  <br/> 
+            This request should be supported by receipts of previous payments. Request without the receipts are not
+            entertained. Disbursement can be sent by soft copy of Request form, Bullder demand and last payment receipt released by the Bank to mail ID : <a href="">disbracpc2.ban@sbi.co.in</a>  <br/><br/><br/>
+        <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 0px solid black;" border="0">
+            <tr>
+                <td>Date:	</td>
+                <td>Signature of the Borrower/s.</td>
+            </tr>
+            <tr>
+                <td>Banglore</td>
+                <td>(Incase of joint accounts this release request should be signed by all the borrowers.)</td>
+            </tr>
+        </table>
+        </div>
+    </body>
+</apex:page>

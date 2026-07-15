@@ -1,0 +1,37 @@
+<aura:component controller="BookingHandler" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="recordLoadError" type="String"/>
+    <aura:attribute name="BookingRecord" type="Object"/>
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Id,Sale_Agreement_Completed__c"
+                      targetFields="{!v.BookingRecord}"
+                      recordUpdated="{!c.doInit}" 
+                      targetError="{!v.recordLoadError}"
+                      />
+    
+    
+    <aura:attribute name="cancellationReason" type="String" />
+    <aura:attribute name="cancellationRemarks" type="String" />
+    <!--<aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>-->
+    
+    <div class="slds-form-element slds-m-bottom--medium">
+        <div class="slds-form-element__control"> 
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:select label="Cancellation Reason" name="Cancellation_Reason" aura:id="mandateFields" value="{!v.cancellationReason}" required="true">
+                    <option value="">-- None--</option>
+                    <option value="Budget">Budget</option>
+                    <option value="Found New Flat">Found New Flat</option>
+                    <option value="Not Interested">Not Interested</option>
+                </lightning:select>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <lightning:textArea name="Cancellation_Description" type="Text" aura:id="mandateFields" label="Cancellation Description"  value="{!v.cancellationRemarks}" required="true" /> 
+            </div>
+        </div>
+    </div>
+    <div style="float:right;">
+        <lightning:button variant="brand" label="Save" title="Save" onclick="{!c.saveCancellationDetails}"/>
+    </div>
+    
+</aura:component>

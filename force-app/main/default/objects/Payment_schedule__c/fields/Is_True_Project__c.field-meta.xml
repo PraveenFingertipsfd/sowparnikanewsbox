@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_True_Project__c</fullName>
+    <formula>TEXT(Quote__r.Project__c ) == &apos;Whispering Petals&apos; || TEXT(Quote__r.Project__c ) == &apos;Euphoria In The East&apos; || TEXT(Quote__r.Project__c ) == &apos;Rhythm of Rain&apos;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Is True Project</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

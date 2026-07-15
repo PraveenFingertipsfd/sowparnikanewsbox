@@ -1,0 +1,380 @@
+<apex:page standardController="Booking__c"  extensions="convertValueToWords" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                @bottom-right {
+
+                              content: "Page " counter(page);
+
+                            }
+                }
+                p{
+                text-align:justify;
+                }
+            </style>
+        </head>
+        <body>
+            
+            <div style="font-size: 17px;"><br/><br/><br/><br/>
+               
+                <h2 style="text-align:center;"> TRIPARTITE AGREEMENT</h2><br/>
+                <p>This agreement is made at Bangalore  this <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.TPA_Date__c}" /></apex:outputText>,amongst:</p>
+                <div>
+                    Mr. {!Booking__c.First_Applicant_Name__c}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Age__c}" /></apex:outputText> years,<br/>
+                    Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                    <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        Mr. {!p.Name}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!p.Age__c}" /></apex:outputText> years,<br/>
+                        Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                    </apex:repeat>
+                    Residing at {!Booking__c.Address__c}
+                </div>
+                <p style="text-align:justify;">
+                  hereinafter called “Borrower” which expression shall, unless it be repugnant to the meaning or context thereof,
+                    mean and include its heris, executors, Administrators and assigns)of the  FIRST PART;   
+                </p>
+                <p>
+                    AND
+                </p>
+                <p style="text-align:justify;">
+                   {!Booking__c.Company_Name__c}., a Company within the meaning of the Companies Act, 1956 and having its registered office at {!Booking__c.Company_Address__c} (hereinafter called “DEVELOPER” which expression shall,
+                    unless it be repugnant to the meaning or context thereof, mean and include its successors in title and assigns) of the 
+                    SECOND PART,
+                </p>
+                <p>
+                    AND
+                </p>
+                <p style="text-align:justify;">
+                    TATA CAPITAL HOUSING FINANCE LIMITED, a company incorporated under the Companies Act, 1956, having its Registered Office at 
+                    Ground Floor, Krishna Tower, Richmond Road, Bangalore- 560025, (hereinafter called “TCHFL” which expression shall, unless it
+                    be repugnant to the meaning or context thereof, mean and include its successors in title and assigns) of the THIRD PART
+                </p>
+                <p>
+                    WHEREAS 
+                </p>
+                <p style="text-align:justify;">
+                    1)	The Developer started/ starting construction of residential apartment building comprising of Basement, Stilt plus Ten Upper
+                    floors in the project known as “{!Booking__c.Project__c}”, situated at {!Booking__c.Project_Address__c}
+                </p>
+                <p style="text-align:justify;">
+                    1.2	The Developer has agreed to sell/ allot and the Purchaser has agreed to purchase a flat in the said building/ premises,
+                    details whereof are more particularly described in the Schedule A hereunder written (hereinafter referred to as the “said
+                    Flat / Premises”), for a total consideration of Rs.<apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Total_Cost_Ex_Leg_Main__c}" /></apex:outputText>.
+                    (Total Price Consideration) pursuant to the Agreement dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> entered into between 
+                    the Developer and the Purchaser (hereinafter referred to as the “said Agreement”) free from all encumbrances, charges, lispendences,
+                    attachments, trusts or whatsoever and howsoever.
+                </p>
+                <p style="text-align:justify;">
+                    2)	In terms of the allotment, the Purchaser has already paid a sum of Rs. _____________ (Rupees ____________________________________________________________only)
+                    (being 5% of the total consideration) in part payment of the consideration amount and the Developer has allotted the
+                    said Flat / Premises to the Purchaser in terms of the said Agreement.
+                </p>
+                <p style="text-align:justify;">
+                 3)	The Developer has agreed to complete the construction and handover the possession of the said Flat / Premises to the Purchaser
+                    on ________________ in terms of the said Agreement against the balance payment.   
+                </p>
+                <p style="text-align:justify;">
+                 4)	For the purpose of making payment of the purchase price and acquiring the ownership of the said Flat / Premises, the Purchaser
+                    along with co-applicant have approached TCHFL for availing finance facility under its Home Loan Scheme.   
+                </p>
+                <p style="text-align:justify;">
+                 
+                TCHFL has agreed to sanction loan of Rs._________/- (Rupees ______________________________________________only) to the Purchaser jointly with the co-applicant subject
+                    to usual terms and conditions applicable to the said Home Loan Scheme, such as mortgage of property, rate of interest,
+                    repayment terms, payment of penal interest in case of default, assignment of insurance policy to TCHFL and furnishing of other
+                    collateral securities etc. 
+    
+                </p>
+                <p style="text-align:justify;">
+                  5)	At or before the execution of this agreement the Developer has represented and assured TCHFL as follows:   
+                </p>
+                <p style="text-align:justify;">
+                •	That the ‘Developer’ is the absolute owner and in peaceful possession of the residential converted land bearing {!projectSpecification} and construct the multi-storeyed building, sell the flats/premises, accept the advance
+                    payment against the purchase consideration and other subsequent payment and also final payment and execute the conveyance
+                    deed under their signature  in favor of prospective purchaser.     
+                </p>
+                <p style="text-align:justify;">
+                    •	That the title of the said Flat / Premises proposed to be sold is clear, marketable and free from all encumbrances. 
+                </p>
+                <p style="text-align:justify;">
+                  •	That the Developer has full power and authority to sell and transfer the said Flat / Premises unto and in favour of the Purchaser.   
+                </p>
+                <p>
+                    •	That the said plan has been lawfully and validly sanctioned.
+                </p>
+                <p style="text-align:justify;">
+                 6)	Relying on the aforesaid representation and at the request of the Purchaser, TCHFL has sanctioned a loan of Rs.____________/-
+                    (Rupees _________ only) to the Purchaser on the terms and conditions agreed vide Loan Agreement dated – ------------- executed
+                    between TCHFL and the Purchaser (“said Loan Agreement”), one of the conditions thereunder being that the Purchaser shall execute 
+                    by way of security an equitable mortgage in favour of TCHFL with all the Purchaser’s right title interest in the said Flat / Premises
+                    and also on the undertaking by the Purchaser that the Purchaser’s right title interest in the said Flat / Premises which is under
+                    construction and remains to be completed, shall remain charged/ mortgaged with TCHFL and further on the terms and condition agreed 
+                    upon between TCHFL and the Purchaser.    
+                </p>
+                <p style="text-align:justify;">
+                 7)	The Developer has undertaken to TCHFL that they would obtain completion certificate and the certificate of occupation of the
+                    said Flat / Premises issued by the  concered authority and also undertake that on execution of conveyance deed in respect of
+                    the said Flat / Premises, the conveyance deed will be deposited with TCHFL.    
+                </p>
+                <p style="text-align:justify;"> 
+                     The Purchaser has deposited the originals of the said Agreement and the money   receipt/s  for the part payment made to the Developer, with TCHFL.
+                </p>
+                <p>
+                    NOW THIS AGREEMENT WITHNESSETH AS UNDER:
+                </p>
+                <p style="text-align:justify;">
+                  In consideration of TCHFL sanctioning a loan of of Rs._________/- (Rupees ___________________________________________________________________only)  to the Purchaser/s for  the  purchase of  the  said Flat / Premises 
+                    to  be constructed  by  the Developer, it  is  hereby  agreed among the parties hereto as under:-  
+                </p>
+                <p style="text-align:justify;">
+                  1.   	TCHFL will make disbursement of the sanctioned loan by making payment to the Developer directly on behalf of the Purchaser
+                    in installments in the manner  provided in the said Agreement and upon specific written request of the Purchaser subject to 
+                    the Loan Agreement entered into between the Purchaser and TCHFL and the covenants hereunder agreed to among the parties
+                    hereto and any payment made to the Developer shall be deemed to be payments made to the Purchaser and the   
+                </p>
+                <p style="text-align:justify;">
+                 Purchaser  shall, in each case, be liable  for  the amount  of the loan disbursed on his/her/their behalf to  the Developer  as  though  
+                    the  same had been  disbursed  directly  to Purchaser.   
+                </p>
+                <p style="text-align:justify;">
+                    2.	The Purchaser/s will not further mortgage/charge/let out/part in the possession of the said Flat / Premises allotted as
+                    aforesaid to any person/financial  institution   for availing any loan without the prior written consent  of TCHFL.
+                    The Purchaser/s will not avail any loan facility from any other financial institution / banks / lenders against the 
+                    said Flat / Premises and will not undertake to create mortgage / charge of whatsoever nature on the said Flat / Premises
+                    in favour of such financial institution / banks / lenders.
+                </p>
+                 <p style="text-align:justify;">
+                    3.The Developer shall maintain a separate account of the Purchaser and adjust the payment received by it from TCHFL against  the  cost 
+                     of  the said Flat / Premises applied by the Purchaser.
+                </p>
+                <p style="text-align:justify;">
+                  4.   	The above covenants shall not be construed to mean and fasten any responsibility upon TCHFL to observe the payment schedule, if any, 
+                    between Developer and the Purchaser/s or make payments to the Developer as requested. TCHFL shall not be responsible for any delay or
+                    omission in disbursements on   account of breach/default attributable to the Developer / Purchaser. The Purchaser/s shall be responsible 
+                    to follow-up with TCHFL to make disbursement on his/her/their behalf as per any agreement he may have with the Developer.  
+                </p>
+                <p style="text-align:justify;">
+                    5. 	Without prejudice to above and notwithstanding anything to the contrary  contained herein, TCHFL  may  in its sole  discretion  refuse  to disburse the loan until :-
+                </p>
+                <p style="text-align:justify;">
+                i)   	The Purchaser/s has paid his/her/their own contribution in full to  Developer  i.e. the cost of  the  said Flat / Premises (including escalation, if any) less loan and/or     
+                </p>
+                <p style="text-align:justify;">
+                  ii)  	Progress and need of construction justifies (TCHFL being  the  sole judge thereof)  the  disbursement requested.  
+                </p>
+                <p style="text-align:justify;">
+               6.	The Developer undertakes that  on completion of the construction of the housing property the possession of the said 
+                    Flat / Premises shall be handed over by the Developer to the Purchaser subject to his/ her compliance with the terms and
+                    conditions of the said Agreement in full after obtaining no objection from TCHFL in writing and the Purchaser shall hold 
+                    the said Flat / Premises in trust for TCHFL when the possession of the said Flat / Premises is delivered. The  Developer
+                    further undertakes that the Title Deed/Sale  Deed/Deed of apartment in favour of the Purchaser by  Developer shall  be 
+                    executed and registered in terms of the provisions of Real Estate (Regulation and Development) Act, 2016 and the
+                    applicable Rules and Regulations thereunder (“RERA”). The Developer shall deposit  the said Title Deed/Sale  Deed/Deed
+                    of apartment in respect of the said Flat / Premises directly with TCHFL.     
+                </p>
+                <p style="text-align:justify;">
+                    7.   	Soon after the Title Deed/Sale Deed of apartment is executed and registered, the Purchaser/s undertake/s to take 
+                    steps for creation of mortgage of  the said Flat / Premises in favour of TCHFL, in the form and manner required  by TCHFL 
+                    and as stipulated under the Loan Agreement, as the said house is already mortgaged with the TCHFL to secure the housing loan.
+                </p>
+                <p style="text-align:justify;">
+                    8.	The Developer undertakes that it has complied with /will comply with the requirements / provisions under RERA
+                    in dealing with the said Flat / Premises. The Borrower declares that it has satisfied himself with respect to RERA 
+                    compliance by the Developer and shall not hold TCHFL responsible for any non-compliance thereof by the Developer.
+                </p>
+                <p style="text-align:justify;">
+                   9.	All stamp duty and charge payable for registration of the deed of conveyance or transfer and also on deed 
+                    of mortgage or charge shall be paid by the Purchaser. C 
+                </p>
+                <p style="text-align:justify;">
+                  10.   The Developer hereby records its consent and no objection for creation  of mortgage of the said Flat / Premises
+                    by Purchaser in favour  of the  TCHFL.  
+                </p>
+                <p style="text-align:justify;">
+                  11.   The Purchaser/s shall diligently and faithfully observe and comply with all the rules, regulations and bye-laws of Developer.  
+                </p>
+                <p style="text-align:justify;">
+                12.  If for any reason there is an increase/escalation in the cost of the said Flat / Premises such increase shall be paid and 
+                    borne by the Purchaser without any reference to TCHFL and until such payment is made, TCHFL shall have the right to suspend
+                    further disbursement of  the sanctioned loan.    
+                </p>
+                <p style="text-align:justify;">
+                    13.  	In the event of default by the Purchaser/s in repayment of dues of TCHFL, TCHFL will without prejudice to its rights under the 
+                    Loan Agreement be entitled to sell the said Flat / Premises and the Developer will have to accept the purchaser of said Flat / Premises
+                    as member of the Developer.
+                </p>
+                <p style="text-align:justify;">
+                  In addition to the above, in the event of cancellation/termination of the Loan Agreement by the Purchaser or TCHFL for any reason whatsoever,
+                    the Purchaser hereby authorizes the Developer to refund such amount of Loan directly disbursed by the TCHFL,  and adjusting the 
+                    earnest money, brokerage and interest on unpaid installments out of the Purchaser’s contribution, to TCHFL, and the same shall be
+                    deemed to be received by the Purchaser towards full and final settlement. However it is further agreed between the Parties that such
+                    payment made by the Developer directly to TCHFL shall not absolve the Purchaser from his liability to pay the residual amount, if any, 
+                    from the outstanding under the Loan Agreement.  
+                </p>
+                <p style="text-align:justify;">
+                14.  The  Developer shall not transfer the said Flat / Premises of  the  Purchaser/s to any other intending purchaser without the prior written consent of TCHFL.    
+                </p>
+                <p style="text-align:justify;">
+                    15.  If the Purchaser/s withdraw/s from the scheme of Developer or in the event of cancellation of allotment of the said Flat / Premise
+                    s in Purchaser's name by  the Developer for whatsoever reasons, with prior written consent of TCHFL or if he /she / they fail(s) to pay
+                    the balance amount being the difference between the loan sanctioned by TCHFL and the provisional / final price of the said Flat / Premises
+                    or in the event of default by the Purchaser/s in repayment of dues of TCHFL, or death of Purchaser/s, the Developer will  refund the  entire 
+                    amount  standing  to  the  credit  of  the Purchaser/s  (including  Purchaser's  contribution) along with interest to TCHFL to the extent of
+                    its outstanding dues under the Loan Agreement within a period of 10 days from the date of cancellation/withdrawal of allotment, failing which
+                    the Developer will be liable to pay interest @18% p.a. on such refund amount until repayment of the same to TCHFL.  TCHFL shall  refund the 
+                    balance, if any, to  the  Purchaser after   adjusting  entire  outstanding  dues   of the Purchaser. After receipt of the aforesaid amount
+                    from the Developer, if any balances remain outstanding in the loan account of the Purchaser, the same will be recovered from the Purchaser
+                    together with interest. In any  event  in which  any  refund becomes due and  payable  under  the Agreement/arrangement    executed/made  
+                    between    the Purchaser/s  and Developer or otherwise, Developer agrees  not to pay any amount on any account to the Purchaser/s by way of 
+                    refund or otherwise without written consent of  TCHFL. 
+                </p>
+                <p style="text-align:justify;">
+                             The Developer undertakes that in case of cancellation of allotment of the said Flat/Premises for  any reason, the Developer shall
+                    intimate the same to TCHFL in writing within a period of 4 days from the date of such cancellation.  
+                </p>
+                <p style="text-align:justify;">
+                    16.	The Developer undertakes that in case of failure for any reason whatsoever to allot/ hand over the possession of the said
+                    Flat / Premises to the Purchaser as per terms, the Developer shall immediately refund total money so received from the Purchaser
+                    and TCHFL with interest to TCHFL to the extent of its dues. 
+                </p>
+                <p style="text-align:justify;">
+                    17.	That in case of default in executing mortgage in favour of TCHFL to secure the loan or in default or repayment of instalment
+                    and/ or interest thereof, TCHFL may exercise its power under the Loan Agreement and to take all action as provided under the Loan Agreement. 
+                </p>
+                <p style="text-align:justify;">
+                  18.	The Developer have further agreed:   
+                </p>
+                <p style="text-align:justify;">
+                 a.	Not to allot / agree to sell / sell the 
+                    said Flat / Premises to any other person or party other than the Purchaser/s herein without the prior written consent of TCHFL.   
+                </p>
+                <p style="text-align:justify;">
+                    b.	Not to create any charge or mortgage over and in respect of the said Flat / Premises except in favour of TCHFL. 
+                </p>
+                <p style="text-align:justify;">
+                  c.	Not to permit any other person to occupy the said Flat / Premises without prior written permission of TCHFL.   
+                </p>
+                <p style="text-align:justify;">
+                    d.	The Developer shall complete the said Flat / Premises strictly within the time as agreed. 
+                </p>
+                <p style="text-align:justify;">
+                e.	To regularly keep TCHFL informed as to the progress of the work of construction of the said Flat / Premises.    
+                </p>
+                <p>
+                  19.	Supremacy and ndment  
+                </p>
+                <p style="text-align:justify;">
+                 This Agreement supersedes all discussions and Agreements (whether oral or written, including all correspondence) prior to
+                    the date of this Agreement between the Parties with respect to the subject matter of this Agreement. This Agreement may be
+                    modified or amended only by a writing duly executed by or on behalf of each of the Parties.   
+                </p>
+                <p>
+                   20.	Governing law  
+                </p>
+                <p >
+                  The Parties agree that this Agreement shall be governed by the laws of India.  
+                </p>
+                <p>
+                    21.	Dispute Resolution 
+                </p>
+                <p style="text-align:justify;">
+                 a)	If any dispute, difference or claim  arises between the parties hereto in connection
+                    with this  Agreement or the security hereof or the validity, interpretation, implementation  or alleged  breach  of this 
+                    Agreement or anything done or omitted to be done  pursuant  to this  Agreement or otherwise in relation to the Security
+                    hereof, the parties shall  attempt in  the  first  instance  to  resolve the same through negotiation/ conciliation. 
+                    If  the  dispute  is  not resolved  through negotiation/ conciliation within thirty days after commencement of  discussions 
+                    or such  longer  period  as the parties agree to in writing, then the same shall be settled by arbitration to be held in
+                    Bangalore, or any statutory amendments thereof and shall be referred to a Sole Arbitrator to be appointed by parties.
+                    In the event of death, refusal, neglect, inability, or incapability of the person so appointed to act as a Sole Arbitrator,
+                    parties may appoint a new arbitrator. The award of the arbitrator shall be final and binding on all parties concerned.   
+                </p>
+                <p style="text-align:justify;">
+                b) 	TCHFL shall be entitled to enforce this Agreement and its rights and benefits created hereunder including (but not limited to)
+                    in relation to the Security and to seek any and all remedies to the extent applicable under the laws prevailing in India from 
+                    time to time including without limitation under the Securitisation and Reconstruction of Financial Assets and Enforcement of 
+                    Security Interest Act, 2002.    
+                </p>
+                <p>
+                 22.	Miscellenous   
+                </p>
+                <p style="text-align:justify;">
+                    a)	The  Purchaser's  liability hereunder shall not be affected, terminated or  prejudiced  by the  death,  insolvency  or 
+                    any  incapacity  of  the  Purchaser,  but  such  liability  shall continue in full force and effect and shall be binding on
+                    the Purchaser's successors.
+                </p>
+                <p style="text-align:justify;">
+                    b) 	The rights, powers and remedies available to TCHFL under this Agreement shall be in addition to and without prejudice to all
+                    rights, powers and remedies available to TCHFL under applicable law or bye-law and which may be given to TCHFL and may be exercised 
+                    independently or collectively. 
+                </p>
+                <p style="text-align:justify;">
+                    IN WITNESS WHEREOF the parties hereto have signed this agreement on the day, month and year first above written.
+                </p>
+                <p style="text-align:justify;">
+                    SIGNED AND DELIVERED by the within named Purchaser/s Shri/Smt.________________
+                </p>
+                <p style="text-align:justify;">
+                    _____________________________________________________________________Witnesses (Signatures with full names and address)
+                </p>
+                <p>
+                    
+                </p>
+                <p>
+                    1.
+                </p>
+                <p>
+                    2.									PURCHASER/S
+                </p>
+                <p>
+                    SIGNED AND DELIVERED by the within named Developer {!Booking__c.Company_Name__c}, by the
+                    hand of________________________________its {!Booking__c.Authorized_Signato__c}.
+                </p>
+                <p>
+                  Witnesses (Signatures with full names and address)  
+                </p>
+                <p>
+                    1.
+                </p>
+                <p>
+                    2.		 FOR THE DEVELOPER
+                </p>
+                <p>
+                  SIGNED AND DELIVERED by the within named TATA
+                    CAPITAL HOUSING FINANCE LIMITED by the hand of Shri/Smt. _____________________________________________________  
+                </p>
+                <p>
+                    Witnesses (Signatures with full names and address)
+                </p>
+                <p>
+                  1.  
+                </p>
+                <p>
+                 2. 				                         			  FOR TCHFL	     
+                </p>
+                <p>
+                    SCHEDULE A
+                </p>
+                <p style="text-align:justify;">
+                    That all  bearing Flat: {!Booking__c.Unit_NumberFor__c} on the {!Booking__c.Floor__c} Floor(Floor) as proposed to be constructed/ under 
+                    construction at building knows as {!Booking__c.Project__c} situated at {!projectSpecification}.
+                </p>
+                <p>
+                    SCHEDULE B:
+                </p>
+                <table>
+                    <tr><td  colspan="3" width="100%" style="text-align:center"><b>Payment Schedules</b></td></tr>
+                    <apex:repeat value="{!Booking__c.Payment_Schedules__r}" var="p">
+                        <tr >
+                            <td width="60%" >{!p.Name} </td>
+                            <td  width="15%" align="center"> <apex:outputText value="{0, Number}"> <apex:param value="{!p.Payment_percent__c}" /></apex:outputText>%  </td>
+                            <td width="25%"   align="right"> <apex:outputText value="{0, Number}"> <apex:param value="{!p.AmountB__c}" /></apex:outputText>  </td>	
+                        </tr>
+                    </apex:repeat>
+                </table>
+            </div>
+        </body>
+    </html>
+</apex:page>

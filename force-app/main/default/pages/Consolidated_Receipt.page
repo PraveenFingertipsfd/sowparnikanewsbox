@@ -1,0 +1,194 @@
+<apex:page standardController="Booking__c" extensions="ConsolidatedReceiptController" renderAs="pdf" applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <style>
+            @page {
+                size: A4;
+                margin: 50px 0 0 0; 
+            }
+
+            @page :first {
+                margin: 0; 
+            }
+
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                page-break-inside: auto;
+                table-layout: fixed;
+            }
+
+            tr {
+                page-break-inside: avoid !important;
+                page-break-after: auto;
+            }
+
+            td, th {
+                page-break-inside: avoid !important;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                word-break: break-word;
+                white-space: normal;
+                overflow: hidden;
+                padding: 4px;
+                font-size: 11px;
+            }
+
+            .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+            }
+
+            .footer img {
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            .content-wrapper {
+                padding: 20px 20px 10px 20px;
+            }
+        </style>
+    </head>
+
+    <body style="font-size:13px; margin: 0;">
+        <div class="content-wrapper">
+
+            <!-- ROW COUNTER -->
+            <apex:variable var="rowCount" value="{!0}" />
+
+            <!-- ===== HEADER TABLE (no border) ===== -->
+            <table style="border:none; width:100%;">
+                <tr>
+                    <td style="border:none; text-align:right; padding:20px 20px 10px 20px;">
+                        <img src="{!$Resource.Sowparnika}" height="60px;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:none; text-align:center;">
+                        <h1 style="margin:5px 0;">Statement of Account</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border:none; text-align:right;">
+                        <strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!TODAY()}" /></apex:outputText></strong>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- ===== CUSTOMER + BOOKING TABLE ===== -->
+            <table style="border:none; width:100%;">
+                <tr>
+                    <td style="vertical-align:top; width:50%; border:none; padding:0 10px 0 0;">
+                        <h4>Customer Details :</h4>
+                        <div>
+                            {!Booking__c.First_Applicant_Name__c}<br/>
+                            Contact no - {!Booking__c.Contact_Number__c}<br/>
+                            Mail Id - {!Booking__c.Email__c}<br/>
+                            <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                                <div>
+                                    {!p.Name}<br/>
+                                    Contact no - {!p.Contact_Number__c}<br/>
+                                    Mail Id - {!p.Email__c}<br/>
+                                </div>
+                            </apex:repeat>
+                            <apex:outputPanel rendered="{!NOT(ISNULL(Booking__c.Co_Applicants__r))}"> Both are</apex:outputPanel>&nbsp;residing at {!Booking__c.Address__c}
+                        </div>
+                    </td>
+                    <td style="vertical-align:top; width:50%; border:none; padding:0;">
+                        <table style="border: 1px solid black;" border="1">
+                            <tr>
+                                <th colspan="2" style="text-align:center;">Booking Details:</th>
+                            </tr>
+                            <tr>
+                                <td>Project</td>
+                                <td>{!Booking__c.Project__c}</td>
+                            </tr>
+                            <tr>
+                                <td>Block/Wing</td>
+                                <td>{!Booking__c.Block_Number__c}</td>
+                            </tr>
+                            <tr>
+                                <td>Flat No</td>
+                                <td>{!Booking__c.Unit_NumberFor__c}</td>
+                            </tr>
+                            <tr>
+                                <td>Floor No</td>
+                                <td>{!Booking__c.Floor__c}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <p>We have received the below mentioned payments via following modes:</p>
+
+            <!-- ===== SINGLE COMBINED DATA TABLE ===== -->
+            <table style="border: 1px solid black;" border="1">
+                <thead>
+                    <tr>
+                        <th style="width:5%;">S.No</th>
+                        <th style="width:14%;">Date</th>
+                        <th style="width:14%;">Amount</th>
+                        <th style="width:14%;">Mode of Payment</th>
+                        <th style="width:28%;">Instrument No</th>
+                        <th style="width:25%;">Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <!-- PAYMENT ROWS -->
+                    <apex:repeat value="{!repList}" var="r">
+                        <apex:variable var="rowCount" value="{!rowCount + 1}" />
+                        <tr style="{!IF(MOD(rowCount, 12) == 0, 'page-break-after: always;', '')}">
+                            <td>{!rowCount}</td>
+                            <td><b><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!r.receiptDate}" /></apex:outputText></b></td>
+                            <td>{!r.receiptAmount}</td>
+                            <td>{!r.modeOfPayment}</td>
+                            <td>{!r.instruMentNo}</td>
+                            <td>{!r.payNameName}</td>
+                        </tr>
+                    </apex:repeat>
+
+                    <!-- TOTAL ROW -->
+                    <apex:variable var="rowCount" value="{!rowCount + 1}" />
+                    <tr style="{!IF(MOD(rowCount, 15) == 0, 'page-break-after: always;', '')}">
+                        <td colspan="2"><b>Total Paid</b></td>
+                        <td colspan="4"><b>Rs.{!receiptAmountInString}/-</b></td>
+                    </tr>
+
+                    <!-- ADDITIONAL CHARGES SECTION HEADER -->
+                    <apex:variable var="rowCount" value="{!rowCount + 1}" />
+                    <tr style="background-color:#f0f0f0; {!IF(MOD(rowCount, 15) == 0, 'page-break-after: always;', '')}">
+                        <td colspan="6" style="text-align:center;"><b>Additional Charges</b></td>
+                    </tr>
+
+                    <!-- ADDITIONAL CHARGES ROWS -->
+                    <apex:repeat value="{!acwBookList}" var="ac">
+                        <apex:variable var="rowCount" value="{!rowCount + 1}" />
+                        <tr style="{!IF(MOD(rowCount, 15) == 0, 'page-break-after: always;', '')}">
+                            <td>{!rowCount}</td>
+                            <td><b><apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!ac.acDate}" /></apex:outputText></b></td>
+                            <td>{!ac.acAmount}</td>
+                            <td colspan="3"><b>{!ac.acName}</b></td>
+                        </tr>
+                    </apex:repeat>
+
+                </tbody>
+            </table>
+
+            <br/>
+            <p>{!Booking__c.Company_Name__c}</p>
+            <p>Sowparnika CRM Team.</p>
+            <p>Note: This is a system-generated Statement and doesn't require a signature.</p>
+        </div>
+
+        <div class="footer">
+            <img src="{!$Resource.Consolidatedaddress}" alt="Footer Image" />
+        </div>
+    </body>
+</apex:page>

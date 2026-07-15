@@ -1,0 +1,73 @@
+<apex:page renderAs="pdf" standardController="Booking__c" showHeader="false"  standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false" >
+   
+            <table>
+                <tr>
+                   <td style="text-align:right; padding: 30px; width: 300px; height: 100px;vertical-align: top;"><img style="text-align:right;vertical-align: text-to" src="{!$Resource.bookingform}" height="150"/></td>
+                    <td style="text-align:right; padding: 30px; width: 300px; height: 100px;vertical-align: top;"><img style="text-align:right;vertical-align: text-to" src="{!$Resource.bookingform}" height="150"/></td>
+                </tr>
+            </table>
+       
+    <tr><td style="text-align: left;font-size: 13px;">Name of the project:&nbsp; <span style="border-bottom: 1px dotted #000;display: inline-block;width: 222px;text-align: left;"><b>{!Booking__c.Project__c}</b></span>&nbsp;&nbsp; Lead ID: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 250px;text-align: left;"><b>{!Booking__c.Lead_Id__c}</b></span><br/><br/></td></tr>
+    <tr><td style="text-align: left;font-size: 13px;">Plat No: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 100px;text-align: left;"><b>{!Booking__c.Plot__r.Plot_Number__c}</b></span>&nbsp;&nbsp; Plat Size: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 120px;text-align: left;"><b>{!Booking__c.Plot__r.Plot_Size__c}</b></span>&nbsp;&nbsp;Phase: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 100px;text-align: left;"><b>{!Booking__c.Plot__r.Phase_Detail__c}</b></span>&nbsp;&nbsp;Booking Value:<span style="border-bottom: 1px dotted #000;display: inline-block;width: 90px;text-align: left;"><b> {!Booking__c.Amount_INR__c}</b></span> <br/><br/></td></tr>
+    <tr><td style="text-align: left;font-size: 13px;">Application Name: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 320px;text-align: left;"><b>{!Booking__c.Applicant_Name__c}</b></span>&nbsp;&nbsp;Date of birth: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 140px;text-align: left;"><b><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!Booking__c.Date_of_Birth__c}" /></apex:outputText></b></span><br/><br/></td></tr>
+    <tr><td style="text-align: left;font-size: 13px;">Aadhar No: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 270px;text-align: left;"><b></b></span>&nbsp;&nbsp;Pan No: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 266px;text-align: left;"><b>{!Booking__c.PAN_Number__c}</b></span><br/><br/></td></tr>
+    <tr><td style="text-align: left;font-size: 13px;">Permanent Address: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 545px;text-align: left;"><b></b></span><br/><br/></td></tr>
+    <tr><td style="text-align: left;font-size: 13px;"> Mobile No: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 222px;text-align: left;"><b>{!Booking__c.Applicant_Mobile_Number__c}</b></span>&nbsp;&nbsp; Secondary Contact No: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 222px;text-align: left;"><b></b></span><br/><br/></td></tr>
+    <tr><td style="text-align: left;font-size: 13px;"> Email Id: <span style="border-bottom: 1px dotted #000;display: inline-block;width: 610px;text-align: left;"><b>{!Booking__c.Email_id__c} </b></span><br/><br/></td></tr>
+   <tr><td style="text-align: left;font-size: 13px;"> Occupation: <img src="/img/checkbox_unchecked.gif"/> IT <img src="/img/checkbox_unchecked.gif"/> BFSI <img src="/img/checkbox_unchecked.gif"/> Real Estate <img src="/img/checkbox_unchecked.gif"/> Retail: <img src="/img/checkbox_unchecked.gif"/> FMCG <img src="/img/checkbox_unchecked.gif"/> Business <img src="/img/checkbox_unchecked.gif"/> Doctor<br/></td></tr>
+   <tr><td style="text-align: left;font-size: 13px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;   <img src="/img/checkbox_unchecked.gif"/> Automobile  <img src="/img/checkbox_unchecked.gif"/> Hospitality <img src="/img/checkbox_unchecked.gif"/> Governement <img src="/img/checkbox_unchecked.gif"/> Education <img src="/img/checkbox_unchecked.gif"/> Others<br/></td></tr>
+   <tr><td style="text-align: left;font-size: 13px;">How did you find out about us?<br/></td></tr>
+<!-- <img src="/img/checkbox_checked.gif"/> -->   
+<center> 
+<table style="width:100%">
+  <tr>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  Print Ads</td>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  Referred by existing customer<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project:<span style="border-bottom: 1px dotted #000;display: inline-block;width: 140px;text-align: center;"><b>{!Booking__c.Plot__r.Project__r.Project__c}</b></span>Unit No:<span style="border-bottom: 1px dotted #000;display: inline-block;width: 190px;text-align: center;"><b>{!Booking__c.Plot__r.Plot_Number__c}</b></span></td>
+   
+  </tr>
+ <tr>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  Social Media</td>
+   
+  </tr>
+  
+  <tr>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  Reliable Website</td>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>Property Portals (99 Acers, Magic Bricks,Common Floor,etc.)</td>
+   
+  </tr>
+  
+  <tr>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  Hoardings</td>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  Channel Partner, Name<span style="border-bottom: 1px dotted #000;display: inline-block;width: 280px;text-align: left;"></span><b></b></td>
+   
+  </tr>
+  
+  <tr>
+      <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>Promotional &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SMS/Emails</td>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  TV</td>
+   
+  </tr>
+  
+  <tr>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/>  Word of Mouth</td>
+    <td style="text-align: left;"><img src="/img/checkbox_unchecked.gif"/>  Radio</td>
+   
+  </tr>
+    <tr>
+    <td style="text-align: left;font-size: 13px;"><img src="/img/checkbox_unchecked.gif"/> Expo </td>
+   
+  </tr>
+</table>
+    </center> 
+   
+   <tr><td style="text-align: left;font-size: 13px;">Preferred bank for loan <img src="/img/checkbox_unchecked.gif"/>ICICI<img src="/img/checkbox_unchecked.gif"/>SBI<img src="/img/checkbox_unchecked.gif"/>Axis<img src="/img/checkbox_unchecked.gif"/>HDFC<img src="/img/checkbox_unchecked.gif"/>IDBI<img src="/img/checkbox_unchecked.gif"/>Others:<span style="border-bottom: 1px dotted #000;display: inline-block;width: 200px;text-align: left;"></span><b></b><br/><br/></td></tr>
+   <tr><td style="text-align: left;font-size: 13px;">Names of Sales Executive:<span style="border-bottom: 1px dotted #000;display: inline-block;width: 510px;text-align: left;"></span><b></b><br/><br/></td></tr>
+   <tr><td style="text-align: left;font-size: 13px;"> Date of Booking:<span style="border-bottom: 1px dotted #000;display: inline-block;width: 570px;text-align: left;"></span><br/><br/></td></tr>
+    <br/><br/><br/> <br/>     
+    ____________________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____________________________<br/><br/>
+    Sales Executive Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Customer's Signature<br/>
+
+
+  
+</apex:page>

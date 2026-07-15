@@ -1,0 +1,86 @@
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="demandControllerNew" applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <style>
+            @page {
+            size: A4;
+            margin: 0;
+            }
+            .details-container {
+            display: flex;
+            justify-content: space-between;
+            }
+            
+            .customer-details,
+            .booking-details {
+            flex: 1;
+            }
+            
+            .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            }
+            .footer img {
+            width: 100%;
+            height: auto;
+            display: block;
+            
+            }
+        </style>
+    </head>
+    <body>
+        <div style="float:right;">
+            <img src="{!$Resource.Sowparnika}" height="70px;"/>
+        </div><br/><br/><br/>
+        <p><span style= "float:right;display: inline-block;"><strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong></span></p>
+        <div style="margin:40px;">
+            <p>To,</p>
+            <p>{!Booking__c.First_Applicant_Name__c}
+                <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                    and {!p.Name}
+                </apex:repeat>
+            </p>
+            <p>{!Booking__c.Address__c}</p>
+            <p>Subject: Demand Letter</p>
+            Dear {!Booking__c.First_Applicant_Name__c}<apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                     and {!p.Name}
+                </apex:repeat>,
+            <p>We kindly request you to release an amount of Rs. {!paymentAmountStr} (Rupees {!AmountInWordsss} Only) for the Flat No. {!Booking__c.Unit_NumberFor__c} on {!Booking__c.Floor__c} floor at Sowparnika towards the execution of the Sale Agreement.</p>
+            <p>Please issue a DD/cheque/RTGS to the below-mentioned account details:</p>
+            <p>Account Number: {!Booking__c.Builder_Account_Number__c}</p>
+            <p>Beneficiary Name: {!Booking__c.Company_Name__c}</p>
+            <p>Cheque Favoring Name: {!Booking__c.Check_Favoring_Name__c}</p>
+            <p>IFSC code: {!Booking__c.IFSC_Code__c}</p>
+            <p>Bank Name: {!Booking__c.Project_Bank_Name__c}</p>
+            <p>Bank Address: {!Booking__c.Project_Bank_Branch__c}</p>
+            <p>Thank you for your prompt attention to this matter.</p>
+            <p>Sincerely,</p>
+            <p>From {!Booking__c.Company_Name__c} </p>
+            <p>{!Booking__c.Owner.Name}</p>
+            <p>{!Booking__c.Owner_Designation__c}</p>
+           <p style="margin: 12px;">* This is a system generated receipt and doesn’t require signature.</p> 
+        </div>
+        <div class="footer">
+            <table style="margin-left: 30px;margin-right: 30px;table-layout: fixed;">
+                <tr>
+                    <td width="60%" style="text-align:left;border: 1px solid black;border-left: none; border-top: none; border-bottom: none;">
+                        <b>Registered &amp; Corporate Office:</b><br/>
+                        {!Booking__c.Company_Name__c}<br/>
+                        No.750, 1st Main Road, C-Block, AECS Layout, Kundalahalli, Banglore - 560 037, INDIA.
+                    </td>
+                    <td width="30%" style="text-align:right;">
+                        CIN: {!Booking__c.CIN_Number__c}<br/>
+                        www.sowparnika.com<br/>
+                        Phone No. 080 4243 3000<br/>
+                        cs@sowparnika.com
+                    </td>
+                </tr>
+            </table>
+            <img src="{!$Resource.footnewswp}" alt="Footer Image" width="795px;"/>
+        </div>
+    </body>
+    
+</apex:page>

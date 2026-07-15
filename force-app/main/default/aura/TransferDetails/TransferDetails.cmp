@@ -1,0 +1,76 @@
+<aura:component controller = "BookingWelcomeMail" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickActionWithoutHeader" access="global" >
+	<aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="trnasferRecord" type="object" />
+    <aura:attribute name="customerName" type="string" />
+    <aura:attribute name="phone" type="string" />
+    <aura:attribute name="country" type="string" />
+    <aura:attribute name="email" type="string" />
+    <aura:attribute name="PanNumb" type="string" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    <aura:html tag="style">
+        .slds-modal__container{ 
+        max-width: 80rem !important;
+        width:80% !important;
+        } 
+        
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        
+        height:unset !important;
+        max-height:unset !important;
+        }
+         
+        .closeIcon{
+        display:none;
+        }
+        .slds-col{
+        margin-left:5px;
+        }
+    </aura:html >
+    <header class="slds-modal__header">
+        <lightning:buttonIcon iconName="utility:close"
+                              onclick="{! c.closeModel }"
+                              alternativeText="close"
+                              variant="bare-inverse"
+                              class="slds-modal__close"/>
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Transfer Details</h2>
+    </header>
+    <br/><br/>
+    <h3 class="slds-section__title slds-theme_shade">
+        <span class="slds-truncate slds-p-horizontal_small" title="Section Title">Primary Applicant</span>
+    </h3>
+    <br/>
+    <div class="slds-grid slds-wrap slds-grid_pull-padded-x-medium">
+        <div class="slds-size_4-of-8 slds-p-horizontal_small">
+           <lightning:input name="First_Applicant_Name__c" type="Text" formatter="Text"  disabled="false" label="Name" aura:id="pro" value="{!v.customerName}" />
+        </div>
+        <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+            <lightning:input name="Contact_Number__c" type="phone" formatter="Text"  disabled="false" label="Phone" aura:id="pro" value="{!v.phone}" />
+        </div> 
+        <div class="slds-size_4-of-8 slds-p-horizontal_small">
+            <lightning:input name="Country__c" type="text" disabled="false"  formatter="currency" label="Country"  value="{!v.country}" />
+        </div>
+        <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+            <lightning:input name="Email__c" type="email" formatter="Text"  disabled="false" label="Email"  value="{!v.email}" />
+        </div>
+        <div class="slds-size_4-of-8 slds-p-horizontal_small"  >
+            <lightning:input name="PAN_Number__c" type="Text" formatter="Text"  disabled="false" label="PAN Number"  value="{!v.PanNumb}" />
+        </div>
+        <br>
+        </br>
+        <br>
+        </br>
+        <br>
+        </br> 
+    </div>
+    
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <button class="slds-button slds-button_brand" onclick="{!c.closeModel}">Cancel</button>
+        <lightning:button class="slds-m-top_small" variant="brand"  label="Save"  onclick="{!c.saveBooking}"/>            
+        </div>
+</aura:component>

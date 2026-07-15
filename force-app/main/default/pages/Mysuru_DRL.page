@@ -1,0 +1,175 @@
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="RaiseDemandController"  standardStylesheets="false" showHeader="false" >
+    <body>
+        <div style="font-size:14px;">
+            
+            
+            <h2 style="text-align:center;">
+                <span style="border-style: groove;">
+                DISBURSEMENT REQUISITION FORM</span>
+            </h2>
+            <table width="100%">
+                <tr>
+                    <td width = "50%" style="text-float:left;"><img style="text-align:right;vertical-align: text-to" src="{!$Resource.newsbi}" height="100"/></td>
+                    <td width = "50%" style="vertical-align: text-top;"><div style="text-align:right;">Date: </div><br/>
+                        <div>
+                            From:&nbsp;{!Booking__c.First_Applicant_Name__c}<br/>
+                            <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">{!p.Name}<br/></apex:repeat><br/>
+                            {!Booking__c.Address__c}
+                        </div></td>
+                </tr>
+            </table>
+            <br/>
+            <table  width="100%">
+                <tr>
+                    <td width = "25%">E-mail:</td>
+                    <td width = "25%"> {!Booking__c.Email__c}</td>
+                    <td width = "25%">Mobile:</td>
+                    <td width = "25%">{!Booking__c.Contact_Number__c}</td>
+                </tr>
+            </table>
+            <table width="100%">
+                <tr>
+                    <td width = "20%">File No:</td>
+                    <td width = "10%"></td>
+                    <td width = "20%">Loan A/c No:</td>
+                    <td width = "10%"> {!Booking__c.Loan_Account_Number__c}</td>
+                    <td width = "20%">SBI A/c No:</td>
+                    <td width = "20%">{!Booking__c.SB_Account__c}</td>
+                </tr> 
+            </table>
+            <br/>
+            <div style="text-align:left;">
+                Dear Sir,
+            </div>
+            <div style="text-align:center;">
+                1/We have been sanctioned the Housing Loan as under
+            </div>
+            <br/>
+            <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <td width="30%">Loan Amount</td>
+                    <td> {!SanctionedAmountstring}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Purpose</td>
+                    <td>Construction / Flat Pur I Take Over / House Pur / Site Pur I Topup</td>
+                </tr>
+                <tr>
+                    <td width="30%">Property Address</td>
+                    <td>{!Booking__c.Project_Address__c}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Plan Sanctioned for</td>
+                    <td>{!totalAmountstring}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Present Stage of Construction</td>
+                    <td>{!stageName}</td>
+                </tr>
+            </table><br/>
+            <div>
+                Now I / We request you to release the following disbursements from my / our loan account
+            </div>
+            <br/>
+            <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <td width="15%">Date of Reg.</td>
+                    <td width="15%"></td>
+                    <td width="30%">DD / BC/ NEFTI FVG.</td>
+                    <td width="40%"></td>
+                </tr>
+                <tr>
+                    <td width="15%">Amount to be released</td>
+                    <td width="15%">{!totalPendingAmountStr}</td>
+                    <td width="30%">DD Payable at / IFSC Code &amp; Alc No.</td>
+                    <td width="40%"></td>
+                </tr>
+            </table><br/>
+            <div>
+                2. Kindly release amount due for disbursement as per work progress certificate / as an advance of Rs.    for purchase of materials to my SB account mentioned above.
+            </div><br/>
+            <b>* Please also recover Interest and Insurance premium amount due from my SB Alc.</b>
+            <br/>
+            <div >
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yours Faithflly,
+            </div><br/><br/>
+            <div style="text-align:right;">
+                (.................................................)
+            </div>
+            <hr/>
+            <h3 style="text-align:center;">
+                FOR OFFICE USE
+            </h3>
+            <table  width="100%">
+                <tr>
+                    <td  width="20%">Expenditure</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%"></td>
+                    <td  width="20%"></td>
+                    <td  width="2%"></td>
+                    <td  width="18%"></td>
+                </tr>
+                <tr>
+                    <td  width="20%">Less Margin (........%)</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%"></td>
+                    <td  width="20%">Debit HTL A/c</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%">Rs..........</td>
+                </tr>
+                <tr>
+                    <td  width="20%">Amount Due for payment</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%"></td>
+                    <td  width="20%">Credit SB/BD/DD</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%">Rs..........</td>
+                </tr>
+                <tr>
+                    <td  width="20%">Amount already disbursed</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%"></td>
+                    <td  width="20%">Interest amount received</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%">Rs..........</td>
+                </tr>
+                <tr>
+                    <td  width="20%">Amount due</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%"></td>
+                    <td  width="20%">Insurance amount recovered</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%">Rs..........</td>
+                </tr>
+                <tr>
+                    <td  width="20%">Adavnce amount (if any)</td>
+                    <td  width="2%">:</td>
+                    <td  width="18%"></td>
+                    <td  width="20%"></td>
+                    <td  width="2%"></td>
+                    <td  width="18%"></td>
+                </tr>
+                <tr>
+                    <td  width="20%"><b>TOTAL</b></td>
+                    <td  width="2%">:</td>
+                    <td  width="18%"></td>
+                    <td  width="20%"></td>
+                    <td  width="2%"></td>
+                    <td  width="18%"></td>
+                </tr>
+                <tr>
+                    <td  width="20%">Recommended for payment</td>
+                    <td  width="2%"></td>
+                    <td  width="18%"></td>
+                    <td  width="20%"></td>
+                    <td  width="2%"></td>
+                    <td  width="18%">Approved</td>
+                </tr>
+                <br/><br/>
+                <div>
+                    Dy. / Asst. Manager&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manager(Maintenance)
+                </div>
+            </table>
+        </div>
+    </body>
+</apex:page>

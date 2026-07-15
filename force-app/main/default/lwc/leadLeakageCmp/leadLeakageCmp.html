@@ -1,0 +1,23 @@
+<template>
+    <lightning-card>
+        <div class="file-uploader">
+
+            <lightning-input label="" name="file uploader" onchange={handleFilesChange} type="file" multiple>
+            </lightning-input>
+            <div class="error-message">{fileName}</div>
+
+            <!--<lightning-button label="Preview" onclick={handlePreview} class="slds-m-right_small" disabled={isTrue}></lightning-button>-->
+            <lightning-button class="upload-button" label={UploadFile} onclick={handleUpload} variant="brand"
+                disabled={isTrue}></lightning-button>
+        </div>
+    </lightning-card>
+    <template if:true={showLoadingSpinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <template if:true={isPreview}>
+        <lightning-card title="preview file" >
+            <lightning-datatable data={csvData} columns={previewColumns} key-field="Id" hide-checkbox-column show-row-number-column></lightning-datatable>
+        </lightning-card>
+    </template>
+   
+</template>

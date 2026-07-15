@@ -1,0 +1,74 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="UserStatusController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="usr" type="User"/>
+    <aura:attribute name="isFalse" type="boolean" default="false"/>
+    <aura:attribute name="reasone" type="string" default=""/>
+    <aura:attribute name="label" type="string" default="Status-"/>
+    <aura:attribute name="isCti" type="boolean" default="false"/>
+    <div class="slds-box slds-theme_shade">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col">
+                <div class="slds-grid slds-gutters">
+                    
+                    <div class="slds-col">
+                        
+                        <div class="slds-align_absolute-center">
+                            <aura:if isTrue="{!v.isCti}">
+                                {!v.label}
+                                <lightning:input class="slds-p-right_medium"  type="toggle" name="{!v.usr.id}"  checked="{!v.usr.Availability__c}" value="{!v.usr.Availability__c}" onchange="{!c.selectChange}" messageToggleActive="Available"  messageToggleInactive="Offline"/>
+                                <lightning:icon size="xx-small" iconName="{!v.usr.Availability__c ? 'action:approval' : 'action:close'}"/>  
+                                <aura:set attribute="else">
+                                    {!v.label}
+                                    <lightning:input class="slds-p-right_medium"  type="toggle" name="{!v.usr.id}"  checked="{!v.usr.Availability__c}" value="{!v.usr.Availability__c}" onchange="{!c.selectChange}" messageToggleActive="Available"  messageToggleInactive="Offline"/>
+                                    <lightning:icon size="xx-small" iconName="{!v.usr.Availability__c ? 'action:approval' : 'action:close'}"/>
+                                </aura:set>
+                            </aura:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--<aura:if isTrue="{!v.isFalse}">
+   		 <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <! Modal/Popup Box Header Starts here
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close"
+                                              onclick="{! c.closePopUP }"
+                                              alternativeText="close"
+                                              variant="bare-inverse"
+                                              class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Offline Reasone</h2>
+                    </header>
+                    <!Modal/Popup Box Body Starts here
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                         <lightning:select aura:id="reasone" name="reasone" label="Select the Reasone" required="true" >
+                             						<option value="">choose one...</option>
+        											<option value="Tea Break">Tea Break</option>
+       												<option value="Lunch Break">Lunch Break</option>
+       											    <option value="Meeting">Meeting</option>
+                             <option value="Training">Training</option>
+                             <option value="Coaching">Coaching</option>
+                             <option value="Floor Activity">Floor Activity</option>
+                             <option value="Log off">Log off</option>
+                             
+    					</lightning:select>
+                    </div>
+                    <!Modal/Popup Box Footer Starts here
+                    <footer class="slds-modal__footer">
+                       <lightning:button variant="brand"
+                                          label="Cancel"
+                                          title="Cancel"
+                                          onclick="{!c.closePopUP}"/> 
+                        <lightning:button variant="brand"
+                                          label="OK"
+                                          title="OK"
+                                          onclick="{!c.submitDetails}"/>
+                    </footer>
+                </div>
+            </section>
+    </aura:if>-->
+    
+</aura:component>

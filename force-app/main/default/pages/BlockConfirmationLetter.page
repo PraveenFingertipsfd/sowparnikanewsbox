@@ -1,0 +1,82 @@
+<apex:page standardController="Booking__c" showHeader="false" applyBodyTag="false" applyHtmlTag="false" renderAs="pdf" >
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+           <style>
+                @page {
+                size: A4;
+                margin: 0px;
+                }
+                .details-container {
+                display: flex;
+                justify-content: space-between;
+                }
+                
+                .customer-details,
+                .booking-details {
+                flex: 1;
+                }
+                
+                .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                }
+                .footer img {
+                width: 100%;
+                height: auto;
+                display: block;
+                
+                }
+            </style>
+        </head>
+        <body style="margin: 40px 60px 100px 40px;">
+            <div>
+                <div style="float:right; margin: 20px 20px 10px 20px;">
+                    <img src="{!$Resource.Sowparnika}" height="60px;"/>
+                </div><br/><br/><br/><br/>
+            </div>
+    <p><span style= "float:right;display: inline-block;"><strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong></span></p>
+    <div>
+        <p>To,<br/>
+            The Manager<br/>
+            {!Booking__c.Bank_Name__c}<br/>
+        </p>
+        <p>Dear Sir/Madam</p>
+        <p>Subject: Confirmation of Flat Ownership</p>
+        <p style="text-align:justify;">I am writing to confirm that Flat No. {!Booking__c.Unit_NumberFor__c} on {!Booking__c.Floor__c} floor, with an area of {!Booking__c.Built_up_area__c} sqft ({!Booking__c.Undivided_Share_Of_Land__c} sqft UDS) <apex:outputText rendered="{!Booking__c.Plot__r.Terrace_Area__c != null}">and terrace area {!Booking__c.Plot__r.Terrace_Area__c} sqft</apex:outputText>, located at “SOWPARNIKA {!UPPER(Booking__c.Project__c)}”, {!Booking__c.Project_Address__c}, belongs to {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                      
+                    </apex:repeat>.</p>
+        <p>Thank you for your attention to this matter.</p>
+        <p>Sincerely,</p>
+        <p>From {!Booking__c.Company_Name__c},</p>
+        <p>{!Booking__c.Owner.Name}<br/>
+            {!Booking__c.Owner_Designation__c}
+        </p>
+    </div>
+ <div class="footer">
+            <table style="margin-left: 30px;margin-right: 30px;table-layout: fixed;">
+                <tr>
+                    <td width="60%" style="text-align:left;border: 1px solid black;border-left: none; border-top: none; border-bottom: none;">
+                        <b>Registered &amp; Corporate Office:</b><br/>
+                        {!Booking__c.Company_Name__c}<br/>
+                        No.750, 1st Main Road, C-Block, AECS Layout, Kundalahalli, Banglore - 560 037, INDIA.
+                    </td>
+                    <td width="25%" style="text-align:right;">
+                        CIN: {!Booking__c.CIN_Number__c}<br/>
+                        www.sowparnika.com<br/>
+                        Phone No. 080 4243 3000<br/>
+                        cs@sowparnika.com
+                    </td>
+                </tr>
+            </table>
+            <img src="{!$Resource.footnewswp}" alt="Footer Image" width="795px;"/>
+        </div>
+</body>
+    </html>
+    
+    
+</apex:page>

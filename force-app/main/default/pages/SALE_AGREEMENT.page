@@ -1,0 +1,740 @@
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="convertValueToWords" showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false"  standardStylesheets="false" >
+    <html >
+        <head>
+            <style type="text/css" media="print">
+                @page {
+                margin-bottom: 200px;
+                @bottom-right {
+                
+                content: "Page " counter(page);
+                
+                }
+                }
+                @top-center {
+                content: element(header);
+                }
+                @bottom-left {
+                content: element(footer);
+                }
+                }
+                div.header {
+                padding: 10px;
+                position: running(header);
+                }
+                div.footer {
+                display: block;
+                padding: 5px;
+                position: running(footer);
+                }
+                .pagenumber:before {
+                content: counter(page);
+                }
+                .pagecount:before {
+                content: counter(pages);
+                }
+                div.header {
+                padding: 20px;
+                position: running(header);
+                margin-left: -200px;
+                }
+                div.footer {
+                padding: 10px;
+                position: running(footer);
+                font-size: 9px;
+                text-align:left;
+                
+                }
+                div.footer :first-child{
+                text-align:right;
+                }
+                
+                div.content, div.content p{
+                padding:0 20px;
+                line-height:1.5;
+                font-size:14px;
+                }
+                th, td {
+                padding: 5px;
+                }
+                p{
+                line-height:1;
+                padding:1px;
+                font-size:16px;
+                }
+                div{
+                line-height:1;
+                padding:1px;
+                }
+                table, tr {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                .content{
+                font-size:14px;
+                }
+                .content-wrapper {
+                page-break-inside: avoid;
+                }
+            </style> 
+        </head>
+        <body>
+            <div class="content" >
+                <apex:outputPanel >
+                    <div style="page-break-after:always;"></div> 
+                    <div >
+                        <p style="text-align:center;font-size:15px;">
+                            <strong> AGREEMENT FOR SALE</strong>
+                        </p>
+                        <p style="font-size:15px;">
+                            This Agreement for Sale is made and executed on this day <apex:outputText value="{0, date, dd MMMM yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> at Bangalore.
+                        </p>
+                        <p style="font-size:15px;">
+                            <strong>BY AND BETWEEN:</strong>
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            
+                            <strong>M/s. SOWPARNIKA HOMES PRIVATE LIMITED, CIN No: U45400KA2014PTC074654</strong> a company incorporated under the provisions of the Companies Act, 2013, having its Registered office at No.750, ‘C’ Block, 1st Main Road, AECS Lay out, Kundalahalli, Bangalore - 560037. (PAN: AAUCS5844F), represented by its authorized signatory {!Booking__c.Authorized_Signato__c}. Authorized vide board resolution dated:<apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Authorized_Signatory_Resolution_Date__c}" /></apex:outputText> hereinafter referred to as the <strong>“Owner and Promoter”</strong> (which expression shall unless repugnant to the context or meaning thereof be deemed to mean and include its successor-in-interest, executors, administrators and permitted assignees); AND <br/>
+                        </p>
+                        <p style="font-size:15px;">
+                            
+                            {!Booking__c.First_Applicant_Name__c}, W/o/S/o/C/o. {!Booking__c.W_o_S_o_C_o__c}, Aged about <apex:outputText value="{0, Number,###,###,###}"> <apex:param value="{!Booking__c.Age__c}" /></apex:outputText> years,<br/>
+                            PAN No: {!Booking__c.PAN_Number__c}, Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                            <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                                {!p.Name}, W/o/S/o/C/o. {!p.W_o_S_o_C_o__c}, Aged about <apex:outputText value="{0, Number,###,###,###}"> <apex:param value="{!p.Age__c}" /></apex:outputText> years,<br/>
+                                PAN No: {!p.PAN_Number__c}, Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                            </apex:repeat>
+                            Residing at {!Booking__c.Address__c}
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            hereinafter called the <strong>“Allottee”</strong> (which expression shall unless repugnant to the context or meaning thereof be deemed to mean and include his/her heirs, executors, administrators, successors-in-interest and permitted assignees).
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            The Promoter and Allottee shall hereinafter collectively be referred to as the <strong>“Parties”</strong> and individually as a <strong>“Party”</strong>.
+                        </p>
+                    </div>
+                    <div style="page-break-after:always;"></div> 
+                    <p>
+                        DEFINITIONS:
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        For the purpose of this Agreement for Sale, unless the context otherwise requires-
+                    </p>
+                    <ol style="list-style-type: lower-alpha;">
+                        <li style="text-align:justify;font-size:15px;"><p>“Act” means the Real Estate (Regulation and Development) Act, 2016 (16 of 2016);</p></li> 
+                        <li style="text-align:justify;font-size:15px;"><p>Rules - means the Karnataka Real Estate (Regulation and Development) Rules, 2017</p></li> 
+                        <li style="text-align:justify;font-size:15px;"><p>Regulations” means the Regulations made under the Real Estate (Regulation and Development) Act, 2016; </p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>SBI – State Bank of India </p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>MCLR – Marginal Cost of Funds based on Lending Rate</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>FAR – Floor Area Ratio</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>STRR – Satellite Town   Ring Road Planning Authority.</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>Common Area - (“Common Areas”) as defined under clause (n) of Section 2 of the Act</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>Project – Sowparnika Euphoria in the East</p></li>
+                    </ol>
+                    <p>
+                        WHEREAS:
+                    </p>
+                    <ol style="list-style-type: upper-alpha;">
+                        <li style="text-align:justify;font-size:15px;"><p>The Owner/Promoter is the sole and absolute and lawful owner of   residential converted land bearing Sy. No-86/1, measuring 3 Acre 05 Guntas, Sy. No-86/3, (Old Sy No.86/1) measuring 1 Acre 30 Guntas, new Sy. No-86/4, (Old Sy No.86/1) measuring 3 Acre 01 Guntas, and 02 gunta of Kharab, Doddagattiganabbe Village, and Sy. No-60/2, (Old Sy No.60) measuring 19-00 Guntas and Sy. No-61/4, (old Sy No.61/2) measuring 8-00 Guntas, of Pujenaagrahara Village,Kasaba Hobli, Hosakote totally measuring 8 Acre 23 guntas  which is more fully described in the Schedule-A hereunder hereinafter referred to as <strong>SCHEDULE A PROPERTY</strong>.  The Owner/Promoter has acquired the Schedule-A property by a Sale Deed dated 10-04-2023, vide registered document No.351/2023-24 of Book-I, registered in the office of the Sub-Registrar, Hosakote. Pursuant to the sale deed the Owner/Promoter has register the Katha in the Doddagatiganabbe Gramapanchayath, vide Katha No.120/86/1,121/86/3,22/ 86/4,473/60/ 2, 474/61/4, RDPR PID No.150300401000520171. </p>  </li>
+                        <li style="text-align:justify;font-size:15px;"><p>WHEREAS, Schedule A Property is situated in an ideal locality and the Owner is also a Promoter desirous of developing the same into residential apartment building have made an application to the STRR Planning Authority for sanction of residential Development and accordingly, STRR Planning Authority instructed the Vendor to relinquish an extent of land admeasuring 6893.58 Square Meters in Schedule-A Property, which is reserved for STRR Land Banking, Parks and Road winding. Hence, the Owner/Promoter has relinquished the same in favor of STRR Planning Authority under the registered Relinquishment Deed dated 29-05-2023 vide registered document No.2066/2023-24, in the office of the Sub-Registrar Hosakote.  Subsequent to the relinquishment of land and after payment of prescribed fee the Member Secretary, STRR Planning Authority has approved the Residential Development Plan vide its approval Letter No. STRRPA/TP/DP-12/2022-23, dated 31-05-2023.</p> </li>
+                        <li style="text-align:justify;font-size:15px;"><p>WHEREAS, in pursuance to the aforesaid approval of Development Plan, the Owner/Promoter has made an application to the STRR Planning Authority for sanction of building plan for the proposed construction of multi-storeyed residential apartment building on Schedule- ‘A’ Property and accordingly the Member Secretary, STRR Planning Authority has approved the building plan in favour of the Owner/Promoter vide Commencement Certificate dated 27-05-2024 bearing No. STRRPA/TP/CC/18/2023-24, for construction of Basement, ground plus Fourteen  upper Floors of residential apartment building over the Schedule-‘A’ Property and named as <strong>“SOWPARNIKA EUPHORIA IN THE EAST.”</strong></p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Project is registered with the Karnataka Real Estate Regulatory Authority under the Certificate dated bearing registration <strong>No. PRM/KA/RERA/1250/304/PR/180724/006943</strong> issued by the Members Secretary, Karnataka Real Estate Regulatory Authority in terms of the provisions of the Real Estate (Regulation and Development) Act, 2016 (the <strong>“Act”</strong>) and the Rules framed thereunder by the Government of Karnataka.</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Owner/Promoter is fully competent to enter into this Agreement and all the legal formalities with respect to the right, title and interest of the Promoter regarding the Said Land on which Project is to be constructed;</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee had applied for an allotment of an Apartment   in the Project Allotment letter dated <apex:outputText value="{0, date, dd MMMM yyyy}"><apex:param value="{!Booking__c.Createddate}" /></apex:outputText> and has been allotted a Residential apartment No.{!Booking__c.Unit_NumberFor__c}, {!Booking__c.BHK_Type__c} having Carpet Area of {!Booking__c.Carpet_Area__c} square feet balcony area of {!Booking__c.Balcony_Area__c} Sq.ft and super built up area of {!Booking__c.Built_up_area__c} Sq.ft and {!Booking__c.Parking__c} parking together with {!Booking__c.UDS__c} Sq.ft of undivided share, right, title and interest in Schedule A property    which is more particularly described in <strong>Schedule- B </strong>(hereinafter referred to as the <strong>“Schedule B Property”</strong>) and the  apartment floor plan of the Schedule B Property is annexed hereto and marked as Schedule- C) the payment plan is annexed hereto and marked as Schedule -D) The specifications  is annexed here  to and  marked as Schedule -E.</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Parties have gone through all the terms and conditions set out in this Agreement and understood the mutual rights and obligations detailed herein;</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Parties hereby confirm that they are signing this Agreement with full knowledge of all the laws, rules, regulations, notifications, etc., applicable to the Project;</p></li> 
+                        <li style="text-align:justify;font-size:15px;"><p>The Parties, relying on the confirmations, representations and assurances of each other to faithfully abide by all the terms, conditions and stipulations contained in this Agreement and all applicable laws, are now willing to enter into this Agreement on the terms and conditions appearing hereinafter;</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>In accordance with the terms and conditions set out in this Agreement and as mutually agreed upon by and between the Parties, the Promoter hereby agrees to sell and the Allottee hereby agrees to purchase the Apartment and parking space;</p></li>
+                        
+                    </ol>
+                    <p style="text-align:justify;font-size:15px;">
+                        NOW THEREFORE, in consideration of the mutual representations, covenants,
+                        Assurances, promises and agreements contained herein and other good and valuable consideration, the Parties agree as follows:
+                    </p>
+                    <p style="font-size:15px;">
+                        <b>1. TERMS:</b>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.1 Subject to the terms and conditions as detailed in this Agreement, the Owner/ Promoter agrees to sell to the Allottee and the Allottee hereby agrees to purchase, the Apartment. 
+                    </p> 
+                    
+                    <div>
+                        <p style="font-size:15px;">
+                            1.2 The Total Price for the Apartment is Rs.{!totalCostInString} (Rupees {!TotalCostAmountInWords} only) .<br/>
+                        </p>
+                        <div style="padding-left:50px;">
+                            <table width="100%" style="line-height:1;font-size:15px;">
+                                <tr>
+                                    <td width="50%">Cost of the Apartment - {!totlbasicPriceinIndian}</td>
+                                    <td width="50%"></td>
+                                </tr>
+                                <tr>
+                                    <td>Taxes – {!totltaxinIndian}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Total Cost of Apartment - {!totalCostInString}</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align:justify;font-size:15px;">(i) The Total Price above includes the booking amount paid by the allottee to the Promoter towards the Apartment;</p>
+                    <p style="text-align:justify;font-size:15px;">(ii) The Total Price above includes Taxes (consisting of tax paid or payable by the Promoter, Service Tax, GST  and Cess or any other similar taxes which may be levied, in connection with the construction of the Project payable by the Promoter) up to the date of handing over the possession of the Apartment: Provided that in case there is any change / modification in the taxes, the Subsequent amount payable by the allottee to the promoter shall be increased/reduced based on such change / modification;</p>
+                    <p style="text-align:justify;font-size:15px;">(iii) The Promoter shall periodically intimate to the Allottee, the amount payable as stated in (i) above and the Allottee shall make payment within 30 (thirty) days from the date of such written intimation. In addition, the Promoter shall provide to the Allottee the details of the taxes paid or demanded along with the acts/rules/notifications together with dates from which such taxes/levies etc. have been imposed or become effective;</p>
+                    <p style="text-align:justify;font-size:15px;">(iv) The Total Price of Apartment includes: 1) Pro rate share in the Common Areas; and 2) Parking Slot(s) as provided in the Agreement.</p>
+                    
+                    <p style="text-align:justify;font-size:15px;">
+                        1.3 The Total Price is escalation-free, save and except increases which the Allottee hereby agrees to pay, due to increase on account of development charges payable to the competent authority and/or any other increase in charges which may be levied or imposed by the competent authority from time to time. The Promoter undertakes and agrees that while raising a demand on the Allottee for increase in development charges, cost/charges imposed by the competent authorities, the Promoter shall enclose the said notification/order/rule/regulation to that effect along with the demand letter being issued to the Allottee, which shall only be applicable on subsequent payments.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.4 The Allottee(s) shall make the payment as per the payment plan set out in <b>Schedule-D (“Payment Plan”)</b>.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.5 The Owner/Promoter may allow, in its sole discretion, a rebate for early payments of instalments payable by the Allottee. The provision for allowing rebate and such rate of rebate shall not be subject to any revision/withdrawal, once granted to an Allottee by the Owner/Promoter.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.6 It is agreed that the Owner/Promoter shall not make any additions and alterations in the sanctioned plans, layout plans and specifications and the nature of fixtures, fittings and amenities described therein in respect of the apartment without the previous written consent of the Allottee. Provided that the Owner/Promoter may make such minor additions or alterations as may be required by the Allottee, or such minor changes or alterations as per the provisions of the Act.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.7 The Promoter shall confirm the final carpet area that has been allotted to the Allottee after the construction of the Building is complete and the occupancy certificate is granted by the competent authority, by furnishing details of the changes, if any, in the carpet area. The total price payable for the carpet area shall be recalculated upon confirmation by the Owner/Promoter. If there is any reduction in the carpet area within the defined limit then Owner/Promoter shall refund the excess money paid by Allottee within forty-five days with annual interest at the rate specified in the Rules, from the date when such an excess amount was paid by the Allottee. If there is any increase in the carpet area allotted to Allottee, the Promoter shall demand that from the Allottee as per the next milestone of the Payment Plan. All these monetary adjustments shall be made at the same rate per square feet as agreed in Clause 1.2 of this Agreement.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.8 Subject to Clause 9.3 the Owner/Promoter agrees and acknowledges, the Allottee shall have the right to the Apartment as mentioned below:</p>
+                    <p style="text-align:justify;font-size:15px;">  (i) The Allottee shall have exclusive ownership of the Apartment;</p>
+                    <p style="text-align:justify;font-size:15px;"> (ii) The Allottee shall also have undivided proportionate share in the Common Areas. Since the share / interest of Allottee in the Common Areas is undivided and cannot be divided or separated, the Allottee shall use the Common Areas along with other occupants, maintenance staff etc., without causing any inconvenience or hindrance to them. Further, the right of the Allottee to use the Common Areas shall always be subject to the timely payment of maintenance charges and other charges as applicable.</p>
+                    <p style="text-align:justify;font-size:15px;">  (iii) That the computation of the price of the Apartment includes recovery of price of land, construction of not only the Apartment but also the Common Areas, internal development charges, external development charges, taxes, cost of providing electric wiring, fire detection and firefighting equipment in the common areas etc. and includes cost for providing all other facilities as provided within the Project.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.9 It is made clear by the Promoter and the Allottee agrees that the Apartment along with the Parking Slot shall be treated as a single indivisible unit for all purposes. It is agreed that the Project is an independent, self-contained Project covering the said Land and is not a part of any other project or zone and shall not form a part of and/or linked/combined with any other project in its vicinity or otherwise except for the purpose of integration of infrastructure for the benefit of the Allottee. It is clarified that Project’s facilities and amenities shall be available only for use and enjoyment of the Allottees of the Project.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.10 It is understood by the Allottee that all other areas and i.e. areas and facilities falling outside the Project, namely parks, civic amenities shall not form a part of the declaration to be filed in accordance with the local laws.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.11 The Owner/Promoter agrees to pay all outgoings before transferring the physical possession of the apartment to the Allottees, which it has collected from the Allottees, for the payment of outgoings (including land cost, ground rent, municipal or other local taxes, charges for electricity, maintenance charges, including mortgage loan and interest on mortgages or other encumbrances and such other liabilities payable to competent authorities, banks and financial institutions, which are related to the project). If the Owner/Promoter fails to pay all or any of the outgoings collected by it from the Allottees or any liability, mortgage loan and interest thereon before transferring the apartment to the Allottees, the Promoter agrees to be liable, even after the transfer of the property, to pay such outgoings and penal charges, if any, to the authority or person to whom they are payable and be liable for the cost of any legal proceedings which may be taken therefore by such authority or person.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        1.12 The Allottee has paid a sum of Rs.{!totlreceivedinIndian}/- (Rupees {!tillDateReceived} only) as booking amount being part payment towards the Total Price of the Apartment at the time of application, the receipt of which the Promoter hereby acknowledges and the Allottee hereby agrees to pay the remaining price of the Apartment as prescribed in the Payment Plan, as may be demanded by the Promoter within the time and in the manner specified therein: Provided that if, the allottee delays in payment towards any amount for which is payable, he/she/they shall be liable to pay interest at the rate State Bank of India MCLR plus two percent.
+                    </p>
+                    <div class="content-wrapper">
+                        <p style="font-size:15px;">
+                            <strong>2. MODE OF PAYMENT:-</strong>
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            Subject to the terms of the Agreement and the Promoter abiding by the construction milestones, the Allottee shall make all payments, on demand by the Promoter, within the stipulated time as mentioned in the Payment Plan through A/c Payee cheque/demand draft or online payment (as applicable) in favour of <b>M/s. Sowparnika Homes Private Limited</b>, payable at Bangalore.
+                        </p>
+                    </div>
+                    <p>
+                        <strong>3. COMPLIANCE OF LAWS RELATING TO REMITTANCES:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        3.1 The Allottee, if resident outside India, shall be solely responsible for complying with the necessary formalities as laid down in Foreign Exchange Management Act, 1999, Reserve Bank of India Act and Rules and Regulations made thereunder or any statutory amendment(s) modification(s) made thereof and all other applicable laws including that of remittance of payment acquisition/sale/transfer of immovable properties in India etc. and provide the Promoter with such permission, approvals which would enable the Promoter to fulfill its obligations under this Agreement. Any refund, transfer of security, if provided in terms of the Agreement shall be made in accordance with the provisions of Foreign Exchange Management Act, 1999 or statutory enactments or amendments thereof and the Rules and Regulations of the Reserve Bank of India or any other applicable law. The Allottee understands and agrees that in the event of any failure on his/her/their part to comply with the applicable guidelines issued by the Reserve Bank of India, he/she /they shall be liable for any action under the Foreign Exchange Management Act, 1999 or other laws as applicable, as amended from time to time.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        3.2 The Owner/Promoter accept no responsibility in this regard. The Allottee shall keep the Promoter fully indemnified and harmless in this regard. Whenever there is any change in the residential status of the Allottee subsequent to the signing of this Agreement, it shall be the sole responsibility of the Allottee to intimate the same in writing to the Promoter immediately and comply with necessary formalities if any under the applicable laws. The Promoter shall not be responsible towards any third party making payment/remittances on behalf of any Allottee and such third party shall not have any right in the application/allotment of the said apartment applied for herein in any way and the Promoter shall be issuing the payment receipts in favour of the Allottee only.
+                    </p>
+                    <div class="content-wrapper">
+                    <p style="text-align:justify;font-size:15px;">
+                        <strong>4. ADJUSTMENT/APPROPRIATION OF PAYMENTS:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Allottee authorizes the Owner/Promoter to adjust/appropriate all payments made by him/her/them under any head(s) of dues against lawful outstanding, if any, in his/her/their names as the Owner/ Promoter may in its sole discretion deem fit and the Allottee undertakes not to object/demand/direct the Promoter to adjust his/her/their payments in any manner.
+                    </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>5. TIME IS ESSENCE.-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        Time is of essence for the Promoter as well as the Allottee. The Promoter shall abide by the time schedule for completing the project and handing over the Apartment to the Allottee and the common areas to the association of the allottees after receiving the occupancy certificate or the completion certificate. Similarly, the Allottee shall make timely payments of the instalment and other dues payable by him/her /them and meeting the other obligations under the Agreement subject to the simultaneous completion of construction by the Promoter as provided in <strong>Schedule -D</strong>.
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>6. CONSTRUCTION OF THE PROJECT OR APARTMENT:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Allottee has seen the specifications of the Apartment and accepted the Payment
+                        Plan, floor plans, [annexed along with this Agreement] which has been approved by the competent authority, as represented by the Promoter. The Promoter shall develop the Project in accordance with the said floor plans and specifications. Subject to the terms in this Agreement, the Promoter undertakes to strictly abide by such plans approved by the competent Authorities and shall also strictly abide by the bye-laws, FAR and density norms and provisions prescribed by the planning authority and shall not have an option to make any variation /alteration / modification in such plans, other than in the manner provided under the Act, and breach of this term by the Owner/Promoter shall constitute a material breach of the Agreement.
+                        
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>7. POSSESSION OF THE APARTMENT:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        <strong>7.1 Schedule for possession of the said Apartment:</strong> -- The Owner/Promoter based on the approved plans and specifications, assures to hand over possession of the Apartment by <apex:outputText value="{0, date, dd MMMM yyyy}"><apex:param value="{!Booking__c.Project_Completion_Date__c}" /></apex:outputText>. If, however, the completion of the Project is delayed due to the <strong>Force Majeure conditions</strong> ( i.e. war, flood, drought, fire, cyclone, earthquake or any other calamity) then the Allottee agrees that the Owner/Promoter shall be entitled to the extension of time for delivery of possession of the Apartment, provided that such Force Majeure conditions are not of a nature which make it impossible for the contract to be implemented. The Allottee agrees and confirms that, in the event it becomes impossible for the Promoter to implement the project due to Force Majeure conditions, then this allotment shall stand terminated and the Promoter shall refund to the Allottee the entire amount received by the Promoter from the allotment within 60 days from that date. After refund of the money paid by the Allottee, Allottee agrees that he/she/they shall not have any rights, claims etc. against the Owner/Promoter and that the Promoter shall be released and discharged from all its obligations and liabilities under this Agreement.
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>7.2 Procedure for taking possession: -</strong> 
+                        
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                       The Promoter, upon obtaining the occupancy Certificate from the competent authority shall, issue notice on the readiness of the Apartment and offer in writing the possession of the Apartment, to the Allottee. In terms of this Agreement the possession to be taken within 2 (two) months from the date of issue of such notice and the Promoter shall give possession of the Apartment to the Allottee. The Promoter agrees and undertakes to indemnify the Allottee in case of failure of fulfillment of any of the provisions, formalities, documentation on part of the Promoter. The Allottee agree(s) to pay the maintenance charges as determined by the Promoter of allottees, as the case may be. The Promoter on its behalf shall offer the possession to the Allottee in writing within 15 days of receiving the occupancy certificate of the Project. 
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>7.3 Failure of Allottee to take Possession of Apartment: - </strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        Upon receiving a written intimation from the Promoter as per clause 7.2, the Allottee shall take possession of the Apartment from the Promoter by executing necessary indemnities, undertakings and such other documentation as prescribed in this Agreement, and the Promoter shall give possession of the Apartment to the allottee. In case the Allottee fails to take possession within the time provided in clause 7.2, such Allottee shall continue to be liable to pay delay penalty and maintenance charges as applicable.
+                    </p>
+                    <div class="content-wrapper">
+                        
+                        
+                        <p style="font-size:15px;">
+                            <strong>7.4 Possession by the Allottee:-</strong>
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            After obtaining the occupancy certificate and handing over physical possession of the Apartment to the Allottees, it shall be the responsibility of the Owner/Promoter to hand over the necessary documents and plans, including common areas, to the association of the Allottees or the competent authority, as the case may be, as per the local laws.
+                        </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>7.5 Cancellation by Allottee:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Allottee shall have the right to cancel/withdraw his/her/their allotment in the Project as provided in the Act: Provided that where the allottee proposes to cancel/withdraw from the project without any fault of the promoter, the promoter herein is entitled to forfeit the 5% of the Appartment Cost along with paid taxes. The balance amount of money paid by the allottee shall be returned by the promoter to the allottee within 60 days of such cancellation.
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>7.6 Compensation: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                         The Owner/ Promoter shall compensate the Allottee in case of any loss caused to him/her/them due to defective title of the land, on which the project is being developed or has been developed, in the manner as provided under the Act and the
+claim for compensation under this section shall not be barred by limitation provided under any law for the time being in force. Except for occurrence of a Force Majeure event, if the promoter fails to complete or is unable to give possession of the Apartment   (i) in accordance with the terms of this Agreement, duly completed by the date specified herein; or (ii) due to discontinuance of his business as a developer on account of suspension or revocation of the registration under the Act; or for any other reason; the Promoter shall be liable, on demand to the allottees, in case the Allottee wishes to withdraw from the Project, without prejudice to any other remedy available, to return the total amount received by him in respect of the Apartment , with interest at the rate specified in the Rules within 60 days in the manner as provided under the Act. Provided that where if the Allottee does not intend to withdraw from the Project, the Promoter shall pay the Allottee interest at the rate specified in the Rules for every month of delay, till the registration and handing over of the possession of the Apartment.
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>8. REPRESENTATIONS AND WARRANTIES OF THE PROMOTER: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Owner/Promoter hereby represents and warrants to the Allottee as follows:</p>
+                    <p style="text-align:justify;font-size:15px;">(i) The Owner/Promoter has absolute, clear and marketable title with respect to the said Land; the requisite rights to carry out development upon the said Land and absolute, actual, physical and legal possession of the said Land for the Project;</p>
+                    <p style="text-align:justify;font-size:15px;"> (ii) The Promoter has lawful rights and requisite approvals from the competent
+                        Authorities to carry out development of the Project;</p>
+                    <p style="text-align:justify;font-size:15px;"> (iii) The Owner/Promoter have availed the Project Loan from VISTRA ITCL (India) LIMITED.</p>
+                    <p style="text-align:justify;font-size:15px;">(iv) There are no litigations pending before any Court of law with respect to the said Land, Project or the Apartment;</p>
+                    <p style="text-align:justify;font-size:15px;"> (v) All approvals, licenses and permits issued by the competent authorities with respect to the Project and Apartment are valid and subsisting and have been obtained by following due process of law. Further, the Promoter has been and shall, at all times, remain to be in compliance with all applicable laws in relation to the Project, said Land, Building and Apartment   and common areas;</p>
+                    <p style="text-align:justify;font-size:15px;"> (vi) The Owner/ Promoter has the right to enter into this Agreement and has not committed or omitted to perform any act or thing, whereby the right, title and interest of the Allottee created herein, may prejudicially be affected;</p>
+                    <p style="text-align:justify;font-size:15px;"> (vii) The Promoter has not entered into any agreement for sale and/or development agreement or any other agreement / arrangement with any person or party with respect to the said Land, including the Project and the said Apartment   which will, in any manner, affect the rights of Allottee under this Agreement;</p>
+                    <p style="text-align:justify;font-size:15px;"> (viii) The Owner/ Promoter confirms that the Promoter is not restricted in any manner whatsoever from selling the said Apartment   to the Allottee in the manner contemplated in this Agreement;</p>
+                    <p style="text-align:justify;font-size:15px;"> (ix) At the time of execution of the conveyance deed the Promoter shall handover lawful, vacant, peaceful, physical possession of the Apartment   to the Allottee and the common areas to the Association of the Allottees;</p>
+                    <p style="text-align:justify;font-size:15px;"> (x) The Schedule Property is not the subject matter of any HUF and that no part thereof is owned by any minor and/or no minor has any right, title and claim over the Schedule Property;</p>
+                    <p style="text-align:justify;font-size:15px;"> (xi) The Promoter has duly paid and shall continue to pay and discharge all governmental dues, rates, charges and taxes and other monies, levies, impositions, premiums, damages and/or penalties and other outgoings, whatsoever, payable with respect to the said project to the competent Authorities;</p>
+                    <p style="text-align:justify;font-size:15px;"> (xii) No notice from the Government or any other local body or authority or any legislative enactment, government ordinance, order, notification (including any notice for acquisition or requisition of the said property) has been received by or served upon the Promoter in respect of the said Land and/or the Project.
+                    </p>
+                    <br/>
+                    <p>
+                        9. THE ALLOTTEE/S HEREBY REPRESENTS AND WARRANTS TO THE PROMOTERS ASFOLLOWS:
+                    </p>
+                    <ol style="list-style-type: upper-alpha;">
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee/s shall at all times provide the required authenticated
+                            information and details as required, in case if the Allottee/s wishes to
+                            approach any banks for financial assistance to purchase the Apartment
+                            through owner/Promoters or individually on his /her/their own approaches
+                            any financial institutions for loans. </p>  </li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee/s shall execute all the necessary documents including but not
+                            limited to tripartite agreement etc. with the bank along with the
+                            owner/Promoters, and shall regularly pay the Equated Monthly Instalments
+                            (EMI) thereafter to the bank.</p> </li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee/s after the execution of the sale deed shall be liable to pay all
+                            municipal taxes and other charges, if any.</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee/s, undertake to join the Owners Association to be formed by the
+                            Allottees.</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee shall take physical possession of the Apartment within a period
+                            of two months from the date of intimation from the owner/promotor by
+                            paying all the amounts to owner/promotor per Schedule – D and to get the
+                            sale deed executed and registered within 2 months from the date of such
+                            intimation.</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee shall participate towards the registration of the sale deed of the
+                            Apartment within 2 (two) months or within time as agreed between the
+                            Parties.</p></li>
+                        <li style="text-align:justify;font-size:15px;"><p>The Allottee/s hereby agree/s that in case the Allottee/s fail/s to respond
+                            and/or neglects to take possession of the Apartment within the time
+                            stipulated by the Promoters, then the Allottee shall in addition to the above,
+                            pay to the Promoters interest as holding charges at the rate of 18% p.a. on
+                            the balance amount of the Apartment (“Holding Charges”) and applicable
+                            maintenance charges towards upkeep and maintenance of the amenities and
+                            common facilities (if any) for the period of such delay. During the period of
+                            said delay the Apartment shall continue to be in possession of the Promoters
+                            but at the sole risk, responsibility and cost of the Allottee in relation to its
+                            deterioration in physical condition.</p></li>
+                            <li style="text-align:justify;font-size:15px;"><p>The Allottee/s hereby agrees and confirms that this Agreement of Sale cannot be transferred/assigned to any other third party or any other person except as provided below.</p>
+                            <ol>
+                                <li style="text-align:justify;font-size:15px;"><p>
+                                    That the Allottee/s shall be entitled to transfer /assign the rights under
+                                    this Agreement only after 36 months from the date of this agreement,
+                                    the allottee has to pay Rs.200/- (Rupees Two Hundred only) per square
+                                    feet on super built up area as transfer fees to the Owner/Promoter.
+                                    </p></li>
+                                <li style="text-align:justify;font-size:15px;">
+                                    <p>
+                                        Any assignment shall be, subject to the above condition, shall be
+                                        permitted only by way of Tripartite written agreement between the
+                                        Promoters, the Allottee/s and the intending transferee/assignee. The
+                                        transferee /assignee shall undertake to be bound by the terms of this
+                                        Agreement including payment of the transfer fees and payment of the
+                                        balance sale price as per the schedule of payment under this
+                                        Agreement to Promoters.
+                                    </p>
+                                </li>
+                            </ol></li>
+                    </ol>
+                    <p style="font-size:15px;">
+                        <strong>10. EVENTS OF DEFAULTS AND CONSEQUENCES. -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        10.1 Subject to the Force Majeure clause, the Promoter shall be considered under a condition of Default, in the following events:</p>
+                    <p style="text-align:justify;font-size:15px;"> (i) Promoter fails to provide ready to move in possession of the Apartment to the Allottee within the time period specified. For the purpose of this clause, 'ready to move in possession' shall mean that the apartment shall be in a habitable condition which is complete in all respects;</p>
+                    <p style="text-align:justify;font-size:15px;"> (ii) Discontinuance of the Promoter’s business as a developer on account of suspension or revocation of his registration under the provisions of the Act or the rules or regulations made thereunder.</p>
+                    <p style="text-align:justify;font-size:15px;"> 10.2 In case of Default by Promoter under the conditions listed above, Allottee is entitled to the following:</p>
+                    <p style="text-align:justify;font-size:15px;">  (i) Stop making further payments to Promoter as demanded by the Promoter. If the
+                        Allottee stops making payments, the Promoter shall correct the situation by completing the construction milestones and only thereafter the Allottee be required to make the next payment without any penal interest; or</p>
+                    <p style="text-align:justify;font-size:15px;"> (ii) The Allottee shall have the option of terminating the Agreement in which case the Promoter shall be liable to refund the entire money paid by the Allottee under any head whatsoever towards the purchase of the apartment, along with interest at the rate specified in the Rules within forty-five days of receiving the termination notice: Provided that where an Allottee does not intend to withdraw from the project or terminate the Agreement, he shall be paid, by the promoter, interest at the rate specified in the Rules, for every month of delay till the handing over of the possession  of the Apartment .</p>
+                    <p style="text-align:justify;font-size:15px;"> 10.3 The Allottee shall be considered under a condition of Default, on the occurrence of the following events:</p>
+                    <p style="text-align:justify;font-size:15px;">  (i) In case the Allottee fails to make payments for 2 consecutive demands made by the Promoter as per the Payment Plan annexed hereto, despite having been issued notice in that regard the allottee shall be liable to pay interest to the promoter on the unpaid amount at the rate specified in the Karnataka RERA Rules.</p>
+                    <p style="text-align:justify;font-size:15px;">  (ii) In case of Default by Allottee under the condition listed above continues for a period beyond 2 consecutive months after notice from the Promoter in this regard, the
+                        Promoter shall cancel the allotment of the Apartment   in favour of the
+                        Allottee and refund the amount money paid to him by the allottee by deducting the
+                        booking amount and the interest liabilities and this Agreement shall thereupon
+                        stand terminated.
+                    </p>
+                        <p style="font-size:15px;">
+                            <strong>11. CONVEYANCE OF THE SAID APARTMENT: -</strong></p>
+                        <p style="text-align:justify;font-size:15px;">
+                          The Promoter, on receipt of Complete amount of the Price of the Apartment under the Agreement from the Allottee, shall execute a conveyance deed and convey the title of the Apartment together with proportionate indivisible share in the Common Areas within 3 (three) months from the issuance of the occupancy certificate. However, in case the Allottee fails to deposit the stamp duty, registration charges and all other incidental and legal expenses etc. so demanded within the period mentioned in the demand letter, the Allottee authorizes the Promoter to withhold registration of the conveyance deed in his/her/their favour till full and final settlement of all dues and stamp duty and registration charges to the Promoter is made by the Allottee. The Allottee shall be solely responsible and liable for compliance of the provisions of Karnataka Stamp Act - 1957 and then amendments thereto followed, including any actions taken or deficiencies/penalties imposed by the competent authority(ies).  </p>
+                    <p style="font-size:15px;">
+                        <strong>12. MAINTENANCE OF THE SAID BUILDING OR APARTMENT OR PROJECT: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Promoter shall be responsible to provide and maintain essential services in the Project till the taking over of the maintenance of the project by the association of the allottees. 
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>13. DEFECT LIABILITY: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        It is agreed that in case any structural defect is brought to the notice of the Promoter within a period of 5 (five) years by the Allottee from the date of handing over possession, it shall be the duty of the Promoter to rectify such defects without further charge, within 30 (thirty) days, and in the event of Promoter’s failure to rectify such defects within such time, the aggrieved Allottees shall be entitled to receive appropriate compensation in the manner as provided under the Act.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        <strong>14. RIGHT OF ALLOTTEE TO USE COMMON AREAS AND FACILITIES
+                            SUBJECT TO PAYMENT OF TOTAL MAINTENANCE CHARGES:- 
+                        </strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Allottee hereby agrees to purchase the Apartment on the specific understanding that is his//her/their right to the use of Common Areas shall be subject to timely payment of total maintenance charges, as determined and thereafter billed by the maintenance agency appointed or the association of allottees (or the maintenance agency appointed by it) and performance by the Allottee of all his/her /their obligations in respect of the terms and conditions specified by the Owner/Promoter/maintenance agency or the association of allottees from time to time.
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>15. RIGHT TO ENTER THE APARTMENT FOR REPAIRS:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Promoter or maintenance agency or association of allottees shall have rights of unrestricted access of all Common Areas, garages/parking spaces for providing necessary maintenance services and the Allottee agrees to permit the association of allottees and/or maintenance agency to enter into the Apartment   or any part thereof, after due notice and during the normal working hours, unless the circumstances warrant otherwise, with a view to set right any defect.
+                    </p>
+                     <div class="content-wrapper">
+                    <p style="font-size:15px;">
+                        <strong>16. USAGE: - </strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        Use of Basement and Service Areas: The basement (s) and service areas, if any, as located within the <strong>“SOWPARNIKA EUPHORIA IN THE EAST”</strong> shall be earmarked for purposes such as parking spaces and services including but not limited to electric sub-station, transformer, DG set rooms, underground water tanks, pump rooms, maintenance and service rooms, firefighting pumps and equipment’s etc. and other permitted uses as per sanctioned plans. The Allottee shall not be permitted to use the services areas and the basements in any manner whatsoever, other than those earmarked as parking spaces, and the same shall be reserved for use by the association of allottees formed by the Allottees for rendering maintenance services.
+                    </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>17. GENERAL COMPLIANCE WITH RESPECT TO THE APARTMENT:- </strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        Subject to Clause 12 above, the Allottee shall, after taking possession, be solely responsible to maintain the Apartment   at his/her own cost, in good repair and condition and shall not do or suffer to be done anything in or to the Building, or the Apartment   , or the staircases, lifts, common passages, corridors, circulation areas, atrium or the compound which may be in violation of any laws or rules of any authority or change or alter or make additions to the Apartment   and keep the Apartment its walls and partitions, sewers, drains, pipe and appurtenances thereto or belonging thereto, in good and tenantable repair and maintain the same in a fit and proper condition and ensure that the support, shelter etc. of the Building is not in any way damaged or jeopardized.</p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Allottee further undertakes, assures and guarantees that he/she /they would not put any sign-board / name-plate, neon light, publicity material or advertisement material etc. on the face / facade of the Building or anywhere on the exterior of the Project, buildings therein or Common Areas. The Allottees shall also not change the colour scheme of the outer walls or painting of the exterior side of the windows or carry out any change in the exterior elevation or design. Further the Allottee shall not store any hazardous or combustible goods in the Apartment   or place any heavy material in the common passages or staircase of the Building. The Allottee shall also not remove any wall, including the outer and load bearing wall of the Apartment  . The Allottee shall plan and distribute its electrical load in conformity with the electrical systems installed by the Promoter and thereafter the association of allottees and/or maintenance agency appointed by association of allottees. The Allottee shall be responsible for any loss or damages arising out of breach of any of the aforesaid conditions.
+                    </p>
+                    <div class="content-wrapper">
+                        <p style="font-size:15px;">
+                            <strong>18. COMPLIANCE OF LAWS, NOTIFICATIONS ETC. BY ALLOTTEE: -</strong>
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            The Allottee is entering into this Agreement for the allotment of an Apartment with the full knowledge of all laws, rules, regulations, notifications applicable to the Project in general and this project in particular. That the Allottee hereby undertakes that he/she shall comply with and carry out, from time to time after he/she/they has taken over for occupation and use the said Apartment, all the requirements, requisitions, demands and repairs which are required by any competent Authority in respect of the Apartment   / at his/her/their own cost.
+                        </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>19. ADDITIONAL CONSTRUCTIONS: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Promoter undertakes that it has no right to make additions or to put up additional structure(s) anywhere in the Project after the building plan has been approved by the competent authority (ies) except for as provided in the Act.
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>20. PROMOTER SHALL NOT MORTGAGE OR CREATE A CHARGE: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        After the Owner/Promoter executes this Agreement he shall not mortgage or create a charge on the [Apartment] and if any such mortgage or charge is made or created then notwithstanding anything contained in any other law for the time being in force, such mortgage or charge shall not affect the right and interest of the Allottee who has taken or agreed to take such [Apartment/Plot/Building].
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>21. THE KARNATAKA APARTMENT OF OWNERSHIP ACT, 1972: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The Promoter has assured the Allottees that the project in its entirety is in accordance with the provisions of the Karnataka Apartment of Owner ship Act, 1972(Karnataka Act 17 of 1973). The Promoter showing compliance of various laws/regulations as per local laws.
+                    </p>
+                    <p style="font-size:15px;"> 
+                        <strong>22. BINDING EFFECT:--</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        Forwarding this Agreement to the Allottee by the Promoter does not create a binding obligation on the part of the Promoter or the Allottee until, firstly, the Allottee signs and delivers this Agreement with all the schedules along with the payments due as stipulated in the Payment Plan within thirty days from the date of receipt by the Allottee. If the Allottee(s) fails to execute and deliver to the Promoter this Agreement within thirty days from the date of its receipt by the Allottee as and when intimated by the Promoter, then the Promoter shall serve a notice to the Allottee for rectifying the default, which if not rectified within thirty days from the date of its receipt by the Allottee, application of the Allottee shall be treated as cancelled and all sums deposited by the Allottee in connection therewith including the booking amount shall be returned to the Allottee, after deducting Rs.50,000/-(Rupees Fifty Thousand only) without any interest or compensation whatsoever.
+                    </p>
+                    <div class="content-wrapper">
+                        <p style="font-size:15px;">
+                            <strong>23. ENTIRE AGREEMENT:-</strong>
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            This Agreement, along with its schedules, constitutes the entire Agreement between the Parties with respect to the subject matter hereof and supersedes any and all understandings, any other agreements, allotment letter, correspondences, arrangements whether written or oral, if any, between the Parties in regard to the said apartment/plot/building, as the case may be.
+                        </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>24. RIGHT TO AMEND: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        This Agreement may only be amended through written consent of the Parties.
+                    </p>
+                    <div class="content-wrapper">
+                    <p style="font-size:15px;">
+                        <strong>25. PROVISIONS OF THIS AGREEMENT APPLICABLE ON ALLOTTEE OR SUBSEQUENT ALLOTTEES: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        It is clearly understood and so agreed by and between the Parties hereto that all the provisions contained herein and the obligations arising hereunder in respect of the Project shall equally be applicable to and enforceable against any subsequent Allottees of the Apartment, in case of a transfer, as the said obligations go along with the Apartment for all intents and purposes.
+                    </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>26. WAIVER NOT A LIMITATION TO ENFORCE:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        <strong>26.1</strong> The Promoter may, at its sole option and discretion, without prejudice to its rights as set out in this Agreement, waive the breach by the Allottee in not making payments as per the Payment Plan including waiving the payment of interest for delayed payment. It is made clear and so agreed by the Allottee that exercise of discretion by the Promoter in the case of one Allottee shall not be construed to be a precedent and /or binding on the Promoter to exercise such discretion in the case of other Allottees.
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        <strong>26.2</strong> Failure on the part of the Promoter to enforce at any time or for any period of time the provisions hereof shall not be construed to be a waiver of any provisions or of the right thereafter to enforce each and every provision.
+                    </p>
+                    <div class="content-wrapper">
+                    <p style="font-size:15px;">
+                        <strong>27. SEVERABILITY:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        If any provision of this Agreement shall be determined to be void or unenforceable under the Act or the Rules and Regulations made thereunder or under other applicable laws, such provisions of the Agreement shall be deemed amended or deleted in so far as reasonably inconsistent with the purpose of this Agreement and to the extent necessary to conform to Act or the Rules and Regulations made thereunder or the applicable law, as the case may be, and the remaining provisions of this Agreement shall remain valid and enforceable as applicable at the time of execution of this Agreement.
+                    </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>28. FURTHER ASSURANCES:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        Both Parties agree that they shall execute, acknowledge and deliver to the other such instruments and take such other actions, in additions to the instruments and actions specifically provided for herein, as may be reasonably required in order to effectuate the provisions of this Agreement or of any transaction contemplated herein or to confirm or perfect any right to be created or transferred hereunder or pursuant to any such transaction.
+                    </p>
+                    
+                    <p style="font-size:15px;">
+                        <strong>29. PLACE OF EXECUTION:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        The execution of this Agreement shall be complete only upon its execution by the Owner/Promoter through its authorized signatory at the Promoter’s Office, or at some other place, which may be mutually agreed between the Promoter and the Allottee, in after the Agreement is duly executed by the Allottee and the Hence this Agreement shall be deemed to have been executed at Bangalore.
+                    </p>
+                    
+                    <p style="font-size:15px;">
+                        <strong>30. NOTICES:-</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        That all notices to be served on the Allottee and the Promoter as contemplated by this Agreement shall be deemed to have been duly served if sent to the Allottee or the Promoter by Registered Post at their respective addresses specified below:
+                    </p>
+                    <div class="content-wrapper">
+                        <p style="font-size:15px;">
+                            {!Booking__c.First_Applicant_Name__c}<br/>
+                            <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                                {!p.Name}<br/>
+                            </apex:repeat>
+                        </p>
+                        <p style="font-size:15px;">
+                            Residing at {!Booking__c.Address__c}<br/>
+                            Owner/Promoter<nr/>
+                            M/s SOWPARNIKA HOMES PRIVATE LIMITED<br/>
+                            No.750,1st Main, ‘C’ Block, AECS Layout, Kundalahalli, Bangalore-560037. </p>
+                    </div>
+                    <p style="text-align:justify;font-size:15px;">
+                        It shall be the duty of the Allottee and the promoter to inform each other of any change in address subsequent to the execution of this Agreement in the above address by Registered Post failing which all communications and letters posted at the above address shall be deemed to have been received by the promoter or the Allottee, as the case may be.
+                        
+                    </p>
+                    <p style="font-size:15px;">
+                        <strong>31. JOINT ALLOTTEES: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        That in case there are Joint Allottees all communications shall be sent by the Promoter to the Allottee whose name appears first and at the address given by him/her which shall for all intents and purposes to consider as properly served on all the Allottees.
+                    </p>
+                    <div class="content-wrapper">
+                        <p style="font-size:15px;">
+                            <strong>32. GOVERNING LAW: -</strong>
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            That the rights and obligations of the parties under or arising out of this Agreement shall be construed and enforced in accordance with the laws of India for the time being in force.
+                        </p>
+                    </div>
+                    <p style="font-size:15px;">
+                        <strong>33. DISPUTE RESOLUTION: -</strong>
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        All or any disputes arising out or touching upon or in relation to the terms and conditions of this Agreement, including the interpretation and validity of the terms thereof and the respective rights and obligations of the Parties, shall be settled amicably by mutual discussion, failing which the same shall be settled through the adjudicating officer appointed under the RERA Act in Bangalore,Karnataka.   </p>
+                    <div class="content-wrapper">
+                        
+                        
+                        <h3 style="text-align:center;font-size:18px;">
+                            SCHEDULE ‘A’
+                        </h3>
+                        <p style="text-align:justify;font-size:15px;">
+                            All that piece and parcel of residential converted lands bearing (i) Sy. No-86/1, measuring 3 Acres 05 Guntas, (converted vide Official Memorandum No:406476, dated 29-12-2022), (ii) Sy. No-86/3, measuring 1 Acre 30 Guntas, (converted vide Official Memorandum No:406478, dated:28-10-2022) (iii) Sy. No-86/4, measuring 3 Acres 01 Guntas and 2 guntas Kharab , (converted vide Official Memorandum No:466479, dated:28-10-2022) situated at Doddagattiganabbe Village  and residential converted lands bearing (iv) Sy. No-60/2, measuring 19-00 Guntas (Old No.60) (converted vide Official Memorandum No:406481, dated 28-10-2022), and (v) new Sy. No-61/4, measuring 8.00 Guntas, (Old No.61/2) (converted vide Official Memorandum No:406482, dated 28-10-2022), RDPR E-Katha PID No.150300401000520171, Situated at Pujena Agrahara Village, Kasaba Hobli, Hosakote Taluk, Bangalore Rural District, totally measuring 8 Acre 23 guntas and commonly bounded on that:
+                        </p>
+                    </div>
+                    <p style="text-align:justify;font-size:15px;">
+                        East by : Road and Pujena Agrahara Boundary;  
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        West by : Sy No.339,340 &amp; 341 of Amani Doddakere Village 
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        North by : Land in Sy No.87 of Doddagatiganebbe &amp; Land in  Sy No.61 of Poojenaagrahara
+                    </p>
+                    <p style="text-align:justify;font-size:15px;">
+                        South by: Land in Sy No.86/2 of Doddagatiganebbe &amp; land in Sy No.60 and 60/1, of Poojenaagrahara
+                    </p>
+                    <br/>
+                    <div class="content-wrapper">
+                    <h3 style="text-align:center;font-size:18px;">
+                        SCHEDULE ‘B’
+                    </h3>
+                    <p style="text-align:justify;font-size:15px;">
+                        {!Booking__c.UDS__c} Sq.ft of  undivided share right title and interest in Schedule  A Property and Apartment No. {!Booking__c.Unit_NumberFor__c}, {!Booking__c.BHK_Type__c} in {!Booking__c.Floor__c} floor, <apex:outputText value="{!Booking__c.Tower__c & ', '}" rendered="{!Booking__c.Tower__c != ''}" /> {!Booking__c.Block_Number__c} block having carpet area {!Booking__c.Carpet_Area__c} Sq.ft and Balcony Area of {!Booking__c.Balcony_Area__c} Sq.ft and super built up area of {!Booking__c.Built_up_area__c} Sq.ft along with {!Booking__c.Parking__c} parking slot and having terrace area {!Booking__c.Plot__r.Terrace_Area__c} Sq.ft in the building named as <strong>“SOWPARNIKA EUPHORIA IN THE EAST.” </strong>                       </p>
+                    <p style="font-size:15px;">
+                        East by: {!Booking__c.East_By__c}<br/>
+                        West by: {!Booking__c.West_By__c}<br/>
+                        North by: {!Booking__c.North_By__c}<br/>
+                        South by: {!Booking__c.South_By__c}<br/>
+                    </p>
+                    </div>
+                    <div style="page-break-after:always;"></div>
+                    <h3 style="text-align:center;font-size:16px;">
+                        SCHEDULE ‘D’ - PAYMENT PLAN BY THE ALLOTTEE
+                    </h3>
+                    <table style="font-size:12px;font-family: Arial Unicode MS;" cellpadding="0" cellspacing="0"  border="1" width="100%">
+                        <apex:repeat value="{!payList}"  var="p">
+                            <tr><td width="60%">{!p.Name}</td>
+                                <td width="20%" align="center"> <apex:outputText value="{0, Number,###,###,###}"> <apex:param value="{!p.Payment_percent}" /></apex:outputText> % </td>
+                                <td width="20">{!p.amount}</td>
+                            </tr>
+                        </apex:repeat>
+                        <tr><td>Total </td><td  style="text-align:center;">
+                            <b>100%</b></td>
+                            <td>{!totalCostInString}</td></tr>
+                    </table>
+                    <div style="page-break-after:always;"></div>
+                    <h3 style="text-align:center;font-size:16px;">
+                        SCHEDULE 'E' - SPECIFICATIONS
+                    </h3>
+                    <div style="font-size:14px;">
+                        
+                        
+                        <p style="font-size:15px;">
+                            <strong>1. Structure:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Core wall and shear wall monolithic construction using the best quality shuttering system.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>2. Flooring:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Living, Dining, Kitchen &amp; Bedrooms: Vitrified tiles of reputed make.</li>
+                            <li>Toilet Flooring: Anti-Skid Ceramic tiles of reputed make.</li>
+                            <li>Toilet Dadoing Up to 7 feet: Ceramic glazed tiles of reputed make.</li>
+                            <li>Kitchen Dadoing Above the Counter to Height of 2 feet: Ceramic glazed tiles of reputed make (supply only).</li>
+                            <li>Balcony: Anti-Skid Ceramic tiles of reputed make.</li>
+                            <li>Common Area: Anti-Skid Ceramic tiles of reputed make.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>3. Kitchen:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Granite top &amp; Stainless steel bowl with drain board sink of reputed make (supply only).</li>
+                            <li>Provision for chimney in kitchen.</li>
+                            <li>Provision for water purifier.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>4. Toilet:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Sanitary fittings: Wall-mounted EWC, Counter top wash basin of reputed make.</li>
+                            <li>CP fittings: Shower spout, diverter, shower head, health faucet of reputed make.</li>
+                            <li>Provision for geyser and exhaust fan in toilets.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>5. Door:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Main Door: Super steel frame &amp; dual door of reputed make.</li>
+                            <li>Internal Doors: Super steel frame &amp; single door of reputed make.</li>
+                            <li>Toilet Doors: FRP door.</li>
+                            <li>Balcony Doors: UPVC glazed shutter with mosquito mesh.</li>
+                            <li>Fire-rated steel doors for fire exit.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>6. Windows:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>UPVC windows with glazed shutters and mosquito mesh.</li>
+                        </ul>
+                        <br/>
+                        <p style="font-size:15px;">
+                            <strong>7. Electrical:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Modular switches &amp; sockets of reputed make.</li>
+                            <li>ELCB and MCB with independent FB meter of approved make.</li>
+                            <li>Good quality concealed copper wiring of approved make.</li>
+                            <li>Provision for washing machine point.</li>
+                            <li>TV points are provided in Living and Master bedroom.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>8. Power Backup:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>100% power backup for common areas.</li>
+                            <li>1.0 KW power backup for each flat through limiter switch.</li>
+                            <li>For 1 BHK units, 0.5KW power backup through limiter switch.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>9. Paint:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Internal: Walls &amp; ceiling is emulsion of reputed make.</li>
+                            <li>External: Waterproof emulsion of reputed make.</li>
+                            <li>All ratings: Enamel paint of reputed make.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>10. Elevator:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Lifts of reputed make.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>11. Water supply:</strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Bore well water supply.</li>
+                        </ul>
+                        <p style="font-size:15px;">
+                            <strong>12. Air Conditioning: </strong>
+                        </p>
+                        <ul style="font-size:15px;">
+                            <li>Provision for fixing AC in living cum dining and all bedrooms.</li>
+                        </ul>
+                    </div>
+                    <p style="text-align:justify;font-size:15px;">
+                        IN WITNESS WHEREOF parties hereinabove named have set their respective hands and
+                        signed this Agreement for sale at Bangalore in the presence of attesting witness, signing
+                        as such on the day first above written.
+                    </p>
+                    <br/>
+                    <h2 style="text-align:left;font-size:16px;">
+                        WITNESSES:
+                    </h2>
+                    <div>
+                        1. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allottees<br/><br/><br/><br/><br/><br/>
+                        2. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Promoter
+                        
+                    </div> 
+                </apex:outputPanel>
+            </div>
+        </body>
+    </html>
+</apex:page>

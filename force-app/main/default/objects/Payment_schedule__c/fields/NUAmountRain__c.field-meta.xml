@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>NUAmountRain__c</fullName>
+    <formula>IF(Project_Name__c == &apos;Rhythm of Rain&apos;,Quote__r.Total_Cost_After_Discount_Ex_Leg_Main__c * Payment_percent__c ,IF(
+S_No__c == 1,
+Quote__r.Booking_AmountNew__c,
+IF(
+Quote__r.Property_Type_For__c = &apos;Villa&apos;,
+IF(
+S_No__c == 2,
+IF(
+Master_Payment_Schedule__r.Is_Land__c = true,
+((Quote__r.Land_Cost__c * Payment_percent__c)) - Quote__r.Booking_AmountNew__c,
+Amount__c
+),
+IF(
+Master_Payment_Schedule__r.Is_Land__c = true,
+Quote__r.Land_Cost__c * Payment_percent__c,
+(Quote__r.Total_Cost_After_Discount_Ex_Leg_Main__c - Quote__r.Land_Cost__c) * Payment_percent__c
+
+)
+),
+if(S_No__c == 2, ((Quote__r.Total_Cost_After_Discount_Ex_Leg_Main__c * Payment_percent__c ) - Quote__r.Booking_AmountNew__c),Quote__r.Total_Cost_After_Discount_Ex_Leg_Main__c * Payment_percent__c)
+)
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>NUAmountRain</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

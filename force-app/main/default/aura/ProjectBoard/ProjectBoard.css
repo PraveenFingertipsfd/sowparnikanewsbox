@@ -1,0 +1,35 @@
+.THIS.card{
+    margin-left:475px;
+    margin-right:475px;
+    border:2px solid black;
+    padding:20px;
+}
+.THIS .inner{
+    padding:20px;
+    background: #ccff99;
+    
+}
+.THIS .legend{
+    background: #fdf5e2;
+
+}
+.THIS .blockCard{
+    padding:20px;
+    background: #FFFFFF;
+}
+.THIS .avaliableplot{
+    padding:20px;
+     background: #FFFFFF;
+}
+.THIS .bookedplot{
+    padding:20px;
+     background:  #ccff99;
+}
+.THIS .notreleasedplot{
+    padding:20px;
+     background: #66d8db
+}
+.THIS .blockedplot{
+    padding:20px;
+     background: #ff9248;
+}

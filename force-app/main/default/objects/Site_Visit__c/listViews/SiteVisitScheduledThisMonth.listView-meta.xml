@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SiteVisitScheduledThisMonth</fullName>
+    <columns>Project__c</columns>
+    <columns>Source__c</columns>
+    <columns>Sub_Source__c</columns>
+    <columns>NAME</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Lead_Status__c</columns>
+    <columns>SLead__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>Visit_Notes__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Lead_Status__c</field>
+        <operation>equals</operation>
+        <value>Site Visit Scheduled</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Scheduled</value>
+    </filters>
+    <filters>
+        <field>Date__c</field>
+        <operation>equals</operation>
+        <value>THIS_MONTH</value>
+    </filters>
+    <label>Site Visit Scheduled This Month</label>
+</ListView>

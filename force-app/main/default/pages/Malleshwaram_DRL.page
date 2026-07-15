@@ -1,0 +1,146 @@
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="RaiseDemandController">
+    <body>
+        <div style="font-size:13px;">
+        <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 0px solid black;" border="0">
+            <tr>
+                <td>From</td>
+                <td ><table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                    <tr>
+                        <td>FILE NO:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>LOANA/C NO:</td>
+                        <td>{!Booking__c.Loan_Account_Number__c}</td>
+                    </tr>
+                    <tr>
+                        <td>SBA/c No:</td>
+                        <td></td>
+                    </tr>
+                    </table></td>
+                
+            </tr>
+            <tr>
+                <td>{!Booking__c.First_Applicant_Name__c}</td>
+                <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">{!p.Name}<br/></apex:repeat><br/>
+                {!Booking__c.Address__c}
+                <td></td>
+            </tr>
+            <tr>
+                <td>Mobile No:</td>
+                <td>Email: racpc.bzl@bbi.co.in</td>
+            </tr><br/>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To,</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Assistant General Manager,</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;State Bank Of India,</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RACPC MSLLESHWARAM (41161)<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#97, Railway Parallel Road<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kumarapark West, Bengaluru-560020.</td>
+                <td></td>
+            </tr>
+            </table>
+        Dear Sir,
+        <div>
+            <h3 style="text-align: center;">HOUSING LOAN-DISBURSEMENT REQUEST</h3></div>
+            I/We have been sanctioned a Housing Loan as under :<br/>
+            <table style="margin-left: 15px;table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <th>Loan Amt (Rs.)</th>
+                    <th>Margin (Rs.)(%)</th>
+                    <th>Total Cost of the Project (Rs.)</th>
+                </tr>
+                <tr>
+                    <td>{!SanctionedAmountstring}</td>
+                    <td></td>
+                    <td>{!totalAmountstring}</td>
+                </tr>
+                <tr>
+                    <td>Purpose</td>
+                    <td colspan="2">Construction / Flat / Take over</td>
+                </tr>
+                <tr rowspan="2">
+                    <td>Project Name &amp; Address<br/>
+                    (Mention Nearest Landmark)</td>
+                    <td colspan="2">{!Booking__c.Project__c}, {!Booking__c.Project_Address__c}<br/>
+                    Flat No:{!Booking__c.Unit_NumberFor__c}</td>
+                </tr>
+                <tr>
+                    <td>Plan sanctioned for</td>
+                    <td colspan="2">{!Booking__c.Unit_NumberFor__c}</td>
+                </tr>
+                <tr>
+                    <td>Present stage of construction</td>
+                    <td colspan="2">{!stageName}</td>
+                </tr>
+            </table><br/>
+            Now, I/We request you to release the following disbursements from my/our Loan account,
+            <br/>
+            <table  style="margin-left: 15px;table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <td>Amt so far released from Loan</td>
+                    <td>Rs.{!bankAmountString} </td>
+                </tr>
+                <tr>
+                    <td>Total Margin Money paid directly by me/us (Enclose copies of receipts)</td>
+                    <td>Rs.</td>
+                </tr>
+                <tr >
+                    <td>Amt to be released now</td>
+                    <td >Rs.{!totalPendingAmountStr} /-</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b><i>Please debit my A/c No = lor any shortfall In my...........................................................,..,1n money payable.</i></b></td>
+                </tr>
+            </table><br/>
+            <div style="text-decoration: underline;">Mode of payment:</div>
+            A)
+            <table  style="margin-left: 15px;table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 1px solid black;" border="1">
+                <tr>
+                    <th>Vendor/Builder Name:</th>
+                    <th>{!Booking__c.Company_Name__c}</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th>Account No.</th>
+                    <th>Bank &amp; Branch</th>
+                    <th>IFSC Code</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
+                    <td>{!Booking__c.Builder_Account_Number__c}</td>
+                    <td>{!Booking__c.Project_Bank_Name__c}, {!Booking__c.Project_Bank_Branch__c}</td>
+                    <td>{!Booking__c.IFSC_Code__c}</td>
+                    <td>{!totalPendingAmountStr}</td>
+                </tr>
+                
+            </table><br/>
+            B)&nbsp;&nbsp; As I have already <b>made the payment (Receipt enclosed)</b>, Please reimburse to my A/c No :.................................. for Rs .......................<br/><br/>
+            C).................................................................................
+            <br/>
+            <br/>
+            <hr/>
+            <i>Note: Please enclose copie of nug, 11 for 1a61JH111Unl mt 11U</i><br/><br/><br/><br/>
+        <table width="100%" style="table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-top: 0; border: 0px solid black;" border="0">
+            <tr>
+                <td>Date:	</td>
+                <td>Signature of the Borrower/s.</td>
+            </tr>
+            <tr>
+                <td>Banglore</td>
+                <td>(Incase of joint accounts this release request should be signed by all)</td>
+            </tr>
+        </table>
+        </div>
+    </body>
+</apex:page>

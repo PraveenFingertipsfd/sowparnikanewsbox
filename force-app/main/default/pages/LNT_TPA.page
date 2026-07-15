@@ -1,0 +1,215 @@
+<apex:page StandardController="Booking__c" extensions="convertValueToWords" renderAs="pdf"  applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <style>
+            @page {
+            size: 210mm 297mm;
+            background: white;
+            
+            @bottom-left {
+            vertical-align: top;
+            content: element(footer);
+            padding-top: 1px;
+            background-color:#fff;
+            }
+            
+            
+            }
+            
+            }
+            footer {
+            bottom:0;
+            display: block;
+            position: running(footer);
+            font-size: 8pt;
+            line-height:1.0;
+            }
+            body {
+            position: relative;
+            box-sizing: border-box;
+            }
+            
+            .details-container {
+            display: flex;
+            justify-content: space-between;
+            }
+            
+            .customer-details,
+            .booking-details {
+            flex: 1;
+            }
+            
+            
+            footer img {
+            width: 100%;
+            }
+            
+            footer table {
+            width: 100%;
+            font-size:14px;
+            }
+            tr {
+            page-break-inside: avoid;
+            }
+        </style>
+    </head>
+    <body >
+        
+        
+        <div style="margin:60px;font-size:16px;" >
+            <br/><br/><br/>
+            <h2 style="text-align:center;font-size:17px;"><b><u>TRIPARTITE AGREEMENT</u></b></h2>
+            The Agreement made on the <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.TPA_Date__c}" /></apex:outputText>  between 
+            <div>
+                    {!Booking__c.First_Applicant_Name__c}, W/o/S/o/C/o. {!Booking__c.W_o_S_o_C_o__c}, Aged about &nbsp;<apex:outputText value="{0,number}"><apex:param value="{!Booking__c.Age__c}" /></apex:outputText> years,<br/>
+                    Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                    <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        {!p.Name}, W/o/S/o/C/o. {!p.W_o_S_o_C_o__c}, Aged about <apex:outputText value="{0,number}"><apex:param value="{!p.Age__c}" /></apex:outputText> years,<br/>
+                        Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                    </apex:repeat>
+                    Residing at {!Booking__c.Address__c}
+                </div>
+             <p style="text-align:justify;">(hereinafter called “the Borrower”, which expression shall, unless excluded by or
+                 repugnant to the context thereof be deemed to include his/ her/ their heirs, executors, administrators and legal representatives)
+                 of the first part;</p>
+             <p style="text-align:justify;"><b>{!Booking__c.Company_Name__c}</b> registered under incorporated under  the provision
+                 of the Companies Act 2013 and having its office at {!Booking__c.Company_Address__c}.
+                 (hereinafter called “the Builder”) of the second part , and</p>
+             <p style="text-align:justify;">LandT Finance Limited, a company registered under the provisions of Companies Act 1956 and
+                 having its registered office at Unit No 505 and 506, DLF Tower B, District Centre, Jasola, New Delhi. (Hereinafter called “LTFL”, which 
+                 expression shall, unless repugnant to the subject or context or meaning there of be deemed to include its successors or assignees) of the 
+                 third part;</p>
+             <p style="text-align:justify;"><b>WHEREAS</b> the Borrower in order to purchase a Flat beaing No. <b>{!Booking__c.Unit_NumberFor__c}</b> measuring <b>{!Booking__c.Built_up_area__c}</b> 
+                 sq. ft being constructed in the building known as <b> "SOWPARNIKA {!Booking__c.Project__c}"</b> on the land bearing {!Booking__c.Project_Address__c} (hereinafter referred to as “the flat”) 
+                 entered into an Agreement dated<b> <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText></b> with the Builder and the Builder has agreed to sell the flat to the 
+                 Borrower for  <b>Rs.{!totalCostInString} /-.</b></p>
+             <p style="text-align:justify;">Whereas the borrower has, on the date of this Agreement paid a sum of<b> Rs. {!totlreceivedinIndian}/-</b>(Rupees <b>{!tillDateReceived}</b> only)
+                  to the Builder towards purchase price of the flat from out of his/ her own resources. </p>
+            <p style="text-align:justify;">Whereas as the building is under construction and is being/ shall be constructed on 
+                or before 30.09.2027 and payment of the balance cost of construction and purchase of land and common facilities is yet to be made 
+                by the Borrower, which will be made to the Builder in instalments as and when falls due, the Builder has not executed the Sale 
+                Deed in favour of the Borrower in respect of the flat together with undivided interest in the land and common facilities </p>
+            <p style="text-align:justify;;"><b>AND </b>whereas the Borrower has, under the provisions of the Home Loan Scheme framed by
+                LTFL, applied to LTFL for a loan of Rs ________________________  for the purchase of a flat, including the refinancing of the amount
+                paid by the Borrower to the Builder from out of his/ her own resources and LTFL has agreed to sanction a loan</p>
+            <p style="text-align:justify;"> of Rs.__________________________________ to the Borrower (hereinafter referred to as 
+                the “Loan for Purchase of Flat”) subject to the terms and conditions applicable to the Housing Loan for Purchase of flat.</p>
+            <p style="text-align:justify;"><b>AND WHEREAS</b> the Borrower has already deposited with/ paid to the Builder a sum of 
+                <b>Rs. {!totlreceivedinIndian}/-</b>(Rupees<b> {!tillDateReceived}</b> only) being his share of cost 
+                of construction and towards purchase of flat including undivided proportionate impartiable share of land and common facilities
+                mentioned in the schedule.</p>
+            <p style="text-align:justify;font-size:17px;"><b>NOW IT IS HEREBY AGREED AS FOLLOWS:</b></p>
+            <p style="text-align:justify;">1.   On receipt of intimation from the Builder that a flat has been allotted to the
+                Borrower, the LTFL has sanctioned the loan of Rs. _________________(the Loan) to the Borrower for purchase of flat, according to
+                its rules. However, a sum of Rs ___________________ (Rupees __________ only) will be paid to the Borrower towards reimbursement
+                of the cost of the flat already made by the Borrower to the Builder and balance amount of Rs. __________________ 
+                (Rupees ___________________________ only) shall be made in instalments/ upfront by the LTFL directly to the Builder as per the
+                valuation by LTFL. Any amount towards purchase price in excess of the Loan for purchase of flat as sanctioned by LTFL shall be
+                paid by the Borrower directly to the Builder as per sale agreement between the Builder and the Borrower. The Borrower agrees and 
+                undertakes to handover the original money receipts issued by the Builder to LTFL.</p>
+            <p style="text-align:justify;">2.   The Builder shall maintain a separate account for the Borrower and adjust the 
+                amounts paid by LTFL against the cost of construction of the flat applied for by the Borrower.</p>
+            <p style="text-align:justify;">3.   On completion of the flat, before delivering the possession thereof to the
+                Borrower, the Builder shall execute the documents of title, namely, the Sale Deed in favour of the Borrower. The Builder shall
+                keep LTFL informed seven days before execution of the aforesaid sale deed of apartment in favour of the Borrower  and agrees
+                and undertakes to sent the original sale deed of apartment to LTFL directly at the following branch office address:</p>
+            <p style="text-align:justify;">LandT  Finance Limited</p>
+             <p style="text-align:justify;;">________________________</p>
+             <p style="text-align:justify;">_______________________</p>
+            <p style="text-align:justify;">4.   If, after reimbursement by LTFL of the cost of the flat paid by the Borrower,
+                the Borrower desires to withdraw from the Self-financing scheme or if he fails to pay the balance amount representing the 
+                difference between the Loan sanctioned by the LTFL and the actual purchase price of the flat or in the case of death of the 
+                Borrower, the entire amount advanced by LTFL will be refunded by the Builder to the LTFL forthwith. The Builder agrees to
+                refund to the Borrower or his legal representatives, as the case may be, out of the total deposit of Rs. _______________/-
+                (Rupees _______________________________) </p>
+            <p style="text-align:justify;">made or to be made later on by the Borrower, after deducting there from such amount including interest
+                and other dues of LTFL as may be recoverable from the Borrower in accordance with provisions applicable to the Self Financing
+                Scheme and thereupon all and every interest the Borrower or his heirs may have in the flat shall cease, provided that in the 
+                event of the death of the Borrower the Builder may permit his legal heirs to have continued interest in the flat if they
+                immediately deposit with the Builder the amount refunded to the LTFL as provided herein and undertake to pay the Builder all 
+                such further sum or sums as would have been payable by the Borrower to the Builder.</p>
+            <p style="text-align:justify;">5.   In the event of cancellation of the allotment by the Builder, or in the eventuality if the
+                Builder intends to exercise its right of re-entry such right shall not be enforced unless notice in writing by the registered post
+                of not less than six months is served on LTFL setting out the precise breach for which the right is proposed to exercise if
+                within the aforesaid six months the LTFL or the Borrower has rectified the breach to the satisfaction of the Builder.
+                In case the breach entitling the Builder to enforce forthwith its mortgage on the flat and recover its dues out of the sale 
+                proceeds thereof and thereafter the Builder shall refund to the Borrower or his legal representative the balance amount if
+                any, after deducting interest and other dues of LTFL and remittance of the same shall be made to LTFL by the Builder.</p>
+            <p style="text-align:justify;">6.   The Builder assures and confirms that the flat as well as the said building and the 
+                land appurtenant thereto is mortgaged with the {!Booking__c.Project_Financier__c}.,</p>
+            <p style="text-align:justify;">7.   The Builder also confirms that it has taken necessary permissions/ approvals/ sanctions
+                for construction of the said building from all the concerned competent</p>
+            <p style="text-align:justify;"> authorities and the construction of the building as well as of the flat is in accordance
+                with the approved plans and the flat is meant for residential purposes as per the sanction.</p>
+            <p style="text-align:justify;">8.   The Builder and the Borrower agrees and undertakes to inform and give proper notice
+                to the co-operative housing society as and when formed, about the flat being so mortgaged to LTFL. </p>
+            <p style="text-align:justify;">9.   The Builder has given its consent that the LTFL shall have a lien on the flat and that 
+                the Borrower shall furnish the flat as security for loan to LTFL and create mortgage in favour of the LTFL and as and
+                when the sale deed of apartment of the flat is executed it will be sent directly to LTFL. However, any outstanding dues
+                of the Builder shall constitute a first charge on the flat.</p>
+            <p style="text-align:justify;">10.  The Builder has no objection to the Borrower mortgaging the flat to LTFL as security for Loan
+                agreed to be advanced by LTFL for the purpose of purchasing the flat subsequent to the sale deed in respect thereof having been 
+                executed after the Builder has received the entire sale consideration and all related charges for the flat from the Borrower.</p>
+            <p style="text-align:justify;">11.  The Builder agrees and undertakes not transfer the flat to any other member or other person without
+                the previous written consent of LTFL.</p>
+            <p style="text-align:justify;">12.  In the event of default by the Borrower, if LTFL enforces the security by sale, the Builder would
+                accept the purchaser/s of the flat as a buyer, on such purchaser complying with the necessary formalities which are required to become
+                a buyer of the Builder.</p>
+              <p style="text-align:justify;">13.    The Borrower assures and confirms that he/ she has not availed of any loan from the Builder/any
+                  other person/ bank/finance company.</p>
+            <div style="page-break-after: always;" />
+              <p style="text-align:center;font-size:17px;">SCHEDULE</p>
+              <p style="text-align:justify;">Flat/Unit<b> No.{!Booking__c.Unit_NumberFor__c}, {!Booking__c.Project_Address__c}</b>. Admeasuring<b> {!Booking__c.Built_Up_Area__c}</b> Sq.ft.(Super Built Up area) including undivided proportionate share 
+                  of land and common facilities. </p>
+              <p style="text-align:justify;"><b>IN WITNESS WHERE OF THE PARTIES </b>above named have hereto set their hands on the dates specified here-in above in each case.</p>
+            <br/> <br/> <br/> <br/>
+            <p style="text-align:justify;line-height: 0.5;"><b>Witness</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Signature of the Borrower/Mortgagor/s)
+               </p>
+              <p style="text-align:justify;line-height: 0.5;">Signature</p>
+              <p style="text-align:justify;line-height: 0.5;">Name</p>
+              <p style="text-align:justify;line-height: 0.5;">Address</p>
+             <p style="text-align:justify;line-height: 0.5;">Occupation</p>
+             <br/> <br/> <br/> <br/>
+             <p style="text-align:justify;line-height: 0.5;"><b>Witness</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Signature on behalf of the Builder)
+               </p>
+              <p style="text-align:justify;line-height: 0.5;">Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name</p>
+              <p style="text-align:justify;line-height: 0.5;">NameSignature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Designation</p>
+              <p style="text-align:justify;line-height: 0.5;">Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Seal</p>
+             <p style="text-align:justify;line-height: 0.5;">Occupation</p>
+             <br/> <br/> <br/> <br/>
+             <p style="text-align:justify;line-height: 0.5;"><b>Witness</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Signature on behalf of the LTFL
+               </p>
+              <p style="text-align:justify;line-height: 0.5;">Signature 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; L&amp;T FINANCE LIMITED)</p>
+              <p style="text-align:justify;line-height: 0.5;">Name</p>
+              <p style="text-align:justify;line-height: 0.5;">Address</p>
+             <p style="text-align:justify;line-height: 0.5;">Occupation</p>
+        </div>
+    </body>
+</apex:page>

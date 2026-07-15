@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConstructionCostLandCost</fullName>
+    <active>false</active>
+    <errorConditionFormula>If(!ISPICKVAL(Property_Type__c, &apos;	Apartment&apos;), AND(ISBLANK(Construction_Cost__c),ISBLANK(Land_Cost__c)),false)</errorConditionFormula>
+    <errorMessage>Please Fill Construction Cost And Land Cost</errorMessage>
+</ValidationRule>

@@ -1,0 +1,49 @@
+<apex:page standardController="Booking__c" showHeader="false" standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                border: 2px solid black;    
+                }
+            </style>
+        </head>
+        
+        <body >
+            <div ><br/><br/><br/><br/>
+               
+                <h2 style="text-align:center;">Deed of Cancellation Agreement</h2><br/>
+                <p>
+                    This deed of cancellation of agreement of sale is made and executed on <b>Date: <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!today()}" /></apex:outputText></b> at {!Booking__c.Country__c}
+                </p>
+                <p>
+                    Between,
+                </p>
+                <p>
+                    <b>Name:{!Booking__c.lead1__r.Name}</b> 
+                </p>
+                <p>
+                    Address: {!Booking__c.Address__c}
+                </p>
+                <p style="text-align:center;">
+                    AND,
+                </p>
+                <p>
+                    Real estate Company<br/>
+                    India
+                </p><bt/>
+                <p>
+                    Hereby declare that any booking with respect to the unit {!Booking__c.Plot__r.Name} in {!Booking__c.Project__c} is not valid henceforth.
+                </p>
+                <p>
+                    <b>Warmth Regards,</b><br/>
+                </p><br/>
+                <p>
+                  <b>Legal Department</b>  
+
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

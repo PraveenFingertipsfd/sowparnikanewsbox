@@ -1,0 +1,113 @@
+<aura:component controller="AddOrEditPaymentSchedule"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName,force:lightningQuickActionWithoutHeader" access="global" >
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="quoteId" type="string" />
+    <aura:attribute name="sObjectName" type="String" />
+    <aura:attribute name="projectName" type="String" />
+    <aura:attribute name="flatNumber" type="String" />
+    <aura:attribute name="paymentSchedules" type="object[]"/>
+    <aura:attribute name="GrandTotal" type="Decimal" default="0.00"/>
+    <aura:attribute name="RecivedAmountTotal" type="Decimal" default="0.00"/>
+    <aura:attribute name="RecivedAmount" type="Decimal" default="0.00"/>
+    <aura:attribute name="FlatCost" type="Decimal" default="0.00"/>
+    <aura:attribute name="totalPercent" type="Decimal" default="0.00"/>
+    <aura:attribute name="RecivedPercent" type="Decimal" default="0.0"/>
+     <aura:attribute name="isUpdated" type="Boolean" default="false"/>
+    <aura:attribute name="aname" type="Payment_schedule__c" default="{'sObjectType':'Payment_schedule__c'}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+    
+    
+    <aura:html tag="style">
+        .slds-p-around–medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content{
+        overflow-y:hidden !important;
+        height:unset !important;
+        max-height:unset !important;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        
+    </aura:html>
+    
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
+        
+        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"> Payment schedules</h2><br/><br/>
+        <b>Project Name:</b> {!v.projectName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Flat Number:</b> {!v.flatNumber} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>FlatCost:</b> {!v.FlatCost}
+    </div>
+    
+    <div class="slds-modal__content">
+        
+        <table > 
+            <tbody>      
+                <aura:iteration items="{!v.paymentSchedules}" var="qt" indexVar="index">
+                    <tr>
+                        <td> 
+                            <lightning:card class="slds-p-left_xx-small groove">
+                                <div class="slds-grid slds-wrap slds-grid_pull-padded-x-small">
+                                    <div class="slds-size_1-of-7 slds-p-horizontal_small" data-record="{!index}">
+                                        <lightning:input name="Sno" type="number" disabled="true" label="S No" value="{!qt.S_No__c}" />
+                                    </div>
+                                    <div class="slds-size_2-of-7 slds-p-horizontal_small" data-record="{!index}" data-id="{!qt.Id}">
+                                        <lightning:input name="ScheduleName" type="String"  label="Payment schdule Name" value="{!qt.Name}" /> 
+                                    </div>
+                                     <div class="slds-size_1-of-7 slds-p-horizontal_small" data-record="{!index}">
+                                        <lightning:select name="select1" label="status" value="{!qt.status__c}">
+                                            <option value="">choose one...</option>
+                                            <option value="Schduled">scheduled</option>
+                                            <option value="Demanded">Demanded</option>
+                                            <option value="Paid">Paid</option>
+                                        </lightning:select>
+                                    </div>
+                                    <div class="slds-size_1-of-7 slds-p-horizontal_small" onchange="{!c.getGrandTotal}" data-record="{!index}">
+                                        <lightning:input type="number" name="input6" label="Percent" value="{!qt.Payment_percent__c}" formatter="percent-fixed" step="0.01"/>
+                                    </div>
+                                    <div class="slds-size_1-of-7 slds-p-horizontal_small" data-record="{!index}">
+                                        <lightning:input name="Amount" type="number" formatter="currency" step="0.01" disabled="true" label="Amountss" value="{!qt.Amount__c}" />
+                                    </div>
+                                     <div class="slds-size_1-of-7 slds-p-horizontal_small" onchange="{!c.getRecivedAmount}" data-record="{!index}">
+                                        <lightning:input name="RecivedAmount" type="number" formatter="currency" step="1" disabled="false" label="Recived Amount" value="{!qt.Received_Amount__c}" />
+                                        <lightning:input type="number" name="input6" label="Percent" value="{!qt.Recived_Per__c}" disabled="true" formatter="percent-fixed" step="1"/>
+                                    </div>
+                                     <div class="slds-size_1-of-7 slds-p-horizontal_small" onchange="{!c.getGrandTotal}" data-record="{!index}">
+                                       
+                                         <lightning:input type="date" name="input6" label="Due Date"  value="{!qt.Payment_Due_Date__c}"/>
+                                    </div>
+                                   
+                                   
+                                </div>
+                                <aura:set attribute="actions" >
+                                    <a onclick="{!c.removeRow}" data-record="{!index}">
+                                        <lightning:buttonIcon iconName="utility:delete" iconClass="red"  size="x-large" variant="destructive" alternativeText="Delete" />
+                                    </a>
+                                    <lightning:buttonIcon iconName="utility:add" iconClass="green"  size="x-large" variant="success" alternativeText="Add" onclick="{!c.addRow}"/>
+                                    
+                                </aura:set>
+                                
+                            </lightning:card>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+        
+    </div>
+    
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+         <b>Total Percent :</b>{!v.totalPercent}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+        <b>Grand Total :</b>₹{!v.GrandTotal}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
+        <b>Recived Amount Total:</b>₹{!v.RecivedAmountTotal}
+        <div class="slds-align_absolute-center slds-p-top_small ">
+            <lightning:button variant="brand" label="Cancel" title="Brand action" onclick="{!c.schduleCancel}" />
+            <lightning:button  variant="brand" label="Save" title="Brand action" onclick="{!c.schduleSave}" />
+        </div>
+    </div>
+    
+    
+    
+</aura:component>

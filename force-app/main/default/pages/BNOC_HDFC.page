@@ -1,0 +1,73 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false" extensions="demandController" action="{!getTotalCost}">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                margin-top: 100px;
+                }
+            </style>
+        </head>
+        
+        <body >
+            <div ><br/>
+                <p>
+                    <strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong>
+                </p>
+                <p>
+                    To,<br/>
+                    
+                    Housing Development Finance Corporation Ltd <br/>
+                    
+                    Bangalore, <br/>
+                    
+                    Karnataka , India.<br/>
+                </p>
+                <p>
+                    Dear Sir,
+                </p>
+                <p>
+                    Sub: NO OBJECTION CERTIFICATE / LETTER to avail loan w.r.t Apt No {!Booking__c.Unit_NumberFor__c} on floor {!Booking__c.Floor__c} in {!Booking__c.Project__c}
+                     booking by {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                      
+                    </apex:repeat>
+                </p>
+                <p style="text-align:justify;">
+                    This is to confirm that we have sold flat No.{!Booking__c.Unit_NumberFor__c} on floor {!Booking__c.Floor__c}  in the building called {!Booking__c.Project__c}
+                    Situated at {!Booking__c.Project_Address__c} to {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                       and {!p.Name}                       
+                    </apex:repeat>, for a total consideration of Rs.{!TotalcostStr} /-({!AmountInWords}). under an agreement dated  <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> which includes GST and excluding Additional expenses.
+                </p>
+                <p style="text-align:justify;">
+                    We have borrowed construction loan from the {!Booking__c.Project_Financier__c} for construction as on date and we further 
+                    confirm that we have a clear legal and marketable title to the said property and part thereof.
+                </p>
+              
+                <p style="text-align:justify;">
+                    We have no objection to your giving a loan of Rs. ____________( Rupees ______________________________________________________) to the said 
+                   {!Booking__c.First_Applicant_Name__c	} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                       
+                    </apex:repeat>, owners of  the said plot and his/their mortgaging the said flat with you by way of security for repayment, 
+                    notwithstanding anything to the contrary contained I our agreement dated  <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /> </apex:outputText>
+                </p>
+                <p style="text-align:justify;">
+                    We also undertake to inform and give proper notice to the Co-operative Housing Society as and when formed, about the flat 
+                    being  mortgaged. We hereby undertake to forward the original title deed fort the undivided share in the land duly 
+                    directly to HDFC  without parting the same with the allotee of the flat during the pendency of the loan under intimation 
+                    to the borrower.
+                    
+                </p>
+                <p>
+                    Thanking you,
+                </p>
+                <p>
+                    {!Booking__c.Company_Name__c}.,<br/>
+                    {!Booking__c.Owner.Name} <br/>
+                    {!Booking__c.Owner_Designation__c}
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

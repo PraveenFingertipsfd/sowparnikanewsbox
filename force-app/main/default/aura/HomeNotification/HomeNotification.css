@@ -1,0 +1,27 @@
+.THIS .overDue{
+   background-color: #F47C7C;
+ 
+}
+.THIS .slds-card__background{
+        background-color: #F47C7C;
+}
+.THIS .custom-icon {
+    height: 24px; 
+    width: 24px;  
+}
+.THIS .green-background {
+    background-color: #50f255;
+}
+.THIS .blue-background {
+    background-color: #22e6e2;
+}
+.THIS .truncate-text {
+    display: inline-block;
+    max-width: 5em;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 0.9;
+}
+.THIS .blue-highlight {
+    background-color: #0176D3 !important;
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AmountB__c</fullName>
+    <formula>IF(Is_True_Project_Booking__c == true,Booking__r.Total_Cost_Ex_Leg_Main__c * Payment_percent__c ,
+			IF(AND(S_No__c == 1, Name != &apos;Merged Schedules&apos;),
+				Booking__r.Booking_Amount__c,
+				IF(Booking__r.Property_TypeFor__c = &apos;Villa&apos;,
+								IF(S_No__c == 2,
+												IF(Master_Payment_Schedule__r.Is_Land__c = true,
+																(Booking__r.Land_Cost__c * Payment_percent__c) - Booking__r.Booking_Amount__c,
+																Amount__c
+												),
+												IF(Master_Payment_Schedule__r.Is_Land__c = true,
+																Booking__r.Land_Cost__c * Payment_percent__c,
+																(Booking__r.Total_Cost_Ex_Leg_Main__c - Booking__r.Land_Cost__c )* Payment_percent__c
+												)
+								),
+								if(S_No__c == 2,  
+										 (Booking__r.Total_Cost_Ex_Leg_Main__c * Payment_percent__c) - Booking__r.Booking_Amount__c,
+											Booking__r.Total_Cost_Ex_Leg_Main__c * Payment_percent__c)
+				)
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>AmountB</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

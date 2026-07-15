@@ -1,0 +1,190 @@
+<apex:page standardController="Quote__c" extensions="getTermsAndCondition" docType="html-5.0" showHeader="false" standardStylesheets="false"   applyBodyTag="false"   renderAs="pdf">
+    <html>
+        <head>
+            <style type="text/css" >
+                
+                @page {
+                size:A4 portrait;  
+                border:2px solid black;
+                border-bottom: none;
+                counter-increment: pages;
+                @bottom-left {
+                content: element(footer);
+                }  
+                }
+                div.footer {
+                display: block;
+                padding: 1px 0;
+                position: running(footer);
+                border-bottom:2px solid black;
+                border-left:2px solid black;
+                border-right:2px solid black;
+                
+                width: 100%;	
+                margin-top: 0;
+                }
+                .pagenumber:before {
+                content: counter(page);
+                }
+                .pagecount:before {
+                content: counter(pages);
+                }
+                
+            </style>
+            
+        </head>
+        <body>
+            
+            <div style="page-break-after:auto;text-font:10px;">
+                <table width="100%" style="text-align:center">
+                    <tr>
+                        <td>
+                            <img src="{!$Resource.Sowparnika}" width="120px" height="40" />
+                        </td></tr>
+                </table>
+                <table style="font-size: 11px;" cellpadding="0" cellspacing="0"  border="1" width="100%" >
+                    <tr> <td colspan="2">Apartment Type : </td>
+                        <td style="text-align:center" ><b>{!Quote__c.BHK_Type__c}</b></td>
+                    </tr>
+
+                         <tr><td colspan="2" width="85%">Quote Date  </td>
+                             <td width="15%" style="text-align:right">
+                                     <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Quote__c.Quote_date__c}" /></apex:outputText>
+                             </td>
+                    </tr>
+                    <tr><td colspan="2" width="85%">Project</td>
+                        <td width="15%" style="text-align:right">{!Quote__c.Project__c}</td>
+                    </tr>
+                    <tr><td colspan="2" width="85%">Unit No</td>
+                        <td width="15%" style="text-align:right">{!Quote__c.Unit__r.Name}</td>
+                    </tr>
+                    <tr><td colspan="2" width="85%">Super Builtup Area(sqft)</td>
+                        <td width="15%" style="text-align:right">{!Quote__c.Built_up_area__c}</td>
+                    </tr>
+                    <apex:outputText rendered="{!Quote__c.Discount__c = 0}">
+                        <tr><td colspan="2">Rate per sqft. </td>
+                            <td style="text-align:right">{!Quote__c.Final_Rate_Per_Sqft__c}</td> 
+                        </tr>
+                        <tr><td colspan="2">PLC Charges</td>
+                            <td style="text-align:right">{!Quote__c.PLC__c * Quote__c.Built_up_area__c}</td>
+                        </tr>
+                        <apex:outputText rendered="{!(Quote__c.Project__c == 'Euphoria In The East' || Quote__c.Project__c == 'Rhythm of Rain' || Quote__c.Project__c == 'Whispering Petals')}"> 
+                            <tr><td colspan="2">Floor Raise Charges</td>
+                                <td style="text-align:right">{!Quote__c.Floor_Raise__c * Quote__c.Built_up_area__c}</td>
+                            </tr>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!NOT(ISBLANK(Quote__c.Unit__r.Terrace_Area__c))}">
+                            <tr><td colspan="2"> Terrace area</td>
+                                <td style="text-align:right">{!Quote__c.Terrace_Area_Charges__c}</td>
+                            </tr>
+                        </apex:outputText>
+                        <tr>
+                            <td colspan="2">Total Basic Cost </td>
+                            <td style="text-align:right"><apex:outputText value="₹{0, number, ##,##,##,##0.00}"><apex:param value="{!Quote__c.Basic_Cost__c}" /></apex:outputText></td>
+                        </tr>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!Quote__c.Discount__c > 0}">
+                        <tr><td colspan="2">Rate per sqft. </td>
+                            <td style="text-align:right">{!Quote__c.Final_Rate_Per_Sqft__c}</td>
+                        </tr>
+                        <tr><td colspan="2">PLC Charges</td>
+                            <td style="text-align:right">{!Quote__c.PLC__c * Quote__c.Built_up_area__c}</td>
+                        </tr>
+                        <apex:outputText rendered="{!(Quote__c.Project__c == 'Euphoria In The East' || Quote__c.Project__c == 'Rhythm of Rain' || Quote__c.Project__c == 'Whispering Petals')}"> 
+                            <tr><td colspan="2">Floor Raise Charges</td>
+                                <td style="text-align:right">{!Quote__c.Floor_Raise__c * Quote__c.Built_up_area__c}</td>
+                            </tr>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!NOT(ISBLANK(Quote__c.Unit__r.Terrace_Area__c))}">
+                            <tr><td colspan="2"> Terrace area</td>
+                                <td style="text-align:right">{!Quote__c.Terrace_Area_Charges__c}</td>
+                            </tr>
+                        </apex:outputText>
+                        <tr><td colspan="2">Total Basic Cost </td>
+                            <td style="text-align:right"><apex:outputText value="₹{0, number, ##,##,##,##0.00}"><apex:param value="{!Quote__c.Basic_Cost__c}" /></apex:outputText></td>
+                        </tr>
+                    </apex:outputText>
+                    
+                    <tr><td colspan="2">GST @ 1% / 5%</td>
+                        <td style="text-align:right">{!Quote__c.GST1__c}%</td>
+                    </tr>
+                    <tr><td colspan="2">GST Amount</td>
+                        <td style="text-align:right">{!Quote__c.GST_5__c}</td>
+                    </tr>
+                    
+                    <apex:outputText rendered="{!(Quote__c.Project__c != 'Euphoria In The East' && Quote__c.Project__c != 'Rhythm of Rain' && Quote__c.Project__c != 'Whispering Petals')}"> 
+                        <tr><td colspan="2">Water &amp; Electricity Charges</td>
+                            <td style="text-align:right">{!Quote__c.Water_Electricity_Charges__c}</td>
+                        </tr>
+                        <tr><td colspan="2">Club &amp; Amenities Charges</td>
+                            <td style="text-align:right">{!Quote__c.Club_Amenities_Charges__c}</td>
+                        </tr>
+                        <tr><td colspan="2">Generator/STP</td>
+                            <td style="text-align:right">{!Quote__c.Generator_STP__c}</td>
+                        </tr>
+                        <tr><td colspan="2">Car Parking Chages</td>
+                            <td style="text-align:right">{!Quote__c.Car_Scooter_Parking__c}</td>
+                        </tr>
+                    </apex:outputText>     
+                    <tr><td colspan="2">Labour Cess @ 0.7%</td>
+                        <td style="text-align:right">{!TEXT(ROUND(Quote__c.Lab_Cess__c, 2))}</td>
+                    </tr>
+                    <tr><td  colspan="3" width="100%" style="text-align:center"><b>Schemes Included</b></td></tr>
+                    <apex:repeat value="{!Quote__c.Schemes_Offers__r}" var="p">
+                        <tr >
+                            <td width="100%" align="center" colspan="3" >{!p.Name} </td>
+                        </tr>
+                    </apex:repeat>
+                    <tr><td colspan="2">Total cost including GST(Excluding Main./Regn./legal charges)</td>
+                        <td style="text-align:right"><apex:outputText value="₹{0, number, ##,##,##,##0.00}"><apex:param value="{!Quote__c.Total_Cost_After_Discount_Ex_Leg_Main__c}" /></apex:outputText></td>
+                    </tr>
+                    <tr><td  colspan="3" width="100%" style="text-align:center"><b>Payment Schedules</b></td></tr>
+                     <apex:repeat value="{!payList}" var="p">
+                            <tr >
+                                <td width="60%" align="left">{!p.Name} </td>
+                                <td  width="20%" align="center"> <apex:outputText value="{0, Number}"> <apex:param value="{!p.Payment_percent}" /></apex:outputText>%  </td>
+                                <td width="20%"   align="right"> {!p.amount}  </td>	
+                            </tr>
+                    </apex:repeat>
+                    <tr >
+                        <td >Total cost including GST(Excluding Main./Regn/legal charges)</td>
+                        <td  align="center"> 100% </td>
+                        <td  align="right"><apex:outputText value="₹{0, number, ##,##,##,##0.00}"><apex:param value="{!Quote__c.Total_Cost_After_Discount_Ex_Leg_Main__c}" /></apex:outputText>   </td>
+                    </tr>
+                    <tr><td width="100%" colspan="3"><b>Note</b></td></tr>
+                    <tr><td width="100%"  colspan="3"><ul>
+                       <apex:repeat value="{!termsAndConditions}" var="p">
+                            <li>{!p.Terms__c}</li>                  
+                        </apex:repeat>
+                        </ul></td></tr>
+                </table>
+                
+                <apex:outputText rendered="{!Quote__c.Quote_status__c == 'Approved'}"> 
+                    <apex:outputText rendered="{!Quote__c.Project__c == 'Euphoria In The East'}"> 
+                        <tr>
+                            <td style="font-size: 11px;">Approved By: </td><td style="font-size: 11px;"> {!Quote__c.Sales_Manager_Name__c} </td>
+                        </tr>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!Quote__c.Project__c == 'Rhythm of Rain'}"> 
+                        <tr>
+                            <td style="font-size: 11px;">Approved By: </td><td style="font-size: 11px;">Tirthankar Bharti</td>
+                        </tr>
+                    </apex:outputText>
+                    <apex:outputText rendered="{!Quote__c.CP_Approval_Status__c == 'Approved'}"> 
+                        <tr>
+                            <td style="font-size: 11px;">Approved By: </td><td width="25%" style="font-size: 11px;"> Ravi Kiran </td>
+                        </tr>
+                    </apex:outputText>
+                </apex:outputText>
+                
+                <tr>
+                    <td>________________ </td><td width="25%">_____________________ </td>
+                </tr>
+
+                 <tr>
+                    <td style="font-size: 11px;">Customer Signature: </td><td width="25%" style="font-size: 11px;">Sales Manager Signature: </td>
+                </tr>
+            </div>
+        </body>
+    </html>
+</apex:page>

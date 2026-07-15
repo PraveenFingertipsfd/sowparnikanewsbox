@@ -1,0 +1,204 @@
+<apex:page standardController="Booking__c" renderAs="pdf" extensions="convertValueToWords"  showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false"  standardStylesheets="false" >
+    <html >
+        <head>
+            <style type="text/css" media="print">
+                @page {
+                margin-bottom: 200px;
+                @bottom-right {
+                
+                content: "Page " counter(page);
+                
+                }
+                }
+                @top-center {
+                content: element(header);
+                }
+                @bottom-left {
+                content: element(footer);
+                }
+                }
+                div.header {
+                padding: 10px;
+                position: running(header);
+                }
+                div.footer {
+                display: block;
+                padding: 5px;
+                position: running(footer);
+                }
+                .pagenumber:before {
+                content: counter(page);
+                }
+                .pagecount:before {
+                content: counter(pages);
+                }
+                div.header {
+                padding: 20px;
+                position: running(header);
+                margin-left: -200px;
+                }
+                div.footer {
+                padding: 10px;
+                position: running(footer);
+                font-size: 9px;
+                text-align:left;
+                
+                }
+                div.footer :first-child{
+                text-align:right;
+                }
+                
+                div.content, div.content p{
+                padding:0 20px;
+                line-height:1.5;
+                font-size:14px;
+                }
+                th, td {
+                padding: 5px;
+                }
+                p{
+                line-height:1;
+                padding:1px;
+                font-size:16px;
+                }
+                div{
+                line-height:1;
+                padding:1px;
+                }
+                table, tr {
+                border: 1px solid black;
+                border-collapse: collapse;
+                }
+                .content{
+                font-size:14px;
+                }
+                .content-wrapper {
+                page-break-inside: avoid;
+                }
+            </style> 
+        </head>
+        <body>
+            <div class="content" >
+                <apex:outputPanel >
+                    
+                    <div >
+                        <p style="text-align:center;font-size:15px;">
+                            <strong><u> MEMORANDUM OF UNDERSTANDING</u></strong>
+                        </p>
+                        <p style="font-size:15px;text-align:center">
+                            <strong>This MEMORANDUM OF UNDERSTANDING</strong> is executed at Bengaluru on this <apex:outputText value="{0, date, dd MMMM yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> BY AND BETWEEN:
+                        </p>
+                        <p style="text-align:justify;font-size:15px;">
+                            <strong>M/s SOWPARNIKA HOMES PRIVATE LIMITED,</strong>a Company incorporated under the Companies Act 2013, having its
+                            Registered Office at No.750, ‘C’ Block, 1st Main Road, AECS Lay out, Kundalahalli, Bangalore-560037 represented by its 
+                            authorized signatory {!Booking__c.Authorized_Signato__c}, Authorized vide board resolution dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Authorized_Signatory_Resolution_Date__c}" /></apex:outputText>. Hereinafter called the FIRST
+                            PARTY (which expression shall, wherever the context so admits or requires, mean and include its successors-in-interest, legal 
+                            representatives, executors, administrators and assigns) on the<strong>FIRST PART.</strong>
+                        </p>
+                        <div style="font-size:15px;padding-left:20px;text-align:center;">
+                            AND 
+                        </div>
+                        <p style="font-size:15px;">{!Booking__c.First_Applicant_Name__c}, W/o/S/o/C/o. {!Booking__c.W_o_S_o_C_o__c}, Aged about  <apex:outputText value="{0, Number,###,###,###}"> <apex:param value="{!Booking__c.Age__c}" /></apex:outputText> years,<br/>
+                            PAN No: {!Booking__c.PAN_Number__c}, Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                            <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                                {!p.Name}, W/o/S/o/C/o. {!p.W_o_S_o_C_o__c}, Aged about <apex:outputText value="{0, Number,###,###,###}"> <apex:param value="{!p.Age__c}" /></apex:outputText> years,<br/>
+                                PAN No: {!p.PAN_Number__c}, Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                            </apex:repeat>
+                            Residing at {!Booking__c.Address__c}
+                        </p>
+                        <p style="font-size:15px;text-align:justify;">Hereinafter called the SECOND PARTY (which term shall, wherever the context so admits or requires, mean and include his/her/their assigns successors, executors, administrators,
+                            heirs &amp; legal representatives) on the <strong>SECOND PART.</strong></p>
+                        <p style="font-size:15px;text-align:justify;"><strong>WHEREAS FIRST PARTY </strong>is sole and absolute owner and at peaceful possession and enjoyment of
+                            residentially converted lands bearing Survey Numbers: 10/4 10/5, 10/6 ,10/7, 11/17, 12/1, 34/3 and 34/4,  
+                            Katha No.1809, RDPR E- Khatha PID  No.1503002500522772, measuring in all 6 Acre 18 guntas, Situated at
+                            Samethanahalli Village, Anugondanahalli Hobli, Hosakote Taluk, Bangalore Rural District which is more fully 
+                            described in the Schedule-A hereunder hereinafter referred to as <strong>SCHEDULE A PROPERTY.</strong>  </p>
+                        <p style="font-size:15px;text-align:justify;"><strong>WHEREAS,</strong> the STRR Planning Authority has granted approval to develop the Project vide
+                            Commencement Certificate No. STRRPA/TP/CC/188/2024-25, dated 24-12-2024, for construction of Basement, ground plus
+                            Fourteen upper Floors of residential apartment building over the Schedule- ‘A’ Property. </p>
+                        <p style="font-size:15px;text-align:justify;">
+                            WHEREAS the FIRST PARTY has propounded a scheme of ownership units to be built on the Schedule “A” property 
+                            comprising of residential apartments, (hereinafter called the said scheme) where under a persons interested in 
+                            acquiring a unit in the building named as “SOWPARNIKA RHYTHM OF RAIN” being under construction on the Schedule “A”
+                            property shall have to acquire a specific undivided right, title and interest in the land covered by the Schedule “A”
+                            property by virtue whereof such persons will be granted the right to construct, own and enjoy a specific unit in the said
+                            building with all matters of common concern, share, amenities, facilities, liabilities, etc., being looked after in terms of an
+                            overall scheme and upon the completion of the said scheme, the land covered by the Schedule “A” property will be owned by all
+                            such persons owning the units therein as co-owners.
+                        </p>
+                        <p style="font-size:15px;text-align:justify;"><strong>AND WHEREAS</strong>pursuant to the above the FIRST PARTY have further offered the purchasers friendly scheme,
+                            wherein the SECOND PARTY on the basis of the mutual understanding between the parties the SECOND PARTY have booked the flat in the
+                            proposed residential project. </p> 
+                        <p style="font-size:15px;text-align:justify;">The parties have entered into agreement of sale and construction with certain terms and conditions. Based on the said
+                            agreement First Party will provide all assistance to the SECOND PARTY to apply for a housing loan in the name of SECOND PARTY in order to
+                            obtain the housing loan for purchase of the apartment unit. The FIRST PARTY herein has offer the reimbursement of Pre-EMI to the SECOND PARTY 
+                            till May 2027. After that the second party shall be responsible to pay the   Pre- EMI/ EMI etc., to the respective bank/ financial institution.</p>
+                        <p style="font-size:15px;text-align:justify;">AND WHEREAS in the event of cancellation of the allotment of the apartment unit under this scheme, it is hereby agreed
+                            between the parties that the agreement of sale and construction and this MOU entered between the parties shall stand cancelled.
+                            The FIRST PARTY shall be entitled to forfeit the booking amount of the apartment cost thereafter shall refund the balance advance if any. 
+                            The second party shall fully co-operate with the First Party to close the second party housing loan with bank or financial institution to the
+                            extent of the Principal outstanding amount as on the date of settlement by the first party with the bank or financial institution </p>
+                        <p style="font-size:15px;text-align:justify;">
+                            WHEREAS pursuant to the above scheme and after completely understanding the above scheme and after satisfaction of the title and
+                            plans approvals and other details of the FIRST PARTY, the SECOND PARTY being interested and decided to book the Apartment 
+                            No. {!Booking__c.Unit_NumberFor__c} having Super built up area {!Booking__c.Built_up_area__c} Sq.ft, carpet area  {!Booking__c.Carpet_Area__c} Sq.ft, Balcony area {!Booking__c.Balcony_Area__c} Sq.ft on {!Booking__c.Floor__c} Floor
+                            with  {!Booking__c.Parking__c} parking along with {!Booking__c.UDS__c} square feet of undivided share of land which is more-fully described in the Schedule B, here under 
+                            and hereinafter referred to as Schedule B Property.
+                        </p>
+                        <p style="font-size:15px;">
+                            AND WHEREAS pursuant to the above, the FIRST PARTY and SECOND PARTY have entered into an agreement
+                            of sale and construction dated: <apex:outputText value="{0, date, dd MMMM yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText> herein for sale of Schedule B Property.
+                        </p>
+                         <p style="text-align:center;font-size:15px;">
+                            <strong><u> NOW THIS MEMORANDUM OF UNDERSTANDING WITHNESSTH AS FOLLOWS:</u></strong>
+                        </p>
+                        <p style="font-size:15px;text-align:justify;">1.	The SECOND PARTY has on the date of signing of the MOU paid the
+                            amount of Rs {!totlreceivedinIndian}/- (Rupees {!tillDateReceived} only) for Schedule “B” &amp; “C” Property.</p>
+                        <p style="font-size:15px;text-align:justify;">2.	The SECOND PARTY hereby agrees to fully co-operate with the FIRST PARTY for applying and 
+                            obtaining the home loan from the bank or financial institution. Wherein the processing fee shall be borne by the SECOND
+                            PARTY.</p>
+                         <p style="font-size:15px;text-align:justify;">3.	The SECOND PARTY also fully agrees to sign all the loan agreements, documents, forms,
+                             undertakings, and any other documents required for obtaining home loan and co-operate   fully with the FIRST PARTY or with bank representatives.</p>
+                         <p style="font-size:15px;text-align:justify;">4.	The FIRST PARTY hereby agrees to reimburse the Pre-EMI based on disbursements to the SECOND PARTY 
+                             till May 2027. After that SECOND PARTY shall be responsible for payment of interest/ Pre- EMI/ EMI etc., to the respective
+                             bank/financial institution. The SECOND PARTY also agrees to make the payment of balance consideration towards the flat, registration 
+                             expenses, stamp duty and miscellaneous charges at the time of registration of the sale deed of the apartment. In this context the term
+                             intimation of readiness for possession will mean that the apartment is ready for livable condition and does not include the full 
+                             completion of all amenities and services.</p>
+                         <p style="font-size:15px;text-align:justify;">5.	In the event the SECOND PARTY desires to cancel the said allotment of apartment, the SECOND PARTY
+                             shall intimate the same in writing to the FIRST PARTY and on receipt of such communication from the SECOND PARTY this MOU,
+                             agreement of sale and construction shall automatically stands cancelled, and the FIRST PARTY shall repay the housing loan 
+                             to the respective financial institution as per RERA rules for which Second Party shall fully cooperate with the FIRST PARTY.
+                        </p>
+                        <div style="page-break-after:always;"></div> 
+                        <h3 style="text-align:center;font-size:18px;">
+                        <u>SCHEDULE “A” PROPERTY</u>
+                    </h3>
+                         <p style="font-size:15px;text-align:justify;">All that piece and parcel of residential converted lands bearing Survey Number 10/4, 10/5, 
+                             10/6, 10/7 , 11/17,12/1, 34/3 and 34/4 RDPR E- Khatha PID  No. No.1503002500522772, measuring in all 6 Acre 18 
+                             guntas,  situated at Samethanahalli Village, Anugondanahalli Hobli, Hosakote Taluk, Bangalore Rural District and 
+                             commonly bounded on that:</p>
+                        <p style="font-size:15px;">East by  : Samethanahalli   Soukhya Road;  </p>
+                        <p style="font-size:15px;">West by :  Private Property </p>
+                        <p style="font-size:15px;">North by  :  Private Property       </p>
+                          <p style="font-size:15px;">South by  :  Private Property</p>
+                        <h3 style="text-align:center;font-size:18px;">
+                        SCHEDULE ‘B’
+                    </h3>
+                          <p style="font-size:15px;text-align:justify;">{!Booking__c.UDS__c} Sq.ft of  undivided share right title and interest in Schedule  A Property and Apartment No. {!Booking__c.Unit_NumberFor__c}, {!Booking__c.BHK_Type__c} in {!Booking__c.Floor__c} floor {!Booking__c.Block_Number__c} block, having carpet area {!Booking__c.Carpet_Area__c} Sq.ft and Balcony Area of {!Booking__c.Balcony_Area__c} Sq.ft and super built up area of {!Booking__c.Built_up_area__c} Sq.ft along with {!Booking__c.Parking__c} parking slot in the building named as “{!Booking__c.Project__c}”</p>
+                          <p style="font-size:15px;">IN WITNESS WHEREOF the parties herein have herein unto set their hands for this MOU 
+                              on the day, month and year first above mentioned before the following witnesses: </p>
+                           <h2 style="text-align:left;font-size:16px;">
+                        WITNESSES:
+                    </h2>
+                    <div>
+                        1. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allottees<br/><br/><br/><br/><br/><br/>
+                        2. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Promoter
+                        
+                    </div> 
+                    </div>
+                </apex:outputPanel>
+            </div>
+        </body>
+    </html>
+</apex:page>

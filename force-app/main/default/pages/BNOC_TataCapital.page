@@ -1,0 +1,94 @@
+<apex:page standardController="Booking__c" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false" extensions="demandController" action="{!getTotalCost}">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/css">
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                margin-top: 200px;
+                }
+            </style>
+        </head>
+        
+        <body >
+            <div style="font-size: 17px;"><br/><br/><br/><br/>
+                <p>
+                  <strong>Date: <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!TODAY()}" /> </apex:outputText> </strong>
+
+                </p>
+                <p>
+                  To,
+                   M/S TATACAPITAL HOUSING FINANCE LIMITED
+                </p>
+                <p>
+                Bangalore.
+                </p>
+                <p>
+                 Dear Sir/Madam    
+                </p>
+                <p>
+                 Re: 	No Objection Certificate for Mortgaging Flat No.{!Booking__c.Unit_NumberFor__c} in the building called {!Booking__c.Project__c} situated at
+                    {!Booking__c.Project_Address__c}.
+                </p>
+                <p>
+                 This is to confirm that {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                      
+                    </apex:repeat>, is the bonafide owner of Flat No. {!Booking__c.Unit_NumberFor__c} of the building
+                    known as  {!Booking__c.Project__c} Situated at  {!Booking__c.Project_Address__c}. (hereinafter referred to as “Said Property”) pursuant to an Agreement of Sale dated <apex:outputText value="{0,date,dd/MM/yyyy}"> <apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /> </apex:outputText>.   
+                </p>
+                <p style="text-align:justify;">
+                 We confirm that we have obtained necessary permissions/approvals/sanctions for construction of the said Building from all the
+                    concerned competent authorities and the construction of the building as well as flat is in accordance with the approved plans.
+                    We assure that we shall obtain the NOC for the sale of the said flat from the financial institution/Bank in which we have created a
+                    charge over the said Project. We have a clear, legal and marketable title to the Said Property and every part thereof.   
+                </p>
+                <p style="text-align:justify;">
+                 We confirm that possession of the said property has been given/shall be given in due course to (i) {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat>  
+                </p>
+                <p style="text-align:justify;">
+                 We are aware that {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat>, has approached Tata Capital Housing Finance Ltd for a loan against the Said Property and
+                    Tata Capital Housing Finance Ltd. has agreed to sanction/grant the loan /Overdraft facility(“said Loan”) to
+                    {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat>, to purchase the Said Property and have agreed to mortgage the Said Property in your 
+                    favour /in favour of your security trustee as security for due repayment of the dues under the said Loan.
+                    We hereby confirm that we have no objection to the said {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat>, 
+                    mortgaging the Said Property to your Company/in favour of your security trustee as a security for
+                    due repayment of the said Loan. 
+   
+                </p>
+                <P style="text-align:justify;">
+                 We hereby agree to note the aforesaid charge in our books in respect of the Said Property and  
+                 {!Booking__c.First_Applicant_Name__c} <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        and {!p.Name}                   
+                    </apex:repeat> will not be permitted to transfer, assign, sell off/cancel or in any other 
+                way/manner deal with the Said Property prejudicial to your rights/ interest as the mortgagee without your prior written consent. 
+   
+                </P>
+                <P style="text-align:justify;">
+                We agree to inform and give proper notice to the Co-operative Society as and when formed, about the Said Property being mortgaged
+                    to your Company and to issue the Share certificate directly to your Company.    
+                </P>
+                <P>
+                 Yours faithfully   
+                </P>
+                <P>
+                 {!Booking__c.Company_Name__c}., 
+                </P>
+                <P>
+                    {!Booking__c.Owner.Name}
+                </P>
+                <p>
+                    {!Booking__c.Owner_Designation__c} 
+                </p>
+            </div>
+        </body>
+    </html>
+</apex:page>

@@ -1,0 +1,104 @@
+<aura:component controller="BulkRaiseDemandControllerCustom" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global">
+    <aura:attribute name="masterPaymentScheduleId" type="String" />
+    <aura:attribute name="bookingRecords" type="Booking__c[]" />
+    <aura:attribute name="bookDetails" type="Booking__c[]" />
+    <aura:attribute name="showNextCmp" type="boolean" default="false" />
+    <aura:attribute name="showNextCmpCustom" type="boolean" default="false" />
+    <aura:registerEvent name="raiseDemandEvent" type="c:RaiseDemandEvent"/>
+    <aura:attribute name="paymentScheduleId" type="Id" />
+    <aura:attribute name="grandTotalAmountCustom" type="Decimal"/>
+    <aura:attribute name="Bookid" type="Id" />
+    <aura:attribute name="Leadid" type="id"/>
+    <aura:attribute name="isStandard" type="boolean" default = "false"/>
+    <aura:attribute name="isCustome" type="boolean" default = "false"/>
+     <aura:handler name="init" value="{!this}" action="{!c.doinit}"></aura:handler>
+     <aura:attribute name="mpsName"     type="String" />
+<aura:attribute name="blockName"   type="String" />
+<aura:attribute name="projectName" type="String" />
+    
+    <lightning:card >
+        <div class="slds-m-around_medium slds-text-align_center">
+            <p><b>Project : </b>{!v.projectName} &nbsp;&nbsp; 
+                <b>Block / Tower : </b>{!v.blockName} &nbsp;&nbsp; 
+                <b>Payment Schedule : </b>{!v.mpsName}</p>
+        </div>
+        <u> <b> <h1 class="slds-text-align_center slds-text-heading_large">Booking Records</h1> </b></u>
+        <div class="slds-m-top_left slds-align_absolute-left">
+            <lightning:button 
+                              label="Raise All" 
+                              onclick="{!c.raiseAllDemands}" 
+                              variant="brand"/><br/>
+        </div>
+     
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Select</th>
+                        <th scope="col">S/No</th>
+                        <th scope="col">Booking</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Project</th>
+                        <th scope="col">Unit Name</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Previous Pendings</th>
+                        <th scope="col">Grand Total</th>
+                        <th scope="col">Raise Demand</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.bookingRecords}" var="bookingWrapper" indexVar="index">
+                        <tr>
+                            <td data-label="Select">
+                                <lightning:input type="checkbox" 
+                                                 aura:id="bookingCheckbox" 
+                                                 value="{!bookingWrapper}" 
+                                                 disabled="{!or(empty(bookingWrapper.booking.Email__c),bookingWrapper.demandRaised)}"/>
+                            </td>
+                            <td data-label="S/No">{!index + 1}</td>
+                            <td data-label="Booking">
+                                <a href="{!'/lightning/r/Booking__c/' + bookingWrapper.booking.Id + '/view'}" target="_blank">
+                                    {!bookingWrapper.booking.Name}
+                                </a>
+                            </td>
+                            <td data-label="Customer Name">
+                                <a href="{!'/lightning/r/Lead__c/' + bookingWrapper.leadid + '/view'}" target="_blank">
+                                    {!bookingWrapper.booking.First_Applicant_Name__c}
+                                </a>         
+                                
+                                
+                                <!--      <a href="#" onclick="{!c.navigateToLead}" data-lead-id="{!bookingWrapper.booking.Lead1__c}">
+                                {!bookingWrapper.booking.Lead_Name__c}
+                            </a>    -->
+                            </td>
+                            <td data-label="Email">{!bookingWrapper.booking.Email__c}</td>
+                            <td data-label="Project">{!bookingWrapper.booking.Project__c}</td>
+                            <td data-label="Unit Name">
+                                <a href="{!'/lightning/r/Plot__c/' + bookingWrapper.unitid + '/view'}" target="_blank">
+                                    {!bookingWrapper.booking.Plot__r.Name}
+                                </a>
+                                
+                            </td>
+                            <td data-label="Total Amount" style="text-align:center;">{!bookingWrapper.totalPaymentAmount}</td>
+                            <td data-label="Total Amount" style="text-align:center;">{!bookingWrapper.previousDemandRaisedPending}</td>
+                            <td data-label="Total Amount" style="text-align:center;"><lightning:input type="number" name="seven" value="{!bookingWrapper.grandTotal}"/></td>
+                            <td data-label="Raise Demand">
+                                <lightning:button 
+                                                  label="Raise Demand" 
+                                                  onclick="{!c.raiseDemandCustom}" 
+                                                  variant="brand"
+                                                  disabled="{!or(empty(bookingWrapper.booking.Email__c),bookingWrapper.demandRaised)}"
+                                                  value="{!bookingWrapper}" />
+                            </td>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        <aura:if isTrue="{!v.showNextCmpCustom}">
+            <c:RaiseDemandLetterCustom Bookid="{!v.Bookid}" paymentScheduleId="{!v.paymentScheduleId}" grandTotalAmountCustom = "{!v.grandTotalAmountCustom}"/>  
+        </aura:if>
+    </lightning:card>
+</aura:component>

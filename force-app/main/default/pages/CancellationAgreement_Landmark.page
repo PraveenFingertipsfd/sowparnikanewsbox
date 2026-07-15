@@ -1,0 +1,151 @@
+<apex:page standardController="Booking__c" extensions="convertValueToWords" showHeader="false" standardStylesheets="false"  applyBodyTag="false" applyHtmlTag="false" renderAs="pdf">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+            <style type="text/CSS">
+                @page {
+                size:portrait;
+                
+                margin-bottom: 200px;
+                @bottom-right {
+                
+                content: "Page " counter(page);
+                
+                }
+                }
+                .content-wrapper {
+                page-break-inside: avoid;
+                }
+            </style>
+        </head>
+        <body >
+            <div ><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                
+                <h2 style="text-align:center;font-size:36px;">CANCELLATION OF SALE AGREEMENT</h2>
+                <p style="font-size:20px;">
+                    This AGREEMENT OF CANCELLATION is made and executed on <b>Date: <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!today()}" /></apex:outputText></b> at Banglore.
+                </p>
+                <div style="page-break-after:always;"></div>
+                <h2 style="text-align:left;font-size:22px;">
+                    BY AND BETWEEN
+                </h2>
+                <p style="font-size:19px;">
+                    {!Booking__c.First_Applicant_Name__c}, W/o/S/o/C/o. {!Booking__c.W_o_S_o_C_o__c}, Aged about {!Booking__c.Age__c} years,<br/>
+                    PAN No: {!Booking__c.PAN_Number__c}, Aadhar No. {!Booking__c.Aadhar_Number__c}.<br/><br/>
+                    <apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+                        {!p.Name}, W/o/S/o/C/o. {!p.W_o_S_o_C_o__c}, Aged about {!p.Age__c} years,<br/>
+                        PAN No: {!p.PAN_Number__c}, Aadhar No. {!p.Aadhar_Number__c}.<br/><br/>
+                    </apex:repeat>
+                    Residing at {!Booking__c.Address__c}
+                </p>
+                <p style="font-size:17px;text-align:justify;">
+                    hereinafter referred to as the FIRST PARTY (which term shall, unless repugnant to the meaning or context thereof, be deemed to mean and include her respective heirs, legal representatives and assigns) of the ONE PART;
+                </p>
+                <p style="text-align:left;font-size:17px;">
+                    AND,
+                </p>
+                <p style="font-size:17px;text-align:justify;">
+                    SOWPARNIKA PROJECTS &amp; INFRASTRUCTURE PRIVATE LIMITED, CIN No.
+                    U45201KA2007PTC043166 a company incorporated under the provisions of the 
+                    Companies Act, 1956, having its registered office at No.750, ‘C’ Block, 1st Main Road, 
+                    AECS Lay out, Kundalahalli, Bangalore - 560037. (PAN - AAKCS9641L), Hereinafter 
+                    referred to as the “Builder and Promoter” represented by its authorized signatory Mr.
+                    Purshotham C Reddy, GM Finance Authorized vide board resolution dated 30.09.2019
+                    (which expression shall unless repugnant to the context or meaning thereof be deemed 
+                    to mean and include its successor-in-interest, executors, administrators and permitted 
+                    assignees); of the SECOND PART
+                </p>
+                <p style="font-size:17px;text-align:justify;">
+                    Whereas Second Party and First Party have entered into an agreement of sale 
+                    dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>, First Party have agreed to purchase the {Booking__c.Undivided_Share_Of_Land__c} Sq ft undivided 
+                    right, title &amp; interest in Schedule Property, together with Apartment 
+                    No.{!Booking__c.Unit_NumberFor__c}, having super built up area of {!Booking__c.Built_up_area__c} Sq. ft, on the {!Booking__c.Floor__c}
+                    Floor along with {!Booking__c.Parking__c} parking space of the building to be constructed 
+                    over the Schedule Property hereunder hereinafter referred to as Schedule-A, 
+                    which is more fully described in the Schedule-A hereunder hereinafter referred 
+                    to as Schedule-A Property.                
+                </p>
+                <p style="font-size:17px;text-align:justify;">
+                    Whereas FIRST PARTY had agreed to Purchase the Schedule A property from the 
+                    SECOND PARTY on the terms set out in sale agreement dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>, for 
+                    total Sale consideration of Rs.{!totalCostInString}/- (Rupees {!TotalCostAmountInWords} Only) availed a loan from {!Booking__c.Bank_Name__c} and disbursed a loan amount of Rs.{!loanAmountInString}/- (Rupees {!loanAmountInWords}) as part of sale consideration towards the purchase of 
+                    the above flat.
+                </p>
+                <p style="font-size:19px;text-align:justify;">
+                    Whereas by virtue of the cancellation, the SECOND PARTY has repaid amount 
+                    paid by the First Party to Flat No. {!Booking__c.Unit_NumberFor__c} and the disbursed amount of 
+                    Rs.{!Booking__c.Amount_By_Bank__c}/-  has been paid to the {!Booking__c.Bank_Name__c} to close the loan. The parties hereto have entered into this Cancellation 
+                    of Agreement in term hereof.
+                </p>
+                <div style="page-break-after:always;"></div>
+                <br/><br/><br/><br/><br/>
+                <h2 style="font-size:22px;">
+                    NOW THIS AGREEMENT OF CANCELLATION WITNESSES AS FOLLOWS:
+                </h2>
+                <p style="font-size:17px;">
+                    <div style="font-size:17px;text-align:justify;">1. In terms of this cancellation agreement, the Second Party has repaid to 
+                        ________ the disbursed amount to close the loan in the following manner:</div><br/>
+                <div style="font-size:17px;text-align:justify;">a. Rs._________/-(Rupees _________________ only) to the First Party.</div><br/>
+                <div style="font-size:17px;text-align:justify;"> b. Rs._________/-(Rupees ___________ only) by way of online 
+                    transaction through NEFT dated _________.</div><br/>
+                <div style="font-size:17px;text-align:justify;"> c. Rs._________/- (Rupees ___________Only) by way of Cheque
+                    bearing No.____________, dated _________, drawn on ___________
+                    Bank, ______________ Road, Bangalore.</div><br/>
+                <div style="font-size:17px;text-align:justify;">d. Rs. ________/- (Rupees _________________Only) by way of Demand 
+                    Draft Bearing No.__________, dated ___________, drawn at
+                    ____________ Bank, ___________ Layout, Bangalore in favour of 
+                    _______________________.</div><br/><br/>
+                <div style="font-size:17px;text-align:justify;">2. The First Party cancelled all their rights and obligations arising out of the 
+                    said Agreement of sale dated <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>;</div><br/>
+                <div style="font-size:17px;text-align:justify;">3. The Parties hereby mutually agree and covenant with each other that 
+                    neither party has done, executed or performed any act or deed or thing or 
+                    suffered anything to the contrary, or in any way be affected or prejudiced 
+                    in title of Schedule A Property.</div> <br/>
+                <div style="font-size:17px;text-align:justify;">4. The parties hereby confirm that they do not have any claims against each 
+                    other/s, in future save as mentioned above.</div><br/>
+                <div style="font-size:17px;text-align:justify;">5. No payment/s and/or claim/s, of any nature whatsoever, are pending 
+                    and/or payable and/or receivable by and between the parties hereto, save 
+                    as mentioned herein.</div> <br/>
+                <div style="font-size:17px;text-align:justify;">6. The FIRST Party represented that the original agreement of sale and the 
+                    receipts issued by the second party has to return to the second party.</div>
+            </p>
+            <div style="page-break-after:always;"></div>
+            <h2 style="text-align:center;font-size:22px;">
+                SCHEDULE PROPERTY
+            </h2>
+            <p style="font-size:17px;">
+                <div style="font-size:17px;text-align:justify;">All that piece and parcel of the converted land bearing Sy Nos. 67/2 and 67/3, MUDA 
+                    approved Site Nos. 67/2 and 67/3, measuring 1 acre 19.04 Guntas or 6002.199 Square 
+                    Meters or 64,608 Square Feet in which 5000 Square meters is considered for residential 
+                    building Situated at Bhogadi Village, Kasaba Hobli, Mysore Taluk, Mysore District 
+                    (Converted as per Official Memorandum Dated 15.5.2008 bearing No ALN. (1) 
+                    139/2007-08 and ALN.(1) 140/2007-08 dated 19.5.2008 both issued by Deputy 
+                    Commissioner Mysore Situated at Bhogadi Village, Kasaba Hobli, Mysore Taluk, 
+                    Mysore District and bounded on :</div><br/><br/>
+            East By : Ring Road <br/><br/>
+            West By : Inchara HBCS Layout (Sy No.68):<br/><br/>
+            North By : R. Narasimha Murty Property (Sy No.67/3):<br/><br/>
+            South By : Sri. Mahesh and Sri. Chikkanna’s Property (Sy No.67/1):<br/><br/>
+        </p>
+        <h3 style="text-align:center;font-size:22px;">
+            SCHEDULE ‘A’
+        </h3>
+        <p style="font-size:17px;">
+            <div style="font-size:17px;text-align:justify;">
+                Apartment No. {!Booking__c.Unit_NumberFor__c} having Super Built up area {!Booking__c.Built_up_area__c}Sq.ft., and carpet area of {!Booking__c.Carpet_Area__c} Sq. m
+                (___ square feet), Balcony area {!Booking__c.Balcony_Area__c}Sq. m on {!Booking__c.Floor__c} floor {!Booking__c.Parking__c} space  along with {Booking__c.Undivided_Share_Of_Land__c} undivided share in the Schedule Property, in the Apartment 
+                building known as SOWPARNIKA THE LAND MARK.</div><br/><br/>
+        East by  : _______<br/>
+        West by  : _______<br/>
+        North by : _______<br/>
+        South by : _______<br/><br/><br/>
+        <b>IN WITNESS WHEREOF</b> the parties herein have herein unto set their hands on the day, 
+        month and year first above mentioned before the following witnesses: <br/><br/>
+        <b style="text-decoration-line: underline;">WITNESSES:</b><br/>
+        1. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FIRST PARTY<br/><br/><br/>
+        2. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SECONDPARTY
+    </p>
+</div>
+</body>
+</html>
+</apex:page>

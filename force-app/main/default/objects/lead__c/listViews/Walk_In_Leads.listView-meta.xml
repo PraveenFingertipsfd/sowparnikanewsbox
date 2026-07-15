@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Walk_In_Leads</fullName>
+    <columns>NAME</columns>
+    <columns>Phone__c</columns>
+    <columns>Created_Date__c</columns>
+    <columns>Lead_status__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>OWNER.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Leadsource__c</field>
+        <operation>equals</operation>
+        <value>Walk-In Leads</value>
+    </filters>
+    <label>Walk-In-Leads</label>
+</ListView>

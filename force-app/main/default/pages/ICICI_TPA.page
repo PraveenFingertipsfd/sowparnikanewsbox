@@ -1,0 +1,200 @@
+<apex:page StandardController="Booking__c" extensions="convertValueToWords" renderAs="pdf" applyHtmlTag="false" showHeader="false" standardStylesheets="false">
+    <head>
+        <style>
+    
+                @page {
+                size:A4 portrait;
+                margin-bottom: 200px;
+                @bottom-right {
+
+                              content: "Page " counter(page);
+
+                            }
+                }
+                p{
+                text-align:justify;
+                }
+            @page {
+            size: 210mm 297mm;
+            background: white;
+            margin-bottom: 4cm;
+            @bottom-left {
+            vertical-align: top;
+            content: element(footer);
+            padding-top: 1px;
+            background-color:#fff;
+            }
+            @bottom-center {
+            border-top:1px solid #777;
+            }
+            @bottom-right {
+            border-top:1px solid #777;
+            }
+            
+            }
+            footer {
+            bottom:0;
+            display: block;
+            position: running(footer);
+            font-size: 8pt;
+            line-height:1.0;
+            }
+            body {
+            position: relative;
+            box-sizing: border-box;
+            }
+            
+            .details-container {
+            display: flex;
+            justify-content: space-between;
+            }
+            
+            .customer-details,
+            .booking-details {
+            flex: 1;
+            }
+            
+            
+            footer img {
+            width: 100%;
+            }
+            
+            footer table {
+            width: 100%;
+            font-size:14px;
+            }
+            tr {
+            page-break-inside: avoid;
+            }
+        </style>
+    </head>
+    <body >
+        <footer class="footer">
+            <table>
+                <tr>
+                    <td width="100%" style="text-align:justify;border-left: none; border-top: none; border-bottom: none; line-height: 2.8;">
+                        Borrower/s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Builder/Developer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        ICICI Bank Ltd
+                    </td>
+                </tr>
+            </table>
+        </footer>
+          <div style="margin:60px;font-size:16px;" >
+            <br/><br/><br/>
+            <h2 style="text-align:center;font-size:17px;"><b><u>LETTER OF UNDERTAKING</u></b></h2>
+              <p style="text-align:justify;">
+               This Letter of Undertaking is made at Bangalore and on the <apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.TPA_Date__c}" /></apex:outputText>    
+                  as set out in the schedule to the Undertaking between Borrower, more particularly described and set out in the schedule to this 
+                  Undertaking of the first part and Builder more particularly described in the schedule to this Undertaking of the second part 
+                  and ICICI BANK Ltd, a Company incorporated under the Companies Act, 1956, having its registered office at C-23, G Block, Bandra
+                  Kurla Complex, Bandra E, Mumbai- 400 051 and a branch office at No. 1, Commissiorate Road, Shobha Pearl, MG Road,
+                  Bangalore –560 025, hereinafter called ICICI BANK Ltd of the third part.   
+              </p>
+              <p style="text-align:justify;">The expression Borrower and ICICI BANK Ltd shall unless repugnant to the context mean and include administrators,
+                  executors, liquidators, partners, proprietors, legal heirs, representatives, agents and assigns etc.</p>
+              <p style="text-align:justify;">Whereas:</p>
+              <p style="text-align:justify;">1. The builder / developer is engaged in the construction and / or sale of flats and is developing residential flats 
+                  at such place as stipulated in the Schedule, hereinafter referred to as Premises.</p>
+              <p style="text-align:justify;">2. The Borrower is desirous of purchasing a flat in the Premises    and for the said purpose has entered into an
+                  agreement to sell with the Builder and has deposited an initial amount as stipulated in the schedule.</p>
+               <p style="text-align:justify;">3.The Borrower has also deposited an amount stipulated in the schedule, being the margin money
+                   towards part payment of the sale consideration of such amount as stipulated in the Schedule.  The Borrower has, for the 
+                   balance amount been sanctioned a loan vide offer letter dated -------------------- of such date as stipulated in the Schedule
+                   from ICICI BANK Ltd</p>
+               <p style="text-align:justify;">4.The ICICI BANK Ltd, shall pay the loan, upon a demand being raised by borrower on basis
+                   of a Builder Demand letter and conditions agreed to between the parties to this agreement.</p>
+               <p style="text-align:justify;">5.Whereas the execution, registration and taking delivery of the registered sale deed for being
+                   deposited with ICICI BANK Ltd involve considerable amount of time, as such the Borrower and Builder have requested ICICI BANK
+                   Ltd to release the sanctioned loan.</p>
+              <p style="text-align:justify;">6. ICICI BANK Ltd having agreed to the said offer, the Borrower, builder and ICICI BANK Ltd agree 
+                  and covenant with each other as follows:</p>
+              <p style="text-align:justify;">a) ICICI BANK Ltd will release the payment on the terms and conditions agreed by the all three 
+                  parties in the agreement.  </p>
+              <p style="text-align:justify;">b) The builder and borrower undertakes to provide the Original Sale Deed 
+                  within a period not exceeding 90 days from the date of completion of the project as mentioned in the Agreement to Sell.</p>
+              <p style="text-align:justify;">c) The borrower and builder undertake the responsibility to register the property and ensure the 
+                  deposition of the Sale Deed / Registration Receipts &amp; Endorsement from registrar with ICICI Bank Ltd.</p>
+              <p style="text-align:justify;">Now this agreement witnesseth as follows:</p>
+              <p style="text-align:justify;">a) The ICICI Bank Ltd shall pay the loan amount towards sale consideration of the property, upon
+                  a demand being raised by the Borrower on the basis of a demand letter from the Builder by considering work progress.</p>
+              <p style="text-align:justify;">b) It is agreed between the parties that ICICI Bank Ltd should make the disbursement directly 
+                  to the builder and such disbursement shall be considered as disbursement made to the Borrower.</p>
+              <p style="text-align:justify;">c) It is agreed between the parties that the Builder shall intimate the factum of the completion of
+                  the flat to ICIC Bank Ltd. Upon such intimation the Builder undertakes to execute the necessary sale deed and till that time,
+                  the builder shall retain the possession of the flat as a trustee for an on behalf of ICICI Bank Ltd.</p>
+              <p style="text-align:justify;">d) It is agreed and understood between the parties that till such time the registered sale deed is 
+                  executed in favour of the borrower, and said deed handed over to ICICI Bank, the Builder shall not hand over vacant and peaceful
+                  possession of the flat to the borrower without written consent from ICICI Bank Ltd.</p>
+              <p style="text-align:justify;">e) The borrower or Builder shall not cancel the allotment/booking/allocation of the flat made to the
+                  borrower without obtaining a ‘No Objection Certificate’ from the ICICI Bank Ltd in this regard.</p>
+              <p style="text-align:justify;">f) In the event, the borrower cancels his allotment/booking/allocation of the said flat or in the event
+                  of ICICI Bank Ltd cancelling his allotment/booking/allocation of the said flat on behalf of the borrower, by virtue of the power of
+                  attorney executed by the Borrower in its favor, the builder undertakes to refund the amount received by the builder (from ICICI Bank)
+                  to ICICI Bank Ltd. However the builder shall be entitled to recover the cancellation charges as per the Agreement entered between the
+                  Borrower and the Builder, out of borrower’s contribution. ICICI Bank Ltd shall after deducting all the outstanding amounts refund the
+                  surplus, if any, to the borrower.</p>
+              <p style="text-align:justify;">The Borrower declares that the agreement was duly read and understood by him prior to affixing signatures hereunder.</p>
+              <p style="text-align:justify;">The parties hereto have signed this tripartite agreement in acceptance of all the terms and conditions stated herein above on the day and place aforementioned.</p>
+        </div>
+        <div style="page-break-after: always;" />
+              <p style="text-align:justify;"><u><b>SCHEDULE TO THE AGREEMENT</b></u></p>
+      
+         <div style="padding:40px;font-size:17px;line-height:1.9;" id="div2">
+            <table border="1" style='border-collapse: collapse; width: 100%;'>
+                <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Place</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">Bangalore</td>
+                </tr>
+                 <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Date</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%"><apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.TPA_Date__c}" /></apex:outputText></td>
+                </tr>
+                 <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Name of the Borrower (s)</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">{!Booking__c.First_Applicant_Name__c}<apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">and {!p.Name}</apex:repeat></td>
+                </tr>
+                 <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Address of the borrower/s</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">{!Booking__c.Address__c}</td>
+                </tr>
+                <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Name of the builder</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">{!Booking__c.Company_Name__c}</td>
+                </tr>
+                  <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Address of the builder</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">{!Booking__c.Company_Address__c}</td>
+                </tr>
+                  <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Name of the project</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">SOWPARNIKA {!Booking__c.Project__c}</td>
+                </tr>
+                  <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Address of the project</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">{!Booking__c.Project_Address__c}</td>
+                </tr>
+                 <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">RERA no of the project</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">{!Booking__c.RERA_NO__c}</td>
+                </tr>
+                 <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Allotment letter/agreement date</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%"><apex:outputText value="{0, DATE, dd'-'MM'-'yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText></td>
+                </tr>
+                 <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Purchase cost Rs.</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">Rs. {!totalCostInString}</td>
+                </tr>
+                 <tr>
+                    <td colspan="1" rowspan="0" style="font-size: 13px;float:center;text-align:left; " width="50%">Margin money deposited with builder Rs.</td>
+                    <td colspan="2" rowspan="0" style="font-size: 13px;float:center;text-align:center; " width="50%">Rs. {!totlreceivedinIndian}</td>
+                </tr>
+             </table>
+        </div>
+    </body>
+</apex:page>
