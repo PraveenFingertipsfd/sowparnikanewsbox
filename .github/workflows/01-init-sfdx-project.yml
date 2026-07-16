@@ -25,7 +25,7 @@ on:
       branch_name:
         description: 'Branch name for the SFDC skeleton (new or existing)'
         required: true
-        default: 'main'
+        default: 'Pattu-branch'
       project_name:
         description: 'Salesforce project name'
         required: true
