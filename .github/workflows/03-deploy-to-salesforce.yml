@@ -11,10 +11,6 @@
 name: 02 - Deploy to Salesforce
 
 on:
-  push:
-    branches: [Pattu-branch]
-    paths:
-      - 'force-app/**'
   workflow_dispatch:
     inputs:
       target_org:
@@ -82,13 +78,9 @@ on:
         required: false
         default: ''
 
-concurrency:
-  group: sf-deploy-${{ github.ref }}
-  cancel-in-progress: false
-
 jobs:
   deploy:
-    name: "Deploy to Salesforce 🚀"
+    name: "Deploy to ${{ github.event.inputs.target_org }} 🚀"
     runs-on: ubuntu-latest
 
     steps:
@@ -98,44 +90,25 @@ jobs:
           ref: ${{ github.ref }}
           fetch-depth: 0
 
-      - name: Resolve Config (event-aware)
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "TARGET_ORG=${{ github.event.inputs.target_org }}"             >> $GITHUB_ENV
-            echo "DEPLOY_TYPE=${{ github.event.inputs.deploy_type }}"           >> $GITHUB_ENV
-            echo "METADATA_FILTER=${{ github.event.inputs.metadata_filter }}"   >> $GITHUB_ENV
-            echo "DEPLOY_SCOPE=${{ github.event.inputs.deploy_scope }}"         >> $GITHUB_ENV
-            echo "SPECIFIC_NAMES=${{ github.event.inputs.specific_names }}"     >> $GITHUB_ENV
-            echo "EXCLUDE_COMPONENTS=${{ github.event.inputs.exclude_components }}" >> $GITHUB_ENV
-          else
-            # Automatic deploy defaults (push to Pattu-branch)
-            echo "TARGET_ORG=SANDBOX"  >> $GITHUB_ENV
-            echo "DEPLOY_TYPE=delta"   >> $GITHUB_ENV
-            echo "METADATA_FILTER=all" >> $GITHUB_ENV
-            echo "DEPLOY_SCOPE=all"    >> $GITHUB_ENV
-            echo "SPECIFIC_NAMES="     >> $GITHUB_ENV
-            echo "EXCLUDE_COMPONENTS=" >> $GITHUB_ENV
-          fi
-
       - name: Display Info
         run: |
           echo "╔═════════════════════════════════════════════╗"
           echo "║  🌿 Branch      : ${{ github.ref_name }}"
-          echo "║  🎯 Target Org  : ${{ env.TARGET_ORG }}"
-          echo "║  📦 Deploy Type : ${{ env.DEPLOY_TYPE }}"
-          echo "║  📂 Metadata    : ${{ env.METADATA_FILTER }}"
-          echo "║  🔎 Scope       : ${{ env.DEPLOY_SCOPE }}"
-          if [ "${{ env.DEPLOY_SCOPE }}" = "specific" ]; then
-          echo "║  📋 Components  : ${{ env.SPECIFIC_NAMES }}"
+          echo "║  🎯 Target Org  : ${{ github.event.inputs.target_org }}"
+          echo "║  📦 Deploy Type : ${{ github.event.inputs.deploy_type }}"
+          echo "║  📂 Metadata    : ${{ github.event.inputs.metadata_filter }}"
+          echo "║  🔎 Scope       : ${{ github.event.inputs.deploy_scope }}"
+          if [ "${{ github.event.inputs.deploy_scope }}" = "specific" ]; then
+          echo "║  📋 Components  : ${{ github.event.inputs.specific_names }}"
           fi
-          if [ -n "${{ env.EXCLUDE_COMPONENTS }}" ]; then
-          echo "║  🚫 Excluding   : ${{ env.EXCLUDE_COMPONENTS }}"
+          if [ -n "${{ github.event.inputs.exclude_components }}" ]; then
+          echo "║  🚫 Excluding   : ${{ github.event.inputs.exclude_components }}"
           fi
           echo "╚═════════════════════════════════════════════╝"
 
       - name: Resolve Metadata Paths
         run: |
-          FILTER="${{ env.METADATA_FILTER }}"
+          FILTER="${{ github.event.inputs.metadata_filter }}"
           BASE="force-app/main/default"
           case "$FILTER" in
             all)                       echo "SOURCE_PATHS=force-app" >> $GITHUB_ENV ;;
@@ -166,9 +139,9 @@ jobs:
 
       # ── Filter to specific components only ──
       - name: Filter Specific Components
-        if: ${{ env.DEPLOY_SCOPE == 'specific' }}
+        if: ${{ github.event.inputs.deploy_scope == 'specific' }}
         run: |
-          NAMES="${{ env.SPECIFIC_NAMES }}"
+          NAMES="${{ github.event.inputs.specific_names }}"
           if [ -z "$NAMES" ]; then
             echo "❌ 'specific' selected but no component names provided!"
             exit 1
@@ -213,9 +186,9 @@ jobs:
 
       # ── Exclude components (works across ALL metadata types) ──
       - name: Exclude Components
-        if: ${{ env.EXCLUDE_COMPONENTS != '' }}
+        if: ${{ github.event.inputs.exclude_components != '' }}
         run: |
-          EXCLUDE="${{ env.EXCLUDE_COMPONENTS }}"
+          EXCLUDE="${{ github.event.inputs.exclude_components }}"
           echo "🚫 Excluding components: $EXCLUDE"
           echo "═══════════════════════════════════════"
 
@@ -257,7 +230,7 @@ jobs:
           sf --version
 
       - name: Install sfdx-git-delta
-        if: ${{ env.DEPLOY_TYPE == 'delta' }}
+        if: ${{ github.event.inputs.deploy_type == 'delta' }}
         run: echo y | sf plugins install sfdx-git-delta
 
       - name: Authenticate to Salesforce
@@ -267,7 +240,7 @@ jobs:
           SFDX_AUTH_URL_SANDBOX: ${{ secrets.SFDX_AUTH_URL_SANDBOX }}
           SFDX_AUTH_URL_DEV: ${{ secrets.SFDX_AUTH_URL_DEV }}
         run: |
-          TARGET_ORG="${{ env.TARGET_ORG }}"
+          TARGET_ORG="${{ github.event.inputs.target_org }}"
           AUTH_URL=""
           case "$TARGET_ORG" in
             DEFAULT)    AUTH_URL="$SALESFORCE_AUTH_URL" ;;
@@ -287,7 +260,7 @@ jobs:
 
       # ── DELTA DEPLOY ──
       - name: Generate Delta Package
-        if: ${{ env.DEPLOY_TYPE == 'delta' }}
+        if: ${{ github.event.inputs.deploy_type == 'delta' }}
         run: |
           mkdir -p delta-output
 
@@ -320,11 +293,11 @@ jobs:
 
       # Filter & exclude from delta output too
       - name: Filter Delta Package
-        if: ${{ env.DEPLOY_TYPE == 'delta' && env.SKIP_DEPLOY != 'true' && (env.DEPLOY_SCOPE == 'specific' || env.EXCLUDE_COMPONENTS != '') }}
+        if: ${{ github.event.inputs.deploy_type == 'delta' && env.SKIP_DEPLOY != 'true' && (github.event.inputs.deploy_scope == 'specific' || github.event.inputs.exclude_components != '') }}
         run: |
           declare -A KEEP_LIST
-          if [ "${{ env.DEPLOY_SCOPE }}" = "specific" ]; then
-            IFS=',' read -ra ITEMS <<< "${{ env.SPECIFIC_NAMES }}"
+          if [ "${{ github.event.inputs.deploy_scope }}" = "specific" ]; then
+            IFS=',' read -ra ITEMS <<< "${{ github.event.inputs.specific_names }}"
             for ITEM in "${ITEMS[@]}"; do
               ITEM=$(echo "$ITEM" | xargs)
               KEEP_LIST["$ITEM"]=1
@@ -332,8 +305,8 @@ jobs:
           fi
 
           declare -A EXCLUDE_LIST
-          if [ -n "${{ env.EXCLUDE_COMPONENTS }}" ]; then
-            IFS=',' read -ra ITEMS <<< "${{ env.EXCLUDE_COMPONENTS }}"
+          if [ -n "${{ github.event.inputs.exclude_components }}" ]; then
+            IFS=',' read -ra ITEMS <<< "${{ github.event.inputs.exclude_components }}"
             for ITEM in "${ITEMS[@]}"; do
               ITEM=$(echo "$ITEM" | xargs)
               EXCLUDE_LIST["$ITEM"]=1
@@ -350,7 +323,7 @@ jobs:
               BASENAME=$(basename "$ENTRY")
               COMPONENT_NAME=$(echo "$BASENAME" | sed 's/\..*//')
 
-              if [ "${{ env.DEPLOY_SCOPE }}" = "specific" ] && [ -z "${KEEP_LIST[$COMPONENT_NAME]}" ]; then
+              if [ "${{ github.event.inputs.deploy_scope }}" = "specific" ] && [ -z "${KEEP_LIST[$COMPONENT_NAME]}" ]; then
                 rm -rf "$ENTRY"
                 continue
               fi
@@ -363,25 +336,25 @@ jobs:
           echo "🔎 Delta package filtered"
 
       - name: Set skip flag (full)
-        if: ${{ env.DEPLOY_TYPE == 'full' }}
+        if: ${{ github.event.inputs.deploy_type == 'full' }}
         run: echo "SKIP_DEPLOY=false" >> $GITHUB_ENV
 
       - name: "🚀 Deploy to Salesforce"
         if: ${{ env.SKIP_DEPLOY != 'true' }}
         run: |
           echo "═══════════════════════════════════════"
-          echo "  🔥 DEPLOYING TO ${{ env.TARGET_ORG }}"
-          echo "  📂 ${{ env.METADATA_FILTER }} (${{ env.DEPLOY_SCOPE }})"
-          if [ "${{ env.DEPLOY_SCOPE }}" = "specific" ]; then
-          echo "  📋 Components: ${{ env.SPECIFIC_NAMES }}"
+          echo "  🔥 DEPLOYING TO ${{ github.event.inputs.target_org }}"
+          echo "  📂 ${{ github.event.inputs.metadata_filter }} (${{ github.event.inputs.deploy_scope }})"
+          if [ "${{ github.event.inputs.deploy_scope }}" = "specific" ]; then
+          echo "  📋 Components: ${{ github.event.inputs.specific_names }}"
           fi
-          if [ -n "${{ env.EXCLUDE_COMPONENTS }}" ]; then
-          echo "  🚫 Excluding: ${{ env.EXCLUDE_COMPONENTS }}"
+          if [ -n "${{ github.event.inputs.exclude_components }}" ]; then
+          echo "  🚫 Excluding: ${{ github.event.inputs.exclude_components }}"
           fi
           echo "═══════════════════════════════════════"
           echo ""
 
-          if [ "${{ env.DEPLOY_TYPE }}" = "delta" ]; then
+          if [ "${{ github.event.inputs.deploy_type }}" = "delta" ]; then
             echo "📦 Deploying changed components only..."
             sf project deploy start \
               --manifest delta-output/package/package.xml \
@@ -410,7 +383,7 @@ jobs:
           echo "✅ Deployment SUCCESSFUL!"
 
       - name: Deploy Destructive Changes
-        if: ${{ env.DEPLOY_TYPE == 'delta' && env.SKIP_DEPLOY != 'true' }}
+        if: ${{ github.event.inputs.deploy_type == 'delta' && env.SKIP_DEPLOY != 'true' }}
         run: |
           if [ -f "delta-output/destructiveChanges/destructiveChanges.xml" ] && \
              grep -q '<types>' delta-output/destructiveChanges/destructiveChanges.xml 2>/dev/null; then
@@ -435,11 +408,11 @@ jobs:
           echo ""
           echo "╔═════════════════════════════════════════════╗"
           echo "║  Branch      : ${{ github.ref_name }}"
-          echo "║  Target Org  : ${{ env.TARGET_ORG }}"
-          echo "║  Deploy Type : ${{ env.DEPLOY_TYPE }}"
-          echo "║  Metadata    : ${{ env.METADATA_FILTER }}"
-          echo "║  Scope       : ${{ env.DEPLOY_SCOPE }}"
-          echo "║  Components  : ${{ env.SPECIFIC_NAMES }}"
-          echo "║  Excluded    : ${{ env.EXCLUDE_COMPONENTS }}"
+          echo "║  Target Org  : ${{ github.event.inputs.target_org }}"
+          echo "║  Deploy Type : ${{ github.event.inputs.deploy_type }}"
+          echo "║  Metadata    : ${{ github.event.inputs.metadata_filter }}"
+          echo "║  Scope       : ${{ github.event.inputs.deploy_scope }}"
+          echo "║  Components  : ${{ github.event.inputs.specific_names }}"
+          echo "║  Excluded    : ${{ github.event.inputs.exclude_components }}"
           echo "║  Skipped     : ${{ env.SKIP_DEPLOY }}"
           echo "╚═════════════════════════════════════════════╝"
