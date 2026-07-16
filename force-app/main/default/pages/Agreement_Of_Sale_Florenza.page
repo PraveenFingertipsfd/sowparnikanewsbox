@@ -64,6 +64,30 @@
     .no-break {
         page-break-inside: avoid;
     }
+    .schedule-title {
+        text-align: center;
+        font-weight: bold;
+        text-decoration: underline;
+        margin: 20px 0 6px 0;
+    }
+    .underline-heading {
+        font-weight: bold;
+        text-decoration: underline;
+        margin: 18px 0 10px 0;
+        page-break-after: avoid;
+    }
+    table.schedule-table {
+        width: 90%;
+        border-collapse: collapse;
+        margin: 14px 0 14px 10px;
+    }
+    table.schedule-table td {
+        border: 1px solid #000000;
+        padding: 5px 8px;
+        font-size: 15px;
+        text-align: left;
+        vertical-align: top;
+    }
 </style>
 </head>
 <body>
@@ -712,7 +736,215 @@
     place any heavy material in the common passages or staircase of the Building. The
     Allottee/s shall also not remove any wall, including the outer and load bearing wall of the
     (Apartment/Plot). The Allottee/s shall plan and distribute its electrical load in conformity
-    with the electrical systems installed by the Promoter and thereafter the association of</p>
+    with the electrical systems installed by the Promoter and thereafter the association of
+    allottee/s and/or maintenance agency appointed by association of allottee/s. The
+    Allottee/s shall be responsible for any loss or damages arising out of breach of any of
+    the aforesaid conditions.</p>
+
+    <!-- ==================== PAGE 16 ==================== -->
+
+    <p class="section-heading">17. Compliance of laws, notifications, etc. by Allottee/s</p>
+
+    <p class="clause">The Allottee/s are entering into this Agreement for the allotment of a (Apartment/Plot)
+    with the full knowledge of all laws, rules regulations, notifications applicable to the
+    Project in general and this project. That the Allottee/s hereby undertakes that he/she
+    shall comply with and carry out, from time to time after he/she has taken over for
+    occupation and use the said (Apartment/Plot), all the requirements, requisitions,
+    demands and repairs which are required by any competent Authority in respect of the
+    (Apartment/Plot) at his/her own cost and the Promoter will not be held responsible.</p>
+
+    <p class="section-heading">18.&#160;&#160;Additional constructions</p>
+
+    <p class="clause">The Promoter undertakes that it has no right to make additions or to put up additional
+    structure(s) anywhere in the Project after the building plan has been approved by the
+    competent authority (ies) except for as provided in the Act or as specified in clause 6 of
+    this agreement.</p>
+
+    <p class="section-heading">19.&#160;&#160;Promoter shall not mortgage or create a charge</p>
+
+    <p class="clause">After the Promoter executes this Agreement he shall not further mortgage or create a
+    charge on the (Building) and if any such mortgage or charge is made or created then
+    notwithstanding anything contained in any other law for the time being in force, such
+    mortgage or charge shall not affect the right and interest of the Allottee/s who has taken
+    or agreed to take such (Apartment/Plot/Building).</p>
+
+    <p class="section-heading">20.&#160;&#160;Apartment ownership Act</p>
+
+    <p class="clause">The Promoter has assured the Allottee/s that the Project in it&#8217;s entirely is in accordance
+    with the provisions of the Kerala Apartment Ownership Act 1983 (5 of 1984), Kerala
+    Apartment Ownership Rules, 1994, Kerala Real Estate (Regulation and Development)
+    Rules, 2018 and Real Estate (Regulation and Development) Act, 2016.</p>
+
+    <p class="section-heading">21. Binding effect</p>
+
+    <p class="clause">Forwarding this Agreement to the Allottee/s by the Promoter does not create a binding
+    obligation on the part of the Promoter or the Allottee/s until, firstly, the Allottee/s signs
+    and delivers this Agreement with all the schedules along with the payments due as
+    stipulated in the Payment Plan within 30 (thirty) days from the date of receipt by the
+    Allottee/s and secondly, appears for registration of the same before the concerned Sub-
+    Registrar as and when intimated by the Promoter. If the Allottee/s&#160;&#160;fails to execute and
+    deliver to the Promoter this Agreement within 30 (thirty) days form the date of its receipt
+    by the Allottee/s and/or appear before the Sub Registrar for its registration as and when
+    intimated by the Promoter, then the Promoter shall serve a notice to the Allottee/s for
+    rectifying the default, which if not rectified within 30 (thirty) days from the date of its
+    receipt by the Allottee/s, application of the Allottee/s shall be treated as cancelled and
+    all sums deposited by the Allottee/s in connection therewith including the booking
+    amount shall be returned to the allottee/s without any interest or compensation
+    whatsoever.</p>
+
+    <!-- ==================== PAGE 17 ==================== -->
+
+    <p class="section-heading">22. Entire agreement</p>
+
+    <p class="clause">This Agreement, along with its schedules, constitutes the entire Agreement between the
+    Parties with respect to the subject matter hereof and supersedes any and all
+    understandings, any other agreements, allotment letter, correspondences, marketing
+    materials, arrangements whether written or oral, if any, between the Parties in regard to
+    the said apartment/Plot/building, as the case may be.</p>
+
+    <p class="section-heading">23. Right to amend</p>
+
+    <p class="clause">This Agreement may only be amended through written consent of the Parties.</p>
+
+    <p class="section-heading">24. Provisions of this agreement applicable on Allottee/s subsequent Allottee/s</p>
+
+    <p class="clause">It is clearly understood and so agreed by and between the Parties hereto that all the
+    provisions contained herein and the obligations arising hereunder in respect of the
+    Project shall equally be applicable to and enforceable against any subsequent Allottee/s
+    of the (Apartment/Plot), in case of a transfer, as the said obligations go along with the
+    (Apartment/Plot) for all intents and purposes.</p>
+
+    <p class="section-heading">25. Waiver not a limitation to enforce</p>
+
+    <p class="clause">25.1.&#160;&#160;The Promoter may, at its sole option and discretion, without prejudice to its rights
+    as set out in this Agreement, waive the breach by the Allottee/s in not making payments
+    as per the Payment Plan including waiving the payment of interest for delayed payment.
+    It is made clear and so agreed by the Allottee/s that exercise of&#160;&#160;discretion by the
+    Promoter in the case of one Allottee/s shall not be construed to be a precedent and/or
+    binding on the Promoter to exercise such discretion in the&#160;&#160;case of other allottee/s.</p>
+
+    <!-- ==================== PAGE 18 ==================== -->
+
+    <p class="clause">25.2.&#160;&#160;Failure on the part of the Promoter to enforce at any time or for any period of
+    time the provisions hereof shall not be construed to be a waiver of any provisions or of
+    the right thereafter to enforce each and every provision.</p>
+
+    <p class="section-heading">26.&#160;&#160;Severability</p>
+
+    <p class="clause">If any provision of this agreement shall be determined to be void or unenforceable under
+    the Act or the Rules and Regulations made thereunder or under other applicable laws,
+    such provisions of the Agreement shall be deemed mended or deleted in so far as
+    reasonably inconsistent with the purpose of this Agreement and to the extent necessary
+    to conform to Act or the Rules and Regulations made thereunder or the applicable law,
+    as the case may be, and the remaining provisions of this Agreement shall remain valid
+    and enforceable as applicable at the time of execution of this Agreement.</p>
+
+    <p class="section-heading">27.&#160;&#160;Method of calculation of proportionate share wherever referred to in the
+    agreement</p>
+
+    <p class="clause">Wherever in this Agreement it is stipulated that the Allottee/s have to make any
+    payment, in common with other Allottee/s&#160;&#160;in project, the same shall be the proportion
+    which the carpet area of the (Apartment/Plot) bears to the total carpet area of all the
+    (Apartment/Plots) in the Project.</p>
+
+    <p class="section-heading">28.&#160;&#160;Further assurances</p>
+
+    <p class="clause">Both Parties agree that they shall execute, acknowledge and deliver to the other,such
+    instruments and take such other actions, in additions to the instruments and actions
+    specifically provided for herein, as may be reasonably required in order to effectuate the
+    provisions of this agreement or of any transaction contemplated herein or to confirm or
+    perfect any right to be created or transferred hereunder or pursuant to any such
+    transaction.</p>
+
+    <p class="section-heading">29.&#160;&#160;Place of execution</p>
+
+    <p class="clause">The execution of this Agreement shall be complete only upon its execution by the
+    Promoter through its authorized signatory at the Promoter&#8217;s office, or at some other
+    place, which may be mutually agreed between the Promoter and the Allottee/s, in
+    Kozhikode, after the agreement is duly executed by the Allottee/s and the Promoter or
+    simultaneously with the execution the said agreement shall be registered at the Office of
+    the Sub Registrar, Chathamangalam. Hence this agreement shall be deemed to have
+    been executed at Sub Registrar Office, Chathamangalam.</p>
+
+    <p class="section-heading">30.&#160;&#160;Notices</p>
+
+    <!-- ==================== PAGE 19 ==================== -->
+
+    <p class="clause">That all notices to be served on the Allottee/s and the Promoter as contemplated by this
+    Agreement shall be deemed to have been duly served if sent to the Allottee/s or the
+    Promoter by Registered Post at their respective addresses specified below:</p>
+
+    <p class="clause" style="text-align:left;"><b>(Name &amp; Address of Allottee/s)</b><br/>
+    ....................<br/>
+    .......................... P.O.,<br/>
+    ......................., ................Village,<br/>
+    ...................... Taluk,<br/>
+    .............................. District</p>
+
+    <p class="clause" style="text-align:left;"><b>(Name and Address of the Promoter)</b><br/>
+    <b>M/s. SOWPARNIKA PROJECTS AND INFRASTRUCTURE PVT LTD.</b><br/>
+    4ACES Building, Near Holy Cross Church,<br/>
+    Muttada-Paruthippara Road,<br/>
+    Muttada P.O, Thiruvananthapuram, Pin-695025.</p>
+
+    <p class="clause italic" style="text-indent:40px;">It shall be the duty of the allottee/s and the promoter to inform each other of any
+    change in address subsequent to the execution of this agreement in the above address
+    by registered post failing which all communications and letters posted at the above
+    addresses shall be deemed to have been received by the promoter or the allottee/s as
+    the case may be.</p>
+
+    <p class="section-heading">31. Joint Allottee/s</p>
+
+    <p class="clause">That in case there are Joint Allottee/s all communications shall be sent by the Promoter
+    to the Allottee/s whose name appears first in this agreement and at the address given
+    by him/her which shall for all intents and purposes be considered as properly served on
+    all the Allottee/s.</p>
+
+    <p class="section-heading">32.&#160;&#160;Governing law</p>
+
+    <p class="clause">That the rights and obligations of the parties under or arising out of this Agreement shall
+    be constructed and enforced in accordance with the laws of India for the time being in
+    force.</p>
+
+    <p class="section-heading">33.&#160;&#160;Dispute resolution</p>
+
+    <p class="clause">All or any disputes arising out or touching upon or in relation to the terms and conditions
+    of this Agreement, including the interpretation and validity of the terms thereof and the
+    respective rights and obligations of the Parties, such aggrieved party will issue a notice
+    to the other party stating the reasons or matters stated above. If the other party does
+    not respond within forty-five (45) days and on receipt of notice does not resolve the
+    matter amicably through mutual discussion in forty-five (45) days, failing which the same
+    shall be settled through the adjudication officer appointed under the Act.</p>
+
+    <!-- ==================== PAGE 20 ==================== -->
+
+    <p class="schedule-title">SCHEDULE A PROPERTY</p>
+
+    <p class="schedule-title">(As per Sale Deed No.954/2025)</p>
+
+    <table class="schedule-table">
+        <tr><td>1</td><td>Serial Number</td><td>1</td></tr>
+        <tr><td>2</td><td>District</td><td>Kozhikode</td></tr>
+        <tr><td>3</td><td>Sub-District</td><td>Chathamangalam</td></tr>
+        <tr><td>4</td><td>Taluk</td><td>Kozhikode</td></tr>
+        <tr><td>5</td><td>Village</td><td>Kunnamangalam</td></tr>
+        <tr><td>6</td><td>Kara</td><td>Karanthur</td></tr>
+        <tr><td>7</td><td>Panchayat/Municipality/Corporation</td><td>Kunnamangalam Panchayat</td></tr>
+        <tr><td>8</td><td>Re-Survey Block No.</td><td>Nil</td></tr>
+        <tr><td>9</td><td>Re-Survey Number</td><td>Nil</td></tr>
+        <tr><td>10</td><td>Re-Survey Sub division Number</td><td>Nil</td></tr>
+        <tr><td>11</td><td>Survey Number</td><td>52</td></tr>
+        <tr><td>12</td><td>Survey Sub Division Number</td><td>76</td></tr>
+        <tr><td>13</td><td>Extent in Ares</td><td>21.472</td></tr>
+        <tr><td>14</td><td>Tenure and Nature of land</td><td>Jenmom - Sthirapuncha</td></tr>
+        <tr><td>15</td><td>Thandapper Number of the Owner</td><td>7951</td></tr>
+        <tr><td>16</td><td>Thandapper Number of the Developer</td><td>Nil</td></tr>
+    </table>
+
+    <p class="underline-heading">DESCRIPTION OF PROPERTY</p>
+
+    <p class="clause">All that forming part and parcel of the land having an extent of 21.472 Ares in Survey
+    No.52/76 in Kunnamangalam Village together with the right of way, including the right to</p>
 
 </body>
 </html>
