@@ -1,0 +1,302 @@
+<apex:page renderAs="pdf" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false" standardStylesheets="false">
+<!-- Agreement of Sale - SOWPARNIKA FLORENZZA (Static Page) -->
+<html>
+<head>
+<style type="text/css">
+    @page {
+        size: A4;
+        margin: 2.2cm 1.8cm 2.2cm 1.8cm;
+        @top-center {
+            content: counter(page);
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+    }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        text-align: justify;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+    }
+    p {
+        margin: 0 0 14px 0;
+    }
+    .title {
+        text-align: center;
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: 16px;
+        margin: 0 0 24px 0;
+    }
+    .center-bold {
+        text-align: center;
+        font-weight: bold;
+        margin: 18px 0 14px 0;
+    }
+    .section-heading {
+        font-weight: bold;
+        margin: 18px 0 10px 0;
+    }
+    .clause {
+        margin: 0 0 14px 0;
+    }
+    .italic {
+        font-style: italic;
+    }
+    table.cost-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 6px 0 14px 20px;
+        page-break-inside: avoid;
+    }
+    table.cost-table td {
+        vertical-align: top;
+        padding: 4px 6px 4px 0;
+        font-size: 15px;
+        text-align: left;
+    }
+    table.cost-table td.label-col {
+        width: 55%;
+    }
+    .no-break {
+        page-break-inside: avoid;
+    }
+</style>
+</head>
+<body>
+
+    <!-- ==================== PAGE 1 ==================== -->
+
+    <p class="title">AGREEMENT OF SALE</p>
+
+    <p>This Agreement of Sale (&#8220;Agreement&#8221;) executed at Kunnamangalam, Kozhikode on this
+    the <b>.....th</b> day of <b>...........,</b> Two Thousand <b>Twenty Six (....../....../2026)</b></p>
+
+    <p class="center-bold">By and Between</p>
+
+    <p><b>Mrs. LAKSHMI PRIVAMVADA</b>, PAN-BHYPP7583B, Aadhaar No.2443 9553 7701, W/o
+    Lakshmivarahan, aged 48 (Forty Eight) years, Homemaker, residing at TC 29/1553/1,
+    &#8216;Sreevarah&#8217;, CRA 73, Kairali Lane, Palkulangara, Vallakkadavu P.O,
+    Thiruvananthapuram, Pin-695008, Petta Village, Thiruvananthapuram Taluk,
+    Thiruvananthapuram District; hereinafter referred to as the &#8220;<b>SELLER/OWNER</b>&#8221;, (which
+    expression shall, unless it be repugnant or opposed to the context or meaning thereof,
+    shall mean and include her heirs, successors, legal representatives, executors and/or
+    permitted assigns) of the First Part;</p>
+
+    <p class="center-bold">And</p>
+
+    <p><b>M/s SOWPARNIKA PROJECTS AND INFRASTRUCTURE PRIVATE LIMITED</b>, (PAN-AAKCS9641L),
+    a Company incorporated under the Companies Act 1956, with Corporate Identity Number:
+    U45201KA2007 PTC043166, having its Registered Office at No.750, &#8216;C&#8217; Block,
+    1st Main Road, AECS Lay out, Kundalahalli, Bangalore-560037 and Branch office at
+    4ACES Building, Near Holy Cross Church, Muttada-Paruthippara Road, Muttada P.O,
+    Thiruvananthapuram, Pin-695025, Kowdiar Village, Thiruvananthapuram Taluk,
+    Thiruvananthapuram District, represented by its authorized signatory, <b>Mr. ANSON
+    ANTONY</b> (Aadhaar No 7035 2845 5055), S/o Mr.Antony Thomas, aged 42 years,
+    Sr. Manager CRM, having official address at 4 ACES Building, Near Holy Cross Church,
+    Muttada-Paruthippara Road, Muttada P.O, Thiruvananthapuram, Pin-695025, Kowdiar
+    Village, Thiruvananthapuram Taluk, Thiruvananthapuram District, presently residing at
+    Flat No.2c2, Silicon Shelter Apartment, Manniakaranpalyam, Rabindranath Tagore Road,
+    Ganapathy P.O, Coimbatore-641006, Manniakaranpalyam Village, Coimbatore North Taluk,
+    Tamil Nadu, authorized vide Board Resolution dated .............; hereinafter referred to as
+    the <b>&#8220;PROMOTER&#8221;</b> (which expression shall unless repugnant to the context or meaning
+    thereof be deemed to mean and include its successor-in-interest, executors,
+    administrators and permitted assignees) of the Second Part;</p>
+
+    <!-- ==================== PAGE 2 ==================== -->
+
+    <p class="center-bold">AND</p>
+
+    <p><b>Mr/Mrs.......................,</b> PAN-..............., Aadhaar Card No-.................,
+    S/o/D/o/W/o....................., aged ....... years, ......-profession-......, residing at
+    .............., ............ P.O., ................, Pin-............, ............Village,
+    .......................... Taluk, .................. District; hereinafter called the
+    <b>&#8220;ALLOTTEE/S&#8221;</b> (which expression shall unless repugnant to the context or meaning
+    thereof be deemed to mean and include his/her/their heirs, executors, administrators,
+    successors-in-interest and permitted assignees) of the Third Part.</p>
+
+    <p class="section-heading">WHEREAS:</p>
+
+    <p class="clause">A. The Owner is the absolute and lawful owner of the residential land measuring 21.472
+    Ares (53 Cents) in Survey No.52/12 in Kunnamangalam Village, situated on the West
+    portion adjoining 6 meter private road acquired by virtue of Sale Deed No.954/2025,
+    registered in Book No.1, Volume 1115, pages from 15 to 42 of Sub Registrar&#8217;s Office,
+    Chathamangalam. And pursuant to the said Sale Deed, the Owner has mutated the said
+    property in her name and now the property having an extent of 21.472 Ares (53 Cents),
+    is in Survey No.52/76 in Kunnamangalam Village and she is paying tax under
+    Thandapper No.7951 in Kunnamangalam Village, which are more fully described in the
+    Schedule hereunder and hereinafter referred to as <b>Schedule A Property</b>.</p>
+
+    <p class="clause">The Owner and the Promoter has entered into a Joint Development Agreement dated
+    16/03/2026 and subsequently registered the same as Joint Development Agreement
+    dated No.738/2026 dated 16.03.2026, registered in Book No.1, Volume No.1309, pages
+    from 131 to 180 of SRO Chathamangalam with regard to the abovementioned extent of
+    land described in Schedule A hereunder.</p>
+
+    <p class="clause">B. The Said Land is earmarked for the purpose of building a residential apartment
+    project, comprising of Basement Floor, Ground Floor and 1<sup>st</sup> to 12<sup>th</sup> Floors and the said
+    project shall be known as <b>&#8220;SOWPARNIKA FLORENZZA&#8221;</b></p>
+
+    <p class="clause">C. The Promoter is fully competent to enter into this Agreement and all the legal
+    formalities with respect to the right, title and interest of the Promoter regarding the Said
+    Land on which the project is to be constructed have been completed.</p>
+
+    <p class="clause">D. The <b>Kunnamangalam Grama Panchayath</b> has granted the Site Approval and
+    Building Permit No.BP/24094/2026 dated 12/02/2026 for the proposed construction of
+    multistoried residential apartment building and the same is valid and subsisting as on
+    date.</p>
+
+    <!-- ==================== PAGE 3 ==================== -->
+
+    <p class="clause">E. The Promoter has obtained a final layout plan approval for the project from
+    Kunnamangalam Grama Panchayat. The Promoter agrees and undertakes that it shall
+    not make any changes to these layout plans except in strict compliance with Section 14
+    of the Act and other laws applicable.</p>
+
+    <p class="clause">F. The Promoter has registered the Project under the provisions of the Act with the
+    Kerala Real Estate Regulatory Authority vide Registration No.K-RERA/PRJ/KKD/095/2026
+    dated 22/06/2026.</p>
+
+    <p class="clause">G. The Allottee/s had applied for an apartment in the Project vide application/booking
+    form dated ............ and has been allotted Apartment No ............, having carpet area
+    of ............. Sq.ft, balcony area of ........ Sq.ft, Type ...... BHK on .............. Floor in
+    &#8216;SOWPARNIKA FLORENZZA&#8217; along with 1 car parking admeasuring .....m x ......... m
+    and of pro rata share in the common areas (&#8220;Common Areas&#8221;) measuring ....... Sq.ft, as
+    defined under clause (n) of Section 2 of the Act, hereinafter referred to as the
+    &#8220;Apartment&#8221;, more particularly described in Schedule A,B and C and the floor plan of the
+    apartment is annexed hereto and marked as Schedule D).</p>
+
+    <p class="clause">H. The Parties have gone through all the terms and conditions set out in this Agreement
+    and understood the mutual rights and obligations detailed herein.</p>
+
+    <p class="clause">I. The Parties hereby confirm that they are signing this Agreement with full knowledge of
+    all the laws, rules, regulations, notifications, etc., applicable to the project.</p>
+
+    <p class="clause">J. The Parties, relying on the confirmations, representations and assurances of each
+    other to faithfully abide by all the terms, conditions and stipulations contained in the
+    Agreement and all applicable laws, are now willing to enter into this agreement on the
+    terms and conditions appearing hereinafter.</p>
+
+    <p class="clause">K. In accordance with the terms and conditions set out in this Agreement and as
+    mutually agreed upon by and between the Parties, the Promoter hereby agrees to sell
+    and the Allottee/s hereby agrees to purchase the [Apartment/Plot] and the garage/
+    closed parking (if applicable) as specified in para G.</p>
+
+    <p class="clause">Now, THEREFORE, in consideration of the mutual representations, covenants,
+    assurances, promises and agreements contained herein and other good and valuable
+    consideration, the Parties agree as follows.</p>
+
+    <p class="section-heading">1. Terms:</p>
+
+    <!-- ==================== PAGE 4 ==================== -->
+
+    <p class="clause">1.1 Subject to the terms and conditions as detailed in this Agreement, the Promoter
+    agrees to sell to the Allottee/s and the Allottee/s hereby agrees to purchase, the
+    [Apartment/Plot] as specified in para G;</p>
+
+    <p class="clause">1.2 The Total Price for the [Apartment/Plot] based on the carpet area in
+    <b>Rs...................../- (Rupees ........................... only) (&#8220;Total Price excluding tax&#8221;);</b></p>
+
+    <table class="cost-table">
+        <tr>
+            <td class="label-col">Block/Building/Tower No.</td>
+            <td>...................................</td>
+        </tr>
+        <tr>
+            <td class="label-col">Apartment No./Type/Floor</td>
+            <td>Apartment No ......, type .... BHK<br/>on the ...... Floor</td>
+        </tr>
+        <tr>
+            <td class="label-col">Land Cost (UDSL)</td>
+            <td>Rs.............../-</td>
+        </tr>
+        <tr>
+            <td class="label-col">Cost of Apartment including<br/>proportionate cost of common areas<br/>and amenities</td>
+            <td>Rs................../-</td>
+        </tr>
+        <tr>
+            <td class="label-col">GST @ 1%</td>
+            <td>Rs.................../-</td>
+        </tr>
+        <tr>
+            <td class="label-col">Labour Cess @.70%</td>
+            <td>Rs..................../-</td>
+        </tr>
+        <tr>
+            <td class="label-col"><b>Total cost including taxes</b></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <p class="clause italic">Breakup of the amounts such as cost of apartment, proportionate cost of common
+    areas, preferential locations charges, cost of other amenities, taxes etc.</p>
+
+    <p class="clause">Explanations:</p>
+
+    <p class="clause italic">(i)&#160;&#160;&#160;&#160;The Total Price above includes the booking amount paid by the allottee/s to the
+    promoter towards the (Apartment/Plot).</p>
+
+    <p class="clause italic">(ii)&#160;&#160;&#160;The Total Price above includes Taxes (consisting of tax paid or payable by the
+    Promoter by way of Goods and Service Tax Act or any other similar taxes which may be
+    levied, in connection with the construction of the Project payable by the Promoter) up to
+    the date of handing over the possession of the (Apartment) Provided that in case there
+    is any change/ modification in the taxes, the subsequent amount payable by the
+    allottee/s to the promoter shall be increased/reduced based on such
+    change/modification.</p>
+
+    <p class="clause italic">(iii)&#160;&#160;The Promoter shall periodically intimate to the Allottee/s, the amount payable as
+    stated in (i) above and the Allottee/s shall make payment with 30 (thirty) days from the
+    date of such written intimation. In addition, the Promoter shall provide to the Allottee/s
+    the details of the taxes paid or demanded along with the acts/rules/notification together
+    with date&#8217;s form which such taxes/levies etc. have been imposed or become effective.</p>
+
+    <!-- ==================== PAGE 5 ==================== -->
+
+    <p class="clause italic">(iv)&#160;&#160;The Total Price of (Apartment/Plot) includes: (1) Pro rata share in the Common
+    Areas as provided in the agreement.</p>
+
+    <p class="clause">1.3&#160;&#160;The Total Price is escalation-free, save and except increases which the Allottee/s
+    hereby agrees to pay, due to increase on account of development charges payable to
+    the competent authority and/or any other increase in charges which may be levied or
+    imposed by the competent authority from time to time. The Promoter undertakes and
+    agrees that while raising a demand on the Allottee/s for increase in development
+    charges, cost/charges imposed by the competent authorities, the Promoter shall
+    enclose the said notification /order/rule/regulation to that effect along with the demand
+    letter being issued to the Allottee/s, which shall only be applicable on subsequent
+    payments.</p>
+
+    <p class="clause">1.4&#160;&#160;The Allottee/s (s) shall make the payment as per the payment plan set out in
+    Schedule E (&#8220;Payment Plan&#8221;).</p>
+
+    <p class="clause">1.5&#160;&#160;The Promoter may allow, in its sole discretion, a rebate for early payments or
+    instalments payable by the Allottee/s. The provision for allowing rebate and such rate or
+    rebate shall not be subject to any revision/withdrawal, once granted to an Allottee/s by
+    the Promoter.</p>
+
+    <p class="clause">1.6&#160;&#160;It is agreed that the Promoter shall not make any additions and alternations in the
+    sanctioned plans, layout plans and specifications and the nature of fixtures, fittings and
+    amenities described therein in respect of the apartment, plot or building, as the case
+    may be, without the previous written consent of the Allottee/s.&#160;&#160;Provided that the
+    Promoter may make such minor additions or alterations as may be required by the
+    Allottee/s, or such minor changes or alterations as per the provisions of the Act or by
+    direction of such competent authority.</p>
+
+    <p class="clause">1.7&#160;&#160;The Promoter shall confirm the final carpet area that has been allotted to the
+    Allottee/s after the construction of the building is complete and the occupancy certificate
+    is granted by the competent authority, by furnishing details of the changes, if any, in the
+    carpet area. The total price payable for the carpet area shall be recalculated upon
+    confirmation by the Promoter. If there is a major reduction in the carpet area within the
+    defined limit then Promoter shall refund the excess money paid by Allottee/s within
+    forty-five days with annual interest at the rate specified in the Rules, from the date when
+    such as excess amount was paid by the Allottee/s. If there is a major increase in the
+    carpet area allotted to Allottee/s, the Promoter shall demand additional amount from the
+    Allottee/s as per the next milestone of the Payment Plan. All these monetary
+    adjustments shall be made at the same rate per square feet as agreed in para 1.2 of
+    this Agreement.</p>
+
+</body>
+</html>
+</apex:page>
