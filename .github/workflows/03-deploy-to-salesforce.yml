@@ -16,7 +16,7 @@ on:
       target_org:
         description: 'Target Salesforce org'
         required: true
-        default: 'DEFAULT'
+        default: 'Pattu-branch'
         type: choice
         options:
           - DEFAULT
