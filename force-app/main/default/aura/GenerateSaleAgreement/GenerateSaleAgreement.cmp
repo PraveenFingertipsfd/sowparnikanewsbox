@@ -48,11 +48,18 @@
         
         <aura:if isTrue="{!v.projectName == 'Whispering Petals'}">
             <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-            <iframe src="{!'/apex/apex/AGREEMENT_SALE?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/> 
+            <iframe src="{!'/apex/apex/AGREEMENT_SALE?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/>
         </div>
-            
+
         </aura:if>
-        
+
+        <aura:if isTrue="{!v.projectName == 'Florenzza'}">
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <iframe src="{!'/apex/apex/Agreement_Of_Sale_Florenza?Id=' + v.recordId }" width="100%" height="500px;" frameBorder="0"/>
+        </div>
+
+        </aura:if>
+
         <footer class="slds-modal__footer">
             <button class="slds-button slds-button_neutral" onclick="{!c.close}">Cancel</button>            
         </footer>
