@@ -1,5 +1,5 @@
 public class AddOrEditPaymentSchedule {
-    
+    //new
     @AuraEnabled
     public static databox getPaymentSchedules(string recId){
         databox db = new databox();

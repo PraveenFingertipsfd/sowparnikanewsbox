@@ -13,9 +13,9 @@ on:
   workflow_dispatch:
     inputs:
       source_org:
-        description: 'Salesforce org to retrieve FROM'
+        description: 'Salesforce org to retrieve FROM (NOT a git branch — branch is set via "Use workflow from")'
         required: true
-        default: 'DEFAULT'
+        default: 'SANDBOX'
         type: choice
         options:
           - DEFAULT
