@@ -1,6 +1,7 @@
 @isTest
 public class AddOrEditPaymentScheduleTest {
     @isTest
+//new..
     public static void method1()
  {
     Payment_schedule__c p=new Payment_schedule__c();
