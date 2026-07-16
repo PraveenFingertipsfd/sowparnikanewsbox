@@ -1,5 +1,5 @@
 global class LeadBatchUpdate implements Database.Batchable<sObject> {
-    
+    //new..
     global Database.QueryLocator start(Database.BatchableContext BC) {
         String baseQuery = 'select id,name,RM_Name__c,RMBack__c from Receipt_Line_Item__c where RM_Name__c != null';
 
