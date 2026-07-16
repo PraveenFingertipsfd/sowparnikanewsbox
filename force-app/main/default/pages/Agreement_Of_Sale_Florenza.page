@@ -1,5 +1,5 @@
-<apex:page renderAs="pdf" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false" standardStylesheets="false">
-<!-- Agreement of Sale - SOWPARNIKA FLORENZZA (Static Page) -->
+<apex:page standardController="Booking__c" extensions="convertValueToWords" renderAs="pdf" applyBodyTag="false" applyHtmlTag="false" showHeader="false" sidebar="false" standardStylesheets="false">
+<!-- Agreement of Sale - SOWPARNIKA FLORENZZA -->
 <html>
 <head>
 <style type="text/css">
@@ -97,7 +97,7 @@
     <p class="title">AGREEMENT OF SALE</p>
 
     <p>This Agreement of Sale (&#8220;Agreement&#8221;) executed at Kunnamangalam, Kozhikode on this
-    the <b>.....th</b> day of <b>...........,</b> Two Thousand <b>Twenty Six (....../....../2026)</b></p>
+    the <b><apex:outputText value="{0, date, dd}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText></b> day of <b><apex:outputText value="{0, date, MMMM yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText></b> <b>(<apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>)</b></p>
 
     <p class="center-bold">By and Between</p>
 
@@ -134,10 +134,14 @@
 
     <p class="center-bold">AND</p>
 
-    <p><b>Mr/Mrs.......................,</b> PAN-..............., Aadhaar Card No-.................,
-    S/o/D/o/W/o....................., aged ....... years, ......-profession-......, residing at
-    .............., ............ P.O., ................, Pin-............, ............Village,
-    .......................... Taluk, .................. District; hereinafter called the
+    <p><b>Mr/Mrs. {!Booking__c.First_Applicant_Name__c},</b> PAN-{!Booking__c.PAN_Number__c},
+    Aadhaar Card No-{!Booking__c.Aadhar_Number__c},
+    S/o/D/o/W/o {!Booking__c.W_o_S_o_C_o__c}, aged&#160;<apex:outputText value="{0, Number,###,###,###}"><apex:param value="{!Booking__c.Age__c}" /></apex:outputText>&#160;years,
+    profession-{!Booking__c.Profession__c}, residing at
+    {!Booking__c.Address__c}<apex:repeat value="{!Booking__c.Co_Applicants__r}" var="p">
+    and <b>Mr/Mrs. {!p.Name},</b> PAN-{!p.PAN_Number__c}, Aadhaar Card No-{!p.Aadhar_Number__c},
+    S/o/D/o/W/o {!p.W_o_S_o_C_o__c}, aged&#160;<apex:outputText value="{0, Number,###,###,###}"><apex:param value="{!p.Age__c}" /></apex:outputText>&#160;years,
+    residing at {!p.Address__c}</apex:repeat>; hereinafter called the
     <b>&#8220;ALLOTTEE/S&#8221;</b> (which expression shall unless repugnant to the context or meaning
     thereof be deemed to mean and include his/her/their heirs, executors, administrators,
     successors-in-interest and permitted assignees) of the Third Part.</p>
@@ -185,10 +189,10 @@
     dated 22/06/2026.</p>
 
     <p class="clause">G. The Allottee/s had applied for an apartment in the Project vide application/booking
-    form dated ............ and has been allotted Apartment No ............, having carpet area
-    of ............. Sq.ft, balcony area of ........ Sq.ft, Type ...... BHK on .............. Floor in
+    form dated <apex:outputText value="{0, date, dd MMMM yyyy}"><apex:param value="{!Booking__c.Date_of_Booking__c}" /></apex:outputText> and has been allotted Apartment No {!Booking__c.Unit_NumberFor__c}, having carpet area
+    of {!ROUND(Booking__c.Carpet_Area__c, 2)} Sq.ft, balcony area of {!ROUND(Booking__c.Balcony_Area__c, 2)} Sq.ft, Type {!SUBSTITUTE(Booking__c.BHK_Type__c, 'BHK', '')} BHK on {!Booking__c.Floor__c} Floor in
     &#8216;SOWPARNIKA FLORENZZA&#8217; along with 1 car parking admeasuring .....m x ......... m
-    and of pro rata share in the common areas (&#8220;Common Areas&#8221;) measuring ....... Sq.ft, as
+    and of pro rata share in the common areas (&#8220;Common Areas&#8221;) measuring {!Booking__c.Common_Area__c} Sq.ft, as
     defined under clause (n) of Section 2 of the Act, hereinafter referred to as the
     &#8220;Apartment&#8221;, more particularly described in Schedule A,B and C and the floor plan of the
     apartment is annexed hereto and marked as Schedule D).</p>
@@ -222,36 +226,36 @@
     [Apartment/Plot] as specified in para G;</p>
 
     <p class="clause">1.2 The Total Price for the [Apartment/Plot] based on the carpet area in
-    <b>Rs...................../- (Rupees ........................... only) (&#8220;Total Price excluding tax&#8221;);</b></p>
+    <b>Rs.{!totalExcludingTaxInIndian}/- (Rupees {!TotalExcludingTaxInWords} only) (&#8220;Total Price excluding tax&#8221;);</b></p>
 
     <table class="cost-table">
         <tr>
             <td class="label-col">Block/Building/Tower No.</td>
-            <td>...................................</td>
+            <td>{!Booking__c.Block_Name__c}</td>
         </tr>
         <tr>
             <td class="label-col">Apartment No./Type/Floor</td>
-            <td>Apartment No ......, type .... BHK<br/>on the ...... Floor</td>
+            <td>Apartment No {!Booking__c.Unit_NumberFor__c}, type {!SUBSTITUTE(Booking__c.BHK_Type__c, 'BHK', '')} BHK<br/>on the {!Booking__c.Floor__c} Floor</td>
         </tr>
         <tr>
             <td class="label-col">Land Cost (UDSL)</td>
-            <td>Rs.............../-</td>
+            <td>Rs.{!landCostInIndian}/-</td>
         </tr>
         <tr>
             <td class="label-col">Cost of Apartment including<br/>proportionate cost of common areas<br/>and amenities</td>
-            <td>Rs................../-</td>
+            <td>Rs.{!totlbasicPriceinIndian}/-</td>
         </tr>
         <tr>
             <td class="label-col">GST @ 1%</td>
-            <td>Rs.................../-</td>
+            <td>Rs.{!gstAmountInIndian}/-</td>
         </tr>
         <tr>
             <td class="label-col">Labour Cess @.70%</td>
-            <td>Rs..................../-</td>
+            <td>Rs.{!labourCessInIndian}/-</td>
         </tr>
         <tr>
             <td class="label-col"><b>Total cost including taxes</b></td>
-            <td></td>
+            <td><b>Rs.{!totalWithTaxInIndian}/-</b></td>
         </tr>
     </table>
 
@@ -379,8 +383,8 @@
 
     <p class="clause">1.12&#160;&#160;&#160;The Allottee/s has paid a sum of <b>Rs. 1,00,000/- (Rupees One Lakh only)</b> as
     booking amount being part payment towards the Total Price of the (Apartment/Plot) at
-    the time of application and has so far paid an amount of <b>Rs................/- (Rupees
-    ............................................ only)</b> including booking amount the receipt of which the
+    the time of application and has so far paid an amount of <b>Rs.{!totlreceivedinIndian}/- (Rupees
+    {!tillDateReceived} only)</b> including booking amount the receipt of which the
     Promoter hereby acknowledges and the Allottee/s hereby agrees to pay the remaining
     price of the (Apartment/Plot) as prescribed in the Payment Plan as may be demanded
     by the Promoter within the time and in the manner specified therein:</p>
@@ -875,11 +879,8 @@
     Promoter by Registered Post at their respective addresses specified below:</p>
 
     <p class="clause" style="text-align:left;"><b>(Name &amp; Address of Allottee/s)</b><br/>
-    ....................<br/>
-    .......................... P.O.,<br/>
-    ......................., ................Village,<br/>
-    ...................... Taluk,<br/>
-    .............................. District</p>
+    {!Booking__c.First_Applicant_Name__c}<br/>
+    {!Booking__c.Address__c}</p>
 
     <p class="clause" style="text-align:left;"><b>(Name and Address of the Promoter)</b><br/>
     <b>M/s. SOWPARNIKA PROJECTS AND INFRASTRUCTURE PVT LTD.</b><br/>
@@ -965,14 +966,14 @@
     <p class="center-bold" style="margin-top:26px;">SCHEDULE &#8220;B&#8221; PROPERTY</p>
 
     <p class="clause">.................. % share of undivided right, title &amp; interest in Schedule-A Property, which
-    is equivalent to ..................... square meters.</p>
+    is equivalent to {!ROUND(Booking__c.Undivided_Share_Of_Land__c * 0.092903, 2)} square meters.</p>
 
     <p class="center-bold" style="margin-top:26px;">SCHEDULE &#8220;C&#8221; PROPERTY</p>
 
-    <p class="clause">Apartment No ................... in the ................... Floor of the building to be constructed
+    <p class="clause">Apartment No {!Booking__c.Unit_NumberFor__c} in the {!Booking__c.Floor__c} Floor of the building to be constructed
     over the Schedule-A property and to be known as <b>&#8220;Sowparnika Florenzza&#8221;</b>, having
-    carpet area of .......... Sq.ft, Balcony measuring ......... Sq.ft and common areas
-    measuring .......... Sq.ft (super built up area of ............. Sq.ft)&#160;&#160;with one car parking
+    carpet area of {!ROUND(Booking__c.Carpet_Area__c, 2)} Sq.ft, Balcony measuring {!ROUND(Booking__c.Balcony_Area__c, 2)} Sq.ft and common areas
+    measuring {!Booking__c.Common_Area__c} Sq.ft (super built up area of {!ROUND(Booking__c.Built_up_area__c, 2)} Sq.ft)&#160;&#160;with one car parking
     space.</p>
 
     <p class="clause"><b>Schedule &#8220;D&#8221;</b> Floor plan of the apartment (Attached Separately)</p>
@@ -990,33 +991,25 @@
             <td style="text-align:center; font-weight:bold; width:14%;">Amount</td>
             <td style="text-align:center; font-weight:bold; width:16%;">Taxes</td>
         </tr>
-        <tr><td>BOOKING</td><td></td><td></td><td></td></tr>
-        <tr><td>AGREEMENT (including Booking Amount)</td><td>10.00%</td><td></td><td></td></tr>
-        <tr><td>ON FOUNDATION COMPLETION</td><td>20.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 1 COMPLETION - GROUND FLOOR</td><td>10.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 2 COMPLETION - Ist&#160;&#160;FLOOR ROOF</td><td>10.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 3 COMPLETION -&#160;&#160;2nd FLOOR ROOF</td><td>5.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 4 COMPLETION - 3rd&#160;&#160;FLOOR ROOF</td><td>5.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 5 COMPLETION - 4th&#160;&#160;FLOOR ROOF</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 6 COMPLETION - 5th FLOOR ROOF</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 7 COMPLETION -&#160;&#160;6th FLOOR ROOF</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 8 COMPLETION -&#160;&#160;7th FLOOR ROOF</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 9 COMPLETION -&#160;&#160;8th FLOOR ROOF</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 10 COMPLETION -&#160;&#160;9th FLOOR ROOF</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>SLAB 11 COMPLETION -&#160;&#160;10th FLOOR ROOF</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>BRICK WORK COMPLETION OF INDIVIDUALAPARTMENT</td><td>4.00%</td><td></td><td></td></tr>
-        <tr><td>PLASTERING COMPLETION OF INDIVIDUAL APARTMENT</td><td>3.00%</td><td></td><td></td></tr>
-        <tr><td>PAINTING AND&#160;&#160;&#160;TILING COMPLETION OF INDIVIDUAL APARTMENT</td><td>3.00%</td><td></td><td></td></tr>
-        <tr><td>ON HANDING OVER</td><td>2.00%</td><td></td><td></td></tr>
+        <apex:repeat value="{!payList}" var="p">
+        <tr>
+            <td>{!p.Name}</td>
+            <td><apex:outputText value="{0, Number,##0.00}" rendered="{!NOT(ISNULL(p.Payment_percent))}"><apex:param value="{!p.Payment_percent}" /></apex:outputText><apex:outputText value="%" rendered="{!NOT(ISNULL(p.Payment_percent))}"/></td>
+            <td>{!p.whisperingAmount}</td>
+            <td></td>
+        </tr>
+        </apex:repeat>
         <tr style="background-color:#d9d9d9;">
             <td style="text-align:center; font-weight:bold;">TOTAL</td>
             <td style="text-align:center; font-weight:bold;">100.00%</td>
-            <td></td><td></td>
+            <td style="text-align:center; font-weight:bold;">{!totlbasicPriceinIndian}</td>
+            <td></td>
         </tr>
         <tr style="background-color:#d9d9d9;">
             <td style="text-align:center; font-weight:bold;">GRAND TOTAL INCLUSIVE OF TAXES</td>
             <td style="text-align:center; font-weight:bold;">Rs.</td>
-            <td></td><td></td>
+            <td style="text-align:center; font-weight:bold;">{!totalWithTaxInIndian}</td>
+            <td></td>
         </tr>
     </table>
 
@@ -1119,7 +1112,7 @@
 
         <p class="clause" style="margin-top:24px;"><b>SIGNED AND DELIVERED BY THE WITHIN NAMED ALOTTEE/S</b></p>
 
-        <p class="clause" style="margin-top:16px;"><b>...................</b></p>
+        <p class="clause" style="margin-top:16px;"><b>{!Booking__c.First_Applicant_Name__c}</b></p>
 
         <p class="clause" style="text-align:left; margin-top:24px;"><b>WITNESSES:</b><br/>
         1.</p>
