@@ -14,6 +14,12 @@ public class convertValueToWords {
     public String totlbasicPriceinIndian {get;set;}
     public String totltaxinIndian {get;set;}
     Public String WhiperingTotalAmount{get; set;}
+    public String totalExcludingTaxInIndian {get;set;}
+    public String TotalExcludingTaxInWords {get;set;}
+    public String totalWithTaxInIndian {get;set;}
+    public String landCostInIndian {get;set;}
+    public String gstAmountInIndian {get;set;}
+    public String labourCessInIndian {get;set;}
     
     public List<paySchWrapper> payList {get;set;}
     
@@ -29,7 +35,7 @@ public class convertValueToWords {
     
     public convertValueToWords(ApexPages.StandardController stdController) {
         bookingId = (Id)stdController.getId();
-        Booking__c bk = [select id,name,Plot__c,Project__c,EB_GST_18__c,Labour_Cess__c,Basic_Price__c,Total_received_Amount__c,Total_Cost_Ex_Leg_Main__c,Booking_Amount__c,Sanctioned_Amount__c,Pending_Amount__c from Booking__c where id =: bookingId];
+        Booking__c bk = [select id,name,Plot__c,Project__c,EB_GST_18__c,Labour_Cess__c,Basic_Price__c,Total_received_Amount__c,Total_Cost_Ex_Leg_Main__c,Booking_Amount__c,Sanctioned_Amount__c,Pending_Amount__c,Total_Cost_Excluding_Tax__c,Total_Cost_With_Tax__c,Land_Cost__c,GST_Amount__c from Booking__c where id =: bookingId];
         if(bk.Project__c != null){
             List<Project__c> prj = [select id,name,Project_Specification__c from Project__c where Project__c =: bk.Project__c];
             if(prj.size() >0){
@@ -45,20 +51,20 @@ public class convertValueToWords {
             pw.Payment_percent = ps.Payment_Percent__c;
             pw.isConstruction = ps.Is_Construction__c;
             pw.isSale = ps.Is_Land__c;
-            pw.amount = ps.AmountB__c.setScale(2).format();
-            pw.whisperingAmount = (bk.Basic_Price__c * ps.Payment_Percent__c / 100).setScale(2).format();
+            pw.amount = ps.AmountB__c != null ? ps.AmountB__c.setScale(2).format() : '';
+            pw.whisperingAmount = (bk.Basic_Price__c != null && ps.Payment_Percent__c != null) ? (bk.Basic_Price__c * ps.Payment_Percent__c / 100).setScale(2).format() : '';
             pw.S_No = ps.S_No__c;
             samp.add(pw);
         }
-        
-		payList =  samp;  
-        if(bk.EB_GST_18__c != null){
+
+		payList =  samp;
+        if(bk.EB_GST_18__c != null && bk.Labour_Cess__c != null){
             Decimal totalTax = Math.round(bk.EB_GST_18__c + bk.Labour_Cess__c);
             totltaxinIndian = totalTax.setScale(2).format();
         }
-        totalCostInString = bk.Total_Cost_Ex_Leg_Main__c.setScale(2).format();
-        totlreceivedinIndian = bk.Total_received_Amount__c.setScale(2).format();
-        totalPendingInIndia = bk.Pending_Amount__c.setScale(2).format();
+        totalCostInString = bk.Total_Cost_Ex_Leg_Main__c != null ? bk.Total_Cost_Ex_Leg_Main__c.setScale(2).format() : '';
+        totlreceivedinIndian = bk.Total_received_Amount__c != null ? bk.Total_received_Amount__c.setScale(2).format() : '';
+        totalPendingInIndia = bk.Pending_Amount__c != null ? bk.Pending_Amount__c.setScale(2).format() : '';
         NumberTOWordConvertion nwcObj = new NumberTOWordConvertion();
         if(bk.Sanctioned_Amount__c != null){
             loanAmountInString = bk.Sanctioned_Amount__c.setScale(2).format();
@@ -67,11 +73,17 @@ public class convertValueToWords {
         if(bk.Basic_Price__c != null){
             totlbasicPriceinIndian = bk.Basic_Price__c.setScale(2).format();
         }
-        TotalCostAmountInWords = nwcObj.getNumberTOWordConvertion(bk.Total_Cost_Ex_Leg_Main__c);
-        TotalBasicAmountInWords = nwcObj.getNumberTOWordConvertion(bk.Basic_Price__c);
-        BookingAmount = nwcObj.getNumberTOWordConvertion(bk.Booking_Amount__c);
-        totalPendingWords = nwcObj.getNumberTOWordConvertion(bk.Pending_Amount__c);
-        tillDateReceived = nwcObj.getNumberTOWordConvertion(bk.Total_received_Amount__c);
+        TotalCostAmountInWords = bk.Total_Cost_Ex_Leg_Main__c != null ? nwcObj.getNumberTOWordConvertion(bk.Total_Cost_Ex_Leg_Main__c) : '';
+        TotalBasicAmountInWords = bk.Basic_Price__c != null ? nwcObj.getNumberTOWordConvertion(bk.Basic_Price__c) : '';
+        BookingAmount = bk.Booking_Amount__c != null ? nwcObj.getNumberTOWordConvertion(bk.Booking_Amount__c) : '';
+        totalPendingWords = bk.Pending_Amount__c != null ? nwcObj.getNumberTOWordConvertion(bk.Pending_Amount__c) : '';
+        tillDateReceived = bk.Total_received_Amount__c != null ? nwcObj.getNumberTOWordConvertion(bk.Total_received_Amount__c) : '';
+        totalExcludingTaxInIndian = bk.Total_Cost_Excluding_Tax__c != null ? bk.Total_Cost_Excluding_Tax__c.setScale(2).format() : '';
+        TotalExcludingTaxInWords = bk.Total_Cost_Excluding_Tax__c != null ? nwcObj.getNumberTOWordConvertion(bk.Total_Cost_Excluding_Tax__c) : '';
+        totalWithTaxInIndian = bk.Total_Cost_With_Tax__c != null ? bk.Total_Cost_With_Tax__c.setScale(2).format() : '';
+        landCostInIndian = bk.Land_Cost__c != null ? bk.Land_Cost__c.setScale(2).format() : '';
+        gstAmountInIndian = bk.GST_Amount__c != null ? bk.GST_Amount__c.setScale(2).format() : '';
+        labourCessInIndian = bk.Labour_Cess__c != null ? bk.Labour_Cess__c.setScale(2).format() : '';
     }
 
 }
