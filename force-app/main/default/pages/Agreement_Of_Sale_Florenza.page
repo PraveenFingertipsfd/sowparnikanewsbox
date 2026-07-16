@@ -39,6 +39,7 @@
     .section-heading {
         font-weight: bold;
         margin: 18px 0 10px 0;
+        page-break-after: avoid;
     }
     .clause {
         margin: 0 0 14px 0;
@@ -691,7 +692,7 @@
     spaces, and the same shall be reserved for use by the association of allottee/s formed
     by the Allottee/s for rendering maintenance services.</p>
 
-    <p class="section-heading">16. General compliance with respect to the apartment</p>
+    <p class="section-heading" style="page-break-before: always;">16. General compliance with respect to the apartment</p>
 
     <p class="clause">Subject to Clause 12 above, the Allottee/s shall, after taking possession, be solely
     responsible to maintain the (Apartment/plot) at his/her own cost, in good repair and
