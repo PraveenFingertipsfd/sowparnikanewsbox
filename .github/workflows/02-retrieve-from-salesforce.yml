@@ -15,7 +15,7 @@ on:
       source_org:
         description: 'Salesforce org to retrieve FROM'
         required: true
-        default: 'DEFAULT'
+        default: 'Pattu-branch'
         type: choice
         options:
           - DEFAULT
