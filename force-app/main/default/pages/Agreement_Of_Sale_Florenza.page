@@ -398,8 +398,8 @@
     milestones, the Allottee/s shall make all payments, on demand by the Promoter, within
     the stipulated time as mentioned in the Payment Plan through A/c Payee cheque/
     demand draft or online payment in favour of &#8220;M/s Sowparnika Projects and
-    Infrastructure Pvt. Ltd &#8211; ....................... - A/c No. ................... with ........... Bank,
-    ................ Branch, IFSC Code: ..................</p>
+    Infrastructure Pvt. Ltd &#8211; {!Booking__c.Beneficiary_Name__c} - A/c No. {!Booking__c.Builder_Account_Number__c} with {!Booking__c.Project_Bank_Name__c},
+    {!Booking__c.Project_Bank_Branch__c} Branch, IFSC Code: {!Booking__c.IFSC_Code__c}</p>
 
     <p class="section-heading">3. Compliance of Laws relating to remittances</p>
 
