@@ -97,7 +97,7 @@
     <p class="title">AGREEMENT OF SALE</p>
 
     <p>This Agreement of Sale (&#8220;Agreement&#8221;) executed at Kunnamangalam, Kozhikode on this
-    the <b><apex:outputText value="{0, date, dd}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText></b> day of <b><apex:outputText value="{0, date, MMMM yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText></b> <b>(<apex:outputText value="{0, date, dd/MM/yyyy}"><apex:param value="{!Booking__c.Sale_Agreement_Date__c}" /></apex:outputText>)</b></p>
+    the <b>&#8230;..th</b> day of <b>&#8230;&#8230;&#8230;&#8230;..,</b> <b>Two Thousand Twenty Six (&#8230;&#8230;/&#8230;&#8230;/2026)</b></p>
 
     <p class="center-bold">By and Between</p>
 
@@ -709,8 +709,16 @@
 
     <p class="section-heading">15. Usage</p>
 
-    <p class="clause">In Florenzza, the Basement, Ground Floor, and First Floor are proposed to be used for car parking. Kindly revise this clause accordingly.
-</p>
+    <p class="clause">Use of Basement, Ground Floor, First Floor and Service Areas &#8211; The basement(s),
+    ground floor, first floor and service areas, if any as located within the &#8220;Sowparnika
+    Florenzza&#8221; Project shall be earmarked for purposes such as parking spaces and
+    services including but not limited to electric sub-station, transformer DG set rooms,
+    underground water tanks, pump rooms, maintenance and service rooms, firefighting
+    pumps and equipment&#8217;s etc., and other permitted uses as per sanctioned plans. The
+    Allottee/s shall not be permitted to use the services areas and the basements in any
+    manner whatsoever, other than those earmarked as parking spaces, and the same
+    shall be reserved for use by the association of allottee/s formed by the Allottee/s for
+    rendering maintenance services.</p>
 <div style="page-break-after: always;"></div>
     <p class="section-heading">16. General compliance with respect to the apartment</p>
 
