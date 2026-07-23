@@ -47,7 +47,7 @@
         font-style: italic;
     }
     .fill-blank {
-        border-bottom: 1px dotted #000000;
+        border-bottom: 2px dotted #000000;
         padding: 0 3px;
     }
     table.cost-table {
